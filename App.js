@@ -7,6 +7,8 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
+import AppSwitchNavigator from "./navigation/switches/AppSwitchNavigator";
+
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
@@ -14,8 +16,9 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import HomeScreen from "./screens/HomeScreen";
 import NewPlaceScreen from "./screens/NewPlaceScreen";
+import DetailsScreen from "./screens/DetailsScreen";
 
-import AppDrawerNavigator from "./navigation/AppDrawerNavigator";
+// import AppDrawerNavigator from "./navigation/AppDrawerNavigator";
 
 export default class App extends React.Component {
   state = { switchValue: false };
@@ -24,21 +27,6 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
-
-class Detail extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Detail</Text>
-      </View>
-    );
-  }
-}
-
-const AppSwitchNavigator = createSwitchNavigator({
-  Welcome: { screen: WelcomeScreen },
-  Dashboard: { screen: AppDrawerNavigator }
-});
 
 const AppContainer = createAppContainer(AppSwitchNavigator);
 

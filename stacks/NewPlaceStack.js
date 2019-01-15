@@ -40,6 +40,5 @@ const NewPlaceStack = createStackNavigator(
     }
   }
 );
-// };
 
 export default NewPlaceStack;

@@ -8,24 +8,11 @@ import {
 } from "react-navigation";
 
 import { View, Text, StyleSheet, Button } from "react-native";
+import { Constants, MapView } from "expo";
 import Icon from "@expo/vector-icons/Ionicons";
+import Map from "./screens/Map";
 import HomeScreen from "./screens/HomeScreen";
 import NewPlaceScreen from "./screens/NewPlaceScreen";
-// import MainTabNavigator from "./navigation/MainTabNavigator";
-// import NewFormNavigator from "./navigation/NewFormNavigator";
-
-// const RootStack = createStackNavigator({
-//   // Home: { screen: MainTabNavigator },
-//   // New: { screen: NewFormNavigator }
-//   Home: { screen: HomeScreen },
-//   New: { screen: NewPlaceScreen }
-// });
-
-// const App = createAppContainer(RootStack);
-
-// const App = createAppContainer(AppContainer);
-//
-// export default App;
 
 class App extends Component {
   render() {
@@ -60,14 +47,15 @@ class DashboardScreen extends Component {
   }
 }
 
-class Feed extends Component {
+class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{ flex: 1 }}>
         <Button
-          title="Go To Detail Screen"
-          onPress={() => this.props.navigation.navigate("Detail")}
+          title="Add A New Place Screen"
+          onPress={() => this.props.navigation.navigate("NewPlace")}
         />
+        <Map />
       </View>
     );
   }
@@ -91,23 +79,24 @@ class Settings extends Component {
   }
 }
 
-class Detail extends Component {
+class NewPlace extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Detail</Text>
+        <Text>NewPlace</Text>
+        <NewPlaceScreen />
       </View>
     );
   }
 }
 
-const FeedStack = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
-    Feed: {
-      screen: Feed,
+    Home: {
+      screen: Home,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Feed",
+          headerTitle: "Home",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -119,7 +108,7 @@ const FeedStack = createStackNavigator(
         };
       }
     },
-    Detail: { screen: Detail }
+    NewPlace: { screen: NewPlace }
   },
   {
     defaultNavigationOptions: {
@@ -168,7 +157,7 @@ const SettingsStack = createStackNavigator({
 
 const DashboardTabNavigator = createBottomTabNavigator(
   {
-    FeedStack,
+    HomeStack,
     ProfileStack,
     SettingsStack
   },
@@ -220,6 +209,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: "#d6d7da"
   }
 });

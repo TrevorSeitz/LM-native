@@ -10,14 +10,14 @@ import {
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Constants, MapView } from "expo";
-import { FeedStack, ProfileStack, SettingsStack } from "../App";
-import SettingsScreem from "./SettingsScreen";
-import NewPlaceScreen from "./NewPlaceScreen";
+
+import HomeScreen from "../screens/HomeScreen";
+import NewPlaceScreen from "../screens/NewPlaceScreen";
 
 const HomeStack = createStackNavigator(
   {
     Home: {
-      screen: Home,
+      screen: HomeScreen,
       navigationOptions: ({ navigation }) => {
         return {
           headerTitle: "Home",
@@ -32,7 +32,7 @@ const HomeStack = createStackNavigator(
         };
       }
     },
-    NewPlace: { screen: NewPlace }
+    NewPlace: { screen: NewPlaceScreen }
   },
   {
     defaultNavigationOptions: {

@@ -9,14 +9,6 @@ import {
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
-// import DashboardTabNavigator from "../navigation/DashboardTabNavigator";
-import DashboardStackNavigator from "../navigation/DashboardStackNavigator";
-import AppDrawerNavigator from "../navigation/AppDrawerNavigator";
-
-// import DashboardScreenfrom from "./DashboardScreen";
-import HomeScreen from "./HomeScreen";
-import NewPlaceScreen from "./NewPlaceScreen";
-
 class WelcomeScreen extends Component {
   render() {
     return (

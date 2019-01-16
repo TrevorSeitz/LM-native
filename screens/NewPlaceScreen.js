@@ -1,18 +1,18 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Switch } from "react-native";
-import { Constants, MapView } from "expo";
+import { Text, View, StyleSheet, Switch, Button } from "react-native";
+import { Constants } from "expo";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import { Card } from "react-native-paper";
 
-export default class NewPlaceScreen extends React.Component {
+class NewPlaceScreen extends React.Component {
   state = { switchValue: false };
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.switchView}>
-          <Text>Show Camera</Text>
+          <Text style={styles.paragraph}>Show Camera</Text>
           <Switch
             onValueChange={value => {
               this.setState({ switchValue: value });
@@ -30,10 +30,16 @@ export default class NewPlaceScreen extends React.Component {
             <Text>Camera off</Text>
           </View>
         )}
+        <Button
+          title="Get Image From Roll"
+          onPress={() => this.props.navigation.navigate("ImagePicker")}
+        />
       </View>
     );
   }
 }
+
+export default NewPlaceScreen;
 
 const styles = StyleSheet.create({
   container: {

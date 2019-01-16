@@ -32,7 +32,7 @@ const NewPlaceStack = createStackNavigator(
         };
       }
     },
-    NewPlace: { screen: NewPlaceScreen }
+    Home: { screen: HomeScreen }
   },
   {
     defaultNavigationOptions: {
@@ -40,6 +40,5 @@ const NewPlaceStack = createStackNavigator(
     }
   }
 );
-// };
 
 export default NewPlaceStack;

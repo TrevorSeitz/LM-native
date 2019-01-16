@@ -2,9 +2,7 @@ import * as React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Constants, MapView } from "expo";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-// You can import from local files
 
-// or any pure javascript modules available in npm
 import { Card } from "react-native-paper";
 
 class HomeScreen extends React.Component {
@@ -27,11 +25,6 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
-// const AppNavigator = createStackNavigator({
-//   Home: { screen: HomeScreen }
-//   // New: { screen: NewPlaceScreen }
-// });
 
 export default HomeScreen;
 

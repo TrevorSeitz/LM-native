@@ -1,21 +1,10 @@
 import React, { Component } from "react";
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createDrawerNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
 
-import { View, Text, StyleSheet, Button } from "react-native";
-import Icon from "@expo/vector-icons/Ionicons";
+import { createAppContainer } from "react-navigation";
 
-import WelcomeScreen from "./screens/WelcomeScreen";
-import DashboardScreen from "./screens/DashboardScreen";
-import HomeScreen from "./screens/HomeScreen";
-import NewPlaceScreen from "./screens/NewPlaceScreen";
+import AppSwitchNavigator from "./navigation/switches/AppSwitchNavigator";
 
-import AppDrawerNavigator from "./navigation/AppDrawerNavigator";
+import { StyleSheet } from "react-native";
 
 export default class App extends React.Component {
   state = { switchValue: false };
@@ -24,21 +13,6 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
-
-class Detail extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Detail</Text>
-      </View>
-    );
-  }
-}
-
-const AppSwitchNavigator = createSwitchNavigator({
-  Welcome: { screen: WelcomeScreen },
-  Dashboard: { screen: AppDrawerNavigator }
-});
 
 const AppContainer = createAppContainer(AppSwitchNavigator);
 

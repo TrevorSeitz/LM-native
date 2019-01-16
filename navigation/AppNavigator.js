@@ -21,4 +21,4 @@ const AppContainer = createAppContainer(appNavigator);
   uriPrefix="/app"
 />;
 // export default AppNavigator;
-export default AppContainer;
+export default createAppContainer(AppNavigator);

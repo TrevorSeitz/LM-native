@@ -1,43 +1,58 @@
 import * as React from "react";
-import { AppRegistry, TextInput, Text, View, StyleSheet } from "react-native";
-import { Constants, MapView } from "expo";
+import { Text, View, StyleSheet, Switch, Button } from "react-native";
+import { Constants } from "expo";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
-export default class NewPlaceScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { text: "" };
-  }
+import { Card } from "react-native-paper";
 
-  _handleButtonPress = () => {
-    CameraRoll.getPhotos({
-      first: 20,
-      assetType: "Photos"
-    })
-      .then(r => {
-        this.setState({ photos: r.edges });
-      })
-      .catch(err => {
-        //Error Loading Images
-      });
-  };
+class NewPlaceScreen extends React.Component {
+  state = { switchValue: false };
 
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "stretch"
-        }}
-      >
-        <Text>This is the place for the New Place Form</Text>
-        <TextInput
-          style={{ height: 40 }}
-          placeholder="Type here to translate!"
-          onChangeText={text => this.setState({ text })}
+      <View style={styles.container}>
+        <View style={styles.switchView}>
+          <Text style={styles.paragraph}>Show Camera</Text>
+          <Switch
+            onValueChange={value => {
+              this.setState({ switchValue: value });
+            }}
+            value={this.state.switchValue}
+            style={styles.switch}
+          />
+        </View>
+        {this.state.switchValue ? (
+          <View style={styles.cameraview}>
+            <Text>Camera on</Text>
+          </View>
+        ) : (
+          <View style={styles.cameraview}>
+            <Text>Camera off</Text>
+          </View>
+        )}
+        <Button
+          title="Get Image From Roll"
+          onPress={() => this.props.navigation.navigate("ImagePicker")}
         />
       </View>
     );
   }
 }
+
+export default NewPlaceScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "#ecf0f1",
+    padding: 8
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center"
+  }
+});

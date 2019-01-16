@@ -13,15 +13,14 @@ import { Constants, MapView } from "expo";
 
 import HomeScreen from "../screens/HomeScreen";
 import NewPlaceScreen from "../screens/NewPlaceScreen";
-import TestScreen from "../screens/TestScreen";
 
-const HomeStack = createStackNavigator(
+const NewPlaceStack = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    NewPlace: {
+      screen: NewPlaceScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Home",
+          headerTitle: "NewPlace",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -33,8 +32,7 @@ const HomeStack = createStackNavigator(
         };
       }
     },
-    NewPlace: { screen: NewPlaceScreen },
-    Test: { screen: TestScreen }
+    Home: { screen: HomeScreen }
   },
   {
     defaultNavigationOptions: {
@@ -42,6 +40,5 @@ const HomeStack = createStackNavigator(
     }
   }
 );
-// };
 
-export default HomeStack;
+export default NewPlaceStack;

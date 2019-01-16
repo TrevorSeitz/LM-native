@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import {
-  // createStackNavigator,
-  // createAppContainer,
-  // createSwitchNavigator,
-  createDrawerNavigator,
-  createBottomTabNavigator
+  createDrawerNavigator
+  // createBottomTabNavigator
 } from "react-navigation";
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
+import WelcomeScreen from "../screens/WelcomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import HomeScreen from "../screens/HomeScreen";
 import NewPlaceScreen from "../screens/NewPlaceScreen";
-import DetailsScreen from "../screens/DetailsScreen";
+import TestScreen from "../screens/TestScreen";
+import LMImagePickerScreen from "../screens/LMImagePickerScreen";
 
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
@@ -26,8 +25,11 @@ const AppDrawerNavigator = createDrawerNavigator({
   NewPlace: {
     screen: NewPlaceScreen
   },
-  Details: {
-    screen: DetailsScreen
+  Test: {
+    screen: TestScreen
+  },
+  LMImagePicker: {
+    screen: LMImagePickerScreen
   }
 });
 

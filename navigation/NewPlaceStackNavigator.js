@@ -9,9 +9,7 @@ import Icon from "@expo/vector-icons/Ionicons";
 import HomeStack from "../stacks/HomeStack";
 import NewPlaceStack from "../stacks/NewPlaceStack";
 
-// import NewPlaceTabNavigator from "./NewPlaceStackNavigator";
-
-const DashboardTabNavigator = createBottomTabNavigator(
+const NewPlaceTabNavigator = createBottomTabNavigator(
   {
     HomeStack,
     NewPlaceStack
@@ -28,9 +26,9 @@ const DashboardTabNavigator = createBottomTabNavigator(
   }
 );
 
-const DashboardStackNavigator = createStackNavigator(
+const NewPlaceStackNavigator = createStackNavigator(
   {
-    DashboardTabNavigator: DashboardTabNavigator
+    NewPlaceTabNavigator: NewPlaceTabNavigator
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
@@ -48,4 +46,5 @@ const DashboardStackNavigator = createStackNavigator(
   }
 );
 
-export default DashboardStackNavigator;
+// export default NewPlaceStackNavigator;
+export default NewPlaceTabNavigator;

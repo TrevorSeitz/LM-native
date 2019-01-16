@@ -7,12 +7,12 @@ import {
 
 import MainTabNavigator from "./MainTabNavigator";
 import NewFormNavigator from "./NewFormNavigator";
-
-// exp
+// import LMImagePickerNavigator from "./LMImagePickerNavigator";
 
 const AppNavigator = createStackNavigator({
   Home: { screen: MainTabNavigator },
   New: { screen: NewFormNavigator }
+  // LMImagePicker: { screen: LMImagePickerNavigator }
 });
 
 const AppContainer = createAppContainer(appNavigator);

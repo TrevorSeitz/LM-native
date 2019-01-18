@@ -11,8 +11,8 @@ import NewFormNavigator from "./NewFormNavigator";
 
 const AppNavigator = createStackNavigator({
   Home: { screen: MainTabNavigator },
-  New: { screen: NewFormNavigator }
-  // LMImagePicker: { screen: LMImagePickerNavigator }
+  New: { screen: NewFormNavigator },
+  LMImagePicker: { screen: LMImagePickerNavigator }
 });
 
 const AppContainer = createAppContainer(appNavigator);
@@ -21,4 +21,5 @@ const AppContainer = createAppContainer(appNavigator);
   uriPrefix="/app"
 />;
 // export default AppNavigator;
-export default createAppContainer(AppNavigator);
+// export default createAppContainer(AppNavigator);
+export default AppContainer;

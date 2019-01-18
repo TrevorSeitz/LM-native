@@ -1,44 +1,100 @@
 import React, { Component } from "react";
-// import { View, Text, StyleSheet, Button } from "react-native";
-
-// import * as React from "react";
-import { Text, StyleSheet, Image, View, TouchableOpacity } from "react-native";
-import { ImagePicker, Permissions } from "expo";
+import * as firebase from "firebase";
+import {
+  Text,
+  StyleSheet,
+  Image,
+  View,
+  TouchableOpacity,
+  Alert
+} from "react-native";
+import { ImagePicker, Permissions, MediaLibrary } from "expo";
 
 class LMImagePickerScreen extends Component {
   state = { image: "nil" };
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
-      aspec: 1,
-      allowsEditing: true
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: 1,
+      quality: 0.5,
+      exif: true
     });
-    this.setState({ image: uri });
+
+    // console.log("result", result);
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+
+    const asset = await MediaLibrary.createAssetAsync(result.uri);
+    // console.log("asset", asset);
+
+    this.uploadImage(result.uri, asset)
+      .then(() => {
+        Alert.alert("Success!");
+      })
+      .catch(error => {
+        Alert.alert(error);
+      });
   };
 
   takePicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA);
-    const { cancelled, uri } = await ImagePicker.launchCameraAsync({
-      allowsEditing: false
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      // aspect: 1,
+      quality: 0.5,
+      exif: true
     });
-    this.setState({ image: uri });
+
+    // console.log("result", result);
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+
+    const asset = await MediaLibrary.createAssetAsync(result.uri);
+    // console.log("asset", asset);
+
+    this.uploadImage(result.uri, asset)
+      .then(() => {
+        Alert.alert("Success!");
+      })
+      .catch(error => {
+        Alert.alert(error);
+      });
+  };
+
+  uploadImage = async (uri, asset) => {
+    uriToBlob = url => {
+      // console.log("bloburl", url);
+      return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.onerror = reject;
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            resolve(xhr.response);
+          }
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "blob"; // convert type
+        xhr.send();
+      });
+    };
+
+    const blob = await uriToBlob(uri);
+    // console.log("blob", blob);
+
+    var ref = firebase
+      .storage()
+      .ref()
+      .child("images/" + asset.filename)
+      .put(blob);
   };
 
   render() {
-    // let { image } = this.state;
-
-    // return (
-    //   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    //     <Button
-    //       title="Pick an image from camera roll"
-    //       onPress={this._pickImage}
-    //     />
-    //     {image && (
-    //       <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-    //     )}
-    //   </View>
-    // );
     return (
       <View style={styles.container}>
         <Image style={styles.image} source={{ uri: this.state.image }} />
@@ -50,19 +106,6 @@ class LMImagePickerScreen extends Component {
     );
   }
 }
-// _pickImage = async () => {
-//   let result = await ImagePicker.launchImageLibraryAsync({
-//     allowsEditing: true,
-//     aspect: [4, 3]
-//   });
-//
-//   console.log(result);
-//
-//   if (!result.cancelled) {
-//     this.setState({ image: result.uri });
-//   }
-// };
-// }
 
 const Button = ({ onPress, children }) => (
   <TouchableOpacity style={styles.button} onPress={onPress}>

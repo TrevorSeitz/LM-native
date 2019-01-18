@@ -23,21 +23,7 @@ class LMImagePickerScreen extends Component {
       exif: true
     });
 
-    // console.log("result", result);
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
-    }
-
-    const asset = await MediaLibrary.createAssetAsync(result.uri);
-    // console.log("asset", asset);
-
-    this.uploadImage(result.uri, asset)
-      .then(() => {
-        Alert.alert("Success!");
-      })
-      .catch(error => {
-        Alert.alert(error);
-      });
+    this.processImage(result);
   };
 
   takePicture = async () => {
@@ -50,6 +36,10 @@ class LMImagePickerScreen extends Component {
       exif: true
     });
 
+    this.processImage(result);
+  };
+
+  processImage = async result => {
     // console.log("result", result);
     if (!result.cancelled) {
       this.setState({ image: result.uri });

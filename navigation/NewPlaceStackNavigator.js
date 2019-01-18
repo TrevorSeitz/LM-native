@@ -8,11 +8,13 @@ import Icon from "@expo/vector-icons/Ionicons";
 
 import HomeStack from "../stacks/HomeStack";
 import NewPlaceStack from "../stacks/NewPlaceStack";
+import LMImagePickerStack from "../stacks/LMImagePickerStack";
 
 const NewPlaceTabNavigator = createBottomTabNavigator(
   {
     HomeStack,
-    NewPlaceStack
+    NewPlaceStack,
+    LMImagePickerStack
     // SettingsStack
   },
   {

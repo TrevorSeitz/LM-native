@@ -2,16 +2,26 @@ import React, { Component } from "react";
 import * as firebase from "firebase";
 import {
   Text,
+  TextInput,
   StyleSheet,
   Image,
   View,
   TouchableOpacity,
   Alert
 } from "react-native";
-import { ImagePicker, Permissions, MediaLibrary } from "expo";
+import { Constants, ImagePicker, Permissions, MediaLibrary } from "expo";
+import Exif from "react-native-exif";
+
+import NewPlaceTextInput from "../components/NewPlaceTextInput";
 
 class LMImagePickerScreen extends Component {
-  state = { image: "nil" };
+  // state = { image: "nil" };
+  state = {
+    image: "nil",
+    name: "add name",
+    address: "add address",
+    email: "email"
+  };
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -22,7 +32,12 @@ class LMImagePickerScreen extends Component {
       quality: 0.5,
       exif: true
     });
-
+    // const uri = result.uri;
+    // Exif.getExif(uri)
+    //   .then(msg => console.warn("OK: " + JSON.stringify(msg)))
+    //   .catch(msg => console.warn("ERROR: " + msg));
+    //
+    // console.log("result", result);
     this.processImage(result);
   };
 
@@ -35,30 +50,32 @@ class LMImagePickerScreen extends Component {
       quality: 0.5,
       exif: true
     });
-
-    this.processImage(result);
+    // console.log("result", result);
+    const metadata = result.metadata;
+    this.processImage(result, metadata);
   };
 
-  processImage = async result => {
+  processImage = async (result, metadata) => {
     // console.log("result", result);
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({ image: result });
+
+      const asset = await MediaLibrary.createAssetAsync(result.uri);
+      // console.log("asset", asset);
+
+      this.uploadImage(result, asset, metadata)
+        .then(() => {
+          Alert.alert("Success!");
+        })
+        .catch(error => {
+          Alert.alert(error);
+        });
     }
-
-    const asset = await MediaLibrary.createAssetAsync(result.uri);
-    // console.log("asset", asset);
-
-    this.uploadImage(result.uri, asset)
-      .then(() => {
-        Alert.alert("Success!");
-      })
-      .catch(error => {
-        Alert.alert(error);
-      });
   };
 
-  uploadImage = async (uri, asset) => {
-    uriToBlob = url => {
+  uploadImage = async (result, asset) => {
+    const uri = result.uri;
+    uriToBlob = uri => {
       // console.log("bloburl", url);
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -68,7 +85,7 @@ class LMImagePickerScreen extends Component {
             resolve(xhr.response);
           }
         };
-        xhr.open("GET", url);
+        xhr.open("GET", uri);
         xhr.responseType = "blob"; // convert type
         xhr.send();
       });
@@ -82,16 +99,25 @@ class LMImagePickerScreen extends Component {
       .ref()
       .child("images/" + asset.filename)
       .put(blob);
+    // .getDownloadURL()
+    // .then(url => console.log(url));
+    // var placeRef = db.collection("places").doc("New Place");
+
+    //   var setWithMerge = placeRef.set(
+    //     {
+    //       name: "New"
+    //     },
+    //     { merge: true }
+    //   );
+    // console.log("url", this.state.image);
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.image} source={{ uri: this.state.image }} />
-        <View style={styles.row}>
-          <Button onPress={this.selectPicture}>Gallery</Button>
-          <Button onPress={this.takePicture}>Take Picture</Button>
-        </View>
+        <Image style={styles.image} source={{ uri: this.state.image.uri }} />
+        <Button onPress={this.selectPicture}>Gallery</Button>
+        <Button onPress={this.takePicture}>Take Picture</Button>
       </View>
     );
   }
@@ -108,7 +134,16 @@ export default LMImagePickerScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "#ecf0f1",
+    padding: 8
+  },
+  image: {
+    flex: 1,
+    alignItems: "stretch"
+    // ,
+    // width: 200,
+    // height: 200
   }
 });

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { createAppContainer } from "react-navigation";
 import ApiKeys from "./constants/ApiKeys";
 import * as firebase from "firebase";
+//
+// import { MaterialIcons } from "@expo/vector-icons";
+// import { Font, AppLoading } from "expo";
 
 import AppSwitchNavigator from "./navigation/switches/AppSwitchNavigator";
 
@@ -15,6 +18,7 @@ export default class App extends React.Component {
     // Initialize firebase
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.firebaseConfig);
+      var database = firebase.database();
     }
   }
 

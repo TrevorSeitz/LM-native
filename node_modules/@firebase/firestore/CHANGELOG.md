@@ -1,4 +1,13 @@
 # Unreleased
+- [changed] The `timestampsInSnapshots` setting is now enabled by default
+  so timestamp fields read from a `DocumentSnapshot` will be returned as
+  `Timestamp` objects instead of `Date`. Any code expecting to receive a
+  `Date` object must be updated.
+- [fixed] Fixed a crash that could happen when the app is shut down after
+  a write has been sent to the server but before it has been received on
+  a listener.
+
+# 0.9.2
 - [fixed] Fixed a regression introduced in 5.7.0 that caused apps using
   experimentalTabSynchronization to hit an exception for "Failed to obtain
   primary lease for action 'Collect garbage'".
@@ -48,7 +57,7 @@
 - [changed] Eliminated superfluous update events for locally cached documents
   that are known to lag behind the server version. Instead, we buffer these
   events until the client has caught up with the server.
-  
+
 # 0.7.2
 - [fixed] Fixed a regression that prevented use of Firestore on ReactNative's
   Expo platform (#1138).

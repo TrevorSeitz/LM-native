@@ -168,12 +168,12 @@ class AddLocationScreen extends Component {
     };
 
     const blob = await uriToBlob(uri);
-    // console.log("blob", blob);
+    console.log("filename", this.state.imageFileName);
 
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + this.state.imagefilename)
+      .child("images/" + this.state.imageFileName)
       .put(blob);
   };
 
@@ -243,6 +243,12 @@ class AddLocationScreen extends Component {
     );
   }
 }
+
+// const Button = ({ onPress, children }) => (
+//   <TouchableOpacity style={styles.button} onPress={onPress}>
+//     <Text style={styles.text}>{children}</Text>
+//   </TouchableOpacity>
+// );
 const styles = StyleSheet.create({
   container: {
     flex: 1,

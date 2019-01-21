@@ -13,6 +13,8 @@ import firestore from "firebase/firestore";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Font, AppLoading } from "expo";
 
+import LMImagePickerScreen from "./LMImagePickerScreen";
+
 class AddLocationScreen extends Component {
   static navigationOptions = {
     title: "Add Location"
@@ -37,6 +39,7 @@ class AddLocationScreen extends Component {
     const state = this.state;
     state[field] = text;
     this.setState(state);
+    console.log("this.state.name", this.state.name);
   };
 
   saveLocation() {
@@ -45,19 +48,19 @@ class AddLocationScreen extends Component {
     });
     this.ref
       .add({
-        photoFileName: "",
-        name: this.state.location.name,
-        venue: this.state.location.venue,
-        latitude: this.state.location.latitude,
-        longitude: this.state.location.longitude,
-        contactName: this.state.location.contactName,
-        contactPhone: this.state.location.contactPhone,
-        email: this.state.location.email,
-        description: this.state.location.description
+        // photoFileName: "",
+        name: this.state.name,
+        venue: this.state.venue,
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+        contactName: this.state.contactName,
+        contactPhone: this.state.contactPhone,
+        email: this.state.email,
+        description: this.state.description
       })
       .then(docRef => {
         this.setState({
-          photoFileName: "",
+          // photoFileName: "",
           name: "",
           venue: "",
           latitude: "",

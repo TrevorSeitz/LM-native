@@ -50,18 +50,15 @@ class LMImagePickerScreen extends Component {
       quality: 0.5,
       exif: true
     });
-    // console.log("result", result);
     const metadata = result.metadata;
     this.processImage(result, metadata);
   };
 
   processImage = async (result, metadata) => {
-    // console.log("result", result);
     if (!result.cancelled) {
       this.setState({ image: result });
 
       const asset = await MediaLibrary.createAssetAsync(result.uri);
-      // console.log("asset", asset);
 
       this.uploadImage(result, asset, metadata)
         .then(() => {
@@ -76,7 +73,6 @@ class LMImagePickerScreen extends Component {
   uploadImage = async (result, asset) => {
     const uri = result.uri;
     uriToBlob = uri => {
-      // console.log("bloburl", url);
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.onerror = reject;
@@ -92,24 +88,12 @@ class LMImagePickerScreen extends Component {
     };
 
     const blob = await uriToBlob(uri);
-    // console.log("blob", blob);
 
     var ref = firebase
       .storage()
       .ref()
       .child("images/" + asset.filename)
       .put(blob);
-    // .getDownloadURL()
-    // .then(url => console.log(url));
-    // var placeRef = db.collection("places").doc("New Place");
-
-    //   var setWithMerge = placeRef.set(
-    //     {
-    //       name: "New"
-    //     },
-    //     { merge: true }
-    //   );
-    // console.log("url", this.state.image);
   };
 
   render() {

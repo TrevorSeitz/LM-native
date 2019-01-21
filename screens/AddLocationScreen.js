@@ -3,7 +3,11 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  Image,
   View,
+  TouchableOpacity,
+  Alert,
+  Text,
   TextInput
 } from "react-native";
 import { Button, Icon } from "react-native-elements";
@@ -11,9 +15,16 @@ import * as firebase from "firebase";
 import firestore from "firebase/firestore";
 // import firebase from "../Firebase";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Font, AppLoading } from "expo";
+import {
+  Font,
+  AppLoading,
+  Constants,
+  ImagePicker,
+  Permissions,
+  MediaLibrary
+} from "expo";
 
-import LMImagePickerScreen from "./LMImagePickerScreen";
+// import LMImagePickerScreen from "./LMImagePickerScreen";
 
 class AddLocationScreen extends Component {
   static navigationOptions = {
@@ -23,7 +34,6 @@ class AddLocationScreen extends Component {
     super();
     this.ref = firebase.firestore().collection("locations");
     this.state = {
-      photoFileName: "",
       name: "",
       venue: "",
       latitude: "",
@@ -32,20 +42,75 @@ class AddLocationScreen extends Component {
       contactPhone: "",
       email: "",
       description: "",
+      image: "nil",
+      imageFileName: "",
       isLoading: false
     };
   }
+
+  selectPicture = async () => {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      // aspect: 1,
+      quality: 0.5,
+      exif: true
+    });
+
+    // console.log("result", result);
+    this.processImage(result);
+  };
+
+  takePicture = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      // aspect: 1,
+      quality: 0.5,
+      exif: true
+    });
+    const metadata = result.metadata;
+
+    this.processImage(result, metadata);
+  };
+
+  processImage = async (result, metadata) => {
+    if (!result.cancelled) {
+      this.setState({ image: result });
+      // console.log("image", this.state.image);
+      // console.log("result", result);
+      const asset = await MediaLibrary.createAssetAsync(result.uri);
+      this.setState({ imageFileName: asset.filename });
+
+      // this.uploadImage(result, asset, metadata)
+      //   .then(() => {
+      //     Alert.alert("Success!");
+      //   })
+      //   .catch(error => {
+      //     Alert.alert(error);
+      //   });
+    }
+  };
+
   updateTextInput = (text, field) => {
     const state = this.state;
     state[field] = text;
     this.setState(state);
-    console.log("this.state.name", this.state.name);
   };
 
   saveLocation() {
     this.setState({
       isLoading: true
     });
+    this.uploadImage(this.state.image);
+    //   .then(() => {
+    //     Alert.alert("Success!");
+    //   })
+    //   .catch(error => {
+    //     Alert.alert(error);
+    //   });
     this.ref
       .add({
         // photoFileName: "",
@@ -56,7 +121,9 @@ class AddLocationScreen extends Component {
         contactName: this.state.contactName,
         contactPhone: this.state.contactPhone,
         email: this.state.email,
-        description: this.state.description
+        description: this.state.description,
+        image: this.state.image,
+        imageFileName: this.state.imageFileName
       })
       .then(docRef => {
         this.setState({
@@ -69,17 +136,47 @@ class AddLocationScreen extends Component {
           contactPhone: "",
           email: "",
           description: "",
+          image: "nil",
           isLoading: false
         });
         this.props.navigation.goBack();
       })
       .catch(error => {
-        console.error("Error adding document: ", error);
+        // console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
       });
   }
+
+  uploadImage = async (result, asset) => {
+    const uri = result.uri;
+    uriToBlob = uri => {
+      console.log("bloburl", result);
+      return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.onerror = reject;
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            resolve(xhr.response);
+          }
+        };
+        xhr.open("GET", uri);
+        xhr.responseType = "blob"; // convert type
+        xhr.send();
+      });
+    };
+
+    const blob = await uriToBlob(uri);
+    // console.log("blob", blob);
+
+    var ref = firebase
+      .storage()
+      .ref()
+      .child("images/" + this.state.imagefilename)
+      .put(blob);
+  };
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -136,6 +233,11 @@ class AddLocationScreen extends Component {
         </View>
         <View style={styles.button}>
           <Button large title="Save" onPress={() => this.saveLocation()} />
+        </View>
+        <View style={styles.container}>
+          <Image style={styles.image} source={{ uri: this.state.image.uri }} />
+          <Button onPress={this.selectPicture}>Gallery</Button>
+          <Button onPress={this.takePicture}>Take Picture</Button>
         </View>
       </ScrollView>
     );

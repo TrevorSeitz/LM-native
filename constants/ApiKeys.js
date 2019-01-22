@@ -15,7 +15,9 @@ const firebaseConfig = {
   storageBucket: "manager-8ccf4.appspot.com",
   messagingSenderId: "535943620965"
 };
-// };
+
+// GOOGLE_MAPS_KEY = AIzaSyCm0e573jedm5MrvvFU38TlKKe1Hu1qi98;
+
 firebase.initializeApp(firebaseConfig);
 
 firebase.firestore().settings(settings);

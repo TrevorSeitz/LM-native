@@ -79,7 +79,7 @@ class AddLocationScreen extends Component {
   processImage = async (result, metadata) => {
     if (!result.cancelled) {
       this.setState({ image: result });
-      // console.log("image", this.state.image);
+      console.log("image", this.state.image.uri);
       // console.log("result", result);
       const asset = await MediaLibrary.createAssetAsync(result.uri);
       this.setState({ imageFileName: asset.filename });
@@ -231,24 +231,25 @@ class AddLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "description")}
           />
         </View>
-        <View style={styles.button}>
-          <Button large title="Save" onPress={() => this.saveLocation()} />
-        </View>
         <View style={styles.container}>
           <Image style={styles.image} source={{ uri: this.state.image.uri }} />
-          <Button onPress={this.selectPicture}>Gallery</Button>
-          <Button onPress={this.takePicture}>Take Picture</Button>
+          <Button2 onPress={this.selectPicture}>Gallery</Button2>
+          <Button2 onPress={this.takePicture}>Take Picture</Button2>
+        </View>
+        <View style={styles.container}>
+          <Button large title="Save" onPress={() => this.saveLocation()} />
         </View>
       </ScrollView>
     );
   }
 }
 
-// const Button = ({ onPress, children }) => (
-//   <TouchableOpacity style={styles.button} onPress={onPress}>
-//     <Text style={styles.text}>{children}</Text>
-//   </TouchableOpacity>
-// );
+const Button2 = ({ onPress, children }) => (
+  <TouchableOpacity style={styles.button} onPress={onPress}>
+    <Text style={styles.buttonText}>{children}</Text>
+  </TouchableOpacity>
+);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -269,6 +270,29 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: "center",
     justifyContent: "center"
+  },
+  buttonText: {
+    fontSize: 18,
+    color: "#111",
+    alignSelf: "center"
+  },
+  button: {
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: "stretch",
+    justifyContent: "center"
+  },
+  image: {
+    flex: 1,
+    alignItems: "stretch",
+    width: 50,
+    height: 50
   }
 });
 

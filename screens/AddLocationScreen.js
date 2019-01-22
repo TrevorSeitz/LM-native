@@ -13,7 +13,6 @@ import {
 import { Button, Icon } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-// import firebase from "../Firebase";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   Font,
@@ -24,9 +23,7 @@ import {
   MediaLibrary
 } from "expo";
 
-// import LMImagePickerScreen from "./LMImagePickerScreen";
-
-class AddLocationScreen extends Component {
+export default class AddLocationScreen extends Component {
   static navigationOptions = {
     title: "Add Location"
   };
@@ -52,7 +49,7 @@ class AddLocationScreen extends Component {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
+      allowsEditing: false,
       // aspect: 1,
       quality: 0.5,
       exif: true
@@ -104,16 +101,15 @@ class AddLocationScreen extends Component {
     this.setState({
       isLoading: true
     });
-    this.uploadImage(this.state.image);
-    //   .then(() => {
-    //     Alert.alert("Success!");
-    //   })
-    //   .catch(error => {
-    //     Alert.alert(error);
-    //   });
+    this.uploadImage(this.state.image)
+      .then(() => {
+        Alert.alert("Success!");
+      })
+      .catch(error => {
+        Alert.alert(error);
+      });
     this.ref
       .add({
-        // photoFileName: "",
         name: this.state.name,
         venue: this.state.venue,
         latitude: this.state.latitude,
@@ -127,7 +123,6 @@ class AddLocationScreen extends Component {
       })
       .then(docRef => {
         this.setState({
-          // photoFileName: "",
           name: "",
           venue: "",
           latitude: "",
@@ -137,6 +132,7 @@ class AddLocationScreen extends Component {
           email: "",
           description: "",
           image: "nil",
+          imageFileName: "",
           isLoading: false
         });
         this.props.navigation.goBack();
@@ -232,12 +228,12 @@ class AddLocationScreen extends Component {
           />
         </View>
         <View style={styles.container}>
-          <Image style={styles.image} source={{ uri: this.state.image.uri }} />
           <Button2 onPress={this.selectPicture}>Gallery</Button2>
           <Button2 onPress={this.takePicture}>Take Picture</Button2>
         </View>
         <View style={styles.container}>
           <Button large title="Save" onPress={() => this.saveLocation()} />
+          <Image style={styles.image} source={{ uri: this.state.image.uri }} />
         </View>
       </ScrollView>
     );
@@ -253,7 +249,7 @@ const Button2 = ({ onPress, children }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
+    padding: 10
   },
   subContainer: {
     flex: 1,
@@ -291,9 +287,11 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     alignItems: "stretch",
-    width: 50,
-    height: 50
+    marginTop: 7.5,
+    padding: 5,
+    width: 75,
+    height: 75
   }
 });
 
-export default AddLocationScreen;
+// export default AddLocationScreen;

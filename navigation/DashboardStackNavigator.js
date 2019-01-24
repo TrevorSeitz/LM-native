@@ -8,15 +8,13 @@ import Icon from "@expo/vector-icons/Ionicons";
 
 import HomeStack from "../stacks/HomeStack";
 import AddLocationStack from "../stacks/AddLocationStack";
-import NewPlaceStack from "../stacks/NewPlaceStack";
-import LMImagePickerStack from "../stacks/LMImagePickerStack";
+import ListLocationsStack from "../stacks/ListLocationsStack";
 
 const DashboardTabNavigator = createBottomTabNavigator(
   {
     HomeStack,
     AddLocationStack,
-    NewPlaceStack,
-    LMImagePickerStack
+    ListLocationsStack
     // SettingsStack
   },
   {

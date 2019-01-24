@@ -15,6 +15,7 @@
     "react-native-elements": "^0.19.1",
     "react-native-exif": "^0.4.0",
     "react-native-firebase": "^5.2.0",
+    "react-native-fontawesome": "^6.0.1",
     "react-native-paper": "2.2.8",
     "react-native-vector-icons": "^6.2.0",
     "react-navigation": "^3.0.9"

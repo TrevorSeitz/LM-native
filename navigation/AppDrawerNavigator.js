@@ -9,7 +9,7 @@ import Icon from "@expo/vector-icons/Ionicons";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import HomeScreen from "../screens/HomeScreen";
-import ListLocationScreen from "../screens/ListLocationScreen";
+import ListLocationsScreen from "../screens/ListLocationsScreen";
 import NewPlaceScreen from "../screens/NewPlaceScreen";
 import TestScreen from "../screens/TestScreen";
 import LMImagePickerScreen from "../screens/LMImagePickerScreen";
@@ -26,8 +26,8 @@ const AppDrawerNavigator = createDrawerNavigator({
   NewPlace: {
     screen: NewPlaceScreen
   },
-  ListLocation: {
-    screen: ListLocationScreen
+  ListLocations: {
+    screen: ListLocationsScreen
   },
   Test: {
     screen: TestScreen

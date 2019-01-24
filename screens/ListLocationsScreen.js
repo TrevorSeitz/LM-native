@@ -78,7 +78,9 @@ export default class ListLocationsScreen extends Component {
               key={item.id}
               title={item.name}
               onPress={() => {
-                this.props.navigation.navigate("Details");
+                this.props.navigation.navigate("Details", {
+                  Locationkey: `${JSON.stringify(item.id)}`
+                });
               }}
             />
           ))}

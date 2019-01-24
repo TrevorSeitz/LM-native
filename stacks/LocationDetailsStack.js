@@ -12,16 +12,15 @@ import Icon from "@expo/vector-icons/Ionicons";
 import { Constants, MapView } from "expo";
 
 import HomeScreen from "../screens/HomeScreen";
-import AddLocationScreen from "../screens/AddLocationScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 
-const HomeStack = createStackNavigator(
+const LocationDetailsStack = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    LocationDetails: {
+      screen: LocationDetailsScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Home",
+          headerTitle: "Location Details",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -33,8 +32,7 @@ const HomeStack = createStackNavigator(
         };
       }
     },
-    AddLocation: { screen: AddLocationScreen },
-    ListLocations: { screen: ListLocationsScreen }
+    Home: { screen: HomeScreen }
   },
   {
     defaultNavigationOptions: {
@@ -42,6 +40,4 @@ const HomeStack = createStackNavigator(
     }
   }
 );
-// };
-
-export default HomeStack;
+export default LocationDetailsStack;

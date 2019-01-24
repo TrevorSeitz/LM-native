@@ -9,12 +9,15 @@ import Icon from "@expo/vector-icons/Ionicons";
 import HomeStack from "../stacks/HomeStack";
 import AddLocationStack from "../stacks/AddLocationStack";
 import ListLocationsStack from "../stacks/ListLocationsStack";
+import LocationDetailsStack from "../stacks/LocationDetailsStack";
 
 const DashboardTabNavigator = createBottomTabNavigator(
   {
     HomeStack,
     AddLocationStack,
     ListLocationsStack
+    // ,
+    // LocationDetailsStack
     // SettingsStack
   },
   {

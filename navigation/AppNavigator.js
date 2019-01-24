@@ -5,15 +5,21 @@ import {
   createStackNavigator
 } from "react-navigation";
 
-import MainTabNavigator from "./MainTabNavigator";
-import NewFormNavigator from "./NewFormNavigator";
+import HomeNavigator from "./HomeNavigator";
+import AddLocationNavigator from "./AddLocationNavigator";
+import ListLocationsNavigator from "./ListLocationsNavigator";
+import LocationDetailsNavigator from "./LocationDetailsNavigator";
 // import LMImagePickerNavigator from "./";
 
 const AppNavigator = createStackNavigator({
   // this sets up the screens for navigation
-  Home: { screen: MainTabNavigator },
-  New: { screen: NewFormNavigator },
-  LMImagePicker: { screen: LMImagePickerNavigator }
+  // Home: { screen: MainTabNavigator },
+  // AddLocation: { screen: AddLocationNavigator },
+  // ListLocations: { screen: ListLocationsNavigator }
+  Home: { MainTabScreen },
+  AddLocation: { AddLocationScreen },
+  ListLocations: { ListLocationsScreen },
+  Details: { LocationDetailsScreen }
 });
 
 const AppContainer = createAppContainer(appNavigator);

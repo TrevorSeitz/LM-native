@@ -11,7 +11,7 @@ import DashboardScreen from "../screens/DashboardScreen";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
-// import TestScreen from "../screens/TestScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 // import LMImagePickerScreen from "../screens/LMImagePickerScreen";
 
 import DashboardStackNavigator from "./DashboardStackNavigator";
@@ -28,9 +28,9 @@ const AppDrawerNavigator = createDrawerNavigator({
   },
   ListLocations: {
     screen: ListLocationsScreen
-    // },
-    // Test: {
-    //   screen: TestScreen
+  },
+  Details: {
+    screen: LocationDetailsScreen
     // },
     // LMImagePicker: {
     //   screen: LMImagePickerScreen

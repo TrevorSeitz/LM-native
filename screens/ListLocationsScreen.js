@@ -4,6 +4,7 @@ import {
   ScrollView,
   ActivityIndicator,
   View,
+  TouchableOpacity,
   Text
 } from "react-native";
 import { List, ListItem, Button, Icon } from "react-native-elements";
@@ -20,6 +21,7 @@ import {
   MediaLibrary,
   FlatList
 } from "expo";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 export default class ListLocationsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -53,7 +55,7 @@ export default class ListLocationsScreen extends Component {
       locations.push({ id: doc.id, name: name, description: description });
     });
     this.setState({ locations });
-    this.state.locations.map((item, i) => console.log("item", i));
+    this.state.locations.map((item, i) => console.log(item));
   };
 
   componentDidMount() {
@@ -73,12 +75,10 @@ export default class ListLocationsScreen extends Component {
         <List>
           {this.state.locations.map((item, i) => (
             <ListItem
-              key={i}
+              key={item.id}
               title={item.name}
               onPress={() => {
-                this.props.navigation.navigate("LocationsDetails", {
-                  boardkey: `${JSON.stringify(item.key)}`
-                });
+                this.props.navigation.navigate("Details");
               }}
             />
           ))}

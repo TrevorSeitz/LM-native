@@ -13,6 +13,7 @@ import { Constants, MapView } from "expo";
 
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 
 const ListLocationsStack = createStackNavigator(
   {
@@ -32,7 +33,8 @@ const ListLocationsStack = createStackNavigator(
         };
       }
     },
-    Home: { screen: HomeScreen }
+    Home: { screen: HomeScreen },
+    Details: { screen: LocationDetailsScreen }
   },
   {
     defaultNavigationOptions: {

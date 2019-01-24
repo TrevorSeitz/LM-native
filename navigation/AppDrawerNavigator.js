@@ -10,9 +10,9 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
-import NewPlaceScreen from "../screens/NewPlaceScreen";
-import TestScreen from "../screens/TestScreen";
-import LMImagePickerScreen from "../screens/LMImagePickerScreen";
+import AddLocationScreen from "../screens/AddLocationScreen";
+// import TestScreen from "../screens/TestScreen";
+// import LMImagePickerScreen from "../screens/LMImagePickerScreen";
 
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
@@ -23,17 +23,17 @@ const AppDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: HomeScreen
   },
-  NewPlace: {
-    screen: NewPlaceScreen
+  AddLocation: {
+    screen: AddLocationScreen
   },
   ListLocations: {
     screen: ListLocationsScreen
-  },
-  Test: {
-    screen: TestScreen
-  },
-  LMImagePicker: {
-    screen: LMImagePickerScreen
+    // },
+    // Test: {
+    //   screen: TestScreen
+    // },
+    // LMImagePicker: {
+    //   screen: LMImagePickerScreen
   }
 });
 

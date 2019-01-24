@@ -41,6 +41,7 @@ export default class AddLocationScreen extends Component {
       description: "",
       image: "nil",
       imageFileName: "",
+      imageFileLocation: "",
       isLoading: false
     };
   }
@@ -79,7 +80,11 @@ export default class AddLocationScreen extends Component {
       console.log("image", this.state.image.uri);
       // console.log("result", result);
       const asset = await MediaLibrary.createAssetAsync(result.uri);
-      this.setState({ imageFileName: asset.filename });
+      this.setState({
+        imageFileName: asset.filename,
+
+        imageFileLocation: "manager-8ccf4.appspot.com/images/{asset.filename}"
+      });
 
       // this.uploadImage(result, asset, metadata)
       //   .then(() => {

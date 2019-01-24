@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet, ScrollView, ActivityIndicator, View } from "react-native";
 import { List, ListItem, Text, Card, Button } from "react-native-elements";
-// import firebase from "../Firebase";
+import firebase from "../Firebase";
 
-class DetailsScreen extends Component {
+class LocationDetailsScreen extends Component {
   static navigationOptions = {
     title: "Location Details"
   };
@@ -62,80 +62,70 @@ class DetailsScreen extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.activity}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    }
     return (
-      <View style={styles.container}>
-        <Text>Detail</Text>
-      </View>
+      <ScrollView>
+        <Card style={styles.container}>
+          <View style={styles.subContainer}>
+            <View>
+              <Text h3>{this.state.location.name}</Text>
+            </View>
+            <View>
+              <Text h4>{this.state.location.venue}</Text>
+            </View>
+            <View>
+              <Text h5>{this.state.location.latitude}</Text>
+            </View>
+            <View>
+              <Text h5>{this.state.location.longitude}</Text>
+            </View>
+            <View>
+              <Text h5>{this.state.location.contactName}</Text>
+            </View>
+            <View>
+              <Text h5>{this.state.location.contactPhone}</Text>
+            </View>
+            <View>
+              <Text h5>{this.state.location.email}</Text>
+            </View>
+            <View>
+              <Text h4>{this.state.location.description}</Text>
+            </View>
+          </View>
+          <View style={styles.detailButton}>
+            <Button
+              large
+              backgroundColor={"#CCCCCC"}
+              leftIcon={{ name: "edit" }}
+              title="Edit"
+              onPress={() => {
+                this.props.navigation.navigate("EditLocation", {
+                  locationkey: `${JSON.stringify(this.state.key)}`
+                });
+              }}
+            />
+          </View>
+          <View style={styles.detailButton}>
+            <Button
+              large
+              backgroundColor={"#999999"}
+              color={"#FFFFFF"}
+              leftIcon={{ name: "delete" }}
+              title="Delete"
+              onPress={() => this.deleteLocation(this.state.key)}
+            />
+          </View>
+        </Card>
+      </ScrollView>
     );
   }
 }
-
-render();
-{
-  if (this.state.isLoading) {
-    return (
-      <View style={styles.activity}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  }
-  return (
-    <ScrollView>
-      <Card style={styles.container}>
-        <View style={styles.subContainer}>
-          <View>
-            <Text h3>{this.state.location.name}</Text>
-          </View>
-          <View>
-            <Text h4>{this.state.location.venue}</Text>
-          </View>
-          <View>
-            <Text h5>{this.state.location.latitude}</Text>
-          </View>
-          <View>
-            <Text h5>{this.state.location.longitude}</Text>
-          </View>
-          <View>
-            <Text h5>{this.state.location.contactName}</Text>
-          </View>
-          <View>
-            <Text h5>{this.state.location.contactPhone}</Text>
-          </View>
-          <View>
-            <Text h5>{this.state.location.email}</Text>
-          </View>
-          <View>
-            <Text h4>{this.state.location.description}</Text>
-          </View>
-        </View>
-        <View style={styles.detailButton}>
-          <Button
-            large
-            backgroundColor={"#CCCCCC"}
-            leftIcon={{ name: "edit" }}
-            title="Edit"
-            onPress={() => {
-              this.props.navigation.navigate("EditLocation", {
-                locationkey: `${JSON.stringify(this.state.key)}`
-              });
-            }}
-          />
-        </View>
-        <View style={styles.detailButton}>
-          <Button
-            large
-            backgroundColor={"#999999"}
-            color={"#FFFFFF"}
-            leftIcon={{ name: "delete" }}
-            title="Delete"
-            onPress={() => this.deleteLocation(this.state.key)}
-          />
-        </View>
-      </Card>
-    </ScrollView>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -16,6 +16,10 @@ const firebaseConfig = {
   messagingSenderId: "535943620965"
 };
 
+// Create a reference with an initial file path and name
+// var storage = firebase.storage();
+// var pathReference = storage.ref('images/stars.jpg');
+
 // GOOGLE_MAPS_KEY = AIzaSyCm0e573jedm5MrvvFU38TlKKe1Hu1qi98;
 
 firebase.initializeApp(firebaseConfig);

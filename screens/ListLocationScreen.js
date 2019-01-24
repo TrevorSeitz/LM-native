@@ -52,22 +52,15 @@ class ListLocationScreen extends Component {
   }
 
   onCollectionUpdate = querySnapshot => {
-    const locations = [];
+    let locations = [...this.state.locations];
     querySnapshot.forEach(doc => {
-      const { name, description } = doc.data();
-      console.log(name);
-      locations.push({
-        key: doc.id,
-        doc, // DocumentSnapshot
-        name,
-        description
-      });
+      const id = doc.data().id;
+      const name = doc.data().name;
+      const description = doc.data().description;
+      locations.push({ id: doc.id, name: name, description: description });
     });
-    this.setState({
-      locations,
-      isLoading: false
-    });
-    console.log(this.state);
+    this.setState({ locations });
+    this.state.locations.map((item, i) => console.log("item", i));
   };
 
   componentDidMount() {
@@ -75,20 +68,6 @@ class ListLocationScreen extends Component {
   }
 
   render() {
-    // firebase
-    //   .firestore()
-    //   .collection("locations")
-    //   .get()
-    //   .then(snapshot => {
-    //   Alert.alert(JSON.stringify(snapshot._docs));
-    //   snapshot.forEach(doc => {
-    //     Alert.alert(doc.id, "=>", doc.data());
-    //   });
-    // })
-    // .catch(err => {
-    //   Alert.alert("Error getting documents", err);
-    // });
-
     if (this.state.isLoading) {
       return (
         <View style={styles.activity}>
@@ -105,7 +84,7 @@ class ListLocationScreen extends Component {
               name={item.name}
               onPress={() => {
                 this.props.navigation.navigate("LocationDetails", {
-                  Locationkey: `${JSON.stringify(item.key)}`
+                  locationkey: `${JSON.stringify(item.id)}`
                 });
               }}
             />

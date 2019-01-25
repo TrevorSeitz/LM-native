@@ -26,4 +26,13 @@ firebase.initializeApp(firebaseConfig);
 
 firebase.firestore().settings(settings);
 
+firebase
+  .auth()
+  .signInAnonymously()
+  .then(credential => {
+    if (credential) {
+      console.log("default app user ->", credential.user.toJSON());
+    }
+  });
+
 export default firebase;

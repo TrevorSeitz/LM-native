@@ -27,6 +27,7 @@ export default class AddLocationScreen extends Component {
   static navigationOptions = {
     title: "Add Location"
   };
+
   constructor() {
     super();
     this.ref = firebase.firestore().collection("locations");
@@ -55,8 +56,6 @@ export default class AddLocationScreen extends Component {
       quality: 0.5,
       exif: true
     });
-
-    // console.log("result", result);
     this.processImage(result);
   };
 
@@ -77,22 +76,10 @@ export default class AddLocationScreen extends Component {
   processImage = async (result, metadata) => {
     if (!result.cancelled) {
       this.setState({ image: result });
-      // console.log("image", this.state.image.uri);
-      // console.log("result", result);
       const asset = await MediaLibrary.createAssetAsync(result.uri);
       this.setState({
-        imageFileName: asset.filename,
-
-        imageFileLocation: "manager-8ccf4.appspot.com/images/{asset.filename}"
+        imageFileName: asset.filename
       });
-
-      // this.uploadImage(result, asset, metadata)
-      //   .then(() => {
-      //     Alert.alert("Success!");
-      //   })
-      //   .catch(error => {
-      //     Alert.alert(error);
-      //   });
     }
   };
 
@@ -106,13 +93,6 @@ export default class AddLocationScreen extends Component {
     this.setState({
       isLoading: true
     });
-    this.uploadImage(this.state.image)
-      .then(() => {
-        Alert.alert("Success!");
-      })
-      .catch(error => {
-        Alert.alert(error);
-      });
     this.ref
       .add({
         name: this.state.name,
@@ -124,7 +104,8 @@ export default class AddLocationScreen extends Component {
         email: this.state.email,
         description: this.state.description,
         image: this.state.image,
-        imageFileName: this.state.imageFileName
+        imageFileName: this.state.imageFileName,
+        imageFileLocation: this.state.imageFileLocation
       })
       .then(docRef => {
         this.setState({
@@ -138,22 +119,22 @@ export default class AddLocationScreen extends Component {
           description: "",
           image: "nil",
           imageFileName: "",
+          imageFileLocation: "",
           isLoading: false
         });
         this.props.navigation.goBack();
       })
       .catch(error => {
-        // console.error("Error adding document: ", error);
+        console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
       });
   }
 
-  uploadImage = async (result, asset) => {
-    const uri = result.uri;
+  uploadImage = async () => {
+    const uri = this.state.image.uri;
     uriToBlob = uri => {
-      // console.log("bloburl", result);
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.onerror = reject;
@@ -169,13 +150,22 @@ export default class AddLocationScreen extends Component {
     };
 
     const blob = await uriToBlob(uri);
-    console.log("file", this.state.imageFileLocation);
 
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + this.state.imageFileName)
-      .put(blob);
+      .child("images/" + this.state.imageFileName);
+    const snapshot = await ref.put(blob);
+    const imageFileLocation = await snapshot.ref
+      .getDownloadURL()
+      .then(result => this.setState({ imageFileLocation: result }))
+      .then(() => {
+        Alert.alert("Success!");
+      })
+      .catch(error => {
+        Alert.alert(error);
+      });
+    this.saveLocation();
   };
 
   render() {
@@ -237,7 +227,7 @@ export default class AddLocationScreen extends Component {
           <Button2 onPress={this.takePicture}>Take Picture</Button2>
         </View>
         <View style={styles.container}>
-          <Button large title="Save" onPress={() => this.saveLocation()} />
+          <Button large title="Save" onPress={() => this.uploadImage()} />
           <Image style={styles.image} source={{ uri: this.state.image.uri }} />
         </View>
       </ScrollView>

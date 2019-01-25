@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, ScrollView, ActivityIndicator, View } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+  View,
+  Image
+} from "react-native";
 import { List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
 
@@ -70,7 +76,10 @@ class LocationDetailsScreen extends Component {
         </View>
       );
     }
-    console.log(this.state.location);
+
+    const imageURL = this.state.location.imageFileLocation;
+    console.log("url", imageURL);
+
     return (
       <ScrollView>
         <Card style={styles.container}>
@@ -99,6 +108,9 @@ class LocationDetailsScreen extends Component {
             <View>
               <Text h4>{this.state.location.description}</Text>
             </View>
+          </View>
+          <View>
+            <Image style={styles.image} source={{ uri: imageURL }} />
           </View>
           <View style={styles.detailButton}>
             <Button
@@ -154,6 +166,14 @@ const styles = StyleSheet.create({
   },
   detailButton: {
     marginTop: 10
+  },
+  image: {
+    flex: 1,
+    alignItems: "stretch",
+    marginTop: 7.5,
+    padding: 5,
+    width: 200,
+    height: 200
   }
 });
 

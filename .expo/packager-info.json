@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://p6-x5s.anonymous.lm-native.exp.direct",
   "packagerNgrokUrl": "https://packager.p6-x5s.anonymous.lm-native.exp.direct",
-  "ngrokPid": 26466,
+  "ngrokPid": 54845,
   "devToolsPort": 19004,
   "packagerPort": 19005,
-  "packagerPid": 26443
+  "packagerPid": 54822
 }

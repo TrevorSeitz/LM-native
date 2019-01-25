@@ -77,7 +77,7 @@ export default class AddLocationScreen extends Component {
   processImage = async (result, metadata) => {
     if (!result.cancelled) {
       this.setState({ image: result });
-      console.log("image", this.state.image.uri);
+      // console.log("image", this.state.image.uri);
       // console.log("result", result);
       const asset = await MediaLibrary.createAssetAsync(result.uri);
       this.setState({
@@ -153,7 +153,7 @@ export default class AddLocationScreen extends Component {
   uploadImage = async (result, asset) => {
     const uri = result.uri;
     uriToBlob = uri => {
-      console.log("bloburl", result);
+      // console.log("bloburl", result);
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.onerror = reject;
@@ -169,7 +169,7 @@ export default class AddLocationScreen extends Component {
     };
 
     const blob = await uriToBlob(uri);
-    console.log("filename", this.state.imageFileName);
+    console.log("file", this.state.imageFileLocation);
 
     var ref = firebase
       .storage()

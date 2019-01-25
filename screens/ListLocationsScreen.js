@@ -55,7 +55,7 @@ export default class ListLocationsScreen extends Component {
       locations.push({ id: doc.id, name: name, description: description });
     });
     this.setState({ locations });
-    this.state.locations.map((item, i) => console.log(item));
+    // this.state.locations.map((item, i) => console.log(item));
   };
 
   componentDidMount() {

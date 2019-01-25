@@ -9,7 +9,6 @@ import TabBarIcon from "../components/TabBarIcon";
 // import WelcomeScreen from "../../screens/WelcomeScreen";
 import HomeScreen from "../screens/HomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
-import NewPlaceScreen from "../screens/NewPlaceScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
 import AddLocationStack from "../stacks/AddLocationStack";
 

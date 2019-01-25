@@ -19,7 +19,7 @@ class LocationDetailsScreen extends Component {
 
   componentDidMount() {
     const { navigation } = this.props;
-    console.log(this.props.navigation.state.params.Locationkey);
+    // console.log(this.props.navigation.state.params.Locationkey);
     const ref = firebase
       .firestore()
       .collection("locations")
@@ -70,6 +70,7 @@ class LocationDetailsScreen extends Component {
         </View>
       );
     }
+    console.log(this.state.location);
     return (
       <ScrollView>
         <Card style={styles.container}>

@@ -105,12 +105,14 @@ class LocationDetailsScreen extends Component {
             <View>
               <Text h5>{this.state.location.email}</Text>
             </View>
-            <View>
-              <Text h4>{this.state.location.description}</Text>
-            </View>
           </View>
           <View>
-            <Image style={styles.image} source={{ uri: imageURL }} />
+            <Text h4>{this.state.location.description}</Text>
+          </View>
+          <View style={styles.imageBox}>
+            <View>
+              <Image style={styles.image} source={{ uri: imageURL }} />
+            </View>
           </View>
           <View style={styles.detailButton}>
             <Button
@@ -174,6 +176,15 @@ const styles = StyleSheet.create({
     padding: 5,
     width: 200,
     height: 200
+  },
+  imageBox: {
+    flex: 1,
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

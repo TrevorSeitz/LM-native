@@ -7,14 +7,17 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
 import HomeStack from "../stacks/HomeStack";
-import NewPlaceStack from "../stacks/NewPlaceStack";
-
-// import NewPlaceTabNavigator from "./NewPlaceStackNavigator";
+import AddLocationStack from "../stacks/AddLocationStack";
+import ListLocationsStack from "../stacks/ListLocationsStack";
+import LocationDetailsStack from "../stacks/LocationDetailsStack";
 
 const DashboardTabNavigator = createBottomTabNavigator(
   {
     HomeStack,
-    NewPlaceStack
+    AddLocationStack,
+    ListLocationsStack
+    // ,
+    // LocationDetailsStack
     // SettingsStack
   },
   {

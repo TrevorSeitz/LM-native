@@ -1,13 +1,25 @@
 import React, { Component } from "react";
-
+import { StyleSheet } from "react-native";
 import { createAppContainer } from "react-navigation";
+import ApiKeys from "./constants/ApiKeys";
+import * as firebase from "firebase";
+//
+// import { MaterialIcons } from "@expo/vector-icons";
+// import { Font, AppLoading } from "expo";
 
 import AppSwitchNavigator from "./navigation/switches/AppSwitchNavigator";
 
-import { StyleSheet } from "react-native";
-
 export default class App extends React.Component {
-  state = { switchValue: false };
+  constructor(props) {
+    super(props);
+    this.state = { switchValue: false };
+
+    // Initialize firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(ApiKeys.firebaseConfig);
+      var database = firebase.database();
+    }
+  }
 
   render() {
     return <AppContainer />;

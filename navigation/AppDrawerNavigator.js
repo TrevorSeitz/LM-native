@@ -9,9 +9,10 @@ import Icon from "@expo/vector-icons/Ionicons";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import HomeScreen from "../screens/HomeScreen";
-import NewPlaceScreen from "../screens/NewPlaceScreen";
-import TestScreen from "../screens/TestScreen";
-import LMImagePickerScreen from "../screens/LMImagePickerScreen";
+import ListLocationsScreen from "../screens/ListLocationsScreen";
+import AddLocationScreen from "../screens/AddLocationScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+// import LMImagePickerScreen from "../screens/LMImagePickerScreen";
 
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
@@ -22,14 +23,17 @@ const AppDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: HomeScreen
   },
-  NewPlace: {
-    screen: NewPlaceScreen
+  AddLocation: {
+    screen: AddLocationScreen
   },
-  Test: {
-    screen: TestScreen
+  ListLocations: {
+    screen: ListLocationsScreen
   },
-  LMImagePicker: {
-    screen: LMImagePickerScreen
+  Details: {
+    screen: LocationDetailsScreen
+    // },
+    // LMImagePicker: {
+    //   screen: LMImagePickerScreen
   }
 });
 

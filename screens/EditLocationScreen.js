@@ -73,46 +73,50 @@ class EditLocationScreen extends Component {
     this.setState({
       isLoading: true
     });
+    const id = this.state.key
     const { navigation } = this.props;
     const updateRef = firebase
       .firestore()
       .collection("locations")
-      .doc(this.state.key);
+      .doc(id);
     updateRef
       .set({
-        key: doc.id,
-        name: location.name,
-        venue: location.venue,
-        contactName: location.contactName,
-        contactPhone: location.contactPhone,
-        email: location.email,
-        description: location.description
+        key: id,
+        name: this.state.name,
+        venue: this.state.venue,
+        contactName: this.state.contactName,
+        contactPhone: this.state.contactPhone,
+        email: this.state.email,
+        description: this.state.description
       })
-      .then(docRef => {
-        this.setState({
-          key: "",
-          id: "",
-          name: "",
-          venue: "",
-          latitude: "",
-          longitude: "",
-          contactName: "",
-          contactPhone: "",
-          email: "",
-          description: "",
-          image: "nil",
-          imageFileName: "",
-          imageFileLocation: "",
-          isLoading: false
-        });
-        this.props.navigation.navigate("Location");
-      })
+      // .then(docRef => {
+      //   this.setState({
+      //     key: "",
+      //     id: "",
+      //     name: "",
+      //     venue: "",
+      //     latitude: "",
+      //     longitude: "",
+      //     contactName: "",
+      //     contactPhone: "",
+      //     email: "",
+      //     description: "",
+      //     image: "nil",
+      //     imageFileName: "",
+      //     imageFileLocation: "",
+      //     isLoading: false
+      //   });
+        // this.props.navigation.navigate("Location");
+      // })
       .catch(error => {
         console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
       })
+      this.props.navigation.navigate("Details", {
+        Locationkey: `${JSON.stringify(id)}`
+      });
   }
 
   render() {

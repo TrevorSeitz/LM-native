@@ -10,7 +10,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
-import AddLocationStack from "../stacks/AddLocationStack";
+// import AddLocationStack from "../stacks/AddLocationStack";
 
 const HomeStack = createStackNavigator({
   New: AddLocationScreen
@@ -31,6 +31,5 @@ AddLocationScreen.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  AddLocationStack
+  HomeStack
 });

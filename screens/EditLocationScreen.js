@@ -37,23 +37,18 @@ class EditLocationScreen extends Component {
     const ref = firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("locationkey")));
+      .doc(JSON.parse(navigation.getParam("Locationkey")));
     ref.get().then(doc => {
       if (doc.exists) {
         const location = doc.data();
         this.setState({
-          key: "doc.id",
-          name: "location.name",
-          venue: "location.venue",
-          latitude: "location.latitude",
-          longitude: "location.longitude",
-          contactName: "location.contactName",
-          contactPhone: "location.contactPhone",
-          email: "location.email",
-          description: "location.description",
-          image: "location.image",
-          imageFileName: "location.imageFileName",
-          imageFileLocation: "location.imageFileLocation",
+          id: doc.id,
+          name: location.name,
+          venue: location.venue,
+          contactName: location.contactName,
+          contactPhone: location.contactPhone,
+          email: location.email,
+          description: location.description,
           isLoading: false
         });
       } else {
@@ -76,22 +71,30 @@ class EditLocationScreen extends Component {
     const updateRef = firebase
       .firestore()
       .collection("locations")
-      .doc(this.state.key);
+      .doc(this.state.id);
     updateRef
       .set({
-        title: this.state.title,
-        description: this.state.description,
-        author: this.state.author
+        id: this.state.id,
+        name: this.state.name,
+        venue: this.state.venue,
+        contactName: this.state.contactName,
+        contactPhone: this.state.contactPhone,
+        email: this.state.email,
+        description: this.state.description
+
       })
       .then(docRef => {
         this.setState({
-          key: "",
-          title: "",
+          id: "",
+          name: "",
+          venue: "",
+          contactName: "",
+          contactPhone: "",
+          email: "",
           description: "",
-          author: "",
           isLoading: false
         });
-        this.props.navigation.navigate("Location");
+        this.props.navigation.navigate("ListLocations");
       })
       .catch(error => {
         console.error("Error adding document: ", error);
@@ -133,9 +136,38 @@ class EditLocationScreen extends Component {
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>
           <TextInput
-            placeholder={"Title"}
-            value={this.state.title}
-            onChangeText={text => this.updateTextInput(text, "title")}
+            label={"Name"}
+            placeholder={"Name"}
+            value={this.state.name}
+            onChangeText={text => this.updateTextInput(text, "name")}
+          />
+        </View>
+          <View style={styles.subContainer}>
+            <TextInput
+              placeholder={"Venue"}
+              value={this.state.venue}
+              onChangeText={text => this.updateTextInput(text, "venue")}
+            />
+          </View>
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"Contact Name"}
+            value={this.state.contactName}
+            onChangeText={text => this.updateTextInput(text, "contactName")}
+          />
+        </View>
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"Contact Phone"}
+            value={this.state.contactPhone}
+            onChangeText={text => this.updateTextInput(text, "contactPhone")}
+          />
+        </View>
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"email"}
+            value={this.state.email}
+            onChangeText={text => this.updateTextInput(text, "email")}
           />
         </View>
         <View style={styles.subContainer}>
@@ -145,13 +177,6 @@ class EditLocationScreen extends Component {
             placeholder={"Description"}
             value={this.state.description}
             onChangeText={text => this.updateTextInput(text, "description")}
-          />
-        </View>
-        <View style={styles.subContainer}>
-          <TextInput
-            placeholder={"Author"}
-            value={this.state.author}
-            onChangeText={text => this.updateTextInput(text, "author")}
           />
         </View>
         <View style={styles.button}>

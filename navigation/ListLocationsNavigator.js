@@ -7,11 +7,11 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 
 const ListLocationsStack = createStackNavigator({
-  New: ListLocationsScreen,
+  List: ListLocationsScreen,
   Details: LocationDetailsScreen
 });
 

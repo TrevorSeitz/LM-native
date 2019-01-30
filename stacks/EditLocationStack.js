@@ -16,13 +16,13 @@ import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 
-const LocationDetailsStack = createStackNavigator(
+const EditLocationStack = createStackNavigator(
   {
-    LocationDetails: {
-      screen: LocationDetailsScreen,
+    EditLocation: {
+      screen: EditLocationScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Location Details",
+          headerTitle: "Edit Location",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -35,8 +35,7 @@ const LocationDetailsStack = createStackNavigator(
       }
     },
     Home: { screen: HomeScreen },
-    ListLocations: { screen: ListLocationsScreen },
-    EditLocation: { screen: EditLocationScreen }
+    LocationDetails: { screen: LocationDetailsScreen }
   },
   {
     defaultNavigationOptions: {
@@ -44,4 +43,4 @@ const LocationDetailsStack = createStackNavigator(
     }
   }
 );
-export default LocationDetailsStack;
+export default EditLocationStack;

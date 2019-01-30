@@ -47,12 +47,13 @@ export default class ListLocationsScreen extends Component {
   }
 
   onCollectionUpdate = querySnapshot => {
-    let locations = [...this.state.locations];
+    let locations = [];
     querySnapshot.forEach(doc => {
       const id = doc.data().id;
       const name = doc.data().name;
-      const description = doc.data().description;
-      locations.push({ id: doc.id, name: name, description: description });
+      // const description = doc.data().description;
+      // locations.push({ id: doc.id, name: name, description: description });
+      locations.push({ id: doc.id, name: name});
     });
     this.setState({ locations });
     // this.state.locations.map((item, i) => console.log(item));

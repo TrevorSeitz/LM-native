@@ -12,6 +12,7 @@ import EditLocationScreen from "../../screens/EditLocationScreen";
 import AppDrawerNavigator from "../AppDrawerNavigator";
 import AddLocationNavigator from "../AddLocationNavigator";
 import ListLocationsNavigator from "../ListLocationsNavigator";
+// import LocationDetailsNavigator from "../LocationDetailsNavigator";
 
 const AppSwitchNavigator = createSwitchNavigator({
   Welcome: { screen: WelcomeScreen },

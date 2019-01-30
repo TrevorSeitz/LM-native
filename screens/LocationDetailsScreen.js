@@ -66,6 +66,7 @@ class LocationDetailsScreen extends Component {
           isLoading: false
         });
       });
+      this.props.navigation.navigate("ListLocations") 
   }
 
   render() {

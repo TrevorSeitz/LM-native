@@ -18,6 +18,7 @@ class EditLocationScreen extends Component {
     super();
     this.state = {
       key: "",
+      id: "",
       name: "",
       venue: "",
       latitude: "",
@@ -42,18 +43,18 @@ class EditLocationScreen extends Component {
       if (doc.exists) {
         const location = doc.data();
         this.setState({
-          key: "doc.id",
-          name: "location.name",
-          venue: "location.venue",
-          latitude: "location.latitude",
-          longitude: "location.longitude",
-          contactName: "location.contactName",
-          contactPhone: "location.contactPhone",
-          email: "location.email",
-          description: "location.description",
-          image: "location.image",
-          imageFileName: "location.imageFileName",
-          imageFileLocation: "location.imageFileLocation",
+          key: doc.id,
+          name: location.name,
+          venue: location.venue,
+          latitude: location.latitude,
+          longitude: location.longitude,
+          contactName: location.contactName,
+          contactPhone: location.contactPhone,
+          email: location.email,
+          description: location.description,
+          image: location.image,
+          imageFileName: location.imageFileName,
+          imageFileLocation: location.imageFileLocation,
           isLoading: false
         });
       } else {
@@ -79,16 +80,29 @@ class EditLocationScreen extends Component {
       .doc(this.state.key);
     updateRef
       .set({
-        title: this.state.title,
-        description: this.state.description,
-        author: this.state.author
+        key: doc.id,
+        name: location.name,
+        venue: location.venue,
+        contactName: location.contactName,
+        contactPhone: location.contactPhone,
+        email: location.email,
+        description: location.description
       })
       .then(docRef => {
         this.setState({
           key: "",
-          title: "",
+          id: "",
+          name: "",
+          venue: "",
+          latitude: "",
+          longitude: "",
+          contactName: "",
+          contactPhone: "",
+          email: "",
           description: "",
-          author: "",
+          image: "nil",
+          imageFileName: "",
+          imageFileLocation: "",
           isLoading: false
         });
         this.props.navigation.navigate("Location");
@@ -98,27 +112,7 @@ class EditLocationScreen extends Component {
         this.setState({
           isLoading: false
         });
-      });
-  }
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Add Location</Text>
-        <Button
-          title="Go to Edit Location... again"
-          onPress={() => this.props.navigation.push("EditLocation")}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate("Location")}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
+      })
   }
 
   render() {
@@ -133,9 +127,38 @@ class EditLocationScreen extends Component {
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>
           <TextInput
-            placeholder={"Title"}
-            value={this.state.title}
-            onChangeText={text => this.updateTextInput(text, "title")}
+            label={"Name"}
+            placeholder={"Name"}
+            value={this.state.name}
+            onChangeText={text => this.updateTextInput(text, "name")}
+          />
+        </View>
+          <View style={styles.subContainer}>
+            <TextInput
+              placeholder={"Venue"}
+              value={this.state.venue}
+              onChangeText={text => this.updateTextInput(text, "venue")}
+            />
+          </View>
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"Contact Name"}
+            value={this.state.contactName}
+            onChangeText={text => this.updateTextInput(text, "contactName")}
+          />
+        </View>
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"Contact Phone"}
+            value={this.state.contactPhone}
+            onChangeText={text => this.updateTextInput(text, "contactPhone")}
+          />
+        </View>
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"email"}
+            value={this.state.email}
+            onChangeText={text => this.updateTextInput(text, "email")}
           />
         </View>
         <View style={styles.subContainer}>
@@ -145,13 +168,6 @@ class EditLocationScreen extends Component {
             placeholder={"Description"}
             value={this.state.description}
             onChangeText={text => this.updateTextInput(text, "description")}
-          />
-        </View>
-        <View style={styles.subContainer}>
-          <TextInput
-            placeholder={"Author"}
-            value={this.state.author}
-            onChangeText={text => this.updateTextInput(text, "author")}
           />
         </View>
         <View style={styles.button}>

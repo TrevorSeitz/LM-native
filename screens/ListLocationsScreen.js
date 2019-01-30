@@ -47,7 +47,7 @@ export default class ListLocationsScreen extends Component {
   }
 
   onCollectionUpdate = querySnapshot => {
-    let locations = [...this.state.locations];
+    let locations = [];
     querySnapshot.forEach(doc => {
       const id = doc.data().id;
       const name = doc.data().name;

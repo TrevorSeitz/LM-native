@@ -1,14 +1,22 @@
 import * as React from "react";
+import * as firebase from "firebase";
+import firestore from "firebase/firestore";
 import { Platform, Text, View, StyleSheet } from "react-native";
 import { Constants, Location, Permissions, MapView, Marker } from "expo";
 import { Card } from "react-native-paper";
 // import { MapView } from "react-native-maps";
 
 export default class Map extends React.Component {
-  state = {
-    location: null,
-    errorMessage: null
-  };
+  constructor() {
+    super();
+    this.ref = firebase.firestore().collection("locations");
+    this.unsubscribe = null;
+      this.state = {
+        location: null,
+        locations: [],
+        errorMessage: null
+      };
+    }
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -19,6 +27,30 @@ export default class Map extends React.Component {
     } else {
       this._getLocationAsync();
     }
+  }
+
+  onCollectionUpdate = querySnapshot => {
+    let locations = [];
+    querySnapshot.forEach(doc => {
+      console.log(doc.data())
+      const id = doc.data().id;
+      const name = doc.data().name;
+      const venue = doc.data().venue;
+      const latitude = doc.data().latitude;
+      const longitude = doc.data().longitude;
+      const contactName = doc.data().contactName;
+      const contactPhone = doc.data().contactPhone;
+      const email = doc.data().email;
+      const description = doc.data().description;
+      const imageFileLocation = doc.data().imageFileLocation;
+      locations.push({ id: doc.id, name: name, venue: venue, latitude: latitude, longitude: longitude, contactName: contactName, contactPhone: contactPhone, email: email, description: description, imageFileLocation: imageFileLocation});
+    });
+    this.setState({ locations });
+    // this.state.locations.map((item, i) => console.log(item));
+  };
+
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
   _getLocationAsync = async () => {
@@ -34,7 +66,6 @@ export default class Map extends React.Component {
   };
 
   render() {
-    let text = "Waiting..";
     let lat = 0;
     let long = 0;
     if (this.state.errorMessage) {
@@ -43,7 +74,8 @@ export default class Map extends React.Component {
       lat = parseFloat(this.state.location.coords.latitude, 5);
       long = parseFloat(this.state.location.coords.longitude, 5);
     }
-console.log(lat, long)
+    const locations = this.state.locations
+
     return (
       <View style={styles.container}>
         <MapView
@@ -57,11 +89,27 @@ console.log(lat, long)
             longitudeDelta: 0.0421
           }}
         >
-          <MapView.Marker coordinate={{latitude: lat, longitude: long}} title={"test"}>
+          <MapView.Marker coordinate={{latitude: lat, longitude: long}} title={"Current Location"}>
             <View style={styles.radius}>
               <View style={styles.marker} />
             </View>
           </MapView.Marker>
+
+          {this.state.locations.map((location) => {
+            const latitude = Number(location.latitude);
+            const longitude = Number(location.longitude);
+            console.log(latitude)
+            return (
+              <MapView.Marker
+              key={location.id}
+              coordinate={{ latitude, longitude }}>
+                <View style={styles.radius}>
+                  <View style={styles.marker} />
+                </View>
+              </MapView.Marker>
+            );
+
+          })}
         </MapView>
       </View>
     );

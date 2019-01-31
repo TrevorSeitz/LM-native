@@ -77,8 +77,19 @@ export default class AddLocationScreen extends Component {
     if (!result.cancelled) {
       this.setState({ image: result });
       const asset = await MediaLibrary.createAssetAsync(result.uri);
+      let lat = parseFloat(result.exif.GPSLatitude, 5)
+      let long = parseFloat(result.exif.GPSLongitude, 5)
+      if(result.exif.GPSLatitudeRef == "S"){
+        lat *= -1
+      }
+      if(result.exif.GPSLongitudeRef == "W"){
+        long *= -1
+      }
+
       this.setState({
-        imageFileName: asset.filename
+        imageFileName: asset.filename,
+        latitude: lat,
+        longitude: long
       });
     }
   };

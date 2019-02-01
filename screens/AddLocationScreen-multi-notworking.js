@@ -18,11 +18,12 @@ import {
   Font,
   AppLoading,
   Constants,
-  // ImagePicker,
+  ImagePicker,
+  CameraRoll,
   Permissions,
   MediaLibrary
 } from "expo";
-import ImagePicker from "react-native-customized-image-picker";
+// import ImagePicker from "react-native-customized-image-picker";
 
 export default class AddLocationScreen extends Component {
   static navigationOptions = {
@@ -44,21 +45,36 @@ export default class AddLocationScreen extends Component {
       image: "nil",
       imageFileName: "",
       imageFileLocation: "",
+      photos: [],
       isLoading: false
     };
   }
 
-  selectPicture = async () => {
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    let result = await ImagePicker.launchImageLibraryAsync({
-      multiple: true,
-      quality: 0.5,
-      exif: true
-    }).then(images => {
-      console.log(images);
-    });
+  // selectPicture = async () => {
+  // await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  // let result = await ImagePicker.launchImageLibraryAsync({
+  //   multiple: true,
+  //   quality: 0.5,
+  //   exif: true
 
-    this.processImage(result);
+  selectPicture = async () => {
+    // await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // let r = [];
+    r = await CameraRoll.getPhotos({
+      first: 2,
+      assetType: "All"
+    })
+      .then(r => {
+        this.setState({ photos: r.edges });
+      })
+      .catch(err => {
+        //Error Loading Images
+      })
+      .then(r => {
+        console.log(r);
+      });
+
+    // this.processImage(images);
   };
 
   takePicture = async () => {

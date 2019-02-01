@@ -20,6 +20,7 @@ import {
   Constants,
   ImagePicker,
   Permissions,
+  Location,
   MediaLibrary
 } from "expo";
 
@@ -43,9 +44,26 @@ export default class AddLocationScreen extends Component {
       image: "nil",
       imageFileName: "",
       imageFileLocation: "",
+      location: {},
       isLoading: false
     };
   }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access location was denied"
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({})
+      //
+      // lat = JSON.stringify(this.state.location.coords.latitude);
+      // long = JSON.stringify(this.state.location.coords.longitude);
+      .then(console.log("get location", location));
+    this.setState({ location });
+  };
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -67,9 +85,17 @@ export default class AddLocationScreen extends Component {
       // aspect: 1,
       quality: 0.5,
       exif: true
-    });
+    }).then(await this._getLocationAsync());
     const metadata = result.metadata;
+    console.log("state.location", this.state.location);
 
+    result.exif.GPSLatitude = JSON.stringify(
+      this.state.location.coords.latitude
+    );
+    result.exif.GPSLongitude = JSON.stringify(
+      this.state.location.coords.longitude
+    );
+    console.log("result", result);
     this.processImage(result, metadata);
   };
 
@@ -77,13 +103,13 @@ export default class AddLocationScreen extends Component {
     if (!result.cancelled) {
       this.setState({ image: result });
       const asset = await MediaLibrary.createAssetAsync(result.uri);
-      let lat = parseFloat(result.exif.GPSLatitude, 5)
-      let long = parseFloat(result.exif.GPSLongitude, 5)
-      if(result.exif.GPSLatitudeRef == "S"){
-        lat *= -1
+      let lat = parseFloat(result.exif.GPSLatitude, 5);
+      let long = parseFloat(result.exif.GPSLongitude, 5);
+      if (result.exif.GPSLatitudeRef == "S") {
+        lat *= -1;
       }
-      if(result.exif.GPSLongitudeRef == "W"){
-        long *= -1
+      if (result.exif.GPSLongitudeRef == "W") {
+        long *= -1;
       }
 
       this.setState({

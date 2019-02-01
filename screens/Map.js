@@ -32,7 +32,7 @@ export default class Map extends React.Component {
   onCollectionUpdate = querySnapshot => {
     let locations = [];
     querySnapshot.forEach(doc => {
-      console.log(doc.data());
+      // console.log(doc.data());
       const id = doc.data().id;
       const name = doc.data().name;
       const venue = doc.data().venue;
@@ -110,13 +110,14 @@ export default class Map extends React.Component {
           </MapView.Marker>
 
           {this.state.locations.map(location => {
-            console.log(location);
+            // console.log(location);
             const latitude = Number(location.latitude);
             const longitude = Number(location.longitude);
             // console.log(latitude);
             return (
               <MapView.Marker
                 key={location.id}
+                title={location.name}
                 coordinate={{ latitude, longitude }}
               >
                 <View style={styles.radius}>

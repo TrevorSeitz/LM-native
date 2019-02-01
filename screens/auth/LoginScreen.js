@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 
-export default class ForgotPasswordScreen extends React.Component {
+export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -10,7 +10,7 @@ export default class ForgotPasswordScreen extends React.Component {
   render() {
     return (
       <View>
-        <Text style={{ paddingTop: 20 }}>Forgot Password Screen</Text>
+        <Text style={{ paddingTop: 20 }}>Login Screen</Text>
         <Button
           title="Bypass this screen"
           onPress={() => this.props.navigation.navigate("Dashboard")}

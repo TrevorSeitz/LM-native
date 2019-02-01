@@ -1,16 +1,22 @@
-import React from "react"
-import { StyleSheet, View, Text } from "react-native";
-
+import React from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
 
 export default class SignupScreen extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
-    return <Text style={{paddingTop: 20}}>SignupScreen</Text>
+    return (
+      <View>
+        <Text style={{ paddingTop: 20 }}>SignupScreen</Text>
+        <Button
+          title="Bypass this screen"
+          onPress={() => this.props.navigation.navigate("Dashboard")}
+        />
+      </View>
+    );
   }
 }
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

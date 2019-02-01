@@ -16,9 +16,16 @@ class WelcomeScreen extends Component {
         <Text>Welcome Screen</Text>
         <Button
           title="Login"
-          onPress={() => this.props.navigation.navigate("Dashboard")}
+          onPress={() => this.props.navigation.navigate("Login")}
         />
-        <Button title="Sign Up" onPress={() => alert("Button Pressed")} />
+        <Button
+          title="Sign Up"
+          onPress={() => this.props.navigation.navigate("Signup")}
+        />
+        <Button
+          title="ForgotPassword"
+          onPress={() => this.props.navigation.navigate("ForgotPassword")}
+        />
       </View>
     );
   }

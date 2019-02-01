@@ -7,6 +7,9 @@ import DashboardScreen from "../../screens/DashboardScreen";
 import AddLocationScreen from "../../screens/AddLocationScreen";
 import LocationDetailsScreen from "../../screens/LocationDetailsScreen";
 import EditLocationScreen from "../../screens/EditLocationScreen";
+import LoginScreen from "../../screens/auth/LoginScreen";
+import SignupScreen from "../../screens/auth/SignupScreen";
+import ForgotPasswordScreen from "../../screens/auth/ForgotPasswordScreen";
 
 import AppDrawerNavigator from "../AppDrawerNavigator";
 import AddLocationNavigator from "../AddLocationNavigator";
@@ -18,7 +21,10 @@ const AppSwitchNavigator = createSwitchNavigator({
   NewLocation: { screen: AddLocationNavigator },
   ListLocations: { screen: ListLocationsNavigator },
   LocationDetails: { screen: LocationDetailsScreen },
-  EditLocation: { screen: EditLocationScreen }
+  EditLocation: { screen: EditLocationScreen },
+  Login: { screen: LoginScreen },
+  Signup: { screen: SignupScreen },
+  ForgotPassword: { screen: ForgotPasswordScreen }
 });
 
 export default AppSwitchNavigator;

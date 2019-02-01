@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, Platform, Image, View, StyleSheet } from "react-native";
 import { Constants, MapView } from "expo";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Map from "./Map";
@@ -7,9 +7,14 @@ import Map from "./Map";
 import { Card } from "react-native-paper";
 
 class HomeScreen extends React.Component {
+  state = { currentUser: null };
+
   render() {
+    const { currentUser } = this.state;
+
     return (
       <View style={styles.container}>
+        <Text>Hi {currentUser && currentUser.email}!</Text>
         <Map />
         <Card />
       </View>

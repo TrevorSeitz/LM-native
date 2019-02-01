@@ -11,12 +11,12 @@ export default class Map extends React.Component {
     super();
     this.ref = firebase.firestore().collection("locations");
     this.unsubscribe = null;
-      this.state = {
-        location: null,
-        locations: [],
-        errorMessage: null
-      };
-    }
+    this.state = {
+      location: null,
+      locations: [],
+      errorMessage: null
+    };
+  }
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -32,7 +32,7 @@ export default class Map extends React.Component {
   onCollectionUpdate = querySnapshot => {
     let locations = [];
     querySnapshot.forEach(doc => {
-      console.log(doc.data())
+      console.log(doc.data());
       const id = doc.data().id;
       const name = doc.data().name;
       const venue = doc.data().venue;
@@ -43,7 +43,18 @@ export default class Map extends React.Component {
       const email = doc.data().email;
       const description = doc.data().description;
       const imageFileLocation = doc.data().imageFileLocation;
-      locations.push({ id: doc.id, name: name, venue: venue, latitude: latitude, longitude: longitude, contactName: contactName, contactPhone: contactPhone, email: email, description: description, imageFileLocation: imageFileLocation});
+      locations.push({
+        id: doc.id,
+        name: name,
+        venue: venue,
+        latitude: latitude,
+        longitude: longitude,
+        contactName: contactName,
+        contactPhone: contactPhone,
+        email: email,
+        description: description,
+        imageFileLocation: imageFileLocation
+      });
     });
     this.setState({ locations });
     // this.state.locations.map((item, i) => console.log(item));
@@ -74,7 +85,7 @@ export default class Map extends React.Component {
       lat = parseFloat(this.state.location.coords.latitude, 5);
       long = parseFloat(this.state.location.coords.longitude, 5);
     }
-    const locations = this.state.locations
+    const locations = this.state.locations;
 
     return (
       <View style={styles.container}>
@@ -89,26 +100,30 @@ export default class Map extends React.Component {
             longitudeDelta: 0.0421
           }}
         >
-          <MapView.Marker coordinate={{latitude: lat, longitude: long}} title={"Current Location"}>
+          <MapView.Marker
+            coordinate={{ latitude: lat, longitude: long }}
+            title={"Current Location"}
+          >
             <View style={styles.radius}>
               <View style={styles.marker} />
             </View>
           </MapView.Marker>
 
-          {this.state.locations.map((location) => {
+          {this.state.locations.map(location => {
+            console.log(location);
             const latitude = Number(location.latitude);
             const longitude = Number(location.longitude);
-            console.log(latitude)
+            // console.log(latitude);
             return (
               <MapView.Marker
-              key={location.id}
-              coordinate={{ latitude, longitude }}>
+                key={location.id}
+                coordinate={{ latitude, longitude }}
+              >
                 <View style={styles.radius}>
                   <View style={styles.marker} />
                 </View>
               </MapView.Marker>
             );
-
           })}
         </MapView>
       </View>
@@ -120,23 +135,23 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 50 / 2,
-    overflow: 'hidden',
-    backgroundColor: 'rgba(0, 122, 255, 0.1)',
+    overflow: "hidden",
+    backgroundColor: "rgba(0, 122, 255, 0.1)",
     borderWidth: 1,
-    borderColor:  'rgba(0, 122, 255, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center'
+    borderColor: "rgba(0, 122, 255, 0.3)",
+    alignItems: "center",
+    justifyContent: "center"
   },
   marker: {
     height: 20,
     width: 20,
     borderWidth: 3,
-    borderColor:  'white',
+    borderColor: "white",
     borderRadius: 20 / 2,
-    overflow: 'hidden',
-    backgroundColor: '#007AFF',
-    alignItems: 'center',
-    justifyContent: 'center'
+    overflow: "hidden",
+    backgroundColor: "#007AFF",
+    alignItems: "center",
+    justifyContent: "center"
   },
   container: {
     flex: 1,

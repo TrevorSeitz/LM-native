@@ -73,7 +73,7 @@ class EditLocationScreen extends Component {
     this.setState({
       isLoading: true
     });
-    const id = this.state.key
+    const id = this.state.key;
     const { navigation } = this.props;
     const updateRef = firebase
       .firestore()
@@ -84,10 +84,15 @@ class EditLocationScreen extends Component {
         key: id,
         name: this.state.name,
         venue: this.state.venue,
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
         contactName: this.state.contactName,
         contactPhone: this.state.contactPhone,
         email: this.state.email,
-        description: this.state.description
+        description: this.state.description,
+        image: this.state.image,
+        imageFileName: this.state.imageFileName,
+        imageFileLocation: this.state.imageFileLocation
       })
       // .then(docRef => {
       //   this.setState({
@@ -106,17 +111,17 @@ class EditLocationScreen extends Component {
       //     imageFileLocation: "",
       //     isLoading: false
       //   });
-        // this.props.navigation.navigate("Location");
+      // this.props.navigation.navigate("Location");
       // })
       .catch(error => {
         console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
-      })
-      this.props.navigation.navigate("Details", {
-        Locationkey: `${JSON.stringify(id)}`
       });
+    this.props.navigation.navigate("Details", {
+      Locationkey: `${JSON.stringify(id)}`
+    });
   }
 
   render() {
@@ -137,13 +142,13 @@ class EditLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "name")}
           />
         </View>
-          <View style={styles.subContainer}>
-            <TextInput
-              placeholder={"Venue"}
-              value={this.state.venue}
-              onChangeText={text => this.updateTextInput(text, "venue")}
-            />
-          </View>
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"Venue"}
+            value={this.state.venue}
+            onChangeText={text => this.updateTextInput(text, "venue")}
+          />
+        </View>
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"Contact Name"}

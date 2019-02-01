@@ -7,7 +7,6 @@ import DashboardScreen from "../../screens/DashboardScreen";
 import AddLocationScreen from "../../screens/AddLocationScreen";
 import LocationDetailsScreen from "../../screens/LocationDetailsScreen";
 import EditLocationScreen from "../../screens/EditLocationScreen";
-// import ListLocationsScreen from "../../screens/ListLocationsScreen";
 
 import AppDrawerNavigator from "../AppDrawerNavigator";
 import AddLocationNavigator from "../AddLocationNavigator";

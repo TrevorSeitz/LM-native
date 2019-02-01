@@ -12,6 +12,7 @@
     "firebase": "^5.8.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-customized-image-picker": "^0.1.4",
     "react-native-elements": "^0.19.1",
     "react-native-exif": "^0.4.0",
     "react-native-firebase": "^5.2.0",

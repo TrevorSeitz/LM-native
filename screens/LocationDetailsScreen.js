@@ -66,7 +66,7 @@ class LocationDetailsScreen extends Component {
           isLoading: false
         });
       });
-      this.props.navigation.navigate("ListLocations") 
+    this.props.navigation.navigate("ListLocations");
   }
 
   render() {
@@ -90,12 +90,6 @@ class LocationDetailsScreen extends Component {
             </View>
             <View>
               <Text h4>{this.state.location.venue}</Text>
-            </View>
-            <View>
-              <Text h5>{this.state.location.latitude}</Text>
-            </View>
-            <View>
-              <Text h5>{this.state.location.longitude}</Text>
             </View>
             <View>
               <Text h5>{this.state.location.contactName}</Text>

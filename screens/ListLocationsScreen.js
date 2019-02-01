@@ -44,6 +44,8 @@ export default class ListLocationsScreen extends Component {
     await Font.loadAsync({
       "Material Icons": require("@expo/vector-icons/fonts/MaterialIcons.ttf")
     });
+
+    this.setState({ isLoading: false });
   }
 
   onCollectionUpdate = querySnapshot => {
@@ -63,13 +65,13 @@ export default class ListLocationsScreen extends Component {
   }
 
   render() {
-    // if (this.state.isLoading) {
-    //   return (
-    //     <View style={styles.activity}>
-    //       <ActivityIndicator size="large" color="#0000ff" />
-    //     </View>
-    //   );
-    // }
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.activity}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    }
     return (
       <ScrollView style={styles.container}>
         <List>

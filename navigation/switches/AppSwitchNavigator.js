@@ -18,19 +18,19 @@ import ListLocationsNavigator from "../ListLocationsNavigator";
 
 const AppSwitchNavigator = createSwitchNavigator(
   {
-    Welcome: { screen: WelcomeScreen },
+    // Welcome: { screen: WelcomeScreen },
     Home: { screen: AppDrawerNavigator },
     NewLocation: { screen: AddLocationNavigator },
     ListLocations: { screen: ListLocationsNavigator },
     LocationDetails: { screen: LocationDetailsScreen },
-    EditLocation: { screen: EditLocationScreen },
-    Login: { screen: LoginScreen },
-    Signup: { screen: SignupScreen },
-    ForgotPassword: { screen: ForgotPasswordScreen },
-    Loading: { screen: LoadingScreen }
+    EditLocation: { screen: EditLocationScreen }
+    // Login: { screen: LoginScreen },
+    // Signup: { screen: SignupScreen },
+    // ForgotPassword: { screen: ForgotPasswordScreen },
+    // Loading: { screen: LoadingScreen }
   },
   {
-    initialRouteName: "Loading"
+    // initialRouteName: "Loading"
   }
 );
 

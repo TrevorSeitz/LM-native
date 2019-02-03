@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font } from "expo";
+
 import { createAppContainer } from "react-navigation";
 import ApiKeys from "./constants/ApiKeys";
 import * as firebase from "firebase";
@@ -34,19 +35,17 @@ export default class App extends React.Component {
   }
 
   render() {
-    // return <AppContainer />;
-    return <LoginContainer />;
-    // return (
-    //   <View style={styles.container}>
-    //     {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-    //     {Platform.OS === "android" && <View style={styles.statusBarUnderlay} />}
-    //     {this.state.isAuthenticated ? (
-    //       <AppContainer />
-    //     ) : (
-    //       <LoginSwitchNavigator />
-    //     )}
-    //   </View>
-    // );
+    return (
+      <View style={styles.container}>
+        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+        {Platform.OS === "android" && <View style={styles.statusBarUnderlay} />}
+        {this.state.isAuthenticated ? (
+          <AppContainer />
+        ) : (
+          <LoginSwitchNavigator />
+        )}
+      </View>
+    );
   }
 }
 

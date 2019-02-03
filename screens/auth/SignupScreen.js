@@ -3,14 +3,23 @@ import { StyleSheet, View, Text, TextInput, Button } from "react-native";
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
-  state = { email: "", password: "", errorMessage: null };
+  state = { email: "", password: "", passwordConfirm: "", errorMessage: null };
 
   handleSignup = () => {
+    if (this.state.password != this.state.passwordConfirm) {
+      Alert.atert("Passwords do not match");
+      return;
+    }
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => this.props.navigation.navigate("Main"))
-      .catch(error => this.setState({ errorMessage: error.message }));
+      .then(
+        () => {},
+        error => {
+          Alert.alert(error.message);
+        }
+      );
   };
 
   render() {
@@ -34,6 +43,14 @@ export default class SignupScreen extends React.Component {
           style={styles.textInput}
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
+        />
+        <TextInput
+          secureTextEntry
+          placeholder="Confirm Password"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={passwordConfirm => this.setState({ passwordConfirm })}
+          value={this.state.passwordConfirm}
         />
         <Button title="Sign Up" onPress={this.handleSignup} />
         <Button

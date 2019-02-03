@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, Button } from "react-native";
+import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
@@ -7,7 +7,7 @@ export default class SignupScreen extends React.Component {
 
   handleSignup = () => {
     if (this.state.password != this.state.passwordConfirm) {
-      Alert.atert("Passwords do not match");
+      Alert.alert("Passwords do not match");
       return;
     }
 
@@ -17,7 +17,7 @@ export default class SignupScreen extends React.Component {
       .then(
         () => {},
         error => {
-          Alert.alert(error.message);
+          Alert.alert("unknown alert from firebase");
         }
       );
   };

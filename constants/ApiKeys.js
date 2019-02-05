@@ -1,13 +1,12 @@
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
 
-const settings = { timestampsInSnapshots: true };
-
+const settings = {};
 // Initialize Firebase
 // export default {
 // var firebaseConfig = {
 const firebaseConfig = {
-  apiKey: "AIzaSyAZnD0gHWdwkASOKLRM2eKyFHkrcWX94Aw",
+  apiKey: "AIzaSyBybytYwjFRxcyL410pnwxbkMDMA8Df4KM",
   src: "https://www.gstatic.com/firebasejs/5.8.0/firebase.js",
   authDomain: "manager-8ccf4.firebaseapp.com",
   databaseURL: "https://manager-8ccf4.firebaseio.com",

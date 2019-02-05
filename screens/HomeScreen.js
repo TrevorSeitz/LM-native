@@ -7,14 +7,17 @@ import Map from "./Map";
 import { Card } from "react-native-paper";
 
 class HomeScreen extends React.Component {
-  state = { currentUser: null };
+  static navigationOptions = {
+    title: "Home"
+  };
+  constructor(props) {
+    super(props);
+    console.log("props", props);
+  }
 
   render() {
-    const { currentUser } = this.state;
-
     return (
       <View style={styles.container}>
-        <Text>Hi {currentUser && currentUser.email}!</Text>
         <Map />
         <Card />
       </View>

@@ -19,21 +19,39 @@ export default class App extends React.Component {
       switchValue: false,
       isLoadingComplete: false,
       isAuthenticationReady: false,
-      isAuthenticated: false
+      isAuthenticated: false,
+      user: {}
     };
-
-    // Initialize firebase
-    if (!firebase.apps.length) {
-      firebase.initializeApp(ApiKeys.firebaseConfig);
-      firebase.auth().onAuthStateChanged(this.StateChanged);
-      var database = firebase.database();
-    }
   }
-  StateChanged = user => {
-    console.log("auth changed", user);
-    this.setState({ isAuthenticationReady: true });
-    this.setState({ isAuthenticated: !!user });
-  };
+
+  // Initialize firebase
+  //   if (!firebase.apps.length) {
+  //     firebase.initializeApp(ApiKeys.firebaseConfig);  //does this actually belong in ApiKeys?
+  //     firebase.auth().onAuthStateChanged(this.StateChanged);
+  //     var database = firebase.database();
+  //   }
+  // }
+
+  componentDidMount() {
+    this.authListener();
+  }
+
+  authListener() {
+    firebase.auth().onAuthStateChanged(user => {
+      // console.log("user", user);
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: null });
+      }
+    });
+  }
+
+  // StateChanged = user => {
+  //   console.log("auth changed", user);
+  //   this.setState({ isAuthenticationReady: true });
+  //   this.setState({ isAuthenticated: !!user });
+  // };
 
   render() {
     // return <AppContainer />;
@@ -42,7 +60,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         {Platform.OS === "android" && <View style={styles.statusBarUnderlay} />}
-        {this.state.isAuthenticated ? <AppContainer /> : <LoginContainer />}
+        {this.state.user ? <AppContainer /> : <LoginContainer />}
       </View>
     );
   }

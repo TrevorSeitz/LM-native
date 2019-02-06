@@ -12,8 +12,10 @@ class HomeScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    console.log("props", props);
+    // console.log("props", props);
   }
+
+  // <Text>Hi {user && user.email}!</Text>
 
   render() {
     return (

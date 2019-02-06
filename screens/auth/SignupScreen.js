@@ -3,13 +3,17 @@ import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
-  state = {
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
-    errorMessage: null
-  };
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("users");
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      errorMessage: null
+    };
+  }
 
   handleSignup = () => {
     if (this.state.password != this.state.passwordConfirm) {
@@ -20,17 +24,15 @@ export default class SignupScreen extends React.Component {
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(result => console.log("result", result))
-      .then(result => console.log("name", this.state.name))
       // .then(result => this.props.navigation.navigate("Home"))
       .then(resp => {
-        return getFirestore
-          .collection("users")
-          .doc(resp.user.uid)
-          .set({
-            name: this.state.name
-          });
+        console.log(resp.user.uid);
+        return this.ref.doc(resp.user.uid).set({
+          name: this.state.name
+        });
       })
+      // .then(result => console.log("result", result))
+      .then(result => console.log("name", this.state.name))
       .catch(
         () => {},
         error => {

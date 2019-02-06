@@ -38,12 +38,12 @@ export default class App extends React.Component {
 
   authListener() {
     firebase.auth().onAuthStateChanged(user => {
-      // console.log("user", user);
       if (user) {
         this.setState({ user });
       } else {
         this.setState({ user: null });
       }
+      console.log("state.user", this.state.user);
     });
   }
 

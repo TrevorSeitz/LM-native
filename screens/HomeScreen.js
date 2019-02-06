@@ -2,6 +2,7 @@ import * as React from "react";
 import { Text, Platform, Image, View, StyleSheet } from "react-native";
 import { Constants, MapView } from "expo";
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import * as firebase from "firebase";
 import Map from "./Map";
 
 import { Card } from "react-native-paper";
@@ -12,7 +13,10 @@ class HomeScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    // console.log("props", props);
+    this.state = {
+      user: firebase.auth()
+    };
+    console.log("Home-user", this.state.user);
   }
 
   // <Text>Hi {user && user.email}!</Text>

@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Text, Platform, Image, View, StyleSheet } from "react-native";
+import {
+  Text,
+  Platform,
+  Image,
+  View,
+  StyleSheet,
+  AsyncStorage
+} from "react-native";
 import { Constants, MapView } from "expo";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import * as firebase from "firebase";
@@ -14,18 +21,26 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: firebase.auth()
+      uid: this._retrieveData()
     };
-    console.log("Home-user", this.state.user);
   }
 
-  // <Text>Hi {user && user.email}!</Text>
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
 
   render() {
+    console.log("uid:", this.state.uid);
     return (
       <View style={styles.container}>
         <Map />
-        <Card />
       </View>
     );
   }

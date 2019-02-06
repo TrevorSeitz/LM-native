@@ -31,8 +31,8 @@ export default class AddLocationScreen extends Component {
 
   constructor() {
     super();
-    this.ref = firebase.firestore().collection("locations");
     this.state = {
+      uid: "",
       name: "",
       venue: "",
       latitude: "",
@@ -47,10 +47,29 @@ export default class AddLocationScreen extends Component {
       location: {},
       isLoading: false
     };
+    // this.ref = firebase.firestore().collection("locations");
+    const uid = this.state.uid;
+    this.ref = firebase
+      .firestore()
+      .collection("users")
+      .doc();
+    // .set(location);
   }
 
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+        console.log("current uid:", this.state.uid);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+
   _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    let { status } = await Permissions.askAsync(Permissions.USERS);
     if (status !== "granted") {
       this.setState({
         errorMessage: "Permission to access location was denied"
@@ -127,36 +146,44 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
+    const uid = this.state.uid;
     this.setState({
       isLoading: true
     });
     this.ref
-      .add({
-        name: this.state.name,
-        venue: this.state.venue,
-        latitude: this.state.latitude,
-        longitude: this.state.longitude,
-        contactName: this.state.contactName,
-        contactPhone: this.state.contactPhone,
-        email: this.state.email,
-        description: this.state.description,
-        image: this.state.image,
-        imageFileName: this.state.imageFileName,
-        imageFileLocation: this.state.imageFileLocation
+      // .doc(uid)
+      .update({
+        uid: uid,
+        location: {
+          name: this.state.name,
+          venue: this.state.venue,
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+          contactName: this.state.contactName,
+          contactPhone: this.state.contactPhone,
+          email: this.state.email,
+          description: this.state.description,
+          image: this.state.image,
+          imageFileName: this.state.imageFileName,
+          imageFileLocation: this.state.imageFileLocation
+        }
       })
       .then(docRef => {
         this.setState({
-          name: "",
-          venue: "",
-          latitude: "",
-          longitude: "",
-          contactName: "",
-          contactPhone: "",
-          email: "",
-          description: "",
-          image: "nil",
-          imageFileName: "",
-          imageFileLocation: "",
+          uid: this.state.uid,
+          locatiom: {
+            name: "",
+            venue: "",
+            latitude: "",
+            longitude: "",
+            contactName: "",
+            contactPhone: "",
+            email: "",
+            description: "",
+            image: "nil",
+            imageFileName: "",
+            imageFileLocation: ""
+          },
           isLoading: false
         });
         this.props.navigation.goBack();

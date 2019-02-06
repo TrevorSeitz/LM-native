@@ -16,27 +16,24 @@ export default class SignupScreen extends React.Component {
   }
 
   handleSignup = () => {
-    if (this.state.password != this.state.passwordConfirm) {
+    const { name, email, pasword, passwordConfirm } = this.state;
+    if (password != passwordConfirm) {
       Alert.alert("Passwords do not match");
       return;
     }
-
     firebase
       .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      // .then(result => this.props.navigation.navigate("Home"))
+      .createUserWithEmailAndPassword(email, password)
       .then(resp => {
-        console.log(resp.user.uid);
         return this.ref.doc(resp.user.uid).set({
-          name: this.state.name
+          name: name
         });
       })
-      // .then(result => console.log("result", result))
-      .then(result => console.log("name", this.state.name))
+      .then(result => this.props.navigation.navigate("Home"))
       .catch(
         () => {},
         error => {
-          Alert.alert("unknown alert from firebase");
+          Alert.alert(error);
         }
       );
   };

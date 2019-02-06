@@ -24,8 +24,8 @@ export default class Map extends React.Component {
         errorMessage:
           "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
       });
-    } else {
-      this._getLocationAsync();
+      // } else {
+      //   this._getLocationAsync();
     }
   }
 
@@ -61,6 +61,7 @@ export default class Map extends React.Component {
   };
 
   componentDidMount() {
+    this._getLocationAsync();
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 

@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+  AsyncStorage
+} from "react-native";
 import { AppLoading, Asset, Font } from "expo";
 import { createAppContainer } from "react-navigation";
 import ApiKeys from "./constants/ApiKeys";
@@ -20,13 +26,14 @@ export default class App extends React.Component {
       isLoadingComplete: false,
       isAuthenticationReady: false,
       isAuthenticated: false,
-      user: {}
+      user: {},
+      uid: ""
     };
   }
 
   // Initialize firebase
   //   if (!firebase.apps.length) {
-  //     firebase.initializeApp(ApiKeys.firebaseConfig);  //does this actually belong in ApiKeys?
+  //     firebase.initializeApp(ApiKeys.firebaseConfig); //does this actually belong in ApiKeys?
   //     firebase.auth().onAuthStateChanged(this.StateChanged);
   //     var database = firebase.database();
   //   }
@@ -38,29 +45,45 @@ export default class App extends React.Component {
 
   authListener() {
     firebase.auth().onAuthStateChanged(user => {
+      // console.log("state change", user);
       if (user) {
+        this._storeData(user);
         this.setState({ user });
+        // firebase.User = user;
       } else {
         this.setState({ user: null });
       }
-      console.log("state.user", this.state.user);
     });
+    // this._storeData();
   }
 
-  // StateChanged = user => {
-  //   console.log("auth changed", user);
-  //   this.setState({ isAuthenticationReady: true });
-  //   this.setState({ isAuthenticated: !!user });
-  // };
+  _storeData = async user => {
+    try {
+      await AsyncStorage.setItem("uid", user.uid);
+    } catch (error) {
+      // Error saving data
+    }
+    this._retrieveData();
+  };
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
 
   render() {
-    // return <AppContainer />;
-    // return <LoginContainer />;
+    const user = this.state.user;
     return (
       <View style={styles.container}>
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         {Platform.OS === "android" && <View style={styles.statusBarUnderlay} />}
-        {this.state.user ? <AppContainer /> : <LoginContainer />}
+        {user ? <AppContainer /> : <LoginContainer />}
       </View>
     );
   }

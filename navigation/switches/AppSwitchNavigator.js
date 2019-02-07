@@ -7,6 +7,7 @@ import DashboardScreen from "../../screens/DashboardScreen";
 import AddLocationScreen from "../../screens/AddLocationScreen";
 import LocationDetailsScreen from "../../screens/LocationDetailsScreen";
 import EditLocationScreen from "../../screens/EditLocationScreen";
+import ProfileScreen from "../../screens/ProfileScreen";
 import LoginScreen from "../../screens/auth/LoginScreen";
 import SignupScreen from "../../screens/auth/SignupScreen";
 import ForgotPasswordScreen from "../../screens/auth/ForgotPasswordScreen";
@@ -23,7 +24,8 @@ const AppSwitchNavigator = createSwitchNavigator(
     NewLocation: { screen: AddLocationNavigator },
     ListLocations: { screen: ListLocationsNavigator },
     LocationDetails: { screen: LocationDetailsScreen },
-    EditLocation: { screen: EditLocationScreen }
+    EditLocation: { screen: EditLocationScreen },
+    Profile: { screen: ProfileScreen }
     // Login: { screen: LoginScreen },
     // Signup: { screen: SignupScreen },
     // ForgotPassword: { screen: ForgotPasswordScreen },

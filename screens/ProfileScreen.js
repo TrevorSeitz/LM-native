@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  TextInput
+  TextInput,
+  AsyncStorage
 } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import * as firebase from "firebase";
@@ -19,62 +20,85 @@ import {
   AppLoading,
   Constants,
   ImagePicker,
-  CameraRoll,
   Permissions,
+  Location,
   MediaLibrary
 } from "expo";
-// import ImagePicker from "react-native-customized-image-picker";
 
-export default class AddLocationScreen extends Component {
+export default class ProfileScreen extends Component {
   static navigationOptions = {
-    title: "Add Location"
+    title: "Profile"
   };
 
-  constructor() {
-    super();
-    this.ref = firebase.firestore().collection("locations");
+  constructor(props) {
+    super(props);
     this.state = {
+      uid: this._retrieveData(),
       name: "",
-      venue: "",
-      latitude: "",
-      longitude: "",
-      contactName: "",
-      contactPhone: "",
+      Phone: "",
       email: "",
-      description: "",
-      image: "nil",
-      imageFileName: "",
-      imageFileLocation: "",
-      photos: [],
+      avatar: "nil",
+      avatarFileName: "",
+      avatarFileLocation: "",
       isLoading: false
     };
+    //
+    // this._retrieveData();
+
+    this.ref = firebase.firestore().collection("users");
   }
 
-  // selectPicture = async () => {
-  // await Permissions.askAsync(Permissions.CAMERA_ROLL);
-  // let result = await ImagePicker.launchImageLibraryAsync({
-  //   multiple: true,
-  //   quality: 0.5,
-  //   exif: true
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+      }
+    } catch (error) {}
+  };
+
+  onCollectionUpdate = querySnapshot => {
+    const uid = this.state.uid;
+    let user = {};
+    this.ref
+      .where("uid", "==", uid)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(doc => {
+          const id = doc.data().id;
+          const uid = doc.data().uid;
+          const name = doc.data().name;
+          const phone = doc.data().phone;
+          const email = doc.data().email;
+          const avatar = doc.data().avatar;
+          const avatarFileName = doc.data().avatarFileName;
+          const avatarFileLocation = doc.data().avatarFileLocation;
+          locations.push({
+            uid: uid,
+            name: name,
+            phone: phone,
+            email: email,
+            avatar: avatar,
+            avatarFileName: avatarFileName,
+            avatarFileLocation: avatarFileLocation
+          });
+        });
+      })
+      .then(() => {
+        this.setState({ user: user });
+      });
+  };
 
   selectPicture = async () => {
-    // await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // let r = [];
-    r = await CameraRoll.getPhotos({
-      first: 2,
-      assetType: "All"
-    })
-      .then(r => {
-        this.setState({ photos: r.edges });
-      })
-      .catch(err => {
-        //Error Loading Images
-      })
-      .then(r => {
-        console.log(r);
-      });
-
-    // this.processImage(images);
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      // aspect: 1,
+      quality: 0.5,
+      exif: true
+    });
+    this.processImage(result);
   };
 
   takePicture = async () => {
@@ -85,29 +109,16 @@ export default class AddLocationScreen extends Component {
       // aspect: 1,
       quality: 0.5,
       exif: true
-    });
-    const metadata = result.metadata;
-
-    this.processImage(result, metadata);
+    }).then(await this.processImage(result, metadata));
   };
 
   processImage = async (result, metadata) => {
     if (!result.cancelled) {
-      this.setState({ image: result });
+      this.setState({ avatar: result });
       const asset = await MediaLibrary.createAssetAsync(result.uri);
-      let lat = parseFloat(result.exif.GPSLatitude, 5);
-      let long = parseFloat(result.exif.GPSLongitude, 5);
-      if (result.exif.GPSLatitudeRef == "S") {
-        lat *= -1;
-      }
-      if (result.exif.GPSLongitudeRef == "W") {
-        long *= -1;
-      }
 
       this.setState({
-        imageFileName: asset.filename,
-        latitude: lat,
-        longitude: long
+        avatarFileName: asset.filename
       });
     }
   };
@@ -118,43 +129,35 @@ export default class AddLocationScreen extends Component {
     this.setState(state);
   };
 
-  saveLocation() {
+  saveuser() {
     this.setState({
       isLoading: true
     });
     this.ref
       .add({
+        uid: this.state.uid,
         name: this.state.name,
-        venue: this.state.venue,
-        latitude: this.state.latitude,
-        longitude: this.state.longitude,
-        contactName: this.state.contactName,
-        contactPhone: this.state.contactPhone,
+        phone: this.state.phone,
         email: this.state.email,
-        description: this.state.description,
-        image: this.state.image,
-        imageFileName: this.state.imageFileName,
-        imageFileLocation: this.state.imageFileLocation
+        avatar: this.state.avatar,
+        avatarFileName: this.state.avatarFileName,
+        avatarFileLocation: this.state.avatarFileLocation
       })
       .then(docRef => {
         this.setState({
+          uid: "",
           name: "",
-          venue: "",
-          latitude: "",
-          longitude: "",
-          contactName: "",
-          contactPhone: "",
+          phone: "",
           email: "",
-          description: "",
-          image: "nil",
-          imageFileName: "",
-          imageFileLocation: "",
+          avatar: "nil",
+          avatarFileName: "",
+          avatarFileLocation: "",
           isLoading: false
         });
         this.props.navigation.goBack();
       })
       .catch(error => {
-        console.error("Error adding document: ", error);
+        // console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
@@ -162,7 +165,7 @@ export default class AddLocationScreen extends Component {
   }
 
   uploadImage = async () => {
-    const uri = this.state.image.uri;
+    const uri = this.state.avatar.uri;
     uriToBlob = uri => {
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -183,18 +186,19 @@ export default class AddLocationScreen extends Component {
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + this.state.imageFileName);
+      .child("avatars/" + this.state.avatarFileName);
     const snapshot = await ref.put(blob);
-    const imageFileLocation = await snapshot.ref
+    const avatarFileLocation = await snapshot.ref
       .getDownloadURL()
-      .then(result => this.setState({ imageFileLocation: result }))
+      .then(result => this.setState({ avatarFileLocation: result }))
+      .then(() => this.saveLocation())
       .then(() => {
         Alert.alert("Success!");
       })
       .catch(error => {
         Alert.alert(error);
       });
-    this.saveLocation();
+    // this.saveLocation();
   };
 
   render() {
@@ -205,6 +209,8 @@ export default class AddLocationScreen extends Component {
         </View>
       );
     }
+    // this._retrieveData();
+    // console.log("render uid:", this.state.uid);
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>
@@ -216,23 +222,9 @@ export default class AddLocationScreen extends Component {
         </View>
         <View style={styles.subContainer}>
           <TextInput
-            placeholder={"Venue"}
-            value={this.state.venue}
-            onChangeText={text => this.updateTextInput(text, "venue")}
-          />
-        </View>
-        <View style={styles.subContainer}>
-          <TextInput
-            placeholder={"Contact Name"}
-            value={this.state.contactName}
-            onChangeText={text => this.updateTextInput(text, "contactName")}
-          />
-        </View>
-        <View style={styles.subContainer}>
-          <TextInput
-            placeholder={"Contact Phone"}
-            value={this.state.contactPhone}
-            onChangeText={text => this.updateTextInput(text, "contactPhone")}
+            placeholder={"Phone"}
+            value={this.state.phone}
+            onChangeText={text => this.updateTextInput(text, "phone")}
           />
         </View>
         <View style={styles.subContainer}>
@@ -242,22 +234,17 @@ export default class AddLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "email")}
           />
         </View>
-        <View style={styles.subContainer}>
-          <TextInput
-            multiline={true}
-            numberOfLines={4}
-            placeholder={"Description"}
-            value={this.state.description}
-            onChangeText={text => this.updateTextInput(text, "description")}
-          />
-        </View>
         <View style={styles.container}>
+          <Text>Get Avatar</Text>
           <Button2 onPress={this.selectPicture}>Gallery</Button2>
           <Button2 onPress={this.takePicture}>Take Picture</Button2>
         </View>
         <View style={styles.container}>
           <Button large title="Save" onPress={() => this.uploadImage()} />
-          <Image style={styles.image} source={{ uri: this.state.image.uri }} />
+          <Image
+            style={styles.avatar}
+            source={{ uri: this.state.avatar.uri }}
+          />
         </View>
       </ScrollView>
     );
@@ -308,7 +295,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     justifyContent: "center"
   },
-  image: {
+  avatar: {
     flex: 1,
     alignItems: "stretch",
     marginTop: 7.5,

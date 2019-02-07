@@ -11,8 +11,8 @@ import DashboardScreen from "../screens/DashboardScreen";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 import LogoutScreen from "../screens/auth/LogoutScreen";
-// import LMImagePickerScreen from "../screens/LMImagePickerScreen";
 
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
@@ -31,9 +31,9 @@ const AppDrawerNavigator = createDrawerNavigator({
   },
   Logout: {
     screen: LogoutScreen
-    // },
-    // LMImagePicker: {
-    //   screen: LMImagePickerScreen
+  },
+  Profile: {
+    screen: ProfileScreen
   }
 });
 

@@ -18,9 +18,7 @@ export default class Map extends React.Component {
     this.unsubscribe = null;
   }
 
-  // let uid = this._retrieveData();
   ref = firebase.firestore().collection("locations");
-  // .where("uid", "==", uid);
 
   _retrieveData = async () => {
     try {
@@ -37,8 +35,6 @@ export default class Map extends React.Component {
         errorMessage:
           "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
       });
-      // } else {
-      //   this._getLocationAsync();
     }
   }
 

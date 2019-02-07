@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  AsyncStorage
+} from "react-native";
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
@@ -16,7 +24,7 @@ export default class SignupScreen extends React.Component {
   }
 
   handleSignup = () => {
-    const { name, email, pasword, passwordConfirm } = this.state;
+    const { name, email, password, passwordConfirm } = this.state;
     if (password != passwordConfirm) {
       Alert.alert("Passwords do not match");
       return;
@@ -24,6 +32,8 @@ export default class SignupScreen extends React.Component {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
+      .then(resp => console.log("user:", resp))
+      .then(user => this._storeData(user))
       .then(resp => {
         return this.ref.doc(resp.user.uid).set({
           name: name
@@ -36,6 +46,15 @@ export default class SignupScreen extends React.Component {
           Alert.alert(error);
         }
       );
+
+    _storeData = async user => {
+      try {
+        await AsyncStorage.setItem("uid", user.uid);
+      } catch (error) {
+        // Error saving data
+      }
+      this._retrieveData();
+    };
   };
 
   render() {

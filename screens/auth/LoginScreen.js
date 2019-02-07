@@ -1,17 +1,40 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  AsyncStorage
+} from "react-native";
 import * as firebase from "firebase";
 
 export default class LoginScreen extends React.Component {
-  state = { email: "", password: "", errorMessage: null };
+  state = {
+    name: "",
+    email: "",
+    password: "",
+    errorMessage: null
+  };
 
   handleLogin = () => {
-    const { email, password } = this.state;
+    const { name, email, password } = this.state;
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .then(user => console.log("user:", user))
+      .then(user => this._storeData(user))
       .then(() => this.props.navigation.navigate("Home"))
       .catch(error => this.setState({ errorMessage: error.message }));
+  };
+
+  _storeData = async user => {
+    try {
+      await AsyncStorage.setItem("uid", user.uid);
+    } catch (error) {
+      // Error saving data
+    }
+    this._retrieveData();
   };
 
   render() {

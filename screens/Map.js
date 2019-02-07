@@ -127,7 +127,7 @@ export default class Map extends React.Component {
             title={"Current Location"}
           >
             <View style={styles.radius}>
-              <View style={styles.marker} />
+              <View style={styles.currentMarker} />
             </View>
           </MapView.Marker>
 
@@ -171,6 +171,17 @@ const styles = StyleSheet.create({
     borderRadius: 20 / 2,
     overflow: "hidden",
     backgroundColor: "#007AFF",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  currentMarker: {
+    height: 20,
+    width: 20,
+    borderWidth: 3,
+    borderColor: "white",
+    borderRadius: 20 / 2,
+    overflow: "hidden",
+    backgroundColor: "#FF0000",
     alignItems: "center",
     justifyContent: "center"
   },

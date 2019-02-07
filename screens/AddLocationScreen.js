@@ -54,17 +54,12 @@ export default class AddLocationScreen extends Component {
   }
 
   _retrieveData = async () => {
-    // console.log("retreive data");
     try {
       const value = await AsyncStorage.getItem("uid");
-      // console.log("async uid:", value);
       if (value !== null) {
         this.setState({ uid: value });
-        // console.log("current uid:", this.state.uid);
       }
-    } catch (error) {
-      // Error retrieving data
-    }
+    } catch (error) {}
   };
 
   _getLocationAsync = async () => {

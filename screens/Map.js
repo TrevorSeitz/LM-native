@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { Platform, Text, View, StyleSheet } from "react-native";
+import { Platform, Text, View, StyleSheet, AsyncStorage } from "react-native";
 import { Constants, Location, Permissions, MapView, Marker } from "expo";
 import { Card } from "react-native-paper";
 // import { MapView } from "react-native-maps";
@@ -9,14 +9,27 @@ import { Card } from "react-native-paper";
 export default class Map extends React.Component {
   constructor() {
     super();
-    this.ref = firebase.firestore().collection("locations");
-    this.unsubscribe = null;
     this.state = {
+      uid: this._retrieveData(),
       location: null,
       locations: [],
       errorMessage: null
     };
+    this.unsubscribe = null;
   }
+
+  // let uid = this._retrieveData();
+  ref = firebase.firestore().collection("locations");
+  // .where("uid", "==", uid);
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+      }
+    } catch (error) {}
+  };
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -30,34 +43,42 @@ export default class Map extends React.Component {
   }
 
   onCollectionUpdate = querySnapshot => {
+    const uid = this.state.uid;
     let locations = [];
-    querySnapshot.forEach(doc => {
-      // console.log(doc.data());
-      const id = doc.data().id;
-      const name = doc.data().name;
-      const venue = doc.data().venue;
-      const latitude = doc.data().latitude;
-      const longitude = doc.data().longitude;
-      const contactName = doc.data().contactName;
-      const contactPhone = doc.data().contactPhone;
-      const email = doc.data().email;
-      const description = doc.data().description;
-      const imageFileLocation = doc.data().imageFileLocation;
-      locations.push({
-        id: doc.id,
-        name: name,
-        venue: venue,
-        latitude: latitude,
-        longitude: longitude,
-        contactName: contactName,
-        contactPhone: contactPhone,
-        email: email,
-        description: description,
-        imageFileLocation: imageFileLocation
+    this.ref
+      .where("uid", "==", uid)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(doc => {
+          const id = doc.data().id;
+          const uid = doc.data().uid;
+          const name = doc.data().name;
+          const venue = doc.data().venue;
+          const latitude = doc.data().latitude;
+          const longitude = doc.data().longitude;
+          const contactName = doc.data().contactName;
+          const contactPhone = doc.data().contactPhone;
+          const email = doc.data().email;
+          const description = doc.data().description;
+          const imageFileLocation = doc.data().imageFileLocation;
+          locations.push({
+            id: id,
+            uid: uid,
+            name: name,
+            venue: venue,
+            latitude: latitude,
+            longitude: longitude,
+            contactName: contactName,
+            contactPhone: contactPhone,
+            email: email,
+            description: description,
+            imageFileLocation: imageFileLocation
+          });
+        });
+      })
+      .then(() => {
+        this.setState({ locations: locations });
       });
-    });
-    this.setState({ locations });
-    // this.state.locations.map((item, i) => console.log(item));
   };
 
   componentDidMount() {
@@ -110,14 +131,12 @@ export default class Map extends React.Component {
             </View>
           </MapView.Marker>
 
-          {this.state.locations.map(location => {
-            // console.log(location);
+          {this.state.locations.map((location, i) => {
             const latitude = Number(location.latitude);
             const longitude = Number(location.longitude);
-            // console.log(latitude);
             return (
               <MapView.Marker
-                key={location.id}
+                key={i}
                 title={location.name}
                 coordinate={{ latitude, longitude }}
               >

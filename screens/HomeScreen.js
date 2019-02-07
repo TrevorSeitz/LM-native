@@ -21,15 +21,15 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      uid: this._retrieveData()
+      user: this._retrieveData()
     };
   }
 
   _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem("uid");
+      const value = await AsyncStorage.getItem("user");
       if (value !== null) {
-        this.setState({ uid: value });
+        this.setState({ user: value });
       }
     } catch (error) {
       // Error retrieving data
@@ -37,7 +37,7 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    console.log("uid:", this.state.uid);
+    // console.log("user", this.state.user);
     return (
       <View style={styles.container}>
         <Map />

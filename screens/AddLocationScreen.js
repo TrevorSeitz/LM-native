@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  TextInput
+  TextInput,
+  AsyncStorage
 } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import * as firebase from "firebase";
@@ -29,10 +30,10 @@ export default class AddLocationScreen extends Component {
     title: "Add Location"
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      uid: "",
+      uid: this._retrieveData(),
       name: "",
       venue: "",
       latitude: "",
@@ -44,24 +45,22 @@ export default class AddLocationScreen extends Component {
       image: "nil",
       imageFileName: "",
       imageFileLocation: "",
-      location: {},
       isLoading: false
     };
-    // this.ref = firebase.firestore().collection("locations");
-    const uid = this.state.uid;
-    this.ref = firebase
-      .firestore()
-      .collection("users")
-      .doc();
-    // .set(location);
+    //
+    // this._retrieveData();
+
+    this.ref = firebase.firestore().collection("locations");
   }
 
   _retrieveData = async () => {
+    // console.log("retreive data");
     try {
       const value = await AsyncStorage.getItem("uid");
+      // console.log("async uid:", value);
       if (value !== null) {
         this.setState({ uid: value });
-        console.log("current uid:", this.state.uid);
+        // console.log("current uid:", this.state.uid);
       }
     } catch (error) {
       // Error retrieving data
@@ -69,7 +68,7 @@ export default class AddLocationScreen extends Component {
   };
 
   _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.USERS);
+    let { status } = await Permissions.askAsync(Permissions.LOCATIONS);
     if (status !== "granted") {
       this.setState({
         errorMessage: "Permission to access location was denied"
@@ -77,10 +76,9 @@ export default class AddLocationScreen extends Component {
     }
 
     let location = await Location.getCurrentPositionAsync({})
-      //
-      // lat = JSON.stringify(this.state.location.coords.latitude);
-      // long = JSON.stringify(this.state.location.coords.longitude);
-      .then(console.log("get location", location));
+      .then
+      // console.log("get location", location)
+      ();
     this.setState({ location });
   };
 
@@ -106,7 +104,7 @@ export default class AddLocationScreen extends Component {
       exif: true
     }).then(await this._getLocationAsync());
     const metadata = result.metadata;
-    console.log("state.location", this.state.location);
+    // console.log("state.location", this.state.location);
 
     result.exif.GPSLatitude = JSON.stringify(
       this.state.location.coords.latitude
@@ -114,7 +112,7 @@ export default class AddLocationScreen extends Component {
     result.exif.GPSLongitude = JSON.stringify(
       this.state.location.coords.longitude
     );
-    console.log("result", result);
+    // console.log("result", result);
     this.processImage(result, metadata);
   };
 
@@ -146,50 +144,44 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
-    const uid = this.state.uid;
     this.setState({
       isLoading: true
     });
     this.ref
-      // .doc(uid)
-      .update({
-        uid: uid,
-        location: {
-          name: this.state.name,
-          venue: this.state.venue,
-          latitude: this.state.latitude,
-          longitude: this.state.longitude,
-          contactName: this.state.contactName,
-          contactPhone: this.state.contactPhone,
-          email: this.state.email,
-          description: this.state.description,
-          image: this.state.image,
-          imageFileName: this.state.imageFileName,
-          imageFileLocation: this.state.imageFileLocation
-        }
+      .add({
+        uid: this.state.uid,
+        name: this.state.name,
+        venue: this.state.venue,
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+        contactName: this.state.contactName,
+        contactPhone: this.state.contactPhone,
+        email: this.state.email,
+        description: this.state.description,
+        image: this.state.image,
+        imageFileName: this.state.imageFileName,
+        imageFileLocation: this.state.imageFileLocation
       })
       .then(docRef => {
         this.setState({
-          uid: this.state.uid,
-          locatiom: {
-            name: "",
-            venue: "",
-            latitude: "",
-            longitude: "",
-            contactName: "",
-            contactPhone: "",
-            email: "",
-            description: "",
-            image: "nil",
-            imageFileName: "",
-            imageFileLocation: ""
-          },
+          uid: "",
+          name: "",
+          venue: "",
+          latitude: "",
+          longitude: "",
+          contactName: "",
+          contactPhone: "",
+          email: "",
+          description: "",
+          image: "nil",
+          imageFileName: "",
+          imageFileLocation: "",
           isLoading: false
         });
         this.props.navigation.goBack();
       })
       .catch(error => {
-        console.error("Error adding document: ", error);
+        // console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
@@ -223,13 +215,14 @@ export default class AddLocationScreen extends Component {
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => this.setState({ imageFileLocation: result }))
+      .then(() => this.saveLocation())
       .then(() => {
         Alert.alert("Success!");
       })
       .catch(error => {
         Alert.alert(error);
       });
-    this.saveLocation();
+    // this.saveLocation();
   };
 
   render() {
@@ -240,6 +233,8 @@ export default class AddLocationScreen extends Component {
         </View>
       );
     }
+    // this._retrieveData();
+    // console.log("render uid:", this.state.uid);
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>

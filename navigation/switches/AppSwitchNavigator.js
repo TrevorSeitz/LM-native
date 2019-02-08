@@ -16,10 +16,11 @@ import LoadingScreen from "../../screens/auth/LoadingScreen";
 import AppDrawerNavigator from "../AppDrawerNavigator";
 import AddLocationNavigator from "../AddLocationNavigator";
 import ListLocationsNavigator from "../ListLocationsNavigator";
+// import LocationDetailsNavigator from "../LocationDetailsNavigator";
 
 const AppSwitchNavigator = createSwitchNavigator(
   {
-    // Welcome: { screen: WelcomeScreen },
+    Welcome: { screen: WelcomeScreen },
     Home: { screen: AppDrawerNavigator },
     NewLocation: { screen: AddLocationNavigator },
     ListLocations: { screen: ListLocationsNavigator },

@@ -38,7 +38,7 @@ class EditLocationScreen extends Component {
     const ref = firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("locationkey")));
+      .doc(JSON.parse(navigation.getParam("Locationkey")));
     ref.get().then(doc => {
       if (doc.exists) {
         const location = doc.data();

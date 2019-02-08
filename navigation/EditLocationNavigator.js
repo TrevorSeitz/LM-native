@@ -7,14 +7,17 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
+import ListLocationsScreen from "../screens/ListLocationsScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 
 const EditLocationStack = createStackNavigator({
-  EditLocation: EditLocationScreen
+  Details: LocationDetailsScreen,
+  Edit: EditLocationScreen
 });
 
 EditLocationScreen.navigationOptions = {
-  tabBarLabel: "Edit Location",
+  tabBarLabel: "Edit Locations",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

@@ -14,6 +14,8 @@ import { Constants, MapView } from "expo";
 import HomeScreen from "../screens/HomeScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import EditLocationScreen from "../screens/EditLocationScreen";
 
 const HomeStack = createStackNavigator(
   {
@@ -34,7 +36,9 @@ const HomeStack = createStackNavigator(
       }
     },
     AddLocation: { screen: AddLocationScreen },
-    ListLocations: { screen: ListLocationsScreen }
+    ListLocations: { screen: ListLocationsScreen },
+    LocationDetails: { screen: LocationDetailsScreen },
+    EditLocation: { screen: EditLocationScreen }
   },
   {
     defaultNavigationOptions: {

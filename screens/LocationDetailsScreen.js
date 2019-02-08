@@ -14,8 +14,8 @@ class LocationDetailsScreen extends Component {
     title: "Location Details"
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isLoading: true,
       location: {},
@@ -95,13 +95,14 @@ class LocationDetailsScreen extends Component {
               <Text h5>{this.state.location.contactName}</Text>
             </View>
             <View>
-              <Text h5>{this.state.location.contactPhone}</Text>
+              <Text h5>Phone: {this.state.location.contactPhone}</Text>
             </View>
             <View>
-              <Text h5>{this.state.location.email}</Text>
+              <Text h5>email: {this.state.location.email}</Text>
             </View>
           </View>
           <View>
+            <Text>Description:</Text>
             <Text h4>{this.state.location.description}</Text>
           </View>
           <View style={styles.imageBox}>
@@ -117,7 +118,7 @@ class LocationDetailsScreen extends Component {
               title="Edit"
               onPress={() => {
                 this.props.navigation.navigate("EditLocation", {
-                  locationkey: `${JSON.stringify(this.state.key)}`
+                  Locationkey: `${JSON.stringify(this.state.key)}`
                 });
               }}
             />

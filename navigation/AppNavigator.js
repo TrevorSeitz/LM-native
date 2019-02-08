@@ -19,7 +19,8 @@ const AppNavigator = createStackNavigator({
   Home: { MainTabScreen },
   AddLocation: { AddLocationScreen },
   ListLocations: { ListLocationsScreen },
-  Details: { LocationDetailsScreen }
+  Details: { LocationDetailsScreen },
+  EditLocation: { EditLocationScreen }
 });
 
 const AppContainer = createAppContainer(appNavigator);

@@ -39,14 +39,15 @@ export default class Map extends React.Component {
   }
 
   onCollectionUpdate = querySnapshot => {
+    // this should only be done onece -= send to async storage
     const uid = this.state.uid;
     let locations = [];
     this.ref
       .where("uid", "==", uid)
       .get()
-      .then(function(querySnapshot) {
+      .then(() => {
         querySnapshot.forEach(doc => {
-          const id = doc.data().id;
+          const id = doc.id;
           const uid = doc.data().uid;
           const name = doc.data().name;
           const venue = doc.data().venue;

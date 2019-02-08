@@ -21,26 +21,29 @@ class LocationDetailsScreen extends Component {
       location: {},
       key: ""
     };
+
+    console.log("props", this.props);
   }
 
   componentDidMount() {
     const { navigation } = this.props;
-    // console.log(this.props.navigation.state.params.Locationkey);
-    const ref = firebase
+    console.log(this.props.navigation.state.params.Locationkey);
+    firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("Locationkey")));
-    ref.get().then(doc => {
-      if (doc.exists) {
-        this.setState({
-          location: doc.data(),
-          key: doc.id,
-          isLoading: false
-        });
-      } else {
-        console.log("No such document!");
-      }
-    });
+      .doc(JSON.parse(navigation.getParam("Locationkey")))
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          this.setState({
+            location: doc.data(),
+            key: doc.id,
+            isLoading: false
+          });
+        } else {
+          console.log("No such document!");
+        }
+      });
   }
 
   deleteLocation(key) {

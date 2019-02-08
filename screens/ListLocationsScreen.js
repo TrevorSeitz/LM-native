@@ -67,7 +67,7 @@ export default class ListLocationsScreen extends Component {
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(doc => {
-          const id = doc.data().id;
+          const id = doc.id;
           const uid = doc.data().uid;
           const name = doc.data().name;
           const venue = doc.data().venue;
@@ -95,6 +95,7 @@ export default class ListLocationsScreen extends Component {
       })
       .then(() => {
         this.setState({ locations: locations });
+        this.state.locations.map((item, i) => console.log(item));
       });
   };
 

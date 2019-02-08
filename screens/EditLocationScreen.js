@@ -43,27 +43,18 @@ class EditLocationScreen extends Component {
       if (doc.exists) {
         const location = doc.data();
         this.setState({
-<<<<<<< HEAD
-          id: doc.id,
-          name: location.name,
-          venue: location.venue,
-=======
           key: doc.id,
           name: location.name,
           venue: location.venue,
           latitude: location.latitude,
           longitude: location.longitude,
->>>>>>> auth_try_two
           contactName: location.contactName,
           contactPhone: location.contactPhone,
           email: location.email,
           description: location.description,
-<<<<<<< HEAD
-=======
           image: location.image,
           imageFileName: location.imageFileName,
           imageFileLocation: location.imageFileLocation,
->>>>>>> auth_try_two
           isLoading: false
         });
       } else {
@@ -87,32 +78,6 @@ class EditLocationScreen extends Component {
     const updateRef = firebase
       .firestore()
       .collection("locations")
-<<<<<<< HEAD
-      .doc(this.state.id);
-    updateRef
-      .set({
-        id: this.state.id,
-        name: this.state.name,
-        venue: this.state.venue,
-        contactName: this.state.contactName,
-        contactPhone: this.state.contactPhone,
-        email: this.state.email,
-        description: this.state.description
-
-      })
-      .then(docRef => {
-        this.setState({
-          id: "",
-          name: "",
-          venue: "",
-          contactName: "",
-          contactPhone: "",
-          email: "",
-          description: "",
-          isLoading: false
-        });
-        this.props.navigation.navigate("ListLocations");
-=======
       .doc(id);
     updateRef
       .set({
@@ -128,7 +93,6 @@ class EditLocationScreen extends Component {
         image: this.state.image,
         imageFileName: this.state.imageFileName,
         imageFileLocation: this.state.imageFileLocation
->>>>>>> auth_try_two
       })
       // .then(docRef => {
       //   this.setState({
@@ -178,15 +142,6 @@ class EditLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "name")}
           />
         </View>
-<<<<<<< HEAD
-          <View style={styles.subContainer}>
-            <TextInput
-              placeholder={"Venue"}
-              value={this.state.venue}
-              onChangeText={text => this.updateTextInput(text, "venue")}
-            />
-          </View>
-=======
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"Venue"}
@@ -194,7 +149,6 @@ class EditLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "venue")}
           />
         </View>
->>>>>>> auth_try_two
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"Contact Name"}

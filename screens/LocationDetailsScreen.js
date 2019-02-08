@@ -65,13 +65,8 @@ class LocationDetailsScreen extends Component {
         this.setState({
           isLoading: false
         });
-<<<<<<< HEAD
-      })
-      .then( this.props.navigation.navigate("ListLocations") );
-=======
       });
     this.props.navigation.navigate("ListLocations");
->>>>>>> auth_try_two
   }
 
   render() {
@@ -94,17 +89,10 @@ class LocationDetailsScreen extends Component {
               <Text h3>{this.state.location.name}</Text>
             </View>
             <View>
-<<<<<<< HEAD
-              <Text h4>Venue: {this.state.location.venue}</Text>
-            </View>
-            <View>
-              <Text h5>Contact: {this.state.location.contactName}</Text>
-=======
               <Text h4>{this.state.location.venue}</Text>
             </View>
             <View>
               <Text h5>{this.state.location.contactName}</Text>
->>>>>>> auth_try_two
             </View>
             <View>
               <Text h5>Phone: {this.state.location.contactPhone}</Text>

@@ -5,7 +5,8 @@ import {
   ActivityIndicator,
   View,
   TouchableOpacity,
-  Text
+  Text,
+  AsyncStorage
 } from "react-native";
 import { List, ListItem, Button, Icon } from "react-native-elements";
 // import FontAwesome, { Icons } from "react-native-fontawesome";
@@ -36,7 +37,8 @@ export default class ListLocationsScreen extends Component {
     this.unsubscribe = null;
     this.state = {
       isLoading: true,
-      locations: []
+      locations: [],
+      uid: this._retrieveData()
     };
   }
 
@@ -44,9 +46,21 @@ export default class ListLocationsScreen extends Component {
     await Font.loadAsync({
       "Material Icons": require("@expo/vector-icons/fonts/MaterialIcons.ttf")
     });
+
+    this.setState({ isLoading: false });
   }
 
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+      }
+    } catch (error) {}
+  };
+
   onCollectionUpdate = querySnapshot => {
+<<<<<<< HEAD
     let locations = [];
     querySnapshot.forEach(doc => {
       const id = doc.data().id;
@@ -57,6 +71,44 @@ export default class ListLocationsScreen extends Component {
     });
     this.setState({ locations });
     // this.state.locations.map((item, i) => console.log(item));
+=======
+    const uid = this.state.uid;
+    let locations = [];
+    this.ref
+      .where("uid", "==", uid)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(doc => {
+          const id = doc.data().id;
+          const uid = doc.data().uid;
+          const name = doc.data().name;
+          const venue = doc.data().venue;
+          const latitude = doc.data().latitude;
+          const longitude = doc.data().longitude;
+          const contactName = doc.data().contactName;
+          const contactPhone = doc.data().contactPhone;
+          const email = doc.data().email;
+          const description = doc.data().description;
+          const imageFileLocation = doc.data().imageFileLocation;
+          locations.push({
+            id: id,
+            uid: uid,
+            name: name,
+            venue: venue,
+            latitude: latitude,
+            longitude: longitude,
+            contactName: contactName,
+            contactPhone: contactPhone,
+            email: email,
+            description: description,
+            imageFileLocation: imageFileLocation
+          });
+        });
+      })
+      .then(() => {
+        this.setState({ locations: locations });
+      });
+>>>>>>> auth_try_two
   };
 
   componentDidMount() {
@@ -64,19 +116,19 @@ export default class ListLocationsScreen extends Component {
   }
 
   render() {
-    // if (this.state.isLoading) {
-    //   return (
-    //     <View style={styles.activity}>
-    //       <ActivityIndicator size="large" color="#0000ff" />
-    //     </View>
-    //   );
-    // }
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.activity}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    }
     return (
       <ScrollView style={styles.container}>
         <List>
           {this.state.locations.map((item, i) => (
             <ListItem
-              key={item.id}
+              key={i}
               title={item.name}
               onPress={() => {
                 this.props.navigation.navigate("Details", {

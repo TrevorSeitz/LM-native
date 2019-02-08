@@ -13,12 +13,9 @@ import LocationDetailsStack from "../stacks/LocationDetailsStack";
 
 const DashboardTabNavigator = createBottomTabNavigator(
   {
-    HomeStack,
-    AddLocationStack,
-    ListLocationsStack
-    // ,
-    // LocationDetailsStack
-    // SettingsStack
+    Home: HomeStack,
+    "Add Location": AddLocationStack,
+    "List Locations": ListLocationsStack
   },
   {
     navigationOptions: ({ navigation }) => {

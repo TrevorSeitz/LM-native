@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  TextInput
+  TextInput,
+  AsyncStorage
 } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import * as firebase from "firebase";
@@ -20,6 +21,7 @@ import {
   Constants,
   ImagePicker,
   Permissions,
+  Location,
   MediaLibrary
 } from "expo";
 
@@ -28,10 +30,10 @@ export default class AddLocationScreen extends Component {
     title: "Add Location"
   };
 
-  constructor() {
-    super();
-    this.ref = firebase.firestore().collection("locations");
+  constructor(props) {
+    super(props);
     this.state = {
+      uid: this._retrieveData(),
       name: "",
       venue: "",
       latitude: "",
@@ -45,7 +47,35 @@ export default class AddLocationScreen extends Component {
       imageFileLocation: "",
       isLoading: false
     };
+    //
+    // this._retrieveData();
+
+    this.ref = firebase.firestore().collection("locations");
   }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+      }
+    } catch (error) {}
+  };
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATIONS);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access location was denied"
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({})
+      .then
+      // console.log("get location", location)
+      ();
+    this.setState({ location });
+  };
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -67,9 +97,17 @@ export default class AddLocationScreen extends Component {
       // aspect: 1,
       quality: 0.5,
       exif: true
-    });
+    }).then(await this._getLocationAsync());
     const metadata = result.metadata;
+    // console.log("state.location", this.state.location);
 
+    result.exif.GPSLatitude = JSON.stringify(
+      this.state.location.coords.latitude
+    );
+    result.exif.GPSLongitude = JSON.stringify(
+      this.state.location.coords.longitude
+    );
+    // console.log("result", result);
     this.processImage(result, metadata);
   };
 
@@ -77,8 +115,19 @@ export default class AddLocationScreen extends Component {
     if (!result.cancelled) {
       this.setState({ image: result });
       const asset = await MediaLibrary.createAssetAsync(result.uri);
+      let lat = parseFloat(result.exif.GPSLatitude, 5);
+      let long = parseFloat(result.exif.GPSLongitude, 5);
+      if (result.exif.GPSLatitudeRef == "S") {
+        lat *= -1;
+      }
+      if (result.exif.GPSLongitudeRef == "W") {
+        long *= -1;
+      }
+
       this.setState({
-        imageFileName: asset.filename
+        imageFileName: asset.filename,
+        latitude: lat,
+        longitude: long
       });
     }
   };
@@ -95,6 +144,7 @@ export default class AddLocationScreen extends Component {
     });
     this.ref
       .add({
+        uid: this.state.uid,
         name: this.state.name,
         venue: this.state.venue,
         latitude: this.state.latitude,
@@ -109,6 +159,7 @@ export default class AddLocationScreen extends Component {
       })
       .then(docRef => {
         this.setState({
+          uid: "",
           name: "",
           venue: "",
           latitude: "",
@@ -125,7 +176,7 @@ export default class AddLocationScreen extends Component {
         this.props.navigation.goBack();
       })
       .catch(error => {
-        console.error("Error adding document: ", error);
+        // console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
@@ -159,13 +210,14 @@ export default class AddLocationScreen extends Component {
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => this.setState({ imageFileLocation: result }))
+      .then(() => this.saveLocation())
       .then(() => {
         Alert.alert("Success!");
       })
       .catch(error => {
         Alert.alert(error);
       });
-    this.saveLocation();
+    // this.saveLocation();
   };
 
   render() {
@@ -176,6 +228,8 @@ export default class AddLocationScreen extends Component {
         </View>
       );
     }
+    // this._retrieveData();
+    // console.log("render uid:", this.state.uid);
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>

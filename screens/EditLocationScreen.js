@@ -18,6 +18,7 @@ class EditLocationScreen extends Component {
     super();
     this.state = {
       key: "",
+      id: "",
       name: "",
       venue: "",
       latitude: "",
@@ -42,13 +43,27 @@ class EditLocationScreen extends Component {
       if (doc.exists) {
         const location = doc.data();
         this.setState({
+<<<<<<< HEAD
           id: doc.id,
           name: location.name,
           venue: location.venue,
+=======
+          key: doc.id,
+          name: location.name,
+          venue: location.venue,
+          latitude: location.latitude,
+          longitude: location.longitude,
+>>>>>>> auth_try_two
           contactName: location.contactName,
           contactPhone: location.contactPhone,
           email: location.email,
           description: location.description,
+<<<<<<< HEAD
+=======
+          image: location.image,
+          imageFileName: location.imageFileName,
+          imageFileLocation: location.imageFileLocation,
+>>>>>>> auth_try_two
           isLoading: false
         });
       } else {
@@ -67,10 +82,12 @@ class EditLocationScreen extends Component {
     this.setState({
       isLoading: true
     });
+    const id = this.state.key;
     const { navigation } = this.props;
     const updateRef = firebase
       .firestore()
       .collection("locations")
+<<<<<<< HEAD
       .doc(this.state.id);
     updateRef
       .set({
@@ -95,33 +112,52 @@ class EditLocationScreen extends Component {
           isLoading: false
         });
         this.props.navigation.navigate("ListLocations");
+=======
+      .doc(id);
+    updateRef
+      .set({
+        key: id,
+        name: this.state.name,
+        venue: this.state.venue,
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+        contactName: this.state.contactName,
+        contactPhone: this.state.contactPhone,
+        email: this.state.email,
+        description: this.state.description,
+        image: this.state.image,
+        imageFileName: this.state.imageFileName,
+        imageFileLocation: this.state.imageFileLocation
+>>>>>>> auth_try_two
       })
+      // .then(docRef => {
+      //   this.setState({
+      //     key: "",
+      //     id: "",
+      //     name: "",
+      //     venue: "",
+      //     latitude: "",
+      //     longitude: "",
+      //     contactName: "",
+      //     contactPhone: "",
+      //     email: "",
+      //     description: "",
+      //     image: "nil",
+      //     imageFileName: "",
+      //     imageFileLocation: "",
+      //     isLoading: false
+      //   });
+      // this.props.navigation.navigate("Location");
+      // })
       .catch(error => {
         console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });
       });
-  }
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Add Location</Text>
-        <Button
-          title="Go to Edit Location... again"
-          onPress={() => this.props.navigation.push("EditLocation")}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate("Location")}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
+    this.props.navigation.navigate("Details", {
+      Locationkey: `${JSON.stringify(id)}`
+    });
   }
 
   render() {
@@ -142,6 +178,7 @@ class EditLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "name")}
           />
         </View>
+<<<<<<< HEAD
           <View style={styles.subContainer}>
             <TextInput
               placeholder={"Venue"}
@@ -149,6 +186,15 @@ class EditLocationScreen extends Component {
               onChangeText={text => this.updateTextInput(text, "venue")}
             />
           </View>
+=======
+        <View style={styles.subContainer}>
+          <TextInput
+            placeholder={"Venue"}
+            value={this.state.venue}
+            onChangeText={text => this.updateTextInput(text, "venue")}
+          />
+        </View>
+>>>>>>> auth_try_two
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"Contact Name"}

@@ -7,16 +7,14 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import LMImagePickerScreen from "../screens/LMImagePickerScreen";
-import LinksScreen from "../screens/LinksScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import SignupScreen from "../screens/auth/SignupScreen";
 
-const HomeStack = createStackNavigator({
-  New: LMImagePickerScreen
+const SignupStack = createStackNavigator({
+  Signup: SignupScreen
 });
 
-LMImagePickerScreen.navigationOptions = {
-  tabBarLabel: "Add A New Place",
+SignupScreen.navigationOptions = {
+  tabBarLabel: "Signup",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -31,5 +29,7 @@ LMImagePickerScreen.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  LMImagePickerStack
+  ListLocationsStack,
+  LocationDetailsStack,
+  SignupStack
 });

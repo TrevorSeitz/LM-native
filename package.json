@@ -18,12 +18,8 @@
     "react-native-exif": "^0.4.0",
     "react-native-firebase": "^5.2.0",
     "react-native-fontawesome": "^6.0.1",
-<<<<<<< HEAD
-    "react-native-material-textfield": "^0.12.0",
-=======
     "react-native-image-crop-picker": "^0.22.0",
     "react-native-maps": "^0.23.0",
->>>>>>> auth_try_two
     "react-native-paper": "2.2.8",
     "react-native-vector-icons": "^6.2.0",
     "react-navigation": "^3.0.9"

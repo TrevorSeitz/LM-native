@@ -60,18 +60,6 @@ export default class ListLocationsScreen extends Component {
   };
 
   onCollectionUpdate = querySnapshot => {
-    // <<<<<<< HEAD
-    //     let locations = [];
-    //     querySnapshot.forEach(doc => {
-    //       const id = doc.data().id;
-    //       const name = doc.data().name;
-    //       // const description = doc.data().description;
-    //       // locations.push({ id: doc.id, name: name, description: description });
-    //       locations.push({ id: doc.id, name: name});
-    //     });
-    //     this.setState({ locations });
-    //     // this.state.locations.map((item, i) => console.log(item));
-    // =======
     const uid = this.state.uid;
     let locations = [];
     this.ref
@@ -108,7 +96,6 @@ export default class ListLocationsScreen extends Component {
       .then(() => {
         this.setState({ locations: locations });
       });
-    // >>>>>>> auth_try_two
   };
 
   componentDidMount() {

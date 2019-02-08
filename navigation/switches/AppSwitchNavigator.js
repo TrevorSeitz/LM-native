@@ -20,7 +20,7 @@ import ListLocationsNavigator from "../ListLocationsNavigator";
 
 const AppSwitchNavigator = createSwitchNavigator(
   {
-    Welcome: { screen: WelcomeScreen },
+    // Welcome: { screen: WelcomeScreen },
     Home: { screen: AppDrawerNavigator },
     NewLocation: { screen: AddLocationNavigator },
     ListLocations: { screen: ListLocationsNavigator },

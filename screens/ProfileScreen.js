@@ -209,8 +209,7 @@ export default class ProfileScreen extends Component {
         </View>
       );
     }
-    // this._retrieveData();
-    // console.log("render uid:", this.state.uid);
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>
@@ -235,16 +234,12 @@ export default class ProfileScreen extends Component {
           />
         </View>
         <View style={styles.container}>
-          <Text>Get Avatar</Text>
+          <Text>Get/Change Avatar</Text>
           <Button2 onPress={this.selectPicture}>Gallery</Button2>
           <Button2 onPress={this.takePicture}>Take Picture</Button2>
         </View>
         <View style={styles.container}>
           <Button large title="Save" onPress={() => this.uploadImage()} />
-          <Image
-            style={styles.avatar}
-            source={{ uri: this.state.avatar.uri }}
-          />
         </View>
       </ScrollView>
     );

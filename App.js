@@ -53,9 +53,7 @@ export default class App extends React.Component {
     const user = this.state.user;
     return (
       <View style={styles.container}>
-        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-        {Platform.OS === "android" && <View style={styles.statusBarUnderlay} />}
-        {user ? <AppContainer /> : <LoginContainer />}
+        {!user ? <LoginContainer /> : <AppContainer />}
       </View>
     );
   }

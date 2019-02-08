@@ -29,11 +29,11 @@ const AppDrawerNavigator = createDrawerNavigator({
   ListLocations: {
     screen: ListLocationsScreen
   },
-  Logout: {
-    screen: LogoutScreen
-  },
   Profile: {
     screen: ProfileScreen
+  },
+  Logout: {
+    screen: LogoutScreen
   }
 });
 

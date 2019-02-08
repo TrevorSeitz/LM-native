@@ -74,13 +74,14 @@ export default class Map extends React.Component {
         });
       })
       .then(() => {
-        this.setState({ locations: locations });
+        this.setState({ locations });
       });
   };
 
   componentDidMount() {
-    this._getLocationAsync();
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    this._getLocationAsync().then(
+      () => (this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate))
+    );
   }
 
   _getLocationAsync = async () => {

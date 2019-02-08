@@ -6,6 +6,7 @@ import registerForPushNotificationsAsync from "../api/registerForPushNotificatio
 
 import LoginScreen from "./../screens/auth/LoginScreen";
 import SignupScreen from "./../screens/auth/SignupScreen";
+import WelcomeScreen from "./../screens/auth/WelcomeScreen";
 import ForgotPasswordScreen from "./../screens/auth/ForgotPasswordScreen";
 
 import AppSwitchNavigator from "./navigation/switches/AppSwitchNavigator";
@@ -14,11 +15,11 @@ import { createAppContainer } from "react-navigation";
 
 const RootStackNavigator = StackNavigator(
   {
+    Main: { screen: WelcomeScreen },
+
     Login: { screen: LoginScreen },
     Signup: { screen: SignupScreen },
-    ForgotPassword: { screen: ForgotPasswordScreen },
-
-    Main: { screen: WelcomeScreen }
+    ForgotPassword: { screen: ForgotPasswordScreen }
   },
   {
     navigationOptions: () => ({

@@ -20,20 +20,20 @@ import ListLocationsNavigator from "../ListLocationsNavigator";
 
 const AppSwitchNavigator = createSwitchNavigator(
   {
-    // Welcome: { screen: WelcomeScreen },
     Home: { screen: AppDrawerNavigator },
     NewLocation: { screen: AddLocationNavigator },
     ListLocations: { screen: ListLocationsNavigator },
     LocationDetails: { screen: LocationDetailsScreen },
     EditLocation: { screen: EditLocationScreen },
-    Profile: { screen: ProfileScreen }
+    Welcome: { screen: WelcomeScreen },
+    Profile: { screen: ProfileScreen },
     // Login: { screen: LoginScreen },
     // Signup: { screen: SignupScreen },
     // ForgotPassword: { screen: ForgotPasswordScreen },
-    // Loading: { screen: LoadingScreen }
+    Loading: { screen: LoadingScreen }
   },
   {
-    // initialRouteName: "Loading"
+    initialRouteName: "Loading"
   }
 );
 

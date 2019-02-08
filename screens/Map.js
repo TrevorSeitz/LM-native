@@ -29,6 +29,12 @@ export default class Map extends React.Component {
     } catch (error) {}
   };
 
+  _storeData = async user => {
+    try {
+      await AsyncStorage.setItem("locations", this.state.locations);
+    } catch (error) {}
+  };
+
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
       this.setState({
@@ -39,13 +45,12 @@ export default class Map extends React.Component {
   }
 
   onCollectionUpdate = querySnapshot => {
-    // this should only be done onece -= send to async storage
     const uid = this.state.uid;
     let locations = [];
     this.ref
       .where("uid", "==", uid)
       .get()
-      .then(() => {
+      .then(function(querySnapshot) {
         querySnapshot.forEach(doc => {
           const id = doc.id;
           const uid = doc.data().uid;
@@ -57,6 +62,8 @@ export default class Map extends React.Component {
           const contactPhone = doc.data().contactPhone;
           const email = doc.data().email;
           const description = doc.data().description;
+          const image = doc.data().image;
+          const imageFileName = doc.data().imageFileName;
           const imageFileLocation = doc.data().imageFileLocation;
           locations.push({
             id: id,
@@ -69,13 +76,17 @@ export default class Map extends React.Component {
             contactPhone: contactPhone,
             email: email,
             description: description,
+            image: image,
+            imageFileName: imageFileName,
             imageFileLocation: imageFileLocation
           });
         });
       })
       .then(() => {
-        this.setState({ locations });
+        this.setState({ locations: locations });
+        this.state.locations.map((item, i) => console.log(item));
       });
+    // .then(() => this._storeData());
   };
 
   componentDidMount() {

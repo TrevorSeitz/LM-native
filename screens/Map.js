@@ -84,7 +84,7 @@ export default class Map extends React.Component {
       })
       .then(() => {
         this.setState({ locations: locations });
-        this.state.locations.map((item, i) => console.log(item));
+        // this.state.locations.map((item, i) => console.log(item));
       });
     // .then(() => this._storeData());
   };

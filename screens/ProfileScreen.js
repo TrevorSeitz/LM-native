@@ -33,18 +33,18 @@ export default class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uid: this._retrieveData(),
+      uid: "",
       name: "",
-      Phone: "",
+      phone: "",
       email: "",
-      avatar: "nil",
+      avatar: {},
       avatarFileName: "",
-      avatarUri: "",
+      // avatarLocalUri: "",
       avatarFileLocation: "",
       isLoading: false
     };
     //
-
+    this._retrieveData();
     this.ref = firebase.firestore().collection("users");
   }
 
@@ -54,6 +54,8 @@ export default class ProfileScreen extends Component {
         if (value !== null) {
           this.onCollectionUpdate(value);
         }
+        // console.log(value);
+        return value;
       })
       .catch(error => {
         Alert.alert(error);
@@ -61,23 +63,28 @@ export default class ProfileScreen extends Component {
   };
 
   onCollectionUpdate = uid => {
-    console.log(uid);
     this.ref
       .doc(uid)
       .get()
       .then(doc => {
         if (doc.exists) {
+          // console.log("doc email: ", doc.data().email);
           this.setState({
-            name: doc.data().name,
-            phone: doc.data().phone,
-            email: doc.data().email,
-            avatar: doc.data().avatar,
-            avatarUri: doc.data().avatarFileLocation,
-            avatarFileName: doc.data().avatarFileName,
-            avatarFileLocation: doc.data().avatarFileLocation
+            uid: uid,
+            name: doc.data().name || "",
+            phone: doc.data().phone || "",
+            email: doc.data().email || "",
+            avatar: doc.data().avatar || {},
+            avatarFileName: doc.data().avatarFileName || "",
+            avatarFileLocation: doc.data().avatarFileLocation || ""
           });
         }
       });
+  };
+
+  updateTextInput = (text, field) => {
+    state[field] = text;
+    this.setState(state);
   };
 
   selectPicture = async () => {
@@ -108,58 +115,17 @@ export default class ProfileScreen extends Component {
       this.setState({ avatar: result });
       const asset = await MediaLibrary.createAssetAsync(result.uri);
 
+      // console.log("asset: ", asset);
       this.setState({
-        avaratUri: result.uri,
+        avatar: result,
         avatarFileName: asset.filename
       });
     }
   };
 
-  updateTextInput = (text, field) => {
-    const state = this.state;
-    state[field] = text;
-    this.setState(state);
-  };
-
-  saveUser() {
-    const id = this.state.uid;
-    this.setState({
-      isLoading: true
-    });
-    this.ref
-      .doc(id)
-      .update({
-        uid: this.state.uid,
-        name: this.state.name,
-        phone: this.state.phone,
-        email: this.state.email,
-        avatar: this.state.avatar,
-        avatarFileName: this.state.avatarFileName,
-        avatarFileLocation: this.state.avatarFileLocation
-      })
-      .then(docRef => {
-        this.setState({
-          uid: "",
-          name: "",
-          phone: "",
-          email: "",
-          avatar: "nil",
-          avatarFileName: "",
-          avatarFileLocation: "",
-          isLoading: false
-        });
-        this.props.navigation.navigate("Home");
-      })
-      .catch(error => {
-        // console.error("Error adding document: ", error);
-        this.setState({
-          isLoading: false
-        });
-      });
-  }
-
   uploadImage = async () => {
-    const uri = this.state.avatarUri;
+    const uri = this.state.avatar.uri;
+    // console.log("uri before Blob", uri);
     uriToBlob = uri => {
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -169,6 +135,7 @@ export default class ProfileScreen extends Component {
             resolve(xhr.response);
           }
         };
+        // console.log("uri in Blob", uri);
         // error here - cannot load empty uri
         xhr.open("GET", uri);
         xhr.responseType = "blob"; // convert type
@@ -186,15 +153,61 @@ export default class ProfileScreen extends Component {
     const avatarFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => this.setState({ avatarFileLocation: result }))
+      .then(result =>
+        console.log("save avatar result:", this.state.avatarFileLocation)
+      )
       .then(() => this.saveUser())
       .then(() => {
         Alert.alert("Success!");
       })
       .catch(error => {
-        Alert.alert(error);
+        Alert.alert("upload image error:", error);
       });
     // this.saveLocation();
   };
+
+  saveUser(id) {
+    // const id = this.state.uid;
+    console.log("saved state: ", this.state);
+    this.setState({
+      // uid: id,
+      isLoading: true
+    });
+    this.uploadImage()
+      .then(() => console.log("async test:"))
+      .then(() =>
+        // console.log("saveUser id:", id);
+        this.ref.doc(id).set({
+          // uid: this.state.uid,
+          name: this.state.name,
+          phone: this.state.phone,
+          email: this.state.email,
+          avatar: this.state.avatar,
+          avatarFileName: this.state.avatarFileName,
+          avatarFileLocation: this.state.avatarFileLocation
+        })
+      )
+      .then(docRef => {
+        this.setState({
+          uid: "",
+          name: "",
+          phone: "",
+          email: "",
+          avatar: {},
+          avatarFileName: "",
+          // this.state.avatar.uri: "",
+          avatarFileLocation: "",
+          isLoading: false
+        });
+        this.props.navigation.navigate("Home");
+      })
+      .catch(error => {
+        // console.error("Error adding document: ", error);
+        this.setState({
+          isLoading: false
+        });
+      });
+  }
 
   render() {
     if (this.state.isLoading) {
@@ -208,10 +221,10 @@ export default class ProfileScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <View>
-          {this.state.avatarUri ? (
+          {this.state.avatar.uri ? (
             <Image
               style={styles.avatar}
-              source={{ uri: this.state.avatarUri }}
+              source={{ uri: this.state.avatar.uri }}
             />
           ) : (
             <Text />
@@ -244,7 +257,11 @@ export default class ProfileScreen extends Component {
           <Button2 onPress={this.takePicture}>Take Picture</Button2>
         </View>
         <View style={styles.container}>
-          <Button large title="Save" onPress={() => this.uploadImage()} />
+          <Button
+            large
+            title="Save"
+            onPress={() => this.saveUser(this.state.uid)}
+          />
         </View>
       </ScrollView>
     );

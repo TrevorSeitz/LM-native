@@ -23,6 +23,7 @@ class HomeScreen extends React.Component {
     this.state = {
       user: this._retrieveData()
     };
+
   }
 
   _retrieveData = async () => {
@@ -40,7 +41,7 @@ class HomeScreen extends React.Component {
     // console.log("user", this.state.user);
     return (
       <View style={styles.container}>
-        <Map />
+        <Map {...this.props}/>
       </View>
     );
   }

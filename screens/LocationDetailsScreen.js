@@ -21,13 +21,12 @@ class LocationDetailsScreen extends Component {
       location: {},
       key: ""
     };
-
-    console.log("props", this.props);
+    console.log(this.props)
   }
 
   componentDidMount() {
     const { navigation } = this.props;
-    console.log(this.props.navigation.state.params.Locationkey);
+    console.log("Locationkey", this.props.navigation.state.params.Locationkey);
     firebase
       .firestore()
       .collection("locations")

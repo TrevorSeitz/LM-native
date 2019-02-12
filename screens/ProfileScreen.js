@@ -83,6 +83,7 @@ export default class ProfileScreen extends Component {
   };
 
   updateTextInput = (text, field) => {
+    const state = this.state;
     state[field] = text;
     this.setState(state);
   };

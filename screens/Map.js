@@ -16,9 +16,18 @@ export default class Map extends React.Component {
       errorMessage: null
     };
     this.unsubscribe = null;
+    this._ismounted = false;
   }
 
   ref = firebase.firestore().collection("locations");
+
+  componentDidMount() {
+    this._ismounted = true;
+  }
+
+  componentWillUnmount() {
+    this._ismounted = false;
+  }
 
   _retrieveData = async () => {
     try {
@@ -83,7 +92,9 @@ export default class Map extends React.Component {
         });
       })
       .then(() => {
-        this.setState({ locations: locations });
+        if (this._ismounted) {
+          this.setState({ locations: locations });
+        }
         // this.state.locations.map((item, i) => console.log(item));
       });
     // .then(() => this._storeData());
@@ -103,8 +114,11 @@ export default class Map extends React.Component {
       });
     }
 
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
+    let location = await Location.getCurrentPositionAsync({}).then(() => {
+      if (this._ismounted) {
+        this.setState({ locations: locations });
+      }
+    });
   };
 
   render() {

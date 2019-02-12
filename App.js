@@ -26,10 +26,16 @@ export default class App extends React.Component {
       user: {},
       uid: ""
     };
+    this._ismounted = false;
   }
 
   componentDidMount() {
     this.authListener();
+    this._ismounted = true;
+  }
+
+  componentWillUnmount() {
+    this._ismounted = false;
   }
 
   authListener() {

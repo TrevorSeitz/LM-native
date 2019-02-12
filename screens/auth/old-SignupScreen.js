@@ -1,66 +1,27 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Button,
-  Alert,
-  AsyncStorage
-} from "react-native";
+import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.ref = firebase.firestore().collection("users");
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-      errorMessage: null
-    };
-  }
+  state = { email: "", password: "", passwordConfirm: "", errorMessage: null };
 
   handleSignup = () => {
-    const { name, email, password, passwordConfirm } = this.state;
-    if (password != passwordConfirm) {
+    if (this.state.password != this.state.passwordConfirm) {
       Alert.alert("Passwords do not match");
       return;
     }
+
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(user => (user = user.user))
-      // .then(user => console.log("user Name: ", this.state.name))
-      // .then(user => this._storeData(user.user))
-      .then(user => {
-        return firebase
-          .firestore()
-          .collection("users")
-          .doc(user.uid)
-          .set({
-            name: name,
-            email: email
-          });
-      })
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      // .then(result => console.log("result", result))
       .then(result => this.props.navigation.navigate("Home"))
-      .catch(
+      .then(
         () => {},
         error => {
-          Alert.alert(error);
+          Alert.alert("unknown alert from firebase");
         }
       );
-
-    _storeData = async user => {
-      try {
-        await AsyncStorage.setItem("uid", user.uid);
-      } catch (error) {
-        // Error saving data
-      }
-      this._retrieveData();
-    };
   };
 
   render() {
@@ -70,13 +31,6 @@ export default class SignupScreen extends React.Component {
         {this.state.errorMessage && (
           <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
         )}
-        <TextInput
-          placeholder="Name"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={name => this.setState({ name })}
-          value={this.state.name}
-        />
         <TextInput
           placeholder="Email"
           autoCapitalize="none"

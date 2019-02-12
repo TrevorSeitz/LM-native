@@ -1,18 +1,19 @@
 import * as React from "react";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { Platform, Text, View, StyleSheet, AsyncStorage } from "react-native";
+import { Platform, Text, View, StyleSheet, Thumbnail, AsyncStorage, Button } from "react-native";
 import { Constants, Location, Permissions, MapView, Marker } from "expo";
 import { Card } from "react-native-paper";
 // import { MapView } from "react-native-maps";
 
 export default class Map extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       uid: this._retrieveData(),
       location: null,
       locations: [],
+      checkLocation: {},
       errorMessage: null
     };
     this.unsubscribe = null;
@@ -32,6 +33,13 @@ export default class Map extends React.Component {
   _storeData = async user => {
     try {
       await AsyncStorage.setItem("locations", this.state.locations);
+    } catch (error) {}
+  };
+
+  _storeLocation = async ()=> {
+    try {
+      await AsyncStorage.setItem("Locationkey", this.state.checkLocation);
+      console.log("store location", this.state.checkLocation)
     } catch (error) {}
   };
 
@@ -107,6 +115,16 @@ export default class Map extends React.Component {
     this.setState({ location });
   };
 
+  goToLoc = (location) => {
+    // this.setState({checkLocation: location.id})
+    console.log(location.id)
+    // this._storeLocation()
+    this.props.navigation.navigate("Details", {
+      Locationkey: `${JSON.stringify(location.id)}`
+    })
+  }
+
+
   render() {
     let lat = 0;
     let long = 0;
@@ -147,10 +165,19 @@ export default class Map extends React.Component {
               <MapView.Marker
                 key={i}
                 title={location.name}
+                description={location.description + "**Click to View**"}
                 coordinate={{ latitude, longitude }}
+                onCalloutPress={() => this.goToLoc(location)}
               >
+                <View>
+                <MapView.Callout>
+                    <View>
+                        <Text>Click Me!</Text>
+                    </View>
+                </MapView.Callout>
                 <View style={styles.radius}>
                   <View style={styles.marker} />
+                </View>
                 </View>
               </MapView.Marker>
             );

@@ -26,14 +26,21 @@ export default class App extends React.Component {
       user: {},
       uid: ""
     };
+    this._ismounted = false;
   }
 
   componentDidMount() {
     this.authListener();
+    this._ismounted = true;
+  }
+
+  componentWillUnmount() {
+    this._ismounted = false;
   }
 
   authListener() {
     firebase.auth().onAuthStateChanged(user => {
+      // console.log("app.js user: ", user);
       if (user) {
         this._storeData(user);
         this.setState({ user, uid: user.uid });

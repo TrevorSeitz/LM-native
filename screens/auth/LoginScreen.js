@@ -16,25 +16,36 @@ export default class LoginScreen extends React.Component {
     password: "",
     errorMessage: null
   };
+  _ismounted = false;
+
+  componentDidMount() {
+    this._ismounted = true;
+  }
+
+  componentWillUnmount() {
+    this._ismounted = false;
+  }
 
   handleLogin = () => {
     const { name, email, password } = this.state;
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(user => console.log("user:", user))
+      // .then(user => console.log("user:", user))
       .then(user => this._storeData(user))
-      .then(() => this.props.navigation.navigate("Home"))
+      .then(() => {
+        if (this._ismounted) this.props.navigation.navigate("Home");
+      })
       .catch(error => this.setState({ errorMessage: error.message }));
   };
 
   _storeData = async user => {
+    console.log(user.user.uid);
     try {
-      await AsyncStorage.setItem("uid", user.uid);
+      await AsyncStorage.setItem("uid", user.user.uid);
     } catch (error) {
       // Error saving data
     }
-    this._retrieveData();
   };
 
   render() {

@@ -83,6 +83,7 @@ export default class ProfileScreen extends Component {
   };
 
   updateTextInput = (text, field) => {
+    const state = this.state;
     state[field] = text;
     this.setState(state);
   };
@@ -252,7 +253,9 @@ export default class ProfileScreen extends Component {
           />
         </View>
         <View style={styles.container}>
-          <Text>Get/Change Avatar</Text>
+          <View style={styles.title}>
+            <Text>Add/Change Avatar</Text>
+          </View>
           <Button2 onPress={this.selectPicture}>Gallery</Button2>
           <Button2 onPress={this.takePicture}>Take Picture</Button2>
         </View>
@@ -286,14 +289,19 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: "#CCCCCC"
   },
+  title: {
+    flex: 1,
+    marginBottom: 2,
+    padding: 2,
+    justifyContent: "center",
+    alignSelf: "center"
+  },
   activity: {
     position: "absolute",
     left: 0,
     right: 0,
     top: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "center"
+    bottom: 0
   },
   buttonText: {
     fontSize: 18,
@@ -306,19 +314,20 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    marginTop: 10,
+    borderRadius: 2,
+    // marginBottom: 2,
+    // marginTop: 2,
     alignSelf: "stretch",
     justifyContent: "center"
   },
   avatar: {
     flex: 1,
-    alignItems: "stretch",
+    // alignItems: center,
+    alignSelf: "center",
     marginTop: 7.5,
     padding: 5,
-    width: 75,
-    height: 75
+    width: 225,
+    height: 225
   }
 });
 

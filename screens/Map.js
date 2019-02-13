@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { Platform, Text, View, StyleSheet, Thumbnail, AsyncStorage, Button } from "react-native";
+import { Platform, Text, View, StyleSheet, Thumbnail, AsyncStorage, Image } from "react-native";
 import { Constants, Location, Permissions, MapView, Marker } from "expo";
 import { Card } from "react-native-paper";
 // import { MapView } from "react-native-maps";
@@ -140,6 +140,7 @@ export default class Map extends React.Component {
       <View style={styles.container}>
         <MapView
           style={styles.map}
+
           initialRegion={{
             // latitude: lat,
             latitude: 43.16053,
@@ -169,11 +170,13 @@ export default class Map extends React.Component {
                 coordinate={{ latitude, longitude }}
                 onCalloutPress={() => this.goToLoc(location)}
               >
+
                 <View>
                 <MapView.Callout>
-                    <View>
-                        <Text>Click Me!</Text>
-                    </View>
+                  <Image
+                    source={{ uri: location.imageFileLocation }}
+                    style={{ width: 40, height: 40 }}
+                  />
                 </MapView.Callout>
                 <View style={styles.radius}>
                   <View style={styles.marker} />

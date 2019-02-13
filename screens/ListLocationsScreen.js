@@ -8,7 +8,7 @@ import {
   Text,
   AsyncStorage
 } from "react-native";
-import { List, ListItem, Button, Icon } from "react-native-elements";
+import { List, ListItem, Button, Icon, Avatar } from "react-native-elements";
 // import FontAwesome, { Icons } from "react-native-fontawesome";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as firebase from "firebase";
@@ -95,7 +95,7 @@ export default class ListLocationsScreen extends Component {
       })
       .then(() => {
         this.setState({ locations: locations });
-        this.state.locations.map((item, i) => console.log(item));
+        // this.state.locations.map((item, i) => console.log(item));
       });
   };
 
@@ -118,9 +118,10 @@ export default class ListLocationsScreen extends Component {
             <ListItem
               key={i}
               title={item.name}
+              subtitle={item.Description}
               onPress={() => {
-                this.props.navigation.navigate("Details", {
-                  Locationkey: `${JSON.stringify(item.id)}`
+              this.props.navigation.navigate("Details", {
+                Locationkey: `${JSON.stringify(item.id)}`
                 });
               }}
             />

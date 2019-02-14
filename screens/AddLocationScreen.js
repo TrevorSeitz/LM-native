@@ -9,7 +9,8 @@ import {
   Alert,
   Text,
   TextInput,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import * as firebase from "firebase";
@@ -24,6 +25,8 @@ import {
   Location,
   MediaLibrary
 } from "expo";
+import ImageBrowser from './ImageBrowser';
+
 
 export default class AddLocationScreen extends Component {
   static navigationOptions = {
@@ -45,6 +48,8 @@ export default class AddLocationScreen extends Component {
       image: "nil",
       imageFileName: "",
       imageFileLocation: "",
+      photos: [],
+      imageBrowserOpen: false,
       isLoading: false
     };
     //
@@ -220,6 +225,26 @@ export default class AddLocationScreen extends Component {
     // this.saveLocation();
   };
 
+  imageBrowserCallback = (callback) => {
+    callback.then((photos) => {
+      this.setState({
+        imageBrowserOpen: false,
+        photos
+      })
+    }).catch((e) => console.log(e))
+    console.log(this.state.photos)
+  }
+
+  renderImage(item, i) {
+    return(
+      <Image
+        style={{height: 75, width: 75}}
+        source={{uri: item.file}}
+        key={i}
+      />
+    )
+  }
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -228,6 +253,10 @@ export default class AddLocationScreen extends Component {
         </View>
       );
     }
+
+      if (this.state.imageBrowserOpen) {
+        return(<ImageBrowser max={4} callback={this.imageBrowserCallback}/>);
+      }
     // this._retrieveData();
     // console.log("render uid:", this.state.uid);
     return (
@@ -282,7 +311,11 @@ export default class AddLocationScreen extends Component {
         </View>
         <View style={styles.container}>
           <Button large title="Save" onPress={() => this.uploadImage()} />
-          <Image style={styles.image} source={{ uri: this.state.image.uri }} />
+          <View style={styles.photoList}>
+            <Image style={styles.image} source={{ uri: this.state.image.uri }} />
+            {this.state.photos.map((item,i) => this.renderImage(item,i))}
+          </View>
+          <Button type="button" small title="Add More Photos" disabled={!this.state.image.uri} onPress={() => this.setState({imageBrowserOpen: true})}/>
         </View>
       </ScrollView>
     );
@@ -302,7 +335,7 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 1,
-    marginBottom: 20,
+    marginBottom: 15,
     padding: 5,
     borderBottomWidth: 2,
     borderBottomColor: "#CCCCCC"
@@ -322,24 +355,31 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   button: {
-    height: 45,
+    height: 35,
     flexDirection: "row",
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    marginTop: 10,
+    borderRadius: 5,
+    marginBottom: 2,
+    marginTop: 2,
     alignSelf: "stretch",
     justifyContent: "center"
   },
   image: {
-    flex: 1,
+    // flex: 1,
     alignItems: "stretch",
-    marginTop: 7.5,
+    width: 75
+  },
+  photoList: {
+    flexDirection: 'row',
+    marginTop: 2.5,
+    marginBottom: 2.5,
     padding: 5,
-    width: 75,
-    height: 75
+    height: 85,
+    // flex: 1,
+    alignItems: "stretch",
+    justifyContent: "center"
   }
 });
 

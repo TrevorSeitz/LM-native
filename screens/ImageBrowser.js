@@ -16,6 +16,7 @@ export default class ImageBrowser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      list: [],
       photos: [],
       selected: {},
       after: null,
@@ -45,11 +46,12 @@ export default class ImageBrowser extends React.Component {
     if (!this.state.has_next_page) return
     CameraRoll
       .getPhotos(params)
-      .then(this.processPhotos)
+      .then((r) => this.processPhotos(r))
   }
 
   processPhotos = (r) => {
     if (this.state.after === r.page_info.end_cursor) return;
+    // let fotos = r.map()
     let uris = r.edges.map(i=> i.node).map(i=> i.image).map(i=>i.uri)
     this.setState({
       photos: [...this.state.photos, ...uris],
@@ -58,16 +60,18 @@ export default class ImageBrowser extends React.Component {
     });
   }
 
-  getItemLayout = (data,index) => {
+  getItemLayout = (data, index) => {
     let length = width/4;
     return { length, offset: length * index, index }
   }
 
   prepareCallback() {
+  console.log("this.props: ", this.props.callback)
     let { selected, photos } = this.state;
     let selectedPhotos = photos.filter((item, index) => {
       return(selected[index])
     });
+      console.log(selectedPhotos)
     let files = selectedPhotos
       .map(i => FileSystem.getInfoAsync(i, {md5: true}))
     let callbackResult = Promise

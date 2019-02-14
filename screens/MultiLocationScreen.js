@@ -9,15 +9,16 @@ export default class MultiLocationScreen extends React.Component {
       imageBrowserOpen: false,
       photos: []
     }
+
   }
   imageBrowserCallback = (callback) => {
     callback.then((photos) => {
-      console.log(photos)
       this.setState({
         imageBrowserOpen: false,
         photos
       })
     }).catch((e) => console.log(e))
+    console.log(this.state.photos)
   }
 
   renderImage(item, i) {

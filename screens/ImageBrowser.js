@@ -66,12 +66,11 @@ export default class ImageBrowser extends React.Component {
   }
 
   prepareCallback() {
-  console.log("this.props: ", this.props.callback)
     let { selected, photos } = this.state;
     let selectedPhotos = photos.filter((item, index) => {
       return(selected[index])
     });
-      console.log(selectedPhotos)
+      // console.log("selected photos from image browser: ", selectedPhotos)
     let files = selectedPhotos
       .map(i => FileSystem.getInfoAsync(i, {md5: true}))
     let callbackResult = Promise

@@ -158,6 +158,7 @@ export default class AddLocationScreen extends Component {
         contactPhone: this.state.contactPhone,
         email: this.state.email,
         description: this.state.description,
+        photos: this.state.photos,
         image: this.state.image,
         imageFileName: this.state.imageFileName,
         imageFileLocation: this.state.imageFileLocation
@@ -173,6 +174,7 @@ export default class AddLocationScreen extends Component {
           contactPhone: "",
           email: "",
           description: "",
+          photos: [],
           image: "nil",
           imageFileName: "",
           imageFileLocation: "",
@@ -188,9 +190,20 @@ export default class AddLocationScreen extends Component {
       });
   }
 
-  uploadImage = async () => {
-    const uri = this.state.image.uri;
+  prepareImages = () => {
+    // let uri = ""
+    // console.log("this.state.photos from prepare images: ", this.state.photos);
+    if (this.state.photos)
+    {const extraUris = this.state.photos.map(photo => {uri = photo.file,
+    console.log("mapped photos uri: ", uri),
+    this.uploadImage(uri)})}
+    this.uploadImage(this.state.image.uri)
+  }
+
+  uploadImage = async (uri) => {
+    // const uri = this.state.image.uri;
     uriToBlob = uri => {
+      console.log("uritoblob uri:", uri)
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.onerror = reject;
@@ -215,9 +228,8 @@ export default class AddLocationScreen extends Component {
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => this.setState({ imageFileLocation: result }))
-      .then(() => this.saveLocation())
-      .then(() => {
-        Alert.alert("Success!");
+      .then(() => {if (uri == this.state.image.uri) {this.saveLocation(),
+        Alert.alert("Success!")};
       })
       .catch(error => {
         Alert.alert(error);
@@ -227,15 +239,16 @@ export default class AddLocationScreen extends Component {
 
   imageBrowserCallback = (callback) => {
     callback.then((photos) => {
+    // console.log("photos from add location screen: ", photos)
       this.setState({
         imageBrowserOpen: false,
-        photos
+        photos: photos
       })
-    }).catch((e) => console.log(e))
-    console.log(this.state.photos)
+    })
+    .catch((e) => console.log(e))
   }
 
-  renderImage(item, i) {
+  renderImage = (item, i) => {
     return(
       <Image
         style={{height: 75, width: 75}}
@@ -310,10 +323,10 @@ export default class AddLocationScreen extends Component {
           <Button2 onPress={this.takePicture}>Take Picture</Button2>
         </View>
         <View style={styles.container}>
-          <Button large title="Save" onPress={() => this.uploadImage()} />
+          <Button large title="Save" onPress={() => this.prepareImages() } />
           <View style={styles.photoList}>
             <Image style={styles.image} source={{ uri: this.state.image.uri }} />
-            {this.state.photos.map((item,i) => this.renderImage(item,i))}
+            {this.state.photos.map((item, i) => this.renderImage(item, i))}
           </View>
           <Button type="button" small title="Add More Photos" disabled={!this.state.image.uri} onPress={() => this.setState({imageBrowserOpen: true})}/>
         </View>

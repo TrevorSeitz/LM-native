@@ -18,7 +18,7 @@ export default class MultiLocationScreen extends React.Component {
         photos
       })
     }).catch((e) => console.log(e))
-    console.log(this.state.photos)
+    // console.log(this.state.photos)
   }
 
   renderImage(item, i) {

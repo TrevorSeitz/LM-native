@@ -49,6 +49,7 @@ export default class AddLocationScreen extends Component {
       imageFileName: "",
       imageFileLocation: "",
       photos: [],
+      photosLocations: [],
       imageBrowserOpen: false,
       isLoading: false
     };
@@ -158,7 +159,7 @@ export default class AddLocationScreen extends Component {
         contactPhone: this.state.contactPhone,
         email: this.state.email,
         description: this.state.description,
-        photos: this.state.photos,
+        photosLocations: this.state.photosLocations,
         image: this.state.image,
         imageFileName: this.state.imageFileName,
         imageFileLocation: this.state.imageFileLocation
@@ -175,6 +176,7 @@ export default class AddLocationScreen extends Component {
           email: "",
           description: "",
           photos: [],
+          photosLocations: [],
           image: "nil",
           imageFileName: "",
           imageFileLocation: "",
@@ -190,35 +192,81 @@ export default class AddLocationScreen extends Component {
       });
   }
 
-  prepareImages = () => {
-    // let uri = ""
-    // console.log("this.state.photos from prepare images: ", this.state.photos);
-    if (this.state.photos)
-    {const extraUris = this.state.photos.map(photo => {uri = photo.file,
-    console.log("mapped photos uri: ", uri),
-    this.uploadImage(uri)})}
-    this.uploadImage(this.state.image.uri)
+  prepareImages = async () => {
+    let extraPhotos = []
+    let allPhotos = this.state.photos
+    allPhotos.push(this.state.image.uri)
+    // console.log("all photos from prepareImages: ", allPhotos)
+    allPhotos.map((item, i) => {
+      if (i < (allPhotos.length-1)) {
+        this.uploadImage(item, extraPhotos)
+      } else {
+        this.uploadMainImage(item)
+      }
+    })
   }
 
-  uploadImage = async (uri) => {
-    // const uri = this.state.image.uri;
-    uriToBlob = uri => {
-      console.log("uritoblob uri:", uri)
-      return new Promise((resolve, reject) => {
-        var xhr = new XMLHttpRequest();
-        xhr.onerror = reject;
-        xhr.onreadystatechange = () => {
-          if (xhr.readyState === 4) {
-            resolve(xhr.response);
-          }
-        };
-        xhr.open("GET", uri);
-        xhr.responseType = "blob"; // convert type
-        xhr.send();
-      });
-    };
+sortUris = (photo) => {
+  if (photo.exists) {
+    this.uploadMainImage(this.state.image.uri)
+  } else {
+    this.uploadImage(photo)
+  }
+}
 
-    const blob = await uriToBlob(uri);
+uriToBlob = uri => {
+  console.log("uriToBlob: ", uri)
+  return new Promise((resolve, reject) => {
+    var xhr = new XMLHttpRequest();
+    xhr.onerror = reject;
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        resolve(xhr.response);
+      }
+    };
+    xhr.open("GET", uri);
+    xhr.responseType = "blob"; // convert type
+    xhr.send();
+  });
+};
+
+  uploadImage = async (photo, extraPhotos) => {
+    let uri = photo.file
+      console.log("extra photos state: ", this.state.photosLocations)
+    // let extraPhotos = []
+    const blob = await this.uriToBlob(uri);
+
+    var ref = firebase
+      .storage()
+      .ref()
+      .child("images/" + photo.modificationTime.toString().slice(".", 1));
+    // console.log("extra filename: ", photo.modificationTime.toString().split(".", 1).toString().toString())
+    const snapshot = await ref.put(blob);
+
+    const imageFileLocation = await snapshot.ref
+      .getDownloadURL()
+      .then((result) => {if (result){ this.pushResult(result, extraPhotos)}})
+      .then(() => { if (extraPhotos.length = this.state.photos.length) {
+        this.setState({photosLocations: extraPhotos })
+      }})
+      .then((result) => console.log("extra photos array: ", this.state.photosLocations))
+      // .then(() => console.log("imagefile: ", this.state.image))
+      // .then(() => {if (this.state.latitude) {this.saveLocation(),
+      // console.log("has latitude")
+      //   Alert.alert("Success!")};
+      // })
+      .catch(error => {
+        Alert.alert(error);
+      });
+  };
+
+  pushResult = () => {
+    if (result){ extraPhotos.push(result)}
+  }
+
+  uploadMainImage = async (uri) => {
+    console.log("Main uri", uri)
+    const blob = await this.uriToBlob(uri);
 
     var ref = firebase
       .storage()
@@ -227,19 +275,19 @@ export default class AddLocationScreen extends Component {
     const snapshot = await ref.put(blob);
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
-      .then(result => this.setState({ imageFileLocation: result }))
-      .then(() => {if (uri == this.state.image.uri) {this.saveLocation(),
-        Alert.alert("Success!")};
-      })
+      .then((result) => {this.setState({ imageFileLocation: result })})
+      .then(() => console.log("Main imagefile location: ", this.state.imageFileLocation))
+      .then(() =>  {this.saveLocation(),
+        Alert.alert("Success!")}
+      )
       .catch(error => {
         Alert.alert(error);
       });
-    // this.saveLocation();
-  };
+
+  }
 
   imageBrowserCallback = (callback) => {
     callback.then((photos) => {
-    // console.log("photos from add location screen: ", photos)
       this.setState({
         imageBrowserOpen: false,
         photos: photos

@@ -186,15 +186,15 @@ export default class AddLocationScreen extends Component {
       })      .catch(error => {
               console.error("Error adding document: ", error);
 
-            })
-      .then(() => {
+            });
+      // .then(() => {
         this.setState({
           isLoading: false
         });
-      })
-      .then(() =>
-      Alert.alert("Success!")
-    )
+      // })
+      // .then(() =>
+      // Alert.alert("Success!")
+    // )
       // .catch(error => {
         // console.error("Error adding document: ", error);
 

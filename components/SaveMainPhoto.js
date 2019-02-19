@@ -9,8 +9,7 @@ constructor(props) {
 console.log(this.props)
 }
 
-  uploadMainImage = async (uri) => {
-    // const uri = this.state.image.uri;
+  uploadMainPhoto = async (uri) => {
     uriToBlob = uri => {
       console.log("uritoblob uri:", uri)
       return new Promise((resolve, reject) => {
@@ -43,5 +42,9 @@ console.log(this.props)
         Alert.alert(error);
       });
   };
+  return() {
+    console.log("inside SaveMainPhoto")
+    // this.uploadMainPhoto(this.state.image.uri)
+  }
 
 }

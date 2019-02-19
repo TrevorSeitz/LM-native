@@ -237,14 +237,16 @@ export default class AddLocationScreen extends Component {
       // .then((result) => {
       //   extraPhotosArray = [...this.state.photosLocations]
       // })
-      .then((result) => {extraPhotosArray.push(result)})
-      .then(() => {
-        this.setState({
-          photosLocations: [...this.state.photosLocations, ...extraPhotosArray]
-        })
+      // .then((result) => {extraPhotosArray.push(result)})
+      .then((result) => {
+        // this.setState({
+        //   photosLocations: [...this.state.photosLocations, ...extraPhotosArray]
+        // })
+        this.setState( prevState => ({photosLocations: [...prevState.photosLocations, result] })
+          )
       })
       .then((result) => {
-        console.log("extraPhotosArray", extraPhotosArray)
+        console.log("this.state.photosLocations: ", this.state.photosLocations)
       })
       // .then((result) => {console.log("download url: ", result)})
       .catch(error => {

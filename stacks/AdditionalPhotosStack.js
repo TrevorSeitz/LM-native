@@ -15,12 +15,12 @@ import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
-import AdditionalPhotosBrowser from "../screens/AdditionalPhotosBrowser";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
 const AdditionalPhotosStack = createStackNavigator(
   {
     AdditionalPhotos: {
-      screen: AdditionalPhotosBrowser,
+      screen: AdditionalPhotosScreen,
       navigationOptions: ({ navigation }) => {
         return {
           headerTitle: "Additional Location Photos",

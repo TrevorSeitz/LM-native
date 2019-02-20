@@ -9,19 +9,17 @@ import HomeNavigator from "./HomeNavigator";
 import AddLocationNavigator from "./AddLocationNavigator";
 import ListLocationsNavigator from "./ListLocationsNavigator";
 import LocationDetailsNavigator from "./LocationDetailsNavigator";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 // import LMImagePickerNavigator from "./";
 
 const AppNavigator = createStackNavigator({
   // this sets up the screens for navigation
-  // Home: { screen: MainTabNavigator },
-  // AddLocation: { screen: AddLocationNavigator },
-  // ListLocations: { screen: ListLocationsNavigator }
-  Home: { MainTabScreen },
-  AddLocation: { AddLocationScreen },
-  ListLocations: { ListLocationsScreen },
-  Details: { LocationDetailsScreen },
-  AdditionalPhotos: { AdditionalPhotosBrowser },
-  EditLocation: { EditLocationScreen }
+  Home:  MainTabScreen,
+  AddLocation:  AddLocationScreen,
+  ListLocations:  ListLocationsScreen,
+  Details:  LocationDetailsScreen,
+  AdditionalPhotos:  AdditionalPhotosScreen,
+  EditLocation:  EditLocationScreen
 });
 
 const AppContainer = createAppContainer(appNavigator);

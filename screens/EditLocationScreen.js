@@ -35,11 +35,11 @@ class EditLocationScreen extends Component {
   }
   componentDidMount() {
     const { navigation } = this.props;
-    const ref = firebase
+    firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("Locationkey")));
-    ref.get().then(doc => {
+      .doc(JSON.parse(navigation.getParam("Locationkey")))
+      .get().then(doc => {
       if (doc.exists) {
         const location = doc.data();
         this.setState({
@@ -94,25 +94,6 @@ class EditLocationScreen extends Component {
         imageFileName: this.state.imageFileName,
         imageFileLocation: this.state.imageFileLocation
       })
-      // .then(docRef => {
-      //   this.setState({
-      //     key: "",
-      //     id: "",
-      //     name: "",
-      //     venue: "",
-      //     latitude: "",
-      //     longitude: "",
-      //     contactName: "",
-      //     contactPhone: "",
-      //     email: "",
-      //     description: "",
-      //     image: "nil",
-      //     imageFileName: "",
-      //     imageFileLocation: "",
-      //     isLoading: false
-      //   });
-      // this.props.navigation.navigate("Location");
-      // })
       .catch(error => {
         console.error("Error adding document: ", error);
         this.setState({
@@ -122,6 +103,7 @@ class EditLocationScreen extends Component {
     this.props.navigation.navigate("Details", {
       Locationkey: `${JSON.stringify(id)}`
     });
+    // this.props.navigation.goBack();
   }
 
   render() {

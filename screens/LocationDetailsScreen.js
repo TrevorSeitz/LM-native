@@ -9,7 +9,7 @@ import {
 import { List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
 
-class LocationDetailsScreen extends Component {
+export default class LocationDetailsScreen extends Component {
   static navigationOptions = {
     title: "Location Details"
   };
@@ -21,12 +21,10 @@ class LocationDetailsScreen extends Component {
       location: {},
       key: ""
     };
-    // console.log(this.props)
   }
 
   componentDidMount() {
     const { navigation } = this.props;
-    // console.log("Locationkey", this.props.navigation.state.params.Locationkey);
     firebase
       .firestore()
       .collection("locations")
@@ -197,5 +195,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-export default LocationDetailsScreen;

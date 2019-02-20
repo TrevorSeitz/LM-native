@@ -15,6 +15,7 @@ import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
 const LocationDetailsStack = createStackNavigator(
   {
@@ -36,7 +37,8 @@ const LocationDetailsStack = createStackNavigator(
     },
     Home: { screen: HomeScreen },
     ListLocations: { screen: ListLocationsScreen },
-    EditLocation: { screen: EditLocationScreen }
+    EditLocation: { screen: EditLocationScreen },
+    AdditionalPhotos: { screen: AdditionalPhotosScreen }
   },
   {
     defaultNavigationOptions: {

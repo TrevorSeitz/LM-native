@@ -18,6 +18,7 @@ class EditLocationScreen extends Component {
     super();
     this.state = {
       key: "",
+      uid: "",
       id: "",
       name: "",
       venue: "",
@@ -27,6 +28,7 @@ class EditLocationScreen extends Component {
       contactPhone: "",
       email: "",
       description: "",
+      photosLocations: [],
       image: "nil",
       imageFileName: "",
       imageFileLocation: "",
@@ -44,6 +46,7 @@ class EditLocationScreen extends Component {
         const location = doc.data();
         this.setState({
           key: doc.id,
+          uid: location.uid,
           name: location.name,
           venue: location.venue,
           latitude: location.latitude,
@@ -52,6 +55,7 @@ class EditLocationScreen extends Component {
           contactPhone: location.contactPhone,
           email: location.email,
           description: location.description,
+          photosLocations: location.photosLocations,
           image: location.image,
           imageFileName: location.imageFileName,
           imageFileLocation: location.imageFileLocation,
@@ -82,6 +86,7 @@ class EditLocationScreen extends Component {
     updateRef
       .set({
         key: id,
+        uid: this.state.uid,
         name: this.state.name,
         venue: this.state.venue,
         latitude: this.state.latitude,
@@ -90,6 +95,7 @@ class EditLocationScreen extends Component {
         contactPhone: this.state.contactPhone,
         email: this.state.email,
         description: this.state.description,
+        photosLocations: this.state.photosLocations,
         image: this.state.image,
         imageFileName: this.state.imageFileName,
         imageFileLocation: this.state.imageFileLocation

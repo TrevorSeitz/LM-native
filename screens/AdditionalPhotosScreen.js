@@ -43,7 +43,7 @@ export default class AdditionalPhotosScreen extends Component {
     .then(doc => {
     if (doc.exists) {
       const location = doc.data();
-      console.log(location.photosLocations)
+      console.log("Location data: ", location)
       this.setState({
         key: doc.id,
         name: location.name,

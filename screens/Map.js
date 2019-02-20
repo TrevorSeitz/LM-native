@@ -25,7 +25,7 @@ export default class Map extends React.Component {
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("uid");
-      console.log(value)
+      // console.log(value)
       if (value !== null) {
         this.setState({ uid: value });
       }
@@ -89,7 +89,7 @@ export default class Map extends React.Component {
   _storeLocation = async ()=> {
     try {
       await AsyncStorage.setItem("Locationkey", this.state.checkLocation);
-      console.log("store location", this.state.checkLocation)
+      // console.log("store location", this.state.checkLocation)
     } catch (error) {}
   };
 
@@ -120,6 +120,7 @@ export default class Map extends React.Component {
           const contactPhone = doc.data().contactPhone;
           const email = doc.data().email;
           const description = doc.data().description;
+          const photosLocations= doc.data().photosLocations;
           const image = doc.data().image;
           const imageFileName = doc.data().imageFileName;
           const imageFileLocation = doc.data().imageFileLocation;
@@ -134,6 +135,7 @@ export default class Map extends React.Component {
             contactPhone: contactPhone,
             email: email,
             description: description,
+            photosLocations: photosLocations,
             image: image,
             imageFileName: imageFileName,
             imageFileLocation: imageFileLocation
@@ -167,7 +169,7 @@ export default class Map extends React.Component {
 
   goToLoc = (location) => {
     // this.setState({checkLocation: location.id})
-    console.log(location.id)
+    // console.log(location.id)
     // this._storeLocation()
     this.props.navigation.navigate("Details", {
       Locationkey: `${JSON.stringify(location.id)}`

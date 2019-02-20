@@ -20,6 +20,7 @@ const AppNavigator = createStackNavigator({
   AddLocation: { AddLocationScreen },
   ListLocations: { ListLocationsScreen },
   Details: { LocationDetailsScreen },
+  AdditionalPhotos: { AdditionalPhotosBrowser },
   EditLocation: { EditLocationScreen }
 });
 

@@ -27,9 +27,6 @@ const AppDrawerNavigator = createDrawerNavigator({
   AddLocation: {
     screen: AddLocationScreen
   },
-  AddMultiLocation: {
-    screen: MultiLocationScreen
-  },
   ListLocations: {
     screen: ListLocationsScreen
   },

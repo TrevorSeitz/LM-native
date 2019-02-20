@@ -13,7 +13,8 @@ import EditLocationScreen from "../screens/EditLocationScreen";
 
 const LocationDetailsStack = createStackNavigator({
   Details: LocationDetailsScreen,
-  Edit: EditLocationScreen
+  Edit: EditLocationScreen,
+  AdditionalPhotos: AdditionalPhotosBrowser
 });
 
 LocationDetailsScreen.navigationOptions = {
@@ -33,5 +34,6 @@ LocationDetailsScreen.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   ListLocationsStack,
+  AdditionalPhotosStack,
   LocationDetailsStack
 });

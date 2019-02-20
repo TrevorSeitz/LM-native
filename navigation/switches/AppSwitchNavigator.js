@@ -13,6 +13,7 @@ import SignupScreen from "../../screens/auth/SignupScreen";
 import ForgotPasswordScreen from "../../screens/auth/ForgotPasswordScreen";
 import LoadingScreen from "../../screens/auth/LoadingScreen";
 import ImageBrowser from "../../screens/ImageBrowser";
+import AdditionalPhotosBrowser from "../../screens/AdditionalPhotosBrowser";
 import MultiLocationScreen from "../../screens/MultiLocationScreen";
 import ImageTile from "../../screens/ImageTile";
 
@@ -32,6 +33,7 @@ const AppSwitchNavigator = createSwitchNavigator(
     Profile: { screen: ProfileScreen },
     MultiLocation: { screen: MultiLocationScreen },
     ImageBrowser: { screen: ImageBrowser },
+    AdditionalPhotos: { screen: AdditionalPhotosBrowser },
     ImageTile: { screen: ImageTile },
     Loading: { screen: LoadingScreen }
   },

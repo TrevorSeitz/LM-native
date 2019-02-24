@@ -35,7 +35,8 @@ const EditLocationStack = createStackNavigator(
       }
     },
     Home: { screen: HomeScreen },
-    LocationDetails: { screen: LocationDetailsScreen }
+    ListLocations: { screen: ListLocationsScreen },
+    Details: { screen: LocationDetailsScreen }
   },
   {
     defaultNavigationOptions: {

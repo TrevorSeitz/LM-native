@@ -11,6 +11,7 @@ export default class Map extends React.Component {
     super(props);
     this.state = {
       uid: this._retrieveData(),
+      user: null,
       location: null,
       locations: [],
       checkLocation: {},
@@ -24,11 +25,60 @@ export default class Map extends React.Component {
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("uid");
+      // console.log(value)
       if (value !== null) {
         this.setState({ uid: value });
       }
     } catch (error) {}
   };
+
+  _getUserAsync = async () => {
+    const { navigation } = this.props;
+    const uid = await AsyncStorage.getItem("uid");
+    let { status } = await Permissions.askAsync(Permissions.USER);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access user was denied"
+      });
+    }
+
+    let user = await firebase
+      .firestore()
+      .collection("users")
+      .doc(JSON.parse(navigation.getParam(uid)))
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          this.setState({
+            user: doc.data(),
+            // key: doc.id,
+            isLoading: false
+          });
+        } else {
+          console.log("No such document!");
+        }
+      });;
+    this.setState({ user });
+  };
+
+  _getUserName = async () => {
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(JSON.parse(navigation.getParam(uid)))
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          this.setState({
+            user: doc.data(),
+            // key: doc.id,
+            isLoading: false
+          });
+        } else {
+          console.log("No such document!");
+        }
+      });
+  }
 
   _storeData = async user => {
     try {
@@ -39,7 +89,7 @@ export default class Map extends React.Component {
   _storeLocation = async ()=> {
     try {
       await AsyncStorage.setItem("Locationkey", this.state.checkLocation);
-      console.log("store location", this.state.checkLocation)
+      // console.log("store location", this.state.checkLocation)
     } catch (error) {}
   };
 
@@ -70,6 +120,7 @@ export default class Map extends React.Component {
           const contactPhone = doc.data().contactPhone;
           const email = doc.data().email;
           const description = doc.data().description;
+          const photosLocations= doc.data().photosLocations;
           const image = doc.data().image;
           const imageFileName = doc.data().imageFileName;
           const imageFileLocation = doc.data().imageFileLocation;
@@ -84,6 +135,7 @@ export default class Map extends React.Component {
             contactPhone: contactPhone,
             email: email,
             description: description,
+            photosLocations: photosLocations,
             image: image,
             imageFileName: imageFileName,
             imageFileLocation: imageFileLocation
@@ -117,7 +169,7 @@ export default class Map extends React.Component {
 
   goToLoc = (location) => {
     // this.setState({checkLocation: location.id})
-    console.log(location.id)
+    // console.log(location.id)
     // this._storeLocation()
     this.props.navigation.navigate("Details", {
       Locationkey: `${JSON.stringify(location.id)}`
@@ -138,6 +190,7 @@ export default class Map extends React.Component {
 
     return (
       <View style={styles.container}>
+        <Text>Hello {}</Text>
         <MapView
           style={styles.map}
 

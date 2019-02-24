@@ -9,7 +9,7 @@ import {
 import { List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
 
-class LocationDetailsScreen extends Component {
+export default class LocationDetailsScreen extends Component {
   static navigationOptions = {
     title: "Location Details"
   };
@@ -21,12 +21,10 @@ class LocationDetailsScreen extends Component {
       location: {},
       key: ""
     };
-    console.log(this.props)
   }
 
   componentDidMount() {
     const { navigation } = this.props;
-    console.log("Locationkey", this.props.navigation.state.params.Locationkey);
     firebase
       .firestore()
       .collection("locations")
@@ -81,7 +79,7 @@ class LocationDetailsScreen extends Component {
     }
 
     const imageURL = this.state.location.imageFileLocation;
-    console.log("url", imageURL);
+    // console.log("url", imageURL);
 
     return (
       <ScrollView>
@@ -114,7 +112,19 @@ class LocationDetailsScreen extends Component {
           </View>
           <View style={styles.detailButton}>
             <Button
-              large
+              medium
+              backgroundColor={"#CCCCCC"}
+              title="See Additional Photos"
+              onPress={() => {
+                this.props.navigation.navigate("AdditionalPhotos", {
+                  Locationkey: `${JSON.stringify(this.state.key)}`
+                });
+              }}
+            />
+          </View>
+          <View style={styles.detailButton}>
+            <Button
+              medium
               backgroundColor={"#CCCCCC"}
               leftIcon={{ name: "edit" }}
               title="Edit"
@@ -127,7 +137,7 @@ class LocationDetailsScreen extends Component {
           </View>
           <View style={styles.detailButton}>
             <Button
-              large
+              medium
               backgroundColor={"#999999"}
               color={"#FFFFFF"}
               leftIcon={{ name: "delete" }}
@@ -185,5 +195,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-export default LocationDetailsScreen;

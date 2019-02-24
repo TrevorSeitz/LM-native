@@ -6,11 +6,9 @@ import {
 } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
-// import WelcomeScreen from "../../screens/WelcomeScreen";
 import HomeScreen from "../screens/HomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
-// import AddLocationStack from "../stacks/AddLocationStack";
 
 const HomeStack = createStackNavigator({
   New: AddLocationScreen

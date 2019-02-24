@@ -13,7 +13,8 @@ import SignupScreen from "../../screens/auth/SignupScreen";
 import ForgotPasswordScreen from "../../screens/auth/ForgotPasswordScreen";
 import LoadingScreen from "../../screens/auth/LoadingScreen";
 import ImageBrowser from "../../screens/ImageBrowser";
-import MultiLocationScreen from "../../screens/MultiLocationScreen";
+import AdditionalPhotosScreen from "../../screens/AdditionalPhotosScreen";
+// import MultiLocationScreen from "../../screens/MultiLocationScreen";
 import ImageTile from "../../screens/ImageTile";
 
 import AppDrawerNavigator from "../AppDrawerNavigator";
@@ -30,8 +31,9 @@ const AppSwitchNavigator = createSwitchNavigator(
     EditLocation: { screen: EditLocationScreen },
     Welcome: { screen: WelcomeScreen },
     Profile: { screen: ProfileScreen },
-    MultiLocation: { screen: MultiLocationScreen },
+    // MultiLocation: { screen: MultiLocationScreen },
     ImageBrowser: { screen: ImageBrowser },
+    AdditionalPhotos: { screen: AdditionalPhotosScreen },
     ImageTile: { screen: ImageTile },
     Loading: { screen: LoadingScreen }
   },

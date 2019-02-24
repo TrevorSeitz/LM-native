@@ -8,6 +8,7 @@ import {
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
 const LoginStack = createStackNavigator({
   Login: LoginScreen
@@ -31,5 +32,6 @@ export default createBottomTabNavigator({
   HomeStack,
   ListLocationsStack,
   LocationDetailsStack,
+  AdditionalPhotosStack,
   LoginStack
 });

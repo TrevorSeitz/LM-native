@@ -7,28 +7,29 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
-import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import SignupScreen from "../screens/auth/SignupScreen";
 
-const ListLocationsStack = createStackNavigator({
-  List: ListLocationsScreen,
-  Details: LocationDetailsScreen
+const SignupStack = createStackNavigator({
+  Signup: SignupScreen
 });
 
-ListLocationsScreen.navigationOptions = {
-  tabBarLabel: "List All Locations",
+SignupScreen.navigationOptions = {
+  tabBarLabel: "Signup",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-list${focused ? "" : ""}`
-          : "md-list"
+          ? `ios-information-circle${focused ? "" : "-outline"}`
+          : "md-information-circle"
       }
     />
   )
 };
 
 export default createBottomTabNavigator({
-  ListLocationsStack
+  HomeStack,
+  ListLocationsStack,
+  LocationDetailsStack,
+  SignupStack
 });

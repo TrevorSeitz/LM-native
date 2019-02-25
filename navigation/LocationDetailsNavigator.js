@@ -33,9 +33,5 @@ LocationDetailsScreen.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  ListLocationsStack,
-  LocationDetailsStack,
-  EditLocationStack,
-  AdditionalPhotosStack,
+  LocationDetailsStack
 });

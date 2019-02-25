@@ -8,9 +8,13 @@ import {
 import HomeNavigator from "./HomeNavigator";
 import AddLocationNavigator from "./AddLocationNavigator";
 import ListLocationsNavigator from "./ListLocationsNavigator";
+
 import LocationDetailsNavigator from "./LocationDetailsNavigator";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
-// import LMImagePickerNavigator from "./";
+import AddLocationScreen from "./AddLocationScreen";
+import ListLocationsScreen from "./ListLocationsScreen";
+import LocationDetailsScreen from "./LocationDetailsScreen";
+import EditLocationScreen from "./EditLocationScreen";
 
 const AppNavigator = createStackNavigator({
   // this sets up the screens for navigation

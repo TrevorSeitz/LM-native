@@ -7,26 +7,23 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
-import { View, Text, StyleSheet, Button, Platform } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Constants, MapView } from "expo";
-import TabBarIcon from "../components/TabBarIcon";
 
 import HomeScreen from "../screens/HomeScreen";
-import AddLocationScreen from "../screens/AddLocationScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
-import ProfileScreen from "../screens/ProfileScreen";
 
-const HomeStack = createStackNavigator(
+const AdditionalPhotosStack = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    AdditionalPhotos: {
+      screen: AdditionalPhotosScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Home",
+          headerTitle: "Additional Photos",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -38,12 +35,10 @@ const HomeStack = createStackNavigator(
         };
       }
     },
-    AddLocation: { screen: AddLocationScreen },
-    ListLocations: { screen: ListLocationsScreen },
-    LocationDetails: { screen: LocationDetailsScreen },
-    EditLocation: { screen: EditLocationScreen },
-    AdditionalPhotos: { screen: AdditionalPhotosScreen },
-    Profile: { screen: ProfileScreen }
+    // Home: { screen: HomeScreen },
+    // ListLocations: { screen: ListLocationsScreen },
+    Details: { screen: LocationDetailsScreen},
+    // EditLocation: { screen: EditLocationScreen }
   },
   {
     defaultNavigationOptions: {
@@ -51,19 +46,4 @@ const HomeStack = createStackNavigator(
     }
   }
 );
-
-  HomeScreen.navigationOptions = {
-    tabBarLabel: "Home!",
-    tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-        focused={focused}
-        name={
-          Platform.OS === "ios"
-            ? `ios-home${focused ? "" : ""}`
-            : "md-home"
-        }
-      />
-    )
-  };
-
-export default HomeStack;
+export default LocationDetailsStack;

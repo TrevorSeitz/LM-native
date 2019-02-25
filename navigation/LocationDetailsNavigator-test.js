@@ -9,26 +9,33 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import EditLocationScreen from "../screens/EditLocationScreen";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
-const ListLocationsStack = createStackNavigator({
-  List: ListLocationsScreen,
-  Details: LocationDetailsScreen
+const LocationDetailsStack = createStackNavigator({
+  Details: LocationDetailsScreen,
+  Edit: EditLocationScreen,
+  AdditionalPhotos: AdditionalPhotosScreen
 });
 
-ListLocationsScreen.navigationOptions = {
-  tabBarLabel: "List All Locations",
+LocationDetailsScreen.navigationOptions = {
+  tabBarLabel: "Location Details",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-list${focused ? "" : ""}`
-          : "md-list"
+          ? `ios-information-circle${focused ? "" : "-outline"}`
+          : "md-information-circle"
       }
     />
   )
 };
 
 export default createBottomTabNavigator({
-  ListLocationsStack
+  HomeStack,
+  ListLocationsStack,
+  LocationDetailsStack,
+  EditLocationStack,
+  AdditionalPhotosStack,
 });

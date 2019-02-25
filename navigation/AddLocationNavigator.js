@@ -10,24 +10,24 @@ import HomeScreen from "../screens/HomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
 
-const HomeStack = createStackNavigator({
+const AddLocationStack = createStackNavigator({
   New: AddLocationScreen
 });
 
 AddLocationScreen.navigationOptions = {
-  tabBarLabel: "Add A New Place",
+  tabBarLabel: "Add A New Location",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+          ? `ios-add${focused ? "" : ""}`
+          : "md-add"
       }
     />
   )
 };
 
 export default createBottomTabNavigator({
-  HomeStack
+  AddLocationStack
 });

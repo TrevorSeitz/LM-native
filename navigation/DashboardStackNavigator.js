@@ -11,17 +11,25 @@ import AddLocationStack from "../stacks/AddLocationStack";
 import ListLocationsStack from "../stacks/ListLocationsStack";
 import LocationDetailsStack from "../stacks/LocationDetailsStack";
 
+import HomeScreen from "../screens/HomeScreen";
+import AddLocationScreen from "../screens/AddLocationScreen";
+import ListLocationsScreen from "../screens/ListLocationsScreen";
+import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+
 const DashboardTabNavigator = createBottomTabNavigator(
   {
-    Home: HomeStack,
-    "Add Location": AddLocationStack,
-    "List Locations": ListLocationsStack
+    // Home: HomeStack,
+    // "Add Location": AddLocationStack,
+    // "List Locations": ListLocationsStack
+      Home: HomeScreen,
+      "Add Location": AddLocationScreen,
+      "List Locations": ListLocationsScreen
   },
   {
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        header: null,
+        // header: null,
         headerTitle: routeName
       };
     }

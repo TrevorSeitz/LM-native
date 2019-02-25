@@ -6,10 +6,14 @@ import {
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
-import HomeStack from "../stacks/HomeStack";
-import AddLocationStack from "../stacks/AddLocationStack";
-import ListLocationsStack from "../stacks/ListLocationsStack";
-import LocationDetailsStack from "../stacks/LocationDetailsStack";
+// import HomeStack from "../stacks/HomeStack";
+// import AddLocationStack from "../stacks/AddLocationStack";
+import HomeScreen from "../screens/HomeScreen";
+import ListLocationsScreen from "../screens/ListLocationsScreen";
+import AddLocationScreen from "../screens/AddLocationScreen";
+// import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+// import ProfileScreen from "../screens/ProfileScreen";
+// import LogoutScreen from "../screens/auth/LogoutScreen";
 
 import HomeScreen from "../screens/HomeScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
@@ -17,19 +21,33 @@ import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator(
+  // this is where the tab navigator is built
   {
+<<<<<<< HEAD
     // Home: HomeStack,
     // "Add Location": AddLocationStack,
     // "List Locations": ListLocationsStack
       Home: HomeScreen,
       "Add Location": AddLocationScreen,
       "List Locations": ListLocationsScreen
+=======
+    Home: HomeScreen,
+    "Add Location": AddLocationScreen,
+    "List Locations": ListLocationsScreen,
+    // "Location Details": LocationDetailsScreen,
+    // Profile: ProfileScreen,
+    // Logout: LogoutScreen,
+
+>>>>>>> 366320cb03367622a8f7578cd4c9d01b8e6bd7b7
   },
   {
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
+<<<<<<< HEAD
         // header: null,
+=======
+>>>>>>> 366320cb03367622a8f7578cd4c9d01b8e6bd7b7
         headerTitle: routeName
       };
     }

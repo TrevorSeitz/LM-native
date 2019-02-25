@@ -17,13 +17,13 @@ import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
-const AdditionalPhotosStack = createStackNavigator(
+const EditLocationStack = createStackNavigator(
   {
-    AdditionalPhotos: {
-      screen: AdditionalPhotosScreen,
+    EditLocation: {
+      screen: EditLocationScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Additional Location Photos",
+          headerTitle: "Edit Location",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -35,10 +35,10 @@ const AdditionalPhotosStack = createStackNavigator(
         };
       }
     },
-    Home: { screen: HomeScreen },
+    // Home: { screen: HomeScreen },
+    Details: { screen: LocationDetailsScreen },
     ListLocations: { screen: ListLocationsScreen },
-    Details: { screen: LocationDetailsScreen},
-    EditLocation: { screen: EditLocationScreen }
+    AdditionalPhotos: { screen: AdditionalPhotosScreen }
   },
   {
     defaultNavigationOptions: {
@@ -46,4 +46,4 @@ const AdditionalPhotosStack = createStackNavigator(
     }
   }
 );
-export default LocationDetailsStack;
+export default EditLocationStack;

@@ -20,7 +20,7 @@ const AddLocationStack = createStackNavigator(
       screen: AddLocationScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "AddLocation",
+          headerTitle: "Add New Location",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -32,7 +32,6 @@ const AddLocationStack = createStackNavigator(
         };
       }
     },
-    Home: { screen: HomeScreen }
   },
   {
     defaultNavigationOptions: {

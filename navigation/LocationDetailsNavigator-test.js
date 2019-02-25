@@ -12,14 +12,14 @@ import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
-const AdditionalPhotosStack = createStackNavigator({
+const LocationDetailsStack = createStackNavigator({
   Details: LocationDetailsScreen,
   Edit: EditLocationScreen,
   AdditionalPhotos: AdditionalPhotosScreen
 });
 
-AdditionalPhotosScreen.navigationOptions = {
-  tabBarLabel: "Additional Location Photos",
+LocationDetailsScreen.navigationOptions = {
+  tabBarLabel: "Location Details",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

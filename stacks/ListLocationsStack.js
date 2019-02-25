@@ -33,8 +33,8 @@ const ListLocationsStack = createStackNavigator(
         };
       }
     },
-    Home: { screen: HomeScreen },
-    Details: { screen: LocationDetailsScreen }
+    // Home: { screen: HomeScreen },
+    Details: LocationDetailsScreen
   },
   {
     defaultNavigationOptions: {

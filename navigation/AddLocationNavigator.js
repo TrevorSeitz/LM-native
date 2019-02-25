@@ -11,7 +11,7 @@ import DashboardScreen from "../screens/DashboardScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
 
 const AddLocationStack = createStackNavigator({
-  New: AddLocationScreen
+  AddLocation: AddLocationScreen
 });
 
 AddLocationScreen.navigationOptions = {

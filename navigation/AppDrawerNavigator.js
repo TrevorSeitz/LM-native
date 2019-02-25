@@ -11,20 +11,20 @@ import DashboardScreen from "../screens/DashboardScreen";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
-// import MultiLocationScreen from "../screens/MultiLocationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import LogoutScreen from "../screens/auth/LogoutScreen";
 
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
 const AppDrawerNavigator = createDrawerNavigator({
+  // This is the list for the Drawer Navigator
   Dashboard: DashboardStackNavigator,
 
   Home: HomeScreen,
 
-  "Add Location": AddLocationScreen,
+  AddLocation: AddLocationScreen,
 
-  "List Locations": ListLocationsScreen,
+  ListLocations: ListLocationsScreen,
 
   Profile: ProfileScreen,
 

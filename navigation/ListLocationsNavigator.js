@@ -18,8 +18,8 @@ const ListLocationsStack = createStackNavigator({
 });
 
 ListLocationsScreen.navigationOptions = {
-  tabBarLabel: "List All Locations",
-  tabBarIcon: ({ focused }) => (
+  TabBarLabel: "List All Locations",
+  TabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={

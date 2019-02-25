@@ -6,25 +6,30 @@ import {
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
-import HomeStack from "../stacks/HomeStack";
-import AddLocationStack from "../stacks/AddLocationStack";
+// import HomeStack from "../stacks/HomeStack";
+// import AddLocationStack from "../stacks/AddLocationStack";
 import HomeScreen from "../screens/HomeScreen";
-import AddLocationScreen from "../screens/AddLocationScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
-// import LocationDetailsStack from "../stacks/LocationDetailsStack";
+import AddLocationScreen from "../screens/AddLocationScreen";
+// import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+// import ProfileScreen from "../screens/ProfileScreen";
+// import LogoutScreen from "../screens/auth/LogoutScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator(
   // this is where the tab navigator is built
   {
     Home: HomeScreen,
     "Add Location": AddLocationScreen,
-    "List Locations": ListLocationsScreen
+    "List Locations": ListLocationsScreen,
+    // "Location Details": LocationDetailsScreen,
+    // Profile: ProfileScreen,
+    // Logout: LogoutScreen,
+
   },
   {
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        // header: null,
         headerTitle: routeName
       };
     }

@@ -9,10 +9,12 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
 const ListLocationsStack = createStackNavigator({
   List: ListLocationsScreen,
-  Details: LocationDetailsScreen
+  Details: LocationDetailsScreen,
+  AdditionalPhotos: AdditionalPhotosScreen
 });
 
 ListLocationsScreen.navigationOptions = {

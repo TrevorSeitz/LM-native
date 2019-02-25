@@ -32,7 +32,6 @@ const AddLocationStack = createStackNavigator(
         };
       }
     },
-    // Home: { screen: HomeScreen }
   },
   {
     defaultNavigationOptions: {

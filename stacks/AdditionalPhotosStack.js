@@ -23,7 +23,7 @@ const AdditionalPhotosStack = createStackNavigator(
       screen: AdditionalPhotosScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Additional Location Photos",
+          headerTitle: "Additional Photos",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -38,7 +38,7 @@ const AdditionalPhotosStack = createStackNavigator(
     // Home: { screen: HomeScreen },
     // ListLocations: { screen: ListLocationsScreen },
     Details: { screen: LocationDetailsScreen},
-    EditLocation: { screen: EditLocationScreen }
+    // EditLocation: { screen: EditLocationScreen }
   },
   {
     defaultNavigationOptions: {

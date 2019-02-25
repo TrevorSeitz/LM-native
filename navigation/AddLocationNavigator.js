@@ -15,7 +15,7 @@ const HomeStack = createStackNavigator({
 });
 
 AddLocationScreen.navigationOptions = {
-  tabBarLabel: "Add A New Place",
+  tabBarLabel: "Add A New Location",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

@@ -19,7 +19,7 @@ import DashboardStackNavigator from "./DashboardStackNavigator";
 
 const AppDrawerNavigator = createDrawerNavigator({
   Dashboard: DashboardStackNavigator,
-  
+
   Home: HomeScreen,
 
   "Add Location": AddLocationScreen,

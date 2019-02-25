@@ -30,11 +30,12 @@ export default class AdditionalPhotosScreen extends Component {
       after: null,
       has_next_page: true
     }
+      this.getPhotos()
   }
 
-  componentDidMount() {
-    this.getPhotos()
-  }
+  // componentDidMount() {
+  //   this.getPhotos()
+  // }
 
   selectImage = (index) => {
     let newSelected = {...this.state.selected};

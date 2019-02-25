@@ -35,8 +35,8 @@ const AdditionalPhotosStack = createStackNavigator(
         };
       }
     },
-    Home: { screen: HomeScreen },
-    ListLocations: { screen: ListLocationsScreen },
+    // Home: { screen: HomeScreen },
+    // ListLocations: { screen: ListLocationsScreen },
     Details: { screen: LocationDetailsScreen},
     EditLocation: { screen: EditLocationScreen }
   },

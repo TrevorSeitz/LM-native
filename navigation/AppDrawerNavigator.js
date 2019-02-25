@@ -18,24 +18,18 @@ import LogoutScreen from "../screens/auth/LogoutScreen";
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
 const AppDrawerNavigator = createDrawerNavigator({
-  Dashboard: {
-    screen: DashboardStackNavigator
-  },
-  Home: {
-    screen: HomeScreen
-  },
-  AddLocation: {
-    screen: AddLocationScreen
-  },
-  ListLocations: {
-    screen: ListLocationsScreen
-  },
-  Profile: {
-    screen: ProfileScreen
-  },
-  Logout: {
-    screen: LogoutScreen
-  }
+  Dashboard: DashboardStackNavigator,
+  
+  Home: HomeScreen,
+
+  "Add Location": AddLocationScreen,
+
+  "List Locations": ListLocationsScreen,
+
+  Profile: ProfileScreen,
+
+  Logout: LogoutScreen,
+
 });
 
 export default AppDrawerNavigator;

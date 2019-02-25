@@ -5,6 +5,7 @@ import WelcomeScreen from "../../screens/WelcomeScreen";
 import HomeScreen from "../../screens/HomeScreen";
 import DashboardScreen from "../../screens/DashboardScreen";
 import AddLocationScreen from "../../screens/AddLocationScreen";
+import ListLocationsScreen from "../../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../../screens/LocationDetailsScreen";
 import EditLocationScreen from "../../screens/EditLocationScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
@@ -20,22 +21,22 @@ import ImageTile from "../../screens/ImageTile";
 import AppDrawerNavigator from "../AppDrawerNavigator";
 import AddLocationNavigator from "../AddLocationNavigator";
 import ListLocationsNavigator from "../ListLocationsNavigator";
-// import LocationDetailsNavigator from "../LocationDetailsNavigator";
 
 const AppSwitchNavigator = createSwitchNavigator(
   {
-    Home: { screen: AppDrawerNavigator },
-    NewLocation: { screen: AddLocationNavigator },
-    ListLocations: { screen: ListLocationsNavigator },
-    LocationDetails: { screen: LocationDetailsScreen },
-    EditLocation: { screen: EditLocationScreen },
-    Welcome: { screen: WelcomeScreen },
-    Profile: { screen: ProfileScreen },
-    // MultiLocation: { screen: MultiLocationScreen },
-    ImageBrowser: { screen: ImageBrowser },
-    AdditionalPhotos: { screen: AdditionalPhotosScreen },
-    ImageTile: { screen: ImageTile },
-    Loading: { screen: LoadingScreen }
+    Welcome: WelcomeScreen,
+    Home: AppDrawerNavigator,
+    AddLocation: AddLocationScreen,
+    // NewLocation: AddLocationNavigator,
+    // ListLocations: ListLocationsNavigator,
+    ListLocations: ListLocationsScreen,
+    LocationDetails: LocationDetailsScreen,
+    EditLocation: EditLocationScreen,
+    Profile: ProfileScreen,
+    ImageBrowser: ImageBrowser,
+    AdditionalPhotos: AdditionalPhotosScreen,
+    ImageTile: ImageTile,
+    Loading: LoadingScreen
   },
   {
     initialRouteName: "Loading"

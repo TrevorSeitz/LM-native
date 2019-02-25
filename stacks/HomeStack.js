@@ -38,7 +38,7 @@ const HomeStack = createStackNavigator(
       }
     },
     AddLocation: { screen: AddLocationScreen },
-    ListLocations: { screen: ListLocationsScreen },
+    // ListLocations: { screen: ListLocationsScreen },
     LocationDetails: { screen: LocationDetailsScreen },
     EditLocation: { screen: EditLocationScreen },
     AdditionalPhotos: { screen: AdditionalPhotosScreen },

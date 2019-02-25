@@ -7,11 +7,6 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
-<<<<<<< HEAD
-=======
-// import {  } from "react-native";
-import TabBarIcon from "../components/TabBarIcon";
->>>>>>> 366320cb03367622a8f7578cd4c9d01b8e6bd7b7
 import { View, Text, StyleSheet, Button, Platform } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Constants, MapView } from "expo";
@@ -44,7 +39,7 @@ const HomeStack = createStackNavigator(
       }
     },
     AddLocation: AddLocationScreen,
-    ListLocations: ListLocationsScreen, 
+    ListLocations: ListLocationsScreen,
     LocationDetails: LocationDetailsScreen,
     EditLocation: EditLocationScreen,
     AdditionalPhotos: AdditionalPhotosScreen,
@@ -57,7 +52,6 @@ const HomeStack = createStackNavigator(
   }
 );
 
-<<<<<<< HEAD
   HomeScreen.navigationOptions = {
     tabBarLabel: "Home!",
     tabBarIcon: ({ focused }) => (
@@ -71,21 +65,5 @@ const HomeStack = createStackNavigator(
       />
     )
   };
-=======
-HomeScreen.navigationOptions = {
-  tabBarLabel: "Home!",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-home${focused ? '' : ""}`
-          : "md-home"
-      }
-    />
-  )
-};
-// };
->>>>>>> 366320cb03367622a8f7578cd4c9d01b8e6bd7b7
 
 export default HomeStack;

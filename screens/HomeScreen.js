@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
     backgroundColor: "#ecf0f1",
-    padding: 8
+    padding: 0
   },
   paragraph: {
     margin: 24,

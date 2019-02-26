@@ -14,14 +14,16 @@ import { Constants, MapView } from "expo";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import EditLocationScreen from "../screens/EditLocationScreen";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 
-const ListLocationsStack = createStackNavigator(
+const LocationDetailsStack = createStackNavigator(
   {
-    ListLocations: {
-      screen: ListLocationsScreen,
+    LocationDetails: {
+      screen: LocationDetailsScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "List Locations",
+          headerTitle: "Location Details",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -34,8 +36,9 @@ const ListLocationsStack = createStackNavigator(
       }
     },
     // Home: { screen: HomeScreen },
-
-    Details: LocationDetailsScreen
+    ListLocations: { screen: ListLocationsScreen },
+    EditLocation: { screen: EditLocationScreen },
+    AdditionalPhotos: { screen: AdditionalPhotosScreen }
   },
   {
     defaultNavigationOptions: {
@@ -43,4 +46,4 @@ const ListLocationsStack = createStackNavigator(
     }
   }
 );
-export default ListLocationsStack;
+export default LocationDetailsStack;

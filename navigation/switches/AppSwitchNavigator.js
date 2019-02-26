@@ -17,26 +17,34 @@ import ImageBrowser from "../../screens/ImageBrowser";
 import AdditionalPhotosScreen from "../../screens/AdditionalPhotosScreen";
 import ImageTile from "../../screens/ImageTile";
 
+// import AppNavigator from "../AppNavigator";
 import AppDrawerNavigator from "../AppDrawerNavigator";
 import AddLocationNavigator from "../AddLocationNavigator";
 import ListLocationsNavigator from "../ListLocationsNavigator";
 
+import DashboardStackNavigator from "../DashboardStackNavigator";
+
 const AppSwitchNavigator = createSwitchNavigator(
   {
-    Home: { screen: AppDrawerNavigator },
-    NewLocation: { screen: AddLocationNavigator },
-    ListLocations: { screen: ListLocationsNavigator },
-    // LocationDetails: { screen: LocationDetailsNavigator},
-    // NewLocation: { screen: AddLocationScreen },
-    // ListLocations: { screen: ListLocationsScreen },
-    LocationDetails: { screen: LocationDetailsScreen},
-    EditLocation: { screen: EditLocationScreen },
-    Welcome: { screen: WelcomeScreen },
-    Profile: { screen: ProfileScreen },
-    ImageBrowser: { screen: ImageBrowser },
-    AdditionalPhotos: { screen: AdditionalPhotosScreen },
-    ImageTile: { screen: ImageTile },
-    Loading: { screen: LoadingScreen }
+    WelcomeScreen: WelcomeScreen,
+    Loading: LoadingScreen,
+    Dashboard: AppDrawerNavigator,
+    // AppDrawerNavigator: AppDrawerNavigator,
+    // DashboardStackNavigator: DashboardStackNavigator
+    // Home: { screen: AppDrawerNavigator },
+    // NewLocation: { screen: AddLocationNavigator },
+    // ListLocations: { screen: ListLocationsNavigator },
+    // // LocationDetails: { screen: LocationDetailsNavigator},
+    // // NewLocation: { screen: AddLocationScreen },
+    // // ListLocations: { screen: ListLocationsScreen },
+    // LocationDetails: { screen: LocationDetailsScreen},
+    // EditLocation: { screen: EditLocationScreen },
+    // Welcome: { screen: WelcomeScreen },
+    // Profile: { screen: ProfileScreen },
+    // ImageBrowser: { screen: ImageBrowser },
+    // AdditionalPhotos: { screen: AdditionalPhotosScreen },
+    // ImageTile: { screen: ImageTile }
+    // AppNavigator: AppNavigator
   },
   {
     initialRouteName: "Loading"

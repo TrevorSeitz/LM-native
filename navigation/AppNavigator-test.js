@@ -1,15 +1,8 @@
 import React from "react";
 import {
   createAppContainer,
-  // createSwitchNavigator,
-  // createStackNavigator
 } from "react-navigation";
 
-import HomeNavigator from "./HomeNavigator";
-import AddLocationNavigator from "./AddLocationNavigator";
-import ListLocationsNavigator from "./ListLocationsNavigator";
-
-import LocationDetailsNavigator from "./LocationDetailsNavigator";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 import AddLocationScreen from "./AddLocationScreen";
 import ListLocationsScreen from "./ListLocationsScreen";

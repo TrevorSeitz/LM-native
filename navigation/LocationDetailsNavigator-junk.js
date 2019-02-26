@@ -7,6 +7,7 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
+import AddLocationScreen from "../screens/AddLocationScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
@@ -33,9 +34,7 @@ LocationDetailsScreen.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  ListLocationsStack,
-  LocationDetailsStack,
-  EditLocationStack,
-  AdditionalPhotosStack,
+    Home: HomeScreen,
+    "Add Location": AddLocationScreen,
+    "List Locations": ListLocationsScreen
 });

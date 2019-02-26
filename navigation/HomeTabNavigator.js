@@ -59,7 +59,7 @@ LocationDetailsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  ListLocationsStack,
-  LocationDetailsStack
+    Home: HomeScreen,
+    "Add Location": AddLocationScreen,
+    "List Locations": ListLocationsScreen
 });

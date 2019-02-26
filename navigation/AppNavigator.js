@@ -5,19 +5,19 @@ import {
   // createStackNavigator
 } from "react-navigation";
 
-import HomeScreen from "../screens/HomeScreen";
-import AddLocationcreen from "../screens/AddLocationScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
-import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import HomeNavigator from "./HomeNavigator";
+import AddLocationNavigator from "./AddLocationNavigator";
+import ListLocationsNavigator from "./ListLocationsNavigator";
+
+import LocationDetailsNavigator from "./LocationDetailsNavigator";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
-import AdditionalPhotosTile from "../screens/AdditionalPhotosTile";
-import ImageBrowser from "../screens/ImageBrowser";
-import ImageTile from "../screens/ImageTile";
-import EditLocationScreen from "../screens/EditLocationScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import AddLocationScreen from "./AddLocationScreen";
+import ListLocationsScreen from "./ListLocationsScreen";
+import LocationDetailsScreen from "./LocationDetailsScreen";
+import EditLocationScreen from "./EditLocationScreen";
 
 const AppNavigator = createStackNavigator({
-  // this sets up the screens for navigation
+  // this sets up the screens for navigation - it creates the stack
   Home:  HomeScreen,
   AddLocation:  AddLocationScreen,
   ListLocations:  ListLocationsScreen,

@@ -10,8 +10,8 @@ import HomeScreen from "../screens/HomeScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
 
-const HomeStack = createStackNavigator({
-  New: AddLocationScreen
+const AddLocationStack = createStackNavigator({
+  AddLocation: AddLocationScreen
 });
 
 AddLocationScreen.navigationOptions = {
@@ -29,5 +29,5 @@ AddLocationScreen.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack
+  AddLocationStack
 });

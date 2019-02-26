@@ -16,6 +16,8 @@ import * as firebase from "firebase";
 const { width } = Dimensions.get('window')
 
 export default class AdditionalPhotosScreen extends Component {
+// possibly add navigation options with tab bar false
+
   constructor(props) {
     super(props);
     this.state = {

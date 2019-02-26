@@ -7,6 +7,7 @@ import {
   StyleSheet,
   AsyncStorage
 } from "react-native";
+import TabBarIcon from "../components/TabBarIcon";
 import { Constants, MapView } from "expo";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import * as firebase from "firebase";
@@ -16,7 +17,17 @@ import { Card } from "react-native-paper";
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: "Home"
+    tabBarLabel: "Home",
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === "ios"
+            ? `ios-home${focused ? "" : ""}`
+            : "md-home"
+        }
+      />
+    )
   };
   constructor(props) {
     super(props);
@@ -53,7 +64,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    // paddingTop: Constants.statusBarHeight, 
+    // paddingTop: Constants.statusBarHeight,
     backgroundColor: "#ecf0f1",
     padding: 0
   },

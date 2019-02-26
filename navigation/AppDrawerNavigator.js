@@ -19,6 +19,7 @@ import LogoutScreen from "../screens/auth/LogoutScreen";
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
 const AppDrawerNavigator = createDrawerNavigator({
+  // this creates the menu for the drawer
   Dashboard: DashboardStackNavigator,
   Home: HomeScreen,
   "Add New Location": AddLocationScreen,

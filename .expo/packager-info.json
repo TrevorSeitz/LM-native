@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19009,
+  "packagerPid": 71804,
+  "expoServerNgrokUrl": "https://p6-x5s.trevorseitz.lm-native.exp.direct",
+  "packagerNgrokUrl": "https://packager.p6-x5s.trevorseitz.lm-native.exp.direct",
+  "ngrokPid": 71834
 }

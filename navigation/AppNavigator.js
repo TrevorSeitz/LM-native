@@ -17,7 +17,7 @@ import LocationDetailsScreen from "./LocationDetailsScreen";
 import EditLocationScreen from "./EditLocationScreen";
 
 const AppNavigator = createStackNavigator({
-  // this sets up the screens for navigation
+  // this sets up the screens for navigation - it creates the stack
   Home:  HomeScreen,
   AddLocation:  AddLocationScreen,
   ListLocations:  ListLocationsScreen,

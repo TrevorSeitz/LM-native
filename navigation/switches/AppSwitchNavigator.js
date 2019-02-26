@@ -13,16 +13,13 @@ import LoginScreen from "../../screens/auth/LoginScreen";
 import SignupScreen from "../../screens/auth/SignupScreen";
 import ForgotPasswordScreen from "../../screens/auth/ForgotPasswordScreen";
 import LoadingScreen from "../../screens/auth/LoadingScreen";
-// import ImageBrowser from "../../screens/ImageBrowser";
-// import AdditionalPhotosScreen from "../../screens/AdditionalPhotosScreen";
-// import MultiLocationScreen from "../../screens/MultiLocationScreen";
-// import ImageTile from "../../screens/ImageTile";
+import ImageBrowser from "../../screens/ImageBrowser";
+import AdditionalPhotosScreen from "../../screens/AdditionalPhotosScreen";
+import ImageTile from "../../screens/ImageTile";
 
 import AppDrawerNavigator from "../AppDrawerNavigator";
 import AddLocationNavigator from "../AddLocationNavigator";
 import ListLocationsNavigator from "../ListLocationsNavigator";
-// import LocationDetailsNavigator from "../LocationDetailsNavigator";
-// import LocationDetailsNavigator from "../LocationDetailsNavigator";
 
 const AppSwitchNavigator = createSwitchNavigator(
   {

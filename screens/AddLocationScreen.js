@@ -31,9 +31,9 @@ import SaveMainPhoto from '../components/SaveMainPhoto'
 
 
 export default class AddLocationScreen extends Component {
-  static navigationOptions = {
-    title: "Add Location"
-  };
+  // static navigationOptions = {
+  //   title: "Add Location"
+  // };
 
   constructor(props) {
     super(props);

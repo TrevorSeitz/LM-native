@@ -24,10 +24,10 @@ const DashboardStackNavigator = createStackNavigator(
   {
     DashboardTabNavigator: DashboardTabNavigator,
     Details: LocationDetailsScreen,
-    AdditionalPhotos: AdditionalPhotosScreen,
-    AdditionalPhotosTile: AdditionalPhotosTile,
-    ImageBrowser: ImageBrowser,
-    ImageTile: ImageTile,
+    // AdditionalPhotos: AdditionalPhotosScreen,
+    // AdditionalPhotosTile: AdditionalPhotosTile,
+    // ImageBrowser: ImageBrowser,
+    // ImageTile: ImageTile,
     EditLocation: EditLocationScreen,
     Profile: ProfileScreen
   },

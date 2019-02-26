@@ -116,7 +116,7 @@ export default class LocationDetailsScreen extends Component {
               backgroundColor={"#CCCCCC"}
               title="See Additional Photos"
               onPress={() => {
-                this.props.navigation.navigate("AdditionalPhotos", {
+                this.props.navigation.push("AdditionalPhotos", {
                   Locationkey: `${JSON.stringify(this.state.key)}`
                 });
               }}

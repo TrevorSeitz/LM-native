@@ -23,13 +23,13 @@ import DashboardTabNavigator from "./DashboardTabNavigator";
 const DashboardStackNavigator = createStackNavigator(
   {
     DashboardTabNavigator: DashboardTabNavigator,
-    Details: LocationDetailsScreen,
+    // Details: LocationDetailsScreen,
     // AdditionalPhotos: AdditionalPhotosScreen,
     // AdditionalPhotosTile: AdditionalPhotosTile,
     // ImageBrowser: ImageBrowser,
     // ImageTile: ImageTile,
-    EditLocation: EditLocationScreen,
-    Profile: ProfileScreen
+    // EditLocation: EditLocationScreen,
+    // Profile: ProfileScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => {

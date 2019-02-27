@@ -19,7 +19,7 @@ const DashboardTabNavigator = createBottomTabNavigator(
       Home: {
         screen: HomeStack,
         navigationOptions: {
-          tabBarLabel: "Home!",
+          tabBarLabel: "Home",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}

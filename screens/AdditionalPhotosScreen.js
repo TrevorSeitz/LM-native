@@ -48,6 +48,7 @@ export default class AdditionalPhotosScreen extends Component {
     }
     if (Object.keys(newSelected).length > this.props.max) return;
     if (!newSelected) newSelected = {};
+    this.setState({ selected: newSelected })
     // create array of indexes to be deleted
     let toDelete = Object.keys(newSelected)
 
@@ -74,16 +75,6 @@ export default class AdditionalPhotosScreen extends Component {
     this.props.navigation.back
   }
 
-
-  // getPhotos = () => {
-  //   let params = { first: 50, mimeTypes: ['image/jpeg'] };
-  //   if (this.state.after) params.after = this.state.after
-  //   if (!this.state.has_next_page) return
-  //   CameraRoll
-  //     .getPhotos(params)
-  //     .then((r) => this.processPhotos(r))
-  // }
-
   getPhotos = () => {
     const { navigation } = this.props;
     firebase
@@ -108,19 +99,18 @@ export default class AdditionalPhotosScreen extends Component {
       });
   }
 
-  processPhotos = (r) => {
-    if (this.state.after === r.page_info.end_cursor) return;
-    // let fotos = r.map()
-    let uris = r.edges.map(i=> i.node).map(i=> i.image).map(i=>i.uri)
-    this.setState({
-      photos: [...this.state.photos, ...uris],
-      after: r.page_info.end_cursor,
-      has_next_page: r.page_info.has_next_page
-    });
-  }
+  // processPhotos = (r) => {
+  //   if (this.state.after === r.page_info.end_cursor) return;
+  //   let uris = r.edges.map(i=> i.node).map(i=> i.image).map(i=>i.uri)
+  //   this.setState({
+  //     photos: [...this.state.photos, ...uris],
+  //     after: r.page_info.end_cursor,
+  //     has_next_page: r.page_info.has_next_page
+  //   });
+  // }
 
   getItemLayout = (data, index) => {
-    let length = width/42;
+    let length = width/2;
     return { length, offset: length * index, index }
   }
 
@@ -129,7 +119,7 @@ export default class AdditionalPhotosScreen extends Component {
     let selectedPhotos = photos.filter((item, index) => {
       return(selected[index])
     });
-      // console.log("selected photos from image browser: ", selectedPhotos)
+
     let files = selectedPhotos
       .map(i => FileSystem.getInfoAsync(i, {md5: true}))
     let callbackResult = Promise
@@ -142,24 +132,25 @@ export default class AdditionalPhotosScreen extends Component {
     this.props.callback(callbackResult)
   }
 
-  renderHeader = () => {
-    let selectedCount = Object.keys(this.state.selected).length;
-    let headerText = selectedCount + ' Selected';
-    if (selectedCount === this.props.max) headerText = headerText + ' (Max)';
-    return (
-      <View style={styles.header}>
-        <Button
-          title="Exit"
-          onPress={() => this.props.callback(Promise.resolve([]))}
-        />
-        <Text>{headerText}</Text>
-        <Button
-          title="Choose"
-          onPress={() => this.prepareCallback()}
-        />
-      </View>
-    )
-  }
+  // renderHeader = () => {
+  //   let selectedCount = Object.keys(this.state.selected).length;
+  //   let headerText = selectedCount + ' Selected';
+  //   if (selectedCount === this.props.max) headerText = headerText + ' (Max)';
+  //   return (
+  //     <View style={styles.header}>
+  //       <Button
+  //         title="Exit"
+  //         onPress={() => this.props.callback(Promise.resolve([]))}
+  //       />
+  //       <Text>{headerText}</Text>
+  //       <Button
+  //         title="Choose"
+  //         onPress={() => this.prepareCallback()}
+  //       />
+  //     </View>
+  //   )
+  // }
+
   renderImageTile = ({item, index}) => {
     let selected = this.state.selected[index] ? true : false
     return(
@@ -215,17 +206,7 @@ export default class AdditionalPhotosScreen extends Component {
       <View style={styles.container}>
         {this.renderImages()}
         <View style={styles.detailButton}>
-          <Button
-            medium
-            backgroundColor={"#999999"}
-            color={"#FFFFFF"}
-            title="Back to Details"
-            onPress={() => {
-              this.props.navigation.navigate("LocationDetails", {
-                Locationkey: `${JSON.stringify(this.state.key)}`
-              });
-            }}
-          />
+
         </View>
         <View style={styles.detailButton}>
           <Button
@@ -233,7 +214,7 @@ export default class AdditionalPhotosScreen extends Component {
             backgroundColor={"#999999"}
             color={"#FFFFFF"}
             leftIcon={{ name: "delete" }}
-            title="Delete"
+            title="Delete Selected"
             onPress={() => this.deleteSelected()}
           />
         </View>

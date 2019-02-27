@@ -12,8 +12,8 @@ import { FileSystem } from 'expo';import { Button } from "react-native-elements"
 import ImageTile from './ImageTile';
 import AdditionalPhotosTile from './AdditionalPhotosTile';
 import * as firebase from "firebase";
-import ImageBrowser from './ImageBrowser';
-import SaveExtraPhoto from '../components/SaveExtraPhoto'
+import AdditionalImageBrowser from './AdditionalImageBrowser';
+// import SaveExtraPhoto from '../components/SaveExtraPhoto'
 import SaveMainPhoto from '../components/SaveMainPhoto'
 
 
@@ -174,10 +174,10 @@ export default class AdditionalPhotosScreen extends Component {
     )
   }
 
-  imageBrowserCallback = (callback) => {
+  additionalImageBrowserCallback = (callback) => {
     callback.then((photos) => {
       this.setState({
-        imageBrowserOpen: false,
+        AdditionalimageBrowserOpen: false,
         photos: photos
       })
     })
@@ -222,8 +222,8 @@ export default class AdditionalPhotosScreen extends Component {
       );
     }
 
-      if (this.state.imageBrowserOpen) {
-        return(<ImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.imageBrowserCallback}/>);
+      if (this.state.additionalImageBrowserOpen) {
+        return(<AdditionalImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.additionalImageBrowserCallback}/>);
       }
     return (
       <View style={styles.container}>
@@ -236,7 +236,7 @@ export default class AdditionalPhotosScreen extends Component {
             medium
             backgroundColor={"#999999"}
             color={"#FFFFFF"}
-            title="Add MorePhotos" disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.setState({imageBrowserOpen: true})}/>
+            title="Add MorePhotos" disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.setState({additionalImageBrowserOpen: true})}/>
         </View>
         <View style={styles.detailButton}>
           <Button

@@ -26,7 +26,7 @@ import {
   MediaLibrary
 } from "expo";
 import ImageBrowser from './ImageBrowser';
-import SaveExtraPhoto from '../components/SaveExtraPhoto'
+// import SaveExtraPhoto from '../components/SaveExtraPhoto'
 import SaveMainPhoto from '../components/SaveMainPhoto'
 
 

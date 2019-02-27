@@ -12,6 +12,10 @@ import { FileSystem } from 'expo';import { Button } from "react-native-elements"
 import ImageTile from './ImageTile';
 import AdditionalPhotosTile from './AdditionalPhotosTile';
 import * as firebase from "firebase";
+import ImageBrowser from './ImageBrowser';
+import SaveExtraPhoto from '../components/SaveExtraPhoto'
+import SaveMainPhoto from '../components/SaveMainPhoto'
+
 
 const { width } = Dimensions.get('window')
 
@@ -22,6 +26,7 @@ export default class AdditionalPhotosScreen extends Component {
     super(props);
     this.state = {
       list: [],
+      maxPhotos: 4,
       photos: [],
       selected: {},
       toDelete: [],
@@ -60,9 +65,9 @@ export default class AdditionalPhotosScreen extends Component {
     let toDelete = this.state.toDelete
     // delete selected photos
     for (let i = toDelete.length; i > 0; i--) {
-      console.log("index: ", i)
+      // console.log("index: ", i)
       let del = toDelete[i]
-        console.log("delete index number: ", del)
+        // console.log("delete index number: ", del)
       currentPhotos.splice(del, 1)
     }
     console.log("currentPhotos: ", currentPhotos)
@@ -85,7 +90,7 @@ export default class AdditionalPhotosScreen extends Component {
       .then(doc => {
       if (doc.exists) {
         const location = doc.data();
-        console.log("Location photos: ", location.photosLocations)
+        // console.log("Location photos: ", location.photosLocations)
         this.setState({
           key: doc.id,
           name: location.name,
@@ -168,6 +173,17 @@ export default class AdditionalPhotosScreen extends Component {
       />
     )
   }
+
+  imageBrowserCallback = (callback) => {
+    callback.then((photos) => {
+      this.setState({
+        imageBrowserOpen: false,
+        photos: photos
+      })
+    })
+    .catch((e) => console.log(e))
+  }
+
   renderImages() {
     return(
       // <FlatList
@@ -198,11 +214,18 @@ export default class AdditionalPhotosScreen extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.activity}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    }
+
+      if (this.state.imageBrowserOpen) {
+        return(<ImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.imageBrowserCallback}/>);
+      }
     return (
-      // <View style={styles.container}>
-      //   {this.renderHeader()}
-      //   {this.renderImages()}
-      // </View>
       <View style={styles.container}>
         {this.renderImages()}
         <View style={styles.detailButton}>
@@ -213,7 +236,13 @@ export default class AdditionalPhotosScreen extends Component {
             medium
             backgroundColor={"#999999"}
             color={"#FFFFFF"}
-            leftIcon={{ name: "delete" }}
+            title="Add MorePhotos" disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.setState({imageBrowserOpen: true})}/>
+        </View>
+        <View style={styles.detailButton}>
+          <Button
+            medium
+            backgroundColor={"#999999"}
+            color={"#FFFFFF"}
             title="Delete Selected"
             onPress={() => this.deleteSelected()}
           />

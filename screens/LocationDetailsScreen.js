@@ -62,7 +62,7 @@ export default class LocationDetailsScreen extends Component {
         }
       })
       .then(() => this._storeData())
-      // .then((doc) => console.log("doc location key: ", navigation.getParam("Locationkey")))
+      .then(() => console.log("location data: ", this.state.location))
       .then(() => this._retrieveData())
 
   }

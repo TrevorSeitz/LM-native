@@ -19,9 +19,29 @@ export default class LocationDetailsScreen extends Component {
     this.state = {
       isLoading: true,
       location: {},
-      key: ""
+      key: "",
+      storedkey: ""
     };
   }
+
+  _storeData = async user => {
+    try {
+      await AsyncStorage.setItem("Locationkey", this.state.key);
+    } catch (error) {}
+  };
+
+  _retrieveData = async () => {
+    try {
+      await AsyncStorage.getItem("Locationkey")
+      .then((value) => {
+      if (value !== null) {
+        this.setState({ storedkey: value })
+        // .then(() => console.log("storedkey", this.state.storedkey))
+      }})
+    } catch (error) {}
+
+    // console.log("Locationkey in LocationDatails: ", this.state.key)
+  };
 
   componentDidMount() {
     const { navigation } = this.props;
@@ -36,11 +56,15 @@ export default class LocationDetailsScreen extends Component {
             location: doc.data(),
             key: doc.id,
             isLoading: false
-          });
+          })
         } else {
           console.log("No such document!");
         }
-      });
+      })
+      .then(() => this._storeData())
+      // .then((doc) => console.log("doc location key: ", navigation.getParam("Locationkey")))
+      .then(() => this._retrieveData())
+
   }
 
   deleteLocation(key) {

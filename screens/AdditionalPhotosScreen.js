@@ -6,6 +6,7 @@ import {
   CameraRoll,
   FlatList,
   Dimensions,
+  AsyncStorage,
   // Button
 } from 'react-native';
 import { FileSystem } from 'expo';import { Button } from "react-native-elements";
@@ -25,6 +26,7 @@ export default class AdditionalPhotosScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // Locationkey: "",
       list: [],
       maxPhotos: 4,
       photos: [],
@@ -37,12 +39,21 @@ export default class AdditionalPhotosScreen extends Component {
       after: null,
       has_next_page: true
     }
-      this.getPhotos()
+      // this.getPhotos()
   }
 
-  // componentDidMount() {
-  //   this.getPhotos()
-  // }
+  componentDidMount() {
+    this.getPhotos()
+    this._storeData()
+  }
+
+  _storeData = async (user) => {
+    const { navigation } = this.props;
+    try {
+      await AsyncStorage.setItem("key", navigation.getParam("Locationkey"));
+    } catch (error) {}
+    // console.log("passed in key: ", navigation.getParam("Locationkey"))
+  };
 
   selectImage = (index) => {
     let newSelected = {...this.state.selected};

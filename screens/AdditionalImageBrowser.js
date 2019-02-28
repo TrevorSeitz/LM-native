@@ -33,7 +33,8 @@ export default class AdditionalImageBrowser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      uid: this._retrieveData(),
+      uid: "",
+      key: "",
       list: [],
       photos: [], // the photos on display for user to choose from
       additionalPhotos: [],
@@ -41,13 +42,17 @@ export default class AdditionalImageBrowser extends React.Component {
       photosLocations:[],
       selected: {},
       after: null,
-      has_next_page: true
+      has_next_page: true,
+      isLoading: false
     }
+    // console.log("props: ", this.props)
+
     this.ref = firebase.firestore().collection("locations");
   }
 
   componentDidMount() {
     this.getPhotos()
+    this._retrieveData()
   }
 
   _retrieveData = async () => {
@@ -57,10 +62,20 @@ export default class AdditionalImageBrowser extends React.Component {
         this.setState({ uid: value });
       }
     } catch (error) {}
+    try {
+      const key = await AsyncStorage.getItem("key");
+      if (key !== null) {
+        this.setState({ key: key });
+        console.log("this is the retrieved key", this.state.key)
+      }
+    } catch (error) {}
+
+    // console.log("uid: ", this.state.uid)
+    // console.log("key: ", this.state.key)
   };
 
   selectImage = (index) => {
-    console.log(this.state.selected)
+    // console.log(this.state.selected)
     let newSelected = {...this.state.selected};
     if (newSelected[index]) {
       delete newSelected[index];
@@ -70,22 +85,24 @@ export default class AdditionalImageBrowser extends React.Component {
     if (Object.keys(newSelected).length > this.props.max) return;
     if (!newSelected) newSelected = {};
     this.setState({ selected: newSelected })
-      console.log(this.state.selected)
   }
 
   saveImages = async (additionalPhotos) => {
-  console.log("in saveImages: ", additionalPhotos)
     this.setState({
       isLoading: true
     });
     // add the new photos uris to working array
     // use for loop to send each photo to storage in order
     for (let i = 0; i < additionalPhotos.length; i++) {
-      await this.uploadExtraImage(additionalPhotos[i])
+      const blob = await this.uriToBlob(additionalPhotos[i])
+      await this.uploadExtraImage(blob)
     }
+    // at this point, we have an array of the old photos and the new in this.state.photosLocations
+    // next, we must up the photoLocations array in the locations document with this array
   }
 
   uriToBlob = (uri)=> {
+    if (uri != undefined){
     return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
       xhr.onerror = reject;
@@ -98,31 +115,69 @@ export default class AdditionalImageBrowser extends React.Component {
       xhr.responseType = "blob"; // convert type
       xhr.send();
     });
+  }
   };
 
-  uploadExtraImage = async (photo) => {
-    let extraPhotosArray = [...this.state.photosLocations]
-    const blob = await this.uriToBlob(photo);
-    console.log("upload extra image blob 1: ", blob)
+  uploadExtraImage = async (blob) => {
+    console.log("photo inside uploadExtraImage:", blob)
     var ref = firebase
       .storage()
       .ref()
       .child("images/" + blob._data.blobId.toString().split(".", 1).toString());
     const snapshot = await ref.put(blob);
+
+    const id = (this.state.key).replace(/"/g, '')
+    console.log("this.key: ", (this.state.key).replace(/"/g, ''));
+    console.log("id: ", id);
     const imageFileLocation = snapshot.ref
       .getDownloadURL()
-      // .then((result) => {console.log("Result 2:", result)})
       .then((result) => {
           this.setState(
             ({ photosLocations }) => ({ photosLocations: [...photosLocations, result] }))
       })
-      .then(() => {
-        console.log("this.state.photosLocations 3: ", this.state.photosLocations)
-      })
       .catch(error => {
         Alert.alert(error);
-      });
+      })
+      .then(() => console.log("this.state.photosLocations: ", this.state.photosLocations ))
+      .then(() => console.log("doc: ", id))
+      .then(() => {
+        const updateRef = firebase
+          .firestore()
+          .collection("locations")
+          .doc(id)
+        updateRef
+          .update({
+            photosLocations: this.state.photosLocations
+            })
+          // .get()
+          // .then(() => console.log("this is the input document id inside uploadExtraImage: ", this.state.key))
+          .then(() => console.log("update should be done"))
+      })
   };
+
+  saveLocation() {
+    console.log("in save location")
+    console.log("additionalPhotos: ", this.state.additionalPhotos)
+    console.log("uploadExtraImage: ", this.state.uploadExtraImage)
+    console.log("photosLocationsphotosLocations: ", this.state.photosLocationsphotosLocations)
+    console.log("photosLocations: ", this.state.photosLocations)
+    firebase
+    .firestore()
+    .collection("locations")
+    .doc(this.state.key)
+    .get()
+    .then(() => console.log("this is the input document id: ", this.state.key))
+    // .then((doc) => console.log("this should be the document: "), doc.id)
+    // .update({
+    //   photosLocations: this.state.photosLocations
+    //   })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+      });
+        this.setState({
+          isLoading: false
+        });
+  }
 
   getPhotos = () => {
     let params = { first: 50, mimeTypes: ['image/jpeg'] };
@@ -149,13 +204,17 @@ export default class AdditionalImageBrowser extends React.Component {
     return { length, offset: length * index, index }
   }
 
-  prepareCallback() {
+  prepareCallback = async () => {
     let { selected, photos } = this.state;
     let selectedPhotos = photos.filter((item, index) => {
       // console.log(selected[index])
       return(selected[index])
     });
-      // console.log("selected photos from image browser: ", selectedPhotos)
+      // send selectedPictures to be saved
+      await this.saveImages(selectedPhotos)
+      // .then(() => {this.saveLocation()})
+
+
     let files = selectedPhotos
       .map(i => FileSystem.getInfoAsync(i, {md5: true}))
     let callbackResult = Promise
@@ -165,10 +224,6 @@ export default class AdditionalImageBrowser extends React.Component {
           return {file: selectedPhotos[i], ...data}
         })
       })
-      //  selected photos holds the uri of the selected photos
-      .then(() => console.log(selectedPhotos))
-      .then(() => this.saveImages(selectedPhotos))
-    // this.props.callback(callbackResult)
   }
 
   renderHeader = () => {

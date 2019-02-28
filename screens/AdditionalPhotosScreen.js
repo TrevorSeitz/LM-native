@@ -85,9 +85,6 @@ export default class AdditionalPhotosScreen extends Component {
     console.log("photosLocations: ", this.state.photosLocations)
     console.log("key: ", this.state.key)
     this.setState({ photosLocations: currentPhotos })
-    // this.props.navigation.navigate("LocationDetails", {
-    //   Locationkey: `${JSON.stringify(this.state.key)}`
-    // })
     this.props.navigation.back
   }
 
@@ -115,16 +112,6 @@ export default class AdditionalPhotosScreen extends Component {
       });
   }
 
-  // processPhotos = (r) => {
-  //   if (this.state.after === r.page_info.end_cursor) return;
-  //   let uris = r.edges.map(i=> i.node).map(i=> i.image).map(i=>i.uri)
-  //   this.setState({
-  //     photos: [...this.state.photos, ...uris],
-  //     after: r.page_info.end_cursor,
-  //     has_next_page: r.page_info.has_next_page
-  //   });
-  // }
-
   getItemLayout = (data, index) => {
     let length = width/2;
     return { length, offset: length * index, index }
@@ -148,34 +135,9 @@ export default class AdditionalPhotosScreen extends Component {
     this.props.callback(callbackResult)
   }
 
-  // renderHeader = () => {
-  //   let selectedCount = Object.keys(this.state.selected).length;
-  //   let headerText = selectedCount + ' Selected';
-  //   if (selectedCount === this.props.max) headerText = headerText + ' (Max)';
-  //   return (
-  //     <View style={styles.header}>
-  //       <Button
-  //         title="Exit"
-  //         onPress={() => this.props.callback(Promise.resolve([]))}
-  //       />
-  //       <Text>{headerText}</Text>
-  //       <Button
-  //         title="Choose"
-  //         onPress={() => this.prepareCallback()}
-  //       />
-  //     </View>
-  //   )
-  // }
-
   renderImageTile = ({item, index}) => {
     let selected = this.state.selected[index] ? true : false
     return(
-      // <ImageTile
-      //   item={item}
-      //   index={index}
-      //   selected={selected}
-      //   selectImage={this.selectImage}
-      // />
       <AdditionalPhotosTile
         item={item}
         index={index}
@@ -197,17 +159,6 @@ export default class AdditionalPhotosScreen extends Component {
 
   renderImages() {
     return(
-      // <FlatList
-      //   data={this.state.photosLocations}
-      //   numColumns={4}
-      //   renderItem={this.renderImageTile}
-      //   keyExtractor={(_,index) => index}
-      //   onEndReached={()=> {this.getPhotos()}}
-      //   onEndReachedThreshold={0.5}
-      //   ListEmptyComponent={<Text>Loading...</Text>}
-      //   initialNumToRender={24}
-      //   getItemLayout={this.getItemLayout}
-      // />
       <View>
       <Text>Location: {this.state.name}</Text>
       <FlatList

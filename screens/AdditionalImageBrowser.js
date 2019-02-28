@@ -222,14 +222,15 @@ export default class AdditionalImageBrowser extends React.Component {
     return { length, offset: length * index, index }
   }
 
-  prepareCallback = async () => {
+  // prepareCallback = async () => {
+    finishSavingPhotos = async () => {
     let { selected, photos } = this.state;
     let selectedPhotos = photos.filter((item, index) => {
       return(selected[index])
     });
       // send selectedPictures to be saved
-      await this.saveImages(selectedPhotos)
-    let files = selectedPhotos
+    await this.saveImages(selectedPhotos)
+    .then(() => {let files = selectedPhotos
       .map(i => FileSystem.getInfoAsync(i, {md5: true}))
     let callbackResult = Promise
       .all(files)
@@ -238,6 +239,8 @@ export default class AdditionalImageBrowser extends React.Component {
           return {file: selectedPhotos[i], ...data}
         })
       })
+    console.log("callback should be done")
+    this.props.callback(callbackResult)})
   }
 
   renderHeader = () => {
@@ -253,7 +256,7 @@ export default class AdditionalImageBrowser extends React.Component {
         <Text>{headerText}</Text>
         <Button
           title="Choose"
-          onPress={() => this.prepareCallback()}
+          onPress={() => this.finishSavingPhotos()}
         />
       </View>
     )

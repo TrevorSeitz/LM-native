@@ -181,7 +181,11 @@ export default class AdditionalImageBrowser extends React.Component {
           .update({
             photosLocations: this.state.photosLocations
             })
-          .then(() => console.log("update should be done"))
+          .then(() => {
+            this.setState({
+              isLoading: false
+            });
+          })
       })
       .then(() => {
         console.log("we should be going to last screen")
@@ -198,12 +202,12 @@ export default class AdditionalImageBrowser extends React.Component {
     .doc(this.state.key)
     .get()
     .then(() => console.log("this is the input document id: ", this.state.key))
-      .catch(error => {
-        console.error("Error adding document: ", error);
-      });
-        this.setState({
-          isLoading: false
-        });
+    .catch(error => {
+      console.error("Error adding document: ", error);
+    });
+    this.setState({
+      isLoading: false
+    });
   }
 
   getPhotos = () => {
@@ -287,6 +291,14 @@ export default class AdditionalImageBrowser extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.activity}>
+          <ActivityIndicator size="large" color="#0000ff" />
+          <Text>Loading...</Text>
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         {this.renderHeader()}

@@ -71,21 +71,46 @@ export default class AdditionalPhotosScreen extends Component {
     this.setState({ toDelete })
   }
 
-  deleteSelected = () => {
+  deleteSelected = async () => {
     let currentPhotos = [...this.state.photosLocations]
+    console.log("START currentPhotos", currentPhotos)
     let toDelete = this.state.toDelete
     // delete selected photos
-    for (let i = toDelete.length; i > 0; i--) {
-      // console.log("index: ", i)
+    for (let i = toDelete.length-1; i >= 0; i--) {
+      console.log("index: ", i)
       let del = toDelete[i]
-        // console.log("delete index number: ", del)
+        console.log("delete index number: ", del)
       currentPhotos.splice(del, 1)
+      console.log("AFTER currentPhotos", currentPhotos)
     }
-    console.log("currentPhotos: ", currentPhotos)
-    console.log("photosLocations: ", this.state.photosLocations)
-    console.log("key: ", this.state.key)
-    this.setState({ photosLocations: currentPhotos })
-    this.props.navigation.back
+    // console.log("currentPhotos: ", currentPhotos)
+    // console.log("photosLocations: ", this.state.photosLocations)
+    // console.log("key: ", this.state.key)
+    await this.setState({ photosLocations: currentPhotos })
+    //
+    // .then(() => {console.log("photosLocations: ", this.state.photosLocations)})
+
+    // console.log("photosLocations: ", this.state.photosLocations)
+
+    // .then(() => {this.deleteFromDB()})
+    this.deleteFromDB()
+  }
+
+  deleteFromDB = () => {
+  console.log("deleteFromDB photosLocations: ", this.state.photosLocations)
+  console.log("deleteFromDB key: ", this.state.key)
+    const id = (this.state.key).replace(/"/g, '')
+    firebase
+      .firestore()
+      .collection("locations")
+      .doc(id)
+      .update({
+        photosLocations: this.state.photosLocations
+        })
+      .then(() => console.log("update should be done"))
+      .then(() => {
+        this.props.navigation.back
+      })
   }
 
   getPhotos = () => {
@@ -150,7 +175,7 @@ export default class AdditionalPhotosScreen extends Component {
   additionalImageBrowserCallback = (callback) => {
     callback.then((photos) => {
       this.setState({
-        AdditionalimageBrowserOpen: false,
+        AdditionalImageBrowserOpen: false,
         photos: photos
       })
     })
@@ -184,7 +209,7 @@ export default class AdditionalPhotosScreen extends Component {
       );
     }
 
-      if (this.state.additionalImageBrowserOpen) {
+      if (this.state.AdditionalImageBrowserOpen) {
         return(<AdditionalImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.additionalImageBrowserCallback}/>);
       }
     return (
@@ -198,7 +223,7 @@ export default class AdditionalPhotosScreen extends Component {
             medium
             backgroundColor={"#999999"}
             color={"#FFFFFF"}
-            title="Add MorePhotos" disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.setState({additionalImageBrowserOpen: true})}/>
+            title="Add MorePhotos" disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.setState({AdditionalImageBrowserOpen: true})}/>
         </View>
         <View style={styles.detailButton}>
           <Button

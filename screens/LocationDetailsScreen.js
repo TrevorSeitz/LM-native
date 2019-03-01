@@ -62,7 +62,7 @@ export default class LocationDetailsScreen extends Component {
         }
       })
       .then(() => this._storeData())
-      .then(() => console.log("location data: ", this.state.location))
+      // .then(() => console.log("location data: ", this.state.location))
       .then(() => this._retrieveData())
 
   }

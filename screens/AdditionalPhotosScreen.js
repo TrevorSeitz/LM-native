@@ -79,9 +79,11 @@ export default class AdditionalPhotosScreen extends Component {
     await this.setState({ photosLocations: currentPhotos })
 
     this.deleteFromDB()
+
+    this.setState({selected: {}})
   }
 
-  deleteFromDB = () => { 
+  deleteFromDB = () => {
     const id = (this.state.key).replace(/"/g, '')
     firebase
       .firestore()
@@ -165,6 +167,12 @@ export default class AdditionalPhotosScreen extends Component {
     .catch((e) => console.log(e))
   }
 
+  addMorePhotos = () => {
+    this.props.navigation.push("AdditionalImageBrowser", {
+      Locationkey: `${JSON.stringify(this.state.key)}`
+    });
+  }
+
   renderImages() {
     return(
       <View>
@@ -191,10 +199,12 @@ export default class AdditionalPhotosScreen extends Component {
         </View>
       );
     }
+    if (this.state.AdditionalImageBrowserOpen) {
+      return(<AdditionalImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.additionalImageBrowserCallback}/>);
+    }
 
-      if (this.state.AdditionalImageBrowserOpen) {
-        return(<AdditionalImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.additionalImageBrowserCallback}/>);
-      }
+    const selectedPhotos = Object.keys(this.state.selected)
+
     return (
       <View style={styles.container}>
         {this.renderImages()}
@@ -206,7 +216,8 @@ export default class AdditionalPhotosScreen extends Component {
             medium
             backgroundColor={"#999999"}
             color={"#FFFFFF"}
-            title="Add MorePhotos" disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.setState({AdditionalImageBrowserOpen: true})}/>
+            title="Add MorePhotos"
+            disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.addMorePhotos()}/>
         </View>
         <View style={styles.detailButton}>
           <Button
@@ -214,7 +225,7 @@ export default class AdditionalPhotosScreen extends Component {
             backgroundColor={"#999999"}
             color={"#FFFFFF"}
             title="Delete Selected"
-            onPress={() => this.deleteSelected()}
+            disabled={(selectedPhotos.length == 0)} onPress={() => this.deleteSelected()}
           />
         </View>
       </View>

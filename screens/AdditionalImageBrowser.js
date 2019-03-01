@@ -41,27 +41,24 @@ export default class AdditionalImageBrowser extends React.Component {
       additionalPhotos: [],
       uploadExtraImage: [],
       photosLocations:[],
+      max: 4,
       selected: {},
       after: null,
       has_next_page: true,
       isLoading: false
     }
-
+    console.log("additioanal Image Browser Props: ", this.props)
     this.ref = firebase.firestore().collection("locations");
   }
 
   componentDidMount() {
     this._retrieveData()
     this.getPhotos()
-    // this.getExtraPhotoList()
   }
-
-  //  place get extra pholo locations here
 
   getExtraPhotoList = () => {
     const { navigation } = this.props;
     const id = (this.state.key).replace(/"/g, '')
-    // const id = (this.state)
     console.log("getExtraPhotoList id: ", id)
     firebase
       .firestore()
@@ -81,8 +78,12 @@ export default class AdditionalImageBrowser extends React.Component {
       })
       .then(() => {
         this.setState({photosLocations: this.state.location.photosLocations })
+      }).then(() => {
+        const currentMax = 4 - this.state.location.photosLocations.length
+        this.setState({max: currentMax})
+        console.log(this.state.max)
       })
-      .then(() => console.log("photosLocations: ", this.state.photosLocations))
+      .then(() => console.log("getExtraPhotoList photosLocations: ", this.state.photosLocations))
 
 
   }
@@ -112,6 +113,7 @@ export default class AdditionalImageBrowser extends React.Component {
     } else {
       newSelected[index] = true
     }
+    // if (Object.keys(newSelected).length > this.state.max) return;
     if (Object.keys(newSelected).length > this.props.max) return;
     if (!newSelected) newSelected = {};
     this.setState({ selected: newSelected })
@@ -181,6 +183,12 @@ export default class AdditionalImageBrowser extends React.Component {
             })
           .then(() => console.log("update should be done"))
       })
+      .then(() => {
+        console.log("we should be going to last screen")
+        this.props.navigation.push("AdditionalPhotos", {
+          Locationkey: `${JSON.stringify(this.state.key)}`
+        })
+      })
   };
 
   saveLocation() {
@@ -222,36 +230,25 @@ export default class AdditionalImageBrowser extends React.Component {
     return { length, offset: length * index, index }
   }
 
-  // prepareCallback = async () => {
-    finishSavingPhotos = async () => {
+  finishSavingPhotos = () => {
+    console.log("inside finishSavingPhotos")
     let { selected, photos } = this.state;
     let selectedPhotos = photos.filter((item, index) => {
       return(selected[index])
     });
       // send selectedPictures to be saved
-    await this.saveImages(selectedPhotos)
-    .then(() => {let files = selectedPhotos
-      .map(i => FileSystem.getInfoAsync(i, {md5: true}))
-    let callbackResult = Promise
-      .all(files)
-      .then(imageData=> {
-        return imageData.map((data, i) => {
-          return {file: selectedPhotos[i], ...data}
-        })
-      })
-    console.log("callback should be done")
-    this.props.callback(callbackResult)})
+    this.saveImages(selectedPhotos)
   }
 
   renderHeader = () => {
     let selectedCount = Object.keys(this.state.selected).length;
     let headerText = selectedCount + ' Selected';
-    if (selectedCount === this.props.max) headerText = headerText + ' (Max)';
+    if (selectedCount === this.state.max) headerText = headerText + ' (Max)';
     return (
       <View style={styles.header}>
         <Button
           title="Exit"
-          onPress={() => this.props.callback(Promise.resolve([]))}
+          onPress={() => this.props.navigation.back}
         />
         <Text>{headerText}</Text>
         <Button

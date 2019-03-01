@@ -19,6 +19,7 @@ import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 const HomeStack = createStackNavigator(
   {
@@ -43,7 +44,8 @@ const HomeStack = createStackNavigator(
     LocationDetails: LocationDetailsScreen,
     EditLocation: EditLocationScreen,
     AdditionalPhotos: AdditionalPhotosScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    AdditionalImageBrowser: AdditionalImageBrowser
   },
   {
     defaultNavigationOptions: {

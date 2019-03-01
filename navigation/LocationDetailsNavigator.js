@@ -12,12 +12,14 @@ import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 const LocationDetailsStack = createStackNavigator({
   List: ListLocationsScreen,
   Details: LocationDetailsScreen,
   Edit: EditLocationScreen,
-  AdditionalPhotos: AdditionalPhotosScreen
+  AdditionalPhotos: AdditionalPhotosScreen,
+  AdditionalImageBrowser: AdditionalImageBrowser
 });
 
 // LocationDetailsScreen.navigationOptions = {

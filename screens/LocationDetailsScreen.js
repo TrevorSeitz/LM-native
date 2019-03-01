@@ -137,8 +137,9 @@ export default class LocationDetailsScreen extends Component {
           <View style={styles.detailButton}>
             <Button
               medium
-              backgroundColor={"#CCCCCC"}
-              title="See Additional Photos"
+              backgroundColor={"#999999"}
+              color={"#FFFFFF"}
+              title="See Additional Photos" disabled={(this.state.location.photosLocations.length == 0)}
               onPress={() => {
                 this.props.navigation.push("AdditionalPhotos", {
                   Locationkey: `${JSON.stringify(this.state.key)}`
@@ -149,7 +150,8 @@ export default class LocationDetailsScreen extends Component {
           <View style={styles.detailButton}>
             <Button
               medium
-              backgroundColor={"#CCCCCC"}
+              backgroundColor={"#999999"}
+              color={"#FFFFFF"}
               leftIcon={{ name: "edit" }}
               title="Edit"
               onPress={() => {

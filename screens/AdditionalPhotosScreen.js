@@ -26,7 +26,6 @@ export default class AdditionalPhotosScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Locationkey: "",
       list: [],
       maxPhotos: 4,
       photos: [],
@@ -39,7 +38,6 @@ export default class AdditionalPhotosScreen extends Component {
       after: null,
       has_next_page: true
     }
-      // this.getPhotos()
   }
 
   componentDidMount() {
@@ -52,7 +50,6 @@ export default class AdditionalPhotosScreen extends Component {
     try {
       await AsyncStorage.setItem("key", navigation.getParam("Locationkey"));
     } catch (error) {}
-    // console.log("passed in key: ", navigation.getParam("Locationkey"))
   };
 
   selectImage = (index) => {
@@ -73,32 +70,18 @@ export default class AdditionalPhotosScreen extends Component {
 
   deleteSelected = async () => {
     let currentPhotos = [...this.state.photosLocations]
-    console.log("START currentPhotos", currentPhotos)
     let toDelete = this.state.toDelete
     // delete selected photos
     for (let i = toDelete.length-1; i >= 0; i--) {
-      console.log("index: ", i)
       let del = toDelete[i]
-        console.log("delete index number: ", del)
       currentPhotos.splice(del, 1)
-      console.log("AFTER currentPhotos", currentPhotos)
     }
-    // console.log("currentPhotos: ", currentPhotos)
-    // console.log("photosLocations: ", this.state.photosLocations)
-    // console.log("key: ", this.state.key)
     await this.setState({ photosLocations: currentPhotos })
-    //
-    // .then(() => {console.log("photosLocations: ", this.state.photosLocations)})
 
-    // console.log("photosLocations: ", this.state.photosLocations)
-
-    // .then(() => {this.deleteFromDB()})
     this.deleteFromDB()
   }
 
-  deleteFromDB = () => {
-  console.log("deleteFromDB photosLocations: ", this.state.photosLocations)
-  console.log("deleteFromDB key: ", this.state.key)
+  deleteFromDB = () => { 
     const id = (this.state.key).replace(/"/g, '')
     firebase
       .firestore()

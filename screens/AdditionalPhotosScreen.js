@@ -176,7 +176,7 @@ export default class AdditionalPhotosScreen extends Component {
   renderImages() {
     return(
       <View>
-      <Text>Location: {this.state.name}</Text>
+      <Text style={styles.name}>{this.state.name}</Text>
       <FlatList
         data={this.state.photosLocations}
         numColumns={2}
@@ -249,4 +249,9 @@ const styles = StyleSheet.create({
   detailButton: {
     marginTop: 10
   },
+  name: {
+    fontSize: 36,
+    // fontWeight: 'bold',
+    textAlign: 'center',
+  }
 })

@@ -15,18 +15,17 @@ import ListLocationsStack from "../stacks/ListLocationsStack";
 const DashboardTabNavigator = createBottomTabNavigator(
   // this is where the tab navigator is built
   {
-      // Home: HomeScreen,
-      Home: {
+      Map: {
         screen: HomeStack,
         navigationOptions: {
-          tabBarLabel: "Home",
+          tabBarLabel: "Map",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
               name={
                 Platform.OS === "ios"
-                  ? `ios-home${focused ? "" : ""}`
-                  : "md-home"
+                  ? `ios-navigate${focused ? "" : ""}`
+                  : "md-navigate"
               }
             />
           )

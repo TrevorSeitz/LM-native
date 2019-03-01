@@ -110,7 +110,7 @@ export default class LocationDetailsScreen extends Component {
         <Card style={styles.container}>
           <View style={styles.subContainer}>
             <View>
-              <Text h3>{this.state.location.name}</Text>
+              <Text style={styles.name}>{this.state.location.name}</Text>
             </View>
             <View>
               <Text h4>{this.state.location.venue}</Text>
@@ -219,5 +219,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: "center",
     justifyContent: "center"
+  },
+  name: {
+    fontSize: 36,
+    // fontWeight: 'bold',
+    textAlign: 'center',
   }
 });

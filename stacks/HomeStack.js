@@ -23,11 +23,11 @@ import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 const HomeStack = createStackNavigator(
   {
-    Home: {
+    Map: {
       screen: HomeScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Home",
+          headerTitle: "Map",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}

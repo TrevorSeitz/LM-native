@@ -16,25 +16,11 @@ import Map from "./Map";
 import { Card } from "react-native-paper";
 
 class HomeScreen extends React.Component {
-  // static navigationOptions = {
-  //   tabBarLabel: "Home",
-  //   tabBarIcon: ({ focused }) => (
-  //     <TabBarIcon
-  //       focused={focused}
-  //       name={
-  //         Platform.OS === "ios"
-  //           ? `ios-home${focused ? "" : ""}`
-  //           : "md-home"
-  //       }
-  //     />
-  //   )
-  // };
   constructor(props) {
     super(props);
     this.state = {
       user: this._retrieveData()
     };
-
   }
 
   _retrieveData = async () => {

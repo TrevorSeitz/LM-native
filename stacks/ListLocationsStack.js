@@ -37,8 +37,6 @@ const ListLocationsStack = createStackNavigator(
         };
       }
     },
-    // Home: { screen: HomeScreen },
-
     Details: LocationDetailsScreen,
     AdditionalPhotos: AdditionalPhotosScreen,
     AdditionalPhotosTile: AdditionalPhotosTile,

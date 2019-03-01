@@ -45,7 +45,7 @@ export default class SignupScreen extends React.Component {
             email: email
           });
       })
-      .then(result => this.props.navigation.navigate("Home"))
+      .then(result => this.props.navigation.navigate("Map"))
       .catch(
         () => {},
         error => {

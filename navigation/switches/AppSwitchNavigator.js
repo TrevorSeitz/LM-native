@@ -29,22 +29,6 @@ const AppSwitchNavigator = createSwitchNavigator(
     WelcomeScreen: WelcomeScreen,
     Loading: LoadingScreen,
     Dashboard: AppDrawerNavigator,
-    // AppDrawerNavigator: AppDrawerNavigator,
-    // DashboardStackNavigator: DashboardStackNavigator
-    // Home: { screen: AppDrawerNavigator },
-    // NewLocation: { screen: AddLocationNavigator },
-    // ListLocations: { screen: ListLocationsNavigator },
-    // // LocationDetails: { screen: LocationDetailsNavigator},
-    // // NewLocation: { screen: AddLocationScreen },
-    // // ListLocations: { screen: ListLocationsScreen },
-    // LocationDetails: { screen: LocationDetailsScreen},
-    // EditLocation: { screen: EditLocationScreen },
-    // Welcome: { screen: WelcomeScreen },
-    // Profile: { screen: ProfileScreen },
-    // ImageBrowser: { screen: ImageBrowser },
-    // AdditionalPhotos: { screen: AdditionalPhotosScreen },
-    // ImageTile: { screen: ImageTile }
-    // AppNavigator: AppNavigator
   },
   {
     initialRouteName: "Loading"

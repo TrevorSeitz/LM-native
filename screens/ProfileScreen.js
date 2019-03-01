@@ -200,7 +200,7 @@ export default class ProfileScreen extends Component {
           avatarFileLocation: "",
           isLoading: false
         });
-        this.props.navigation.navigate("Home");
+        this.props.navigation.navigate("Map");
       })
       .catch(error => {
         // console.error("Error adding document: ", error);

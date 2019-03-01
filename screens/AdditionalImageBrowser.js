@@ -252,7 +252,9 @@ export default class AdditionalImageBrowser extends React.Component {
       <View style={styles.header}>
         <Button
           title="Exit"
-          onPress={() => this.props.navigation.back}
+          onPress={() => this.props.navigation.navigate("Details", {
+            Locationkey: `${JSON.stringify(this.state.key)}`
+          })}
         />
         <Text>{headerText}</Text>
         <Button

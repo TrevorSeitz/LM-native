@@ -12,22 +12,22 @@ import Icon from "@expo/vector-icons/Ionicons";
 import { Constants, MapView } from "expo";
 import TabBarIcon from "../components/TabBarIcon";
 
-import HomeScreen from "../screens/HomeScreen";
-import AddLocationScreen from "../screens/AddLocationScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
-import LocationDetailsScreen from "../screens/LocationDetailsScreen";
-import EditLocationScreen from "../screens/EditLocationScreen";
-import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
+// import AddLocationScreen from "../screens/AddLocationScreen";
+// import ListLocationsScreen from "../screens/ListLocationsScreen";
+// import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+// import EditLocationScreen from "../screens/EditLocationScreen";
+// import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+// import ProfileScreen from "../screens/ProfileScreen";
+// import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 const HomeStack = createStackNavigator(
   {
-    Map: {
-      screen: HomeScreen,
+    Profile: {
+      screen: ProfileScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Map",
+          headerTitle: "Profile",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -53,7 +53,7 @@ const HomeStack = createStackNavigator(
     }
   }
 );
-
+  //
   // HomeScreen.navigationOptions = {
   //   tabBarLabel: "Home!",
   //   tabBarIcon: ({ focused }) => (

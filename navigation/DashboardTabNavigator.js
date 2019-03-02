@@ -5,12 +5,14 @@ import {
 import TabBarIcon from "../components/TabBarIcon";
 
 import HomeStack from "../stacks/HomeStack";
-
-import HomeScreen from "../screens/HomeScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
-import AddLocationScreen from "../screens/AddLocationScreen";
 import AddLocationStack from "../stacks/AddLocationStack";
 import ListLocationsStack from "../stacks/ListLocationsStack";
+import ProfileStack from "../stacks/ProfileStack";
+
+// import HomeScreen from "../screens/HomeScreen";
+// import ListLocationsScreen from "../screens/ListLocationsScreen";
+// import AddLocationScreen from "../screens/AddLocationScreen";
+// import ProfileScreen from "../screens/ProfileScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator(
   // this is where the tab navigator is built
@@ -34,7 +36,7 @@ const DashboardTabNavigator = createBottomTabNavigator(
       "Add Location": {
         screen: AddLocationStack,
         navigationOptions: {
-          tabBarLabel: "Add A New Location",
+          tabBarLabel: "Add Location",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
@@ -50,7 +52,7 @@ const DashboardTabNavigator = createBottomTabNavigator(
       "List Locations":  {
         screen: ListLocationsStack,
         navigationOptions: {
-          tabBarLabel: "List All Location",
+          tabBarLabel: "List Locations",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
@@ -58,6 +60,22 @@ const DashboardTabNavigator = createBottomTabNavigator(
                 Platform.OS === "ios"
                   ? `ios-list${focused ? "" : ""}`
                   : "md-list"
+              }
+            />
+          )
+        }
+      },
+      "Profile":  {
+        screen: ProfileStack,
+        navigationOptions: {
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon
+              focused={focused}
+              name={
+                Platform.OS === "ios"
+                  ? `ios-person${focused ? "" : ""}`
+                  : "md-person"
               }
             />
           )

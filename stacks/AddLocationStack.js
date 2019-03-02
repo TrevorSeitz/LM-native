@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
   createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createDrawerNavigator,
-  createBottomTabNavigator
+  // createAppContainer,
+  // createSwitchNavigator,
+  // createDrawerNavigator,
+  // createBottomTabNavigator
 } from "react-navigation";
 
 import { View, Text, StyleSheet, Button } from "react-native";

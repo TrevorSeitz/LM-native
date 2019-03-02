@@ -14,10 +14,14 @@ import { Constants, MapView } from "expo";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
 import AdditionalPhotosTile from "../screens/AdditionalPhotosTile";
 import ImageBrowser from "../screens/ImageBrowser";
 import ImageTile from "../screens/ImageTile";
+
+
+import LocationDetailsStack from "../stacks/LocationDetailsStack";
 
 const ListLocationsStack = createStackNavigator(
   {
@@ -38,7 +42,9 @@ const ListLocationsStack = createStackNavigator(
       }
     },
     Details: LocationDetailsScreen,
+    // Details: LocationDetailsScreen,
     AdditionalPhotos: AdditionalPhotosScreen,
+    AdditionalImageBrowser: AdditionalImageBrowser,
     AdditionalPhotosTile: AdditionalPhotosTile,
     ImageBrowser: ImageBrowser,
     ImageTile: ImageTile

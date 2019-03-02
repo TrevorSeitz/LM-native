@@ -16,14 +16,14 @@ import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import LogoutScreen from "../screens/auth/LogoutScreen";
 
+
+import AddLocationStack from "../stacks/AddLocationStack"
+
 import DashboardStackNavigator from "./DashboardStackNavigator";
 
 const AppDrawerNavigator = createDrawerNavigator({
   // this creates the menu for the drawer
   Dashboard: DashboardStackNavigator,
-  Home: HomeScreen,
-  "Add New Location": AddLocationScreen,
-  "List All Locations": ListLocationsScreen,
   Profile: ProfileScreen,
   Logout: LogoutScreen,
 });

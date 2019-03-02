@@ -25,11 +25,11 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 export default class ListLocationsScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: "Location List"
-    };
-  };
+  // static navigationOptions = ({ navigation }) => {
+  //   return {
+  //     title: "Location List"
+  //   };
+  // };
 
   constructor() {
     super();
@@ -120,7 +120,7 @@ export default class ListLocationsScreen extends Component {
               title={item.name}
               subtitle={item.Description}
               onPress={() => {
-              this.props.navigation.navigate("Details", {
+              this.props.navigation.push("Details", {
                 Locationkey: `${JSON.stringify(item.id)}`
                 });
               }}

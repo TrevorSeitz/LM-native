@@ -34,7 +34,7 @@ export default class LoginScreen extends React.Component {
       // .then(user => console.log("user:", user))
       .then(user => this._storeData(user))
       .then(() => {
-        if (this._ismounted) this.props.navigation.navigate("Home");
+        if (this._ismounted) this.props.navigation.navigate("Map");
       })
       .catch(error => this.setState({ errorMessage: error.message }));
   };

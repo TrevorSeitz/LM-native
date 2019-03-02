@@ -6,46 +6,36 @@ import {
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
-// import HomeStack from "../stacks/HomeStack";
-// import AddLocationStack from "../stacks/AddLocationStack";
-// import ListLocationsStack from "../screens/ListLocationsStack";
 import HomeScreen from "../screens/HomeScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
 import AddLocationScreen from "../screens/AddLocationScreen";
-// import LocationDetailsScreen from "../screens/LocationDetailsScreen";
-// import ProfileScreen from "../screens/ProfileScreen";
-// import LogoutScreen from "../screens/auth/LogoutScreen";
+import ListLocationsScreen from "../screens/ListLocationsScreen";
 
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+import AdditionalPhotosTile from "../screens/AdditionalPhotosTile";
+import ImageBrowser from "../screens/ImageBrowser";
+import ImageTile from "../screens/ImageTile";
+import EditLocationScreen from "../screens/EditLocationScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
-const DashboardTabNavigator = createBottomTabNavigator(
-  // this is where the tab navigator is built
-  {
-    // Home: HomeStack,
-    // "Add Location": AddLocationStack,
-    // "List Locations": ListLocationsStack
-      Home: HomeScreen,
-      "Add Location": AddLocationScreen,
-      "List Locations": ListLocationsScreen
-  },
-  {
-    navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      return {
-        // header: null,
-        headerTitle: routeName
-      };
-    }
-  }
-);
+import DashboardTabNavigator from "./DashboardTabNavigator";
 
 const DashboardStackNavigator = createStackNavigator(
   {
-    DashboardTabNavigator: DashboardTabNavigator
+    DashboardTabNavigator: DashboardTabNavigator,
+    // Details: LocationDetailsScreen,
+    // AdditionalPhotos: AdditionalPhotosScreen,
+    // AdditionalPhotosTile: AdditionalPhotosTile,
+    // ImageBrowser: ImageBrowser,
+    // ImageTile: ImageTile,
+    // EditLocation: EditLocationScreen,
+    // Profile: ProfileScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
+      // const { routeName } = navigation.state.routes[navigation.state.index];
       return {
+      //   headerTitle: routeName,
         headerLeft: (
           <Icon
             style={{ paddingLeft: 10 }}

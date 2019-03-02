@@ -12,29 +12,28 @@ import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 const LocationDetailsStack = createStackNavigator({
+  List: ListLocationsScreen,
   Details: LocationDetailsScreen,
   Edit: EditLocationScreen,
-  AdditionalPhotos: AdditionalPhotosScreen
+  AdditionalPhotos: AdditionalPhotosScreen,
+  AdditionalImageBrowser: AdditionalImageBrowser
 });
 
-LocationDetailsScreen.navigationOptions = {
-  tabBarLabel: "Location Details",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
-    />
-  )
-};
+// LocationDetailsScreen.navigationOptions = {
+//   tabBarLabel: "Location Details",
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={
+//         Platform.OS === "ios"
+//           ? `ios-information-circle${focused ? "" : "-outline"}`
+//           : "md-information-circle"
+//       }
+//     />
+//   )
+// };
 
-export default createBottomTabNavigator({
-    Home: HomeScreen,
-    "Add Location": AddLocationScreen,
-    "List Locations": ListLocationsScreen
-});
+export default LocationDetailsStack

@@ -26,14 +26,14 @@ import {
   MediaLibrary
 } from "expo";
 import ImageBrowser from './ImageBrowser';
-import SaveExtraPhoto from '../components/SaveExtraPhoto'
+// import SaveExtraPhoto from '../components/SaveExtraPhoto'
 import SaveMainPhoto from '../components/SaveMainPhoto'
 
 
 export default class AddLocationScreen extends Component {
-  static navigationOptions = {
-    title: "Add Location"
-  };
+  // static navigationOptions = {
+  //   title: "Add Location"
+  // };
 
   constructor(props) {
     super(props);
@@ -147,8 +147,8 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
-    console.log("in save location")
-    console.log(this.state.photosLocations)
+    // console.log("in save location")
+    // console.log(this.state.photosLocations)
     this.ref
       .add({
         uid: this.state.uid,

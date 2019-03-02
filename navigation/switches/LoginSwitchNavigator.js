@@ -12,7 +12,7 @@ const LoginSwitchNavigator = createSwitchNavigator(
   {
     Welcome: { screen: WelcomeScreen },
 
-    Home: { screen: HomeScreen },
+    Map: { screen: HomeScreen },
 
     Login: { screen: LoginScreen },
     Signup: { screen: SignupScreen },

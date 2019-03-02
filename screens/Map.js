@@ -171,7 +171,7 @@ export default class Map extends React.Component {
     // this.setState({checkLocation: location.id})
     // console.log(location.id)
     // this._storeLocation()
-    this.props.navigation.navigate("Details", {
+    this.props.navigation.push("Details", {
       Locationkey: `${JSON.stringify(location.id)}`
     })
   }

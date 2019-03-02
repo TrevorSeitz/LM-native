@@ -19,9 +19,29 @@ export default class LocationDetailsScreen extends Component {
     this.state = {
       isLoading: true,
       location: {},
-      key: ""
+      key: "",
+      storedkey: ""
     };
   }
+
+  _storeData = async user => {
+    try {
+      await AsyncStorage.setItem("Locationkey", this.state.key);
+    } catch (error) {}
+  };
+
+  _retrieveData = async () => {
+    try {
+      await AsyncStorage.getItem("Locationkey")
+      .then((value) => {
+      if (value !== null) {
+        this.setState({ storedkey: value })
+        // .then(() => console.log("storedkey", this.state.storedkey))
+      }})
+    } catch (error) {}
+
+    // console.log("Locationkey in LocationDatails: ", this.state.key)
+  };
 
   componentDidMount() {
     const { navigation } = this.props;
@@ -36,11 +56,15 @@ export default class LocationDetailsScreen extends Component {
             location: doc.data(),
             key: doc.id,
             isLoading: false
-          });
+          })
         } else {
           console.log("No such document!");
         }
-      });
+      })
+      .then(() => this._storeData())
+      // .then(() => console.log("location data: ", this.state.location))
+      .then(() => this._retrieveData())
+
   }
 
   deleteLocation(key) {
@@ -86,7 +110,7 @@ export default class LocationDetailsScreen extends Component {
         <Card style={styles.container}>
           <View style={styles.subContainer}>
             <View>
-              <Text h3>{this.state.location.name}</Text>
+              <Text style={styles.name}>{this.state.location.name}</Text>
             </View>
             <View>
               <Text h4>{this.state.location.venue}</Text>
@@ -113,10 +137,11 @@ export default class LocationDetailsScreen extends Component {
           <View style={styles.detailButton}>
             <Button
               medium
-              backgroundColor={"#CCCCCC"}
-              title="See Additional Photos"
+              backgroundColor={"#999999"}
+              color={"#FFFFFF"}
+              title="See Additional Photos" disabled={(this.state.location.photosLocations.length == 0)}
               onPress={() => {
-                this.props.navigation.navigate("AdditionalPhotos", {
+                this.props.navigation.push("AdditionalPhotos", {
                   Locationkey: `${JSON.stringify(this.state.key)}`
                 });
               }}
@@ -125,7 +150,8 @@ export default class LocationDetailsScreen extends Component {
           <View style={styles.detailButton}>
             <Button
               medium
-              backgroundColor={"#CCCCCC"}
+              backgroundColor={"#999999"}
+              color={"#FFFFFF"}
               leftIcon={{ name: "edit" }}
               title="Edit"
               onPress={() => {
@@ -193,5 +219,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: "center",
     justifyContent: "center"
+  },
+  name: {
+    fontSize: 36,
+    // fontWeight: 'bold',
+    textAlign: 'center',
   }
 });

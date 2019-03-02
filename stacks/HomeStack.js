@@ -39,13 +39,13 @@ const HomeStack = createStackNavigator(
         };
       }
     },
-    AddLocation: AddLocationScreen,
-    ListLocations: ListLocationsScreen,
-    LocationDetails: LocationDetailsScreen,
-    EditLocation: EditLocationScreen,
-    AdditionalPhotos: AdditionalPhotosScreen,
-    Profile: ProfileScreen,
-    AdditionalImageBrowser: AdditionalImageBrowser
+    // AddLocation: AddLocationScreen,
+    // ListLocations: ListLocationsScreen,
+    // LocationDetails: LocationDetailsScreen,
+    // EditLocation: EditLocationScreen,
+    // AdditionalPhotos: AdditionalPhotosScreen,
+    // Profile: ProfileScreen,
+    // AdditionalImageBrowser: AdditionalImageBrowser
   },
   {
     defaultNavigationOptions: {

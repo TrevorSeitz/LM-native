@@ -7,11 +7,12 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeStack from "../stacks/HomeStack";
 import AddLocationStack from "../stacks/AddLocationStack";
 import ListLocationsStack from "../stacks/ListLocationsStack";
+import ProfileStack from "../stacks/ProfileStack";
 
-import HomeScreen from "../screens/HomeScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
-import AddLocationScreen from "../screens/AddLocationScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+// import HomeScreen from "../screens/HomeScreen";
+// import ListLocationsScreen from "../screens/ListLocationsScreen";
+// import AddLocationScreen from "../screens/AddLocationScreen";
+// import ProfileScreen from "../screens/ProfileScreen";
 
 const DashboardTabNavigator = createBottomTabNavigator(
   // this is where the tab navigator is built
@@ -65,7 +66,7 @@ const DashboardTabNavigator = createBottomTabNavigator(
         }
       },
       "Profile":  {
-        screen: ProfileScreen,
+        screen: ProfileStack,
         navigationOptions: {
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (

@@ -20,7 +20,7 @@ import SaveMainPhoto from '../components/SaveMainPhoto'
 
 const { width } = Dimensions.get('window')
 
-export default class AdditionalPhotosScreen extends Component {
+export default class EditAdditionalPhotosScreen extends Component {
 // possibly add navigation options with tab bar false
 
   constructor(props) {
@@ -210,6 +210,23 @@ export default class AdditionalPhotosScreen extends Component {
         {this.renderImages()}
         <View style={styles.detailButton}>
 
+        </View>
+        <View style={styles.detailButton}>
+          <Button
+            medium
+            backgroundColor={"#999999"}
+            color={"#FFFFFF"}
+            title="Add MorePhotos"
+            disabled={(this.state.photosLocations.length >= this.state.maxPhotos)} onPress={() => this.addMorePhotos()}/>
+        </View>
+        <View style={styles.detailButton}>
+          <Button
+            medium
+            backgroundColor={"#999999"}
+            color={"#FFFFFF"}
+            title="Delete Selected"
+            disabled={(selectedPhotos.length == 0)} onPress={() => this.deleteSelected()}
+          />
         </View>
       </View>
     );

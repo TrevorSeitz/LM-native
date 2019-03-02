@@ -15,17 +15,16 @@ import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
-import EditLocationStack from "../stacks/EditLocationStack";
-import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
 import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
-const LocationDetailsStack = createStackNavigator(
+const EditLocationStack = createStackNavigator(
   {
-    LocationDetails: {
-      screen: LocationDetailsScreen,
+    Edit: {
+      screen: EditLocationScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Location Details",
+          headerTitle: "Edit Location",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -38,8 +37,8 @@ const LocationDetailsStack = createStackNavigator(
       }
     },
     // ListLocations: ListLocationsScreen,
-    Edit: EditLocationScreen,
-    // AdditionalPhotos: AdditionalPhotosScreen,
+    // Edit: EditLocationStack,
+    EditAdditionalPhotos: EditAdditionalPhotosStack,
     // AdditionalImageBrowser: AdditionalImageBrowser,
   },
   {
@@ -49,4 +48,5 @@ const LocationDetailsStack = createStackNavigator(
     }
   }
 );
-export default LocationDetailsStack;
+export default EditLocationStack
+;

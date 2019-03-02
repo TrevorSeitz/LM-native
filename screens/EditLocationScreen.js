@@ -4,12 +4,13 @@ import {
   ScrollView,
   ActivityIndicator,
   View,
-  TextInput
+  TextInput,
+  Image
 } from "react-native";
-import { Button } from "react-native-elements";
+import {  List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
 
-class EditLocationScreen extends Component {
+export default class EditLocationScreen extends Component {
   static navigationOptions = {
     title: "Edit Location"
   };
@@ -17,6 +18,7 @@ class EditLocationScreen extends Component {
   constructor() {
     super();
     this.state = {
+      location: {},
       key: "",
       uid: "",
       id: "",
@@ -43,22 +45,23 @@ class EditLocationScreen extends Component {
       .doc(JSON.parse(navigation.getParam("Locationkey")))
       .get().then(doc => {
       if (doc.exists) {
-        const location = doc.data();
+        // const location = doc.data();
         this.setState({
+          location: doc.data(),
           key: doc.id,
-          uid: location.uid,
-          name: location.name,
-          venue: location.venue,
-          latitude: location.latitude,
-          longitude: location.longitude,
-          contactName: location.contactName,
-          contactPhone: location.contactPhone,
-          email: location.email,
-          description: location.description,
-          photosLocations: location.photosLocations,
-          image: location.image,
-          imageFileName: location.imageFileName,
-          imageFileLocation: location.imageFileLocation,
+          // uid: location.uid,
+          // name: location.name,
+          // venue: location.venue,
+          // latitude: location.latitude,
+          // longitude: location.longitude,
+          // contactName: location.contactName,
+          // contactPhone: location.contactPhone,
+          // email: location.email,
+          // description: location.description,
+          // photosLocations: location.photosLocations,
+          // image: location.image,
+          // imageFileName: location.imageFileName,
+          // imageFileLocation: location.imageFileLocation,
           isLoading: false
         });
       } else {
@@ -86,19 +89,19 @@ class EditLocationScreen extends Component {
     updateRef
       .set({
         key: id,
-        uid: this.state.uid,
-        name: this.state.name,
-        venue: this.state.venue,
-        latitude: this.state.latitude,
-        longitude: this.state.longitude,
-        contactName: this.state.contactName,
-        contactPhone: this.state.contactPhone,
-        email: this.state.email,
-        description: this.state.description,
-        photosLocations: this.state.photosLocations,
-        image: this.state.image,
-        imageFileName: this.state.imageFileName,
-        imageFileLocation: this.state.imageFileLocation
+        uid: this.state.location.uid,
+        name: this.state.location.name,
+        venue: this.state.location.venue,
+        latitude: this.state.location.latitude,
+        longitude: this.state.location.longitude,
+        contactName: this.state.location.contactName,
+        contactPhone: this.state.location.contactPhone,
+        email: this.state.location.email,
+        description: this.state.location.description,
+        photosLocations: this.state.location.photosLocations,
+        image: this.state.location.image,
+        imageFileName: this.state.location.imageFileName,
+        imageFileLocation: this.state.location.imageFileLocation
       })
       .catch(error => {
         console.error("Error adding document: ", error);
@@ -120,41 +123,45 @@ class EditLocationScreen extends Component {
         </View>
       );
     }
+
+    // const imageURL = this.state.imageFileLocation;
+    console.log("Location: ", this.state)
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>
           <TextInput
             label={"Name"}
             placeholder={"Name"}
-            value={this.state.name}
+            value={this.state.location.name}
             onChangeText={text => this.updateTextInput(text, "name")}
           />
         </View>
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"Venue"}
-            value={this.state.venue}
+            value={this.state.location.venue}
             onChangeText={text => this.updateTextInput(text, "venue")}
           />
         </View>
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"Contact Name"}
-            value={this.state.contactName}
+            value={this.state.location.contactName}
             onChangeText={text => this.updateTextInput(text, "contactName")}
           />
         </View>
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"Contact Phone"}
-            value={this.state.contactPhone}
+            value={this.state.location.contactPhone}
             onChangeText={text => this.updateTextInput(text, "contactPhone")}
           />
         </View>
         <View style={styles.subContainer}>
           <TextInput
             placeholder={"email"}
-            value={this.state.email}
+            value={this.state.location.email}
             onChangeText={text => this.updateTextInput(text, "email")}
           />
         </View>
@@ -163,16 +170,44 @@ class EditLocationScreen extends Component {
             multiline={true}
             numberOfLines={4}
             placeholder={"Description"}
-            value={this.state.description}
+            value={this.state.location.description}
             onChangeText={text => this.updateTextInput(text, "description")}
           />
         </View>
-        <View style={styles.button}>
+        <View style={styles.imageBox}>
+          <View>
+            <Image style={styles.image} source={{ uri: this.state.location.imageFileLocation }} />
+          </View>
+        </View>
+        <View style={styles.detailButton}>
           <Button
-            large
+            medium
+            backgroundColor={"#999999"}
+            color={"#FFFFFF"}
+            title="Edit Additional Photos"
+            onPress={() => {
+              this.props.navigation.push("EditAdditionalPhotos", {
+                Locationkey: `${JSON.stringify(this.state.key)}`
+              });
+            }}
+          />
+        </View>
+        <View style={styles.detailButton}>
+          <Button
+            medium
             leftIcon={{ name: "update" }}
             title="Update"
             onPress={() => this.updateLocation()}
+          />
+        </View>
+        <View style={styles.detailButton}>
+          <Button
+            medium
+            backgroundColor={"#999999"}
+            color={"#FFFFFF"}
+            leftIcon={{ name: "delete" }}
+            title="Delete"
+            onPress={() => this.deleteLocation(this.state.key)}
           />
         </View>
       </ScrollView>
@@ -192,6 +227,26 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: "#CCCCCC"
   },
+  detailButton: {
+    marginTop: 10
+  },
+  image: {
+    flex: 1,
+    alignItems: "stretch",
+    marginTop: 5,
+    padding: 5,
+    width: 100,
+    height: 100
+  },
+  imageBox: {
+    flex: 1,
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center"
+  },
   activity: {
     position: "absolute",
     left: 0,
@@ -203,4 +258,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default EditLocationScreen;
+// export default EditLocationScreen;

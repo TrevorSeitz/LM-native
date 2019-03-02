@@ -14,18 +14,18 @@ import { Constants, MapView } from "expo";
 import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
-import EditLocationScreen from "../screens/EditLocationScreen";
-import EditLocationStack from "../stacks/EditLocationStack";
-import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+import EditAdditionalPhotosScreen from "../screens/EditAdditionalPhotosScreen";
 import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
-const LocationDetailsStack = createStackNavigator(
+import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
+
+const AdditionalImageBrowserStack = createStackNavigator(
   {
-    LocationDetails: {
-      screen: LocationDetailsScreen,
+    AdditionalImageBrowser: {
+      screen: AdditionalImageBrowser,
       navigationOptions: ({ navigation }) => {
         return {
-          headerTitle: "Location Details",
+          headerTitle: "Edit Location",
           headerLeft: (
             <Icon
               style={{ paddingLeft: 10 }}
@@ -38,8 +38,9 @@ const LocationDetailsStack = createStackNavigator(
       }
     },
     // ListLocations: ListLocationsScreen,
-    Edit: EditLocationScreen,
-    // AdditionalPhotos: AdditionalPhotosScreen,
+    // EditPhotos: EditAdditionalPhotosStack,
+    // EditAdditionalPhotos: EditAdditionalPhotosStack,
+    // EditAdditionalPhotos: EditAdditionalPhotosScreen,
     // AdditionalImageBrowser: AdditionalImageBrowser,
   },
   {
@@ -49,4 +50,5 @@ const LocationDetailsStack = createStackNavigator(
     }
   }
 );
-export default LocationDetailsStack;
+export default AdditionalImageBrowserStack
+;

@@ -188,10 +188,11 @@ export default class AdditionalImageBrowser extends React.Component {
           })
       })
       .then(() => {
-        console.log("we should be going to last screen")
-        this.props.navigation.push("AdditionalPhotos", {
+        this.props.navigation.navigate("EditAdditionalPhotos", {  // additionalPhotos Screen has back button to here
           Locationkey: `${JSON.stringify(this.state.key)}`
         })
+        // this.props.navigation.goBack() // Doesn't reload photos at additionalPhotos screen
+
       })
   };
 

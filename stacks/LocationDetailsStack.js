@@ -39,7 +39,7 @@ const LocationDetailsStack = createStackNavigator(
     },
     // ListLocations: ListLocationsScreen,
     Edit: EditLocationScreen,
-    // AdditionalPhotos: AdditionalPhotosScreen,
+    AdditionalPhotos: AdditionalPhotosScreen,
     // AdditionalImageBrowser: AdditionalImageBrowser,
   },
   {

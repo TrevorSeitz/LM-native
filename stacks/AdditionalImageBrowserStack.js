@@ -17,7 +17,9 @@ import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditAdditionalPhotosScreen from "../screens/EditAdditionalPhotosScreen";
 import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
-import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
+// import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
+
+import EditAdditionalPhotosSwitchNavigator from "../navigation/switches/EditAdditionalPhotosSwitchNavigator"
 
 const AdditionalImageBrowserStack = createStackNavigator(
   {
@@ -42,11 +44,13 @@ const AdditionalImageBrowserStack = createStackNavigator(
     // EditAdditionalPhotos: EditAdditionalPhotosStack,
     // EditAdditionalPhotos: EditAdditionalPhotosScreen,
     // AdditionalImageBrowser: AdditionalImageBrowser,
+    // EditAdditionalPhotos: EditAdditionalPhotosSwitchNavigator,
   },
   {
     defaultNavigationOptions: {
       gesturesEnabled: false,
-      header: null
+      header: null,
+      tabBarVisible: false,
     }
   }
 );

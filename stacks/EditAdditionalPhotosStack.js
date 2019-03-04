@@ -19,6 +19,8 @@ import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 import AdditionalImageBrowserStack from "../stacks/AdditionalImageBrowserStack";
 
+import AdditionalImageBrowserSwitchNavigator from "../navigation/switches/AdditionalImageBrowserSwitchNavigator"
+
 const EditAdditionalPhotosStack = createStackNavigator(
   {
     EditPhotos: {
@@ -40,8 +42,9 @@ const EditAdditionalPhotosStack = createStackNavigator(
     // ListLocations: ListLocationsScreen,
     // Edit: EditAdditionalPhotosStack,
     // EditAdditionalPhotos: EditAdditionalPhotosScreen,
-    // AdditionalImageBrowser: AdditionalImageBrowserStack,
+    // AdditionalImageBrowser: AdditionalImageBrowser,
     AdditionalImageBrowser: AdditionalImageBrowserStack,
+    // AdditionalImageBrowser: AdditionalImageBrowserSwitchNavigator,
   },
   {
     defaultNavigationOptions: {

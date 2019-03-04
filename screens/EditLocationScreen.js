@@ -19,24 +19,27 @@ export default class EditLocationScreen extends Component {
     super();
     this.state = {
       location: {},
-      key: "",
-      uid: "",
-      id: "",
-      name: "",
-      venue: "",
-      latitude: "",
-      longitude: "",
-      contactName: "",
-      contactPhone: "",
-      email: "",
-      description: "",
-      photosLocations: [],
-      image: "nil",
-      imageFileName: "",
-      imageFileLocation: "",
+      // key: "",
+      // uid: "",
+      // id: "",
+      // name: "",
+      // venue: "",
+      // latitude: "",
+      // longitude: "",
+      // contactName: "",
+      // contactPhone: "",
+      // email: "",
+      // description: "",
+      // photosLocations: [],
+      // image: "nil",
+      // imageFileName: "",
+      // imageFileLocation: "",
       isLoading: false
     };
   }
+
+
+
   componentDidMount() {
     const { navigation } = this.props;
     firebase
@@ -45,30 +48,25 @@ export default class EditLocationScreen extends Component {
       .doc(JSON.parse(navigation.getParam("Locationkey")))
       .get().then(doc => {
       if (doc.exists) {
-        // const location = doc.data();
         this.setState({
           location: doc.data(),
           key: doc.id,
-          // uid: location.uid,
-          // name: location.name,
-          // venue: location.venue,
-          // latitude: location.latitude,
-          // longitude: location.longitude,
-          // contactName: location.contactName,
-          // contactPhone: location.contactPhone,
-          // email: location.email,
-          // description: location.description,
-          // photosLocations: location.photosLocations,
-          // image: location.image,
-          // imageFileName: location.imageFileName,
-          // imageFileLocation: location.imageFileLocation,
           isLoading: false
         });
       } else {
         console.log("No such document!");
       }
-    });
+    })
+    .then(() => this._storeData())
   }
+
+
+  _storeData = async (user) => {
+    const { navigation } = this.props;
+    try {
+      await AsyncStorage.setItem("Locationkey", navigation.getParam("Locationkey"));
+    } catch (error) {}
+  };
 
   updateTextInput = (text, field) => {
     const state = this.state;
@@ -80,7 +78,7 @@ export default class EditLocationScreen extends Component {
     this.setState({
       isLoading: true
     });
-    const id = this.state.key;
+    const id = (this.state.key).replace(/"/g, '');
     const { navigation } = this.props;
     const updateRef = firebase
       .firestore()
@@ -112,7 +110,6 @@ export default class EditLocationScreen extends Component {
     this.props.navigation.navigate("Details", {
       Locationkey: `${JSON.stringify(id)}`
     });
-    // this.props.navigation.goBack();
   }
 
   render() {
@@ -123,10 +120,6 @@ export default class EditLocationScreen extends Component {
         </View>
       );
     }
-
-    // const imageURL = this.state.imageFileLocation;
-    console.log("Location: ", this.state)
-
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>
@@ -187,7 +180,7 @@ export default class EditLocationScreen extends Component {
             title="Edit Additional Photos"
             onPress={() => {
               this.props.navigation.push("EditAdditionalPhotos", {
-                Locationkey: `${JSON.stringify(this.state.key)}`
+                photosLocations: this.state.location.photosLocations
               });
             }}
           />

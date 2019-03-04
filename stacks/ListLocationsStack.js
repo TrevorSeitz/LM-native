@@ -28,6 +28,9 @@ import EditLocationStack from "../stacks/EditLocationStack";
 import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
 import AdditionalImageBrowserStack from "../stacks/AdditionalImageBrowserStack";
 
+import EditAdditionalPhotosSwitchNavigator from "../navigation/switches/EditAdditionalPhotosSwitchNavigator";
+import AdditionalImageBrowserSwitchNavigator from "../navigation/switches/AdditionalImageBrowserSwitchNavigator";
+
 
 const ListLocationsStack = createStackNavigator(
   {
@@ -50,11 +53,11 @@ const ListLocationsStack = createStackNavigator(
     Details: LocationDetailsScreen,
     Edit: EditLocationScreen,
     // EditAdditionalPhotos: EditAdditionalPhotosStack,
-    EditAdditionalPhotos: EditAdditionalPhotosScreen,
-    // EditAdditionalPhotos: EditAdditionalPhotosStack,
-    // AdditionalPhotos: AdditionalPhotosScreen,
-    AdditionalImageBrowser: AdditionalImageBrowserStack,
-    // AdditionalImageBrowser: AdditionalImageBrowser,
+    // EditAdditionalPhotos: EditAdditionalPhotosSwitchNavigator,
+    EditAdditionalPhotos: EditAdditionalPhotosStack,
+    AdditionalPhotos: AdditionalPhotosScreen,
+    // AdditionalImageBrowser: AdditionalImageBrowserSwitchNavigator,
+    AdditionalImageBrowser: AdditionalImageBrowser,
     // AdditionalPhotosTile: AdditionalPhotosTile,
     // ImageBrowser: ImageBrowser,
     // ImageTile: ImageTile

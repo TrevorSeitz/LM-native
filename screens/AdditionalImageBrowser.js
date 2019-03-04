@@ -59,7 +59,6 @@ export default class AdditionalImageBrowser extends React.Component {
   getExtraPhotoList = () => {
     const { navigation } = this.props;
     const id = (this.state.key).replace(/"/g, '')
-    console.log("getExtraPhotoList id: ", id)
     firebase
       .firestore()
       .collection("locations")
@@ -77,13 +76,13 @@ export default class AdditionalImageBrowser extends React.Component {
         }
       })
       .then(() => {
-        this.setState({photosLocations: this.state.location.photosLocations })
+        this.setState({photosLocations: navigation.getParam("photosLocations") })
       }).then(() => {
         const currentMax = 4 - this.state.location.photosLocations.length
         this.setState({max: currentMax})
         console.log(this.state.max)
       })
-      .then(() => console.log("getExtraPhotoList photosLocations: ", this.state.photosLocations))
+      // .then(() => console.log("getExtraPhotoList photosLocations: ", this.state.photosLocations))
 
 
   }
@@ -170,7 +169,7 @@ export default class AdditionalImageBrowser extends React.Component {
       .catch(error => {
         Alert.alert(error);
       })
-      .then(() => console.log("this.state.photosLocations: ", this.state.photosLocations ))
+      .then(() => console.log("Additional image browser this.state.photosLocations: ", this.state.photosLocations ))
       .then(() => console.log("doc: ", id))
       .then(() => {
         const updateRef = firebase
@@ -186,14 +185,20 @@ export default class AdditionalImageBrowser extends React.Component {
               isLoading: false
             });
           })
-      })
-      .then(() => {
-        this.props.navigation.navigate("EditAdditionalPhotos", {  // additionalPhotos Screen has back button to here
-          Locationkey: `${JSON.stringify(this.state.key)}`
-        })
-        // this.props.navigation.goBack() // Doesn't reload photos at additionalPhotos screen
+          .then(() => {
+            console.log("go to edit additional photos")
+            this.props.navigation.push("EditAdditionalPhotos", {
+              photosLocations: this.state.photosLocations
+            })
 
+            // this.props.navigation.state.params.returnData("EditAdditionalPhotos", {
+            //   photosLocations: this.state.photosLocations
+            // });
+            // this.props.navigation.goBack();
+
+          })
       })
+
   };
 
   saveLocation() {

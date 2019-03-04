@@ -14,14 +14,12 @@ import ImageTile from './ImageTile';
 import AdditionalPhotosTile from './AdditionalPhotosTile';
 import * as firebase from "firebase";
 import AdditionalImageBrowser from './AdditionalImageBrowser';
-// import SaveExtraPhoto from '../components/SaveExtraPhoto'
 import SaveMainPhoto from '../components/SaveMainPhoto'
 
 
 const { width } = Dimensions.get('window')
 
 export default class EditAdditionalPhotosScreen extends Component {
-// possibly add navigation options with tab bar false
 
   constructor(props) {
     super(props);
@@ -34,22 +32,31 @@ export default class EditAdditionalPhotosScreen extends Component {
       key: "",
       name:"",
       venue:"",
-      photosLocations: [],
+      photosLocations: [],  //need to get this from navigate.getParam
+      // photosLocations: navigation.getParam("photosLocations"),
       after: null,
       has_next_page: true
     }
+    console.log("Edit Additioanal Photo Props: ", props)
   }
+
 
   componentDidMount() {
-    this.getPhotos()
-    this._storeData()
+    this._retrieveData()
   }
 
-  _storeData = async (user) => {
-    const { navigation } = this.props;
+  _retrieveData = async () => {
     try {
-      await AsyncStorage.setItem("key", navigation.getParam("Locationkey"));
-    } catch (error) {}
+      const value = await AsyncStorage.getItem("key");
+      if (value !== null) {
+      // console.log("Edit additional PhotosLocationkey:", value)
+        this.setState({ key: value });
+        // console.log("this.state.key:", this.state.key)
+      }
+    } catch (error) {
+    }
+    // console.log("Retrieved key in Edit Additional Photos:", this.state.key)
+      this.getPhotos()
   };
 
   selectImage = (index) => {
@@ -84,7 +91,7 @@ export default class EditAdditionalPhotosScreen extends Component {
   }
 
   deleteFromDB = () => {
-    const id = (this.state.key).replace(/"/g, '')
+    const id = this.state.key
     firebase
       .firestore()
       .collection("locations")
@@ -92,7 +99,6 @@ export default class EditAdditionalPhotosScreen extends Component {
       .update({
         photosLocations: this.state.photosLocations
         })
-      .then(() => console.log("update should be done"))
       .then(() => {
         this.props.navigation.back
       })
@@ -100,10 +106,13 @@ export default class EditAdditionalPhotosScreen extends Component {
 
   getPhotos = () => {
     const { navigation } = this.props;
+    console.log("this.state.key get photos =", this.state.key)
+    const id = (this.state.key).replace(/"/g, '')
+    console.log("get photos from id =", id)
     firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("Locationkey")))
+      .doc(id)
       .get()
       .then(doc => {
       if (doc.exists) {
@@ -113,13 +122,15 @@ export default class EditAdditionalPhotosScreen extends Component {
           key: doc.id,
           name: location.name,
           venue: location.venue,
-          photosLocations: location.photosLocations,
+          photosLocations: navigation.getParam("photosLocations"),
           isLoading: false
         })
+        console.log("Edit Additional Photos photosLocations =", this.state.photosLocations)
         } else {
         console.log("No such document!");
         }
       });
+      this.forceUpdate()
   }
 
   getItemLayout = (data, index) => {
@@ -168,8 +179,9 @@ export default class EditAdditionalPhotosScreen extends Component {
   }
 
   addMorePhotos = () => {
+    console.log("photolocations to send to image browser: ", this.state.photosLocations)
     this.props.navigation.push("AdditionalImageBrowser", {
-      Locationkey: `${JSON.stringify(this.state.key)}`
+      photosLocations: this.state.photosLocations
     });
   }
 

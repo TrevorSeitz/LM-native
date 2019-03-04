@@ -5,7 +5,8 @@ import {
   ActivityIndicator,
   View,
   TextInput,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import {  List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
@@ -69,7 +70,7 @@ export default class EditLocationScreen extends Component {
   };
 
   updateTextInput = (text, field) => {
-    const state = this.state;
+    const state = this.state.location;
     state[field] = text;
     this.setState(state);
   };
@@ -106,10 +107,16 @@ export default class EditLocationScreen extends Component {
         this.setState({
           isLoading: false
         });
-      });
-    this.props.navigation.navigate("Details", {
-      Locationkey: `${JSON.stringify(id)}`
-    });
+      })
+      .then(() =>{
+        this.setState({
+          isLoading: false
+        })
+        Alert.alert("Success!")
+      })
+    // this.props.navigation.navigate("Details", {
+    //   Locationkey: `${JSON.stringify(id)}`
+    // });
   }
 
   render() {

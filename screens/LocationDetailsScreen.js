@@ -155,7 +155,7 @@ export default class LocationDetailsScreen extends Component {
               leftIcon={{ name: "edit" }}
               title="Edit"
               onPress={() => {
-                this.props.navigation.navigate("EditLocation", {
+                this.props.navigation.navigate("Edit", {
                   Locationkey: `${JSON.stringify(this.state.key)}`
                 });
               }}

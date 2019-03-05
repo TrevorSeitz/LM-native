@@ -6,17 +6,17 @@ import {
 import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 
-import HomeScreen from "../screens/HomeScreen";
-import AddLocationScreen from "../screens/AddLocationScreen";
-import ListLocationsScreen from "../screens/ListLocationsScreen";
-
-import LocationDetailsScreen from "../screens/LocationDetailsScreen";
-import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
-import AdditionalPhotosTile from "../screens/AdditionalPhotosTile";
-import ImageBrowser from "../screens/ImageBrowser";
-import ImageTile from "../screens/ImageTile";
-import EditLocationScreen from "../screens/EditLocationScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+// import HomeScreen from "../screens/HomeScreen";
+// import AddLocationScreen from "../screens/AddLocationScreen";
+// import ListLocationsScreen from "../screens/ListLocationsScreen";
+//
+// import LocationDetailsScreen from "../screens/LocationDetailsScreen";
+// import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+// import AdditionalPhotosTile from "../screens/AdditionalPhotosTile";
+// import ImageBrowser from "../screens/ImageBrowser";
+// import ImageTile from "../screens/ImageTile";
+// import EditLocationScreen from "../screens/EditLocationScreen";
+// import ProfileScreen from "../screens/ProfileScreen";
 
 import DashboardTabNavigator from "./DashboardTabNavigator";
 

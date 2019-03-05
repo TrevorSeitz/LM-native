@@ -19,7 +19,7 @@ const LocationDetailsStack = createStackNavigator({
   Details: LocationDetailsScreen,
   Edit: EditLocationScreen,
   AdditionalPhotos: AdditionalPhotosScreen,
-  AdditionalImageBrowser: AdditionalImageBrowser
+  // AdditionalImageBrowser: AdditionalImageBrowser
 });
 
 // LocationDetailsScreen.navigationOptions = {

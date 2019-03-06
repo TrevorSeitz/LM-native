@@ -7,6 +7,7 @@ import {
   FlatList,
   Dimensions,
   AsyncStorage,
+  ActivityIndicator,
   // Button
 } from 'react-native';
 import { FileSystem } from 'expo';import { Button } from "react-native-elements";
@@ -35,9 +36,10 @@ export default class EditAdditionalPhotosScreen extends Component {
       photosLocations: [],  //need to get this from navigate.getParam
       // photosLocations: navigation.getParam("photosLocations"),
       after: null,
-      has_next_page: true
+      has_next_page: true,
+      // isLoading: true
     }
-    console.log("Edit Additioanal Photo Props: ", props)
+    // console.log("Edit Additioanal Photo Props: ", props)
   }
 
 
@@ -106,9 +108,9 @@ export default class EditAdditionalPhotosScreen extends Component {
 
   getPhotos = () => {
     const { navigation } = this.props;
-    console.log("this.state.key get photos =", this.state.key)
+    // console.log("this.state.key get photos =", this.state.key)
     const id = (this.state.key).replace(/"/g, '')
-    console.log("get photos from id =", id)
+    // console.log("get photos from id =", id)
     firebase
       .firestore()
       .collection("locations")
@@ -123,9 +125,9 @@ export default class EditAdditionalPhotosScreen extends Component {
           name: location.name,
           venue: location.venue,
           photosLocations: navigation.getParam("photosLocations"),
-          isLoading: false
+          // isLoading: false
         })
-        console.log("Edit Additional Photos photosLocations =", this.state.photosLocations)
+        // console.log("Edit Additional Photos photosLocations =", this.state.photosLocations)
         } else {
         console.log("No such document!");
         }
@@ -179,7 +181,7 @@ export default class EditAdditionalPhotosScreen extends Component {
   }
 
   addMorePhotos = () => {
-    console.log("photolocations to send to image browser: ", this.state.photosLocations)
+    // console.log("photolocations to send to image browser: ", this.state.photosLocations)
     this.props.navigation.push("AdditionalImageBrowser", {
       photosLocations: this.state.photosLocations
     });

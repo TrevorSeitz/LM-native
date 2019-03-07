@@ -177,17 +177,18 @@ export default class EditAdditionalPhotosScreen extends Component {
   }
 
   renderImages() {
+    const length = this.state.photosLocations.length ? this.state.photosLocations.length : 0
     return(
       <View>
       <Text style={styles.name}>{this.state.name}</Text>
-      <FlatList
+      <Text style={styles.note}>{length} of {this.state.maxPhotos} saved</Text>
+    <FlatList
         data={this.state.photosLocations}
         numColumns={2}
         renderItem={this.renderImageTile}
         keyExtractor={(_,index) => index}
         onEndReachedThreshold={0.5}
-        ListEmptyComponent={<Text>Loading...</Text>}
-        initialNumToRender={24}
+        initialNumToRender={this.state.maxPhotos}
         getItemLayout={this.getItemLayout}
       />
     </View>
@@ -202,11 +203,9 @@ export default class EditAdditionalPhotosScreen extends Component {
         </View>
       );
     }
-    console.log("photosLocations: ", this.state.photosLocations)
     if (this.state.AdditionalImageBrowserOpen) {
       return(<AdditionalImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.additionalImageBrowserCallback}/>);
     }
-
     const selectedPhotos = Object.keys(this.state.selected)
 
     return (
@@ -255,6 +254,11 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 36,
+    // fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  note: {
+    fontSize: 12,
     // fontWeight: 'bold',
     textAlign: 'center',
   }

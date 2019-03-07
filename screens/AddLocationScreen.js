@@ -31,10 +31,6 @@ import SaveMainPhoto from '../components/SaveMainPhoto'
 
 
 export default class AddLocationScreen extends Component {
-  // static navigationOptions = {
-  //   title: "Add Location"
-  // };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -55,9 +51,6 @@ export default class AddLocationScreen extends Component {
       imageBrowserOpen: false,
       isLoading: false
     };
-    //
-    // this._retrieveData();
-
     this.ref = firebase.firestore().collection("locations");
   }
 
@@ -106,15 +99,15 @@ export default class AddLocationScreen extends Component {
     })
     .then(await this._getLocationAsync());
     const metadata = result.metadata;
-    // console.log("result", result.metadata);
+    console.log("result", result.metadata);
 
-    // result.exif.GPSLatitude = JSON.stringify(
-    //   this.state.location.coords.latitude
-    // );
-    // result.exif.GPSLongitude = JSON.stringify(
-    //   this.state.location.coords.longitude
-    // );
-    // console.log("result", result);
+    result.exif.GPSLatitude = JSON.stringify(
+      this.state.location.coords.latitude
+    );
+    result.exif.GPSLongitude = JSON.stringify(
+      this.state.location.coords.longitude
+    );
+    console.log("result", result);
     this.processImage(result, metadata);
   };
 

@@ -166,7 +166,7 @@ export default class EditLocationScreen extends Component {
             medium
             backgroundColor={"#999999"}
             color={"#FFFFFF"}
-            title="Edit Additional Photos"
+            title="Add/Edit Additional Photos"
             onPress={() => {
               this.props.navigation.push("EditAdditionalPhotos", {
                 photosLocations: this.state.location.photosLocations

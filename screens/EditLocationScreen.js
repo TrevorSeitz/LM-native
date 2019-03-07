@@ -20,26 +20,9 @@ export default class EditLocationScreen extends Component {
     super();
     this.state = {
       location: {},
-      // key: "",
-      // uid: "",
-      // id: "",
-      // name: "",
-      // venue: "",
-      // latitude: "",
-      // longitude: "",
-      // contactName: "",
-      // contactPhone: "",
-      // email: "",
-      // description: "",
-      // photosLocations: [],
-      // image: "nil",
-      // imageFileName: "",
-      // imageFileLocation: "",
       isLoading: false
     };
   }
-
-
 
   componentDidMount() {
     const { navigation } = this.props;
@@ -81,11 +64,10 @@ export default class EditLocationScreen extends Component {
     });
     const id = (this.state.key).replace(/"/g, '');
     const { navigation } = this.props;
-    const updateRef = firebase
+    firebase
       .firestore()
       .collection("locations")
-      .doc(id);
-    updateRef
+      .doc(id)
       .set({
         key: id,
         uid: this.state.location.uid,
@@ -114,9 +96,6 @@ export default class EditLocationScreen extends Component {
         })
         Alert.alert("Success!")
       })
-    // this.props.navigation.navigate("Details", {
-    //   Locationkey: `${JSON.stringify(id)}`
-    // });
   }
 
   render() {
@@ -127,6 +106,9 @@ export default class EditLocationScreen extends Component {
         </View>
       );
     }
+
+    console.log(" photosLocations: ", this.state.location.photosLocations)
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>

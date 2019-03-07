@@ -15,6 +15,7 @@ import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
+import EditAdditionalPhotosScreen from "../screens/EditAdditionalPhotosScreen";
 import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
@@ -41,9 +42,9 @@ const EditLocationStack = createStackNavigator(
     },
     // ListLocations: ListLocationsScreen,
     // Edit: EditLocationStack,
-    EditAdditionalPhotos: EditAdditionalPhotosSwitchNavigator,
+    EditAdditionalPhotos: EditAdditionalPhotosScreen,
     // EditAdditionalPhotos: EditAdditionalPhotosStack,
-    // AdditionalImageBrowser: AdditionalImageBrowser,
+    AdditionalImageBrowser: AdditionalImageBrowser,
   },
   {
     defaultNavigationOptions: {

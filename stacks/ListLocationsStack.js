@@ -51,17 +51,8 @@ const ListLocationsStack = createStackNavigator(
       }
     },
     Details: LocationDetailsScreen,
-    Edit: EditLocationScreen,
-    // EditAdditionalPhotos: EditAdditionalPhotosStack,
-    // EditAdditionalPhotos: EditAdditionalPhotosSwitchNavigator,
-    EditAdditionalPhotos: EditAdditionalPhotosStack,
+    Edit: EditLocationStack,
     AdditionalPhotos: AdditionalPhotosScreen,
-    // AdditionalImageBrowser: AdditionalImageBrowserSwitchNavigator,
-    AdditionalImageBrowser: AdditionalImageBrowser,
-    // AdditionalPhotosTile: AdditionalPhotosTile,
-    // ImageBrowser: ImageBrowser,
-    // ImageTile: ImageTile
-
   },
   {
     defaultNavigationOptions: {

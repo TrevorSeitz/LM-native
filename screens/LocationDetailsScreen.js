@@ -36,11 +36,8 @@ export default class LocationDetailsScreen extends Component {
       .then((value) => {
       if (value !== null) {
         this.setState({ storedkey: value })
-        // .then(() => console.log("storedkey", this.state.storedkey))
       }})
     } catch (error) {}
-
-    // console.log("Locationkey in LocationDatails: ", this.state.key)
   };
 
   componentDidMount() {
@@ -62,7 +59,6 @@ export default class LocationDetailsScreen extends Component {
         }
       })
       .then(() => this._storeData())
-      // .then(() => console.log("location data: ", this.state.location))
       .then(() => this._retrieveData())
 
   }
@@ -103,7 +99,6 @@ export default class LocationDetailsScreen extends Component {
     }
 
     const imageURL = this.state.location.imageFileLocation;
-    // console.log("url", imageURL);
 
     return (
       <ScrollView>
@@ -175,10 +170,6 @@ export default class LocationDetailsScreen extends Component {
       </ScrollView>
     );
   }
-
-  // render() {
-  //   return <Text>Hello</Text>;
-  // }
 }
 const styles = StyleSheet.create({
   container: {

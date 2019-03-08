@@ -11,25 +11,24 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Constants, MapView } from "expo";
 
-import HomeScreen from "../screens/HomeScreen";
+// import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
-import EditLocationScreen from "../screens/EditLocationScreen";
-import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
-import EditAdditionalPhotosScreen from "../screens/EditAdditionalPhotosScreen";
+// import EditLocationScreen from "../screens/EditLocationScreen";
+// import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
+// import EditAdditionalPhotosScreen from "../screens/EditAdditionalPhotosScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
-import AdditionalPhotosTile from "../screens/AdditionalPhotosTile";
-import ImageBrowser from "../screens/ImageBrowser";
-import ImageTile from "../screens/ImageTile";
+// import AdditionalPhotosTile from "../screens/AdditionalPhotosTile";
+// import ImageBrowser from "../screens/ImageBrowser";
+// import ImageTile from "../screens/ImageTile";
 
-
-import LocationDetailsStack from "../stacks/LocationDetailsStack";
 import EditLocationStack from "../stacks/EditLocationStack";
-import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
-import AdditionalImageBrowserStack from "../stacks/AdditionalImageBrowserStack";
+// import LocationDetailsStack from "../stacks/LocationDetailsStack";
+// import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
+// import AdditionalImageBrowserStack from "../stacks/AdditionalImageBrowserStack";
 
-import EditAdditionalPhotosSwitchNavigator from "../navigation/switches/EditAdditionalPhotosSwitchNavigator";
-import AdditionalImageBrowserSwitchNavigator from "../navigation/switches/AdditionalImageBrowserSwitchNavigator";
+// import EditAdditionalPhotosSwitchNavigator from "../navigation/switches/EditAdditionalPhotosSwitchNavigator";
+// import AdditionalImageBrowserSwitchNavigator from "../navigation/switches/AdditionalImageBrowserSwitchNavigator";
 
 
 const ListLocationsStack = createStackNavigator(
@@ -51,17 +50,8 @@ const ListLocationsStack = createStackNavigator(
       }
     },
     Details: LocationDetailsScreen,
-    Edit: EditLocationScreen,
-    // EditAdditionalPhotos: EditAdditionalPhotosStack,
-    // EditAdditionalPhotos: EditAdditionalPhotosSwitchNavigator,
-    EditAdditionalPhotos: EditAdditionalPhotosStack,
+    Edit: EditLocationStack,
     AdditionalPhotos: AdditionalPhotosScreen,
-    // AdditionalImageBrowser: AdditionalImageBrowserSwitchNavigator,
-    AdditionalImageBrowser: AdditionalImageBrowser,
-    // AdditionalPhotosTile: AdditionalPhotosTile,
-    // ImageBrowser: ImageBrowser,
-    // ImageTile: ImageTile
-
   },
   {
     defaultNavigationOptions: {

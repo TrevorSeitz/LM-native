@@ -31,10 +31,6 @@ import SaveMainPhoto from '../components/SaveMainPhoto'
 
 
 export default class AddLocationScreen extends Component {
-  // static navigationOptions = {
-  //   title: "Add Location"
-  // };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -55,9 +51,6 @@ export default class AddLocationScreen extends Component {
       imageBrowserOpen: false,
       isLoading: false
     };
-    //
-    // this._retrieveData();
-
     this.ref = firebase.firestore().collection("locations");
   }
 
@@ -71,22 +64,20 @@ export default class AddLocationScreen extends Component {
   };
 
   _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATIONS);
-    if (status !== "granted") {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
       this.setState({
-        errorMessage: "Permission to access location was denied"
+        errorMessage: 'Permission to access location was denied',
       });
     }
 
-    let location = await Location.getCurrentPositionAsync({})
-      .then
-      // console.log("get location", location)
-      ();
+    let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
   };
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    console.log("permission: ", result)
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: false,
@@ -105,9 +96,10 @@ export default class AddLocationScreen extends Component {
       // aspect: 1,
       quality: 0.5,
       exif: true
-    }).then(await this._getLocationAsync());
+    })
+    .then(await this._getLocationAsync());
     const metadata = result.metadata;
-    // console.log("state.location", this.state.location);
+    console.log("result", result.metadata);
 
     result.exif.GPSLatitude = JSON.stringify(
       this.state.location.coords.latitude
@@ -115,7 +107,7 @@ export default class AddLocationScreen extends Component {
     result.exif.GPSLongitude = JSON.stringify(
       this.state.location.coords.longitude
     );
-    // console.log("result", result);
+    console.log("result", result);
     this.processImage(result, metadata);
   };
 

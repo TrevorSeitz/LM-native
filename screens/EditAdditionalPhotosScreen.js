@@ -7,6 +7,7 @@ import {
   FlatList,
   Dimensions,
   AsyncStorage,
+  ActivityIndicator,
   // Button
 } from 'react-native';
 import { FileSystem } from 'expo';import { Button } from "react-native-elements";
@@ -33,13 +34,10 @@ export default class EditAdditionalPhotosScreen extends Component {
       name:"",
       venue:"",
       photosLocations: [],  //need to get this from navigate.getParam
-      // photosLocations: navigation.getParam("photosLocations"),
       after: null,
-      has_next_page: true
+      has_next_page: true,
     }
-    console.log("Edit Additioanal Photo Props: ", props)
   }
-
 
   componentDidMount() {
     this._retrieveData()
@@ -49,13 +47,10 @@ export default class EditAdditionalPhotosScreen extends Component {
     try {
       const value = await AsyncStorage.getItem("key");
       if (value !== null) {
-      // console.log("Edit additional PhotosLocationkey:", value)
         this.setState({ key: value });
-        // console.log("this.state.key:", this.state.key)
       }
     } catch (error) {
     }
-    // console.log("Retrieved key in Edit Additional Photos:", this.state.key)
       this.getPhotos()
   };
 
@@ -90,6 +85,7 @@ export default class EditAdditionalPhotosScreen extends Component {
     this.setState({selected: {}})
   }
 
+// This should be used both for delete and add
   deleteFromDB = () => {
     const id = this.state.key
     firebase
@@ -106,9 +102,7 @@ export default class EditAdditionalPhotosScreen extends Component {
 
   getPhotos = () => {
     const { navigation } = this.props;
-    console.log("this.state.key get photos =", this.state.key)
     const id = (this.state.key).replace(/"/g, '')
-    console.log("get photos from id =", id)
     firebase
       .firestore()
       .collection("locations")
@@ -117,20 +111,18 @@ export default class EditAdditionalPhotosScreen extends Component {
       .then(doc => {
       if (doc.exists) {
         const location = doc.data();
-        // console.log("Location photos: ", location.photosLocations)
         this.setState({
           key: doc.id,
           name: location.name,
           venue: location.venue,
           photosLocations: navigation.getParam("photosLocations"),
-          isLoading: false
         })
-        console.log("Edit Additional Photos photosLocations =", this.state.photosLocations)
         } else {
         console.log("No such document!");
         }
       });
       this.forceUpdate()
+      console.log("photosLocation: ", this.state.photosLocations)
   }
 
   getItemLayout = (data, index) => {
@@ -179,24 +171,24 @@ export default class EditAdditionalPhotosScreen extends Component {
   }
 
   addMorePhotos = () => {
-    console.log("photolocations to send to image browser: ", this.state.photosLocations)
     this.props.navigation.push("AdditionalImageBrowser", {
       photosLocations: this.state.photosLocations
     });
   }
 
   renderImages() {
+    const length = this.state.photosLocations.length ? this.state.photosLocations.length : 0
     return(
       <View>
       <Text style={styles.name}>{this.state.name}</Text>
-      <FlatList
+      <Text style={styles.note}>{length} of {this.state.maxPhotos} saved</Text>
+    <FlatList
         data={this.state.photosLocations}
         numColumns={2}
         renderItem={this.renderImageTile}
         keyExtractor={(_,index) => index}
         onEndReachedThreshold={0.5}
-        ListEmptyComponent={<Text>Loading...</Text>}
-        initialNumToRender={24}
+        initialNumToRender={this.state.maxPhotos}
         getItemLayout={this.getItemLayout}
       />
     </View>
@@ -214,7 +206,6 @@ export default class EditAdditionalPhotosScreen extends Component {
     if (this.state.AdditionalImageBrowserOpen) {
       return(<AdditionalImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.additionalImageBrowserCallback}/>);
     }
-
     const selectedPhotos = Object.keys(this.state.selected)
 
     return (
@@ -263,6 +254,11 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 36,
+    // fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  note: {
+    fontSize: 12,
     // fontWeight: 'bold',
     textAlign: 'center',
   }

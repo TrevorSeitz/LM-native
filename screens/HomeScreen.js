@@ -15,36 +15,37 @@ import Map from "./Map";
 
 import { Card } from "react-native-paper";
 
-class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this._retrieveData()
+      uid: ""
     };
+    this._retrieveData()
   }
 
   _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem("user");
+      const value = await AsyncStorage.getItem("uid");
       if (value !== null) {
-        this.setState({ user: value });
+        this.setState({ uid: value });
       }
     } catch (error) {
       // Error retrieving data
     }
+      console.log("home screen retrieve data uid", this.state.uid);
   };
 
   render() {
-    // console.log("user", this.state.user);
+    let state = this.state.uid
     return (
       <View style={styles.container}>
+        <Text>{state}</Text>
         <Map {...this.props}/>
       </View>
     );
   }
 }
-
-export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {

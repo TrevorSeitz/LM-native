@@ -36,11 +36,9 @@ export default class AdditionalImageBrowser extends React.Component {
       uid: "",
       key: "",
       location: {},
-      list: [],
       photos: [], // the photos on display for user to choose from
-      additionalPhotos: [],
-      uploadExtraImage: [],
-      photosLocations:[],
+      additionalPhotos: [],  // The selected photos to be saved
+      photosLocations:[], // the photos that are saved to the DB
       max: 4,
       selected: {},
       after: null,
@@ -57,6 +55,7 @@ export default class AdditionalImageBrowser extends React.Component {
   }
 
   getExtraPhotoList = () => {
+    // retreive the Location information from teh DB
     const { navigation } = this.props;
     const id = (this.state.key).replace(/"/g, '')
     firebase
@@ -76,24 +75,18 @@ export default class AdditionalImageBrowser extends React.Component {
         }
       })
       .then(() => {
+        // retreive additional photos from EditAdditionalPhotos
         this.setState({photosLocations: navigation.getParam("photosLocations") })
       }).then(() => {
+        // Calculate the number of additional photos that can be chosen
         const currentMax = 4 - this.state.location.photosLocations.length
         this.setState({max: currentMax})
-        console.log(this.state.max)
       })
-      // .then(() => console.log("getExtraPhotoList photosLocations: ", this.state.photosLocations))
 
 
   }
 
   _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("uid");
-      if (value !== null) {
-        this.setState({ uid: value });
-      }
-    } catch (error) {}
     try {
       const key = await AsyncStorage.getItem("key");
       if (key !== null) {
@@ -112,8 +105,8 @@ export default class AdditionalImageBrowser extends React.Component {
     } else {
       newSelected[index] = true
     }
-    // if (Object.keys(newSelected).length > this.state.max) return;
-    if (Object.keys(newSelected).length > this.props.max) return;
+    if (Object.keys(newSelected).length > this.state.max) return;
+    // if (Object.keys(newSelected).length > this.props.max) return;
     if (!newSelected) newSelected = {};
     this.setState({ selected: newSelected })
   }
@@ -124,8 +117,8 @@ export default class AdditionalImageBrowser extends React.Component {
     });
     // add the new photos uris to working array
     // use for loop to send each photo to storage in order
-    for (let i = 0; i < additionalPhotos.length; i++) {
-      const blob = await this.uriToBlob(additionalPhotos[i])
+    for (let image of additionalPhotos) {
+      const blob = await this.uriToBlob(image)
       await this.uploadExtraImage(blob)
     }
     // at this point, we have an array of the old photos and the new in this.state.photosLocations
@@ -169,35 +162,26 @@ export default class AdditionalImageBrowser extends React.Component {
       .catch(error => {
         Alert.alert(error);
       })
-      .then(() => console.log("Additional image browser this.state.photosLocations: ", this.state.photosLocations ))
-      .then(() => console.log("doc: ", id))
-      .then(() => {
-        const updateRef = firebase
-          .firestore()
-          .collection("locations")
-          .doc(id)
-        updateRef
-          .update({
-            photosLocations: this.state.photosLocations
-            })
-          .then(() => {
-            this.setState({
-              isLoading: false
-            });
-          })
-          .then(() => {
-            console.log("go to edit additional photos")
-            this.props.navigation.push("EditAdditionalPhotos", {
-              photosLocations: this.state.photosLocations
-            })
-
-            // this.props.navigation.state.params.returnData("EditAdditionalPhotos", {
-            //   photosLocations: this.state.photosLocations
-            // });
-            // this.props.navigation.goBack();
-
-          })
-      })
+      // .then(() => {
+      //   const updateRef = firebase
+      //     .firestore()
+      //     .collection("locations")
+      //     .doc(id)
+      //   updateRef
+      //     .update({
+      //       photosLocations: this.state.photosLocations
+      //       })
+      //     .then(() => {
+      //       this.setState({
+      //         isLoading: false
+      //       });
+      //     })
+      //     .then(() => {
+      //       this.props.navigation.push("EditAdditionalPhotos", {
+      //         photosLocations: this.state.photosLocations
+      //       })
+      //     })
+      // })
 
   };
 
@@ -240,14 +224,38 @@ export default class AdditionalImageBrowser extends React.Component {
     return { length, offset: length * index, index }
   }
 
-  finishSavingPhotos = () => {
+  finishSavingPhotos = async () => {
     console.log("inside finishSavingPhotos")
     let { selected, photos } = this.state;
     let selectedPhotos = photos.filter((item, index) => {
       return(selected[index])
     });
       // send selectedPictures to be saved
-    this.saveImages(selectedPhotos)
+    await this.saveImages(selectedPhotos)
+    this.updateFirestore()
+  }
+
+  updateFirestore = () => {
+
+        const id = (this.state.key).replace(/"/g, '')
+    const updateRef = firebase
+      .firestore()
+      .collection("locations")
+      .doc(id)
+    updateRef
+      .update({
+        photosLocations: this.state.photosLocations
+        })
+      .then(() => {
+        this.setState({
+          isLoading: false
+        });
+      })
+      .then(() => {
+        this.props.navigation.push("EditAdditionalPhotos", {
+          photosLocations: this.state.photosLocations
+        })
+      })
   }
 
   renderHeader = () => {

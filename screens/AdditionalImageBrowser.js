@@ -36,11 +36,10 @@ export default class AdditionalImageBrowser extends React.Component {
       uid: "",
       key: "",
       location: {},
-      list: [],
+      // list: [],
       photos: [], // the photos on display for user to choose from
-      additionalPhotos: [],
-      uploadExtraImage: [],
-      photosLocations:[],
+      additionalPhotos: [],  // The selected photos to be saved
+      photosLocations:[], // the photos that are saved to the DB
       max: 4,
       selected: {},
       after: null,
@@ -57,6 +56,7 @@ export default class AdditionalImageBrowser extends React.Component {
   }
 
   getExtraPhotoList = () => {
+    // retreive the Location information from teh DB
     const { navigation } = this.props;
     const id = (this.state.key).replace(/"/g, '')
     firebase
@@ -76,24 +76,26 @@ export default class AdditionalImageBrowser extends React.Component {
         }
       })
       .then(() => {
+        // retreive additional photos from EditAdditionalPhotos
         this.setState({photosLocations: navigation.getParam("photosLocations") })
       }).then(() => {
+        // Calculate the number of additional photos that can be chosen
         const currentMax = 4 - this.state.location.photosLocations.length
         this.setState({max: currentMax})
-        console.log(this.state.max)
       })
-      // .then(() => console.log("getExtraPhotoList photosLocations: ", this.state.photosLocations))
 
 
   }
 
   _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("uid");
-      if (value !== null) {
-        this.setState({ uid: value });
-      }
-    } catch (error) {}
+    // try {
+    //   const value = await AsyncStorage.getItem("uid");
+    //   if (value !== null) {
+    //     this.setState({ uid: value });
+    //   }
+    // } catch (error) {}
+
+    // retreive the Location Key from Async Storage
     try {
       const key = await AsyncStorage.getItem("key");
       if (key !== null) {
@@ -112,8 +114,8 @@ export default class AdditionalImageBrowser extends React.Component {
     } else {
       newSelected[index] = true
     }
-    // if (Object.keys(newSelected).length > this.state.max) return;
-    if (Object.keys(newSelected).length > this.props.max) return;
+    if (Object.keys(newSelected).length > this.state.max) return;
+    // if (Object.keys(newSelected).length > this.props.max) return;
     if (!newSelected) newSelected = {};
     this.setState({ selected: newSelected })
   }

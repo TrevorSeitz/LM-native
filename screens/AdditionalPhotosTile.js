@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 const { width } = Dimensions.get('window')
 
-class AdditionalPhotosTile extends React.PureComponent {
+export default class AdditionalPhotosTile extends React.PureComponent {
   render() {
     let { item, index, selected, selectImage } = this.props;
+
     if (!item) return null;
     return (
       <TouchableHighlight
@@ -27,4 +28,4 @@ class AdditionalPhotosTile extends React.PureComponent {
     )
   }
 }
-export default AdditionalPhotosTile;
+// export default AdditionalPhotosTile;

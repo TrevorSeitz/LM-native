@@ -8,14 +8,17 @@ import {
   Dimensions,
   AsyncStorage,
   ActivityIndicator,
-  // Button
+  Image
 } from 'react-native';
-import { FileSystem } from 'expo';import { Button } from "react-native-elements";
+import { FileSystem } from 'expo';
+import shorthash from "shorthash"
+import { Button } from "react-native-elements";
 import ImageTile from './ImageTile';
 import AdditionalPhotosTile from './AdditionalPhotosTile';
 import * as firebase from "firebase";
 import AdditionalImageBrowser from './AdditionalImageBrowser';
 import SaveMainPhoto from '../components/SaveMainPhoto'
+import CacheImage from "../components/CacheImage"
 
 
 const { width } = Dimensions.get('window')
@@ -34,6 +37,7 @@ export default class EditAdditionalPhotosScreen extends Component {
       name:"",
       venue:"",
       photosLocations: [],  //need to get this from navigate.getParam
+      cachedPhotos: [],
       after: null,
       has_next_page: true,
     }
@@ -46,13 +50,18 @@ export default class EditAdditionalPhotosScreen extends Component {
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("key");
-      if (value !== null) {
+      // console.log("edit phot value = ", value)
         this.setState({ key: value });
-      }
     } catch (error) {
     }
       this.getPhotos()
   };
+
+  // _storeData = async () => {
+  //   try {
+  //     await AsyncStorage.setItem("key", this.state.key);
+  //   } catch (error) {}
+  // };
 
   selectImage = (index) => {
     let newSelected = {...this.state.selected};
@@ -70,6 +79,8 @@ export default class EditAdditionalPhotosScreen extends Component {
     this.setState({ toDelete })
   }
 
+
+// Does Not delete from DB
   deleteSelected = async () => {
     let currentPhotos = [...this.state.photosLocations]
     let toDelete = this.state.toDelete
@@ -82,12 +93,17 @@ export default class EditAdditionalPhotosScreen extends Component {
 
     this.deleteFromDB()
 
+    const photos = this.state.photosLocations
+    for (let location of photos) {
+      this.cacheImage(location)
+    }
+
     this.setState({selected: {}})
   }
 
 // This should be used both for delete and add
   deleteFromDB = () => {
-    const id = this.state.key
+    const id = (this.state.key).replace(/"/g, '')
     firebase
       .firestore()
       .collection("locations")
@@ -96,6 +112,10 @@ export default class EditAdditionalPhotosScreen extends Component {
         photosLocations: this.state.photosLocations
         })
       .then(() => {
+        this._storeData()
+      })
+      .then(() => {
+        console.log("Document successfully deleted!");
         this.props.navigation.back
       })
   }
@@ -109,20 +129,42 @@ export default class EditAdditionalPhotosScreen extends Component {
       .doc(id)
       .get()
       .then(doc => {
-      if (doc.exists) {
-        const location = doc.data();
-        this.setState({
-          key: doc.id,
-          name: location.name,
-          venue: location.venue,
-          photosLocations: navigation.getParam("photosLocations"),
-        })
+        if (doc.exists) {
+          const location = doc.data();
+          this.setState({
+            // key: doc.id,
+            name: location.name,
+            venue: location.venue,
+            photosLocations: navigation.getParam("photosLocations"),
+          })
         } else {
         console.log("No such document!");
         }
-      });
+    })
+      .then(() => {
+      const photos = this.state.photosLocations
+      for (let location of photos) {
+        this.cacheImage(location)
+      }
+    })
       this.forceUpdate()
-      console.log("photosLocation: ", this.state.photosLocations)
+  }
+
+  cacheImage = async (uri) => {
+    const name = shorthash.unique(uri)
+    const path = `${FileSystem.cacheDirectory}${name}`
+    const image = await FileSystem.getInfoAsync(path)
+
+    if (image.exists) {
+      this.setState({
+        cachedPhotos: [...this.state.cachedPhotos, image.uri]
+      })
+      return
+    }
+    const newImage = await FileSystem.downloadAsync(uri, path)
+    this.setState({
+      cachedPhotos: [...this.state.cachedPhotos, image.uri]
+    })
   }
 
   getItemLayout = (data, index) => {
@@ -152,6 +194,7 @@ export default class EditAdditionalPhotosScreen extends Component {
     let selected = this.state.selected[index] ? true : false
     return(
       <AdditionalPhotosTile
+        style={{opacity: selected ? 0.5 : 1}}
         item={item}
         index={index}
         selected={selected}
@@ -177,9 +220,9 @@ export default class EditAdditionalPhotosScreen extends Component {
   }
 
   renderImages() {
-    const length = this.state.photosLocations.length ? this.state.photosLocations.length : 0
+    const length = this.state.cachedPhotos.length ? this.state.cachedPhotos.length : 0
     return(
-      <View>
+    <View>
       <Text style={styles.name}>{this.state.name}</Text>
       <Text style={styles.note}>{length} of {this.state.maxPhotos} saved</Text>
     <FlatList
@@ -207,7 +250,6 @@ export default class EditAdditionalPhotosScreen extends Component {
       return(<AdditionalImageBrowser max={(this.state.maxPhotos - this.state.photosLocations.length)} callback={this.additionalImageBrowserCallback}/>);
     }
     const selectedPhotos = Object.keys(this.state.selected)
-
     return (
       <View style={styles.container}>
         {this.renderImages()}
@@ -261,5 +303,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     // fontWeight: 'bold',
     textAlign: 'center',
-  }
+  },
+  image: {
+    flex: 1,
+    alignItems: "stretch",
+    marginTop: 5,
+    padding: 5,
+    width: 300,
+    height: 300
+  },
 })

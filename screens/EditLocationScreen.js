@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   ScrollView,
+  AsyncStorage,
   ActivityIndicator,
   View,
   TextInput,
@@ -22,35 +23,49 @@ export default class EditLocationScreen extends Component {
       location: {},
       isLoading: false
     };
+
   }
 
   componentDidMount() {
     const { navigation } = this.props;
+        // console.log("nav key", JSON.parse(navigation.getParam("key")))
     firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("Locationkey")))
+      .doc(JSON.parse(navigation.getParam("key")))
       .get().then(doc => {
       if (doc.exists) {
         this.setState({
           location: doc.data(),
-          key: doc.id,
           isLoading: false
         });
       } else {
         console.log("No such document!");
       }
     })
-    .then(() => this._storeData())
+    .then(() => {
+      this._retrieveData()
+    })
   }
 
-
-  _storeData = async (user) => {
-    const { navigation } = this.props;
+  _retrieveData = async () => {
     try {
-      await AsyncStorage.setItem("Locationkey", navigation.getParam("Locationkey"));
+      const value = await AsyncStorage.getItem("key")
+      // .then((value) => {console.log("edit page retrieved key = ", value)})
+      .then((value) => {
+      if (value !== null) {
+        this.setState({ storedkey: value })
+      }})
     } catch (error) {}
+    // console.log("edit page page retrieved key = ", this.state.key)
   };
+
+  // _storeData = async user => {
+  //   try {
+  //     // await AsyncStorage.setItem("photosLocations", this.state.location.photosLocations)
+  //     await AsyncStorage.setItem("key", this.state.key)
+  //   } catch (error) {}
+  // };
 
   updateTextInput = (text, field) => {
     const state = this.state.location;
@@ -106,8 +121,6 @@ export default class EditLocationScreen extends Component {
         </View>
       );
     }
-
-    console.log(" photosLocations: ", this.state.location.photosLocations)
 
     return (
       <ScrollView style={styles.container}>

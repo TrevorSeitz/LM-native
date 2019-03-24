@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   ScrollView,
+  AsyncStorage,
   ActivityIndicator,
   View,
   Image
@@ -24,20 +25,23 @@ export default class LocationDetailsScreen extends Component {
     };
   }
 
-  _storeData = async user => {
+  _storeData = async ()=> {
     try {
-      await AsyncStorage.setItem("Locationkey", this.state.key);
+      await AsyncStorage.setItem("key", this.state.key);
+        // console.log("stored data key = ", this.state.key)
     } catch (error) {}
   };
 
   _retrieveData = async () => {
     try {
-      await AsyncStorage.getItem("Locationkey")
+      const value = await AsyncStorage.getItem("key")
+      // .then((value) => {console.log("location details retrieved key = ", value)})
       .then((value) => {
       if (value !== null) {
         this.setState({ storedkey: value })
       }})
     } catch (error) {}
+    // console.log("details page page retrieved key = ", this.state.key)
   };
 
   componentDidMount() {
@@ -45,7 +49,7 @@ export default class LocationDetailsScreen extends Component {
     firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("Locationkey")))
+      .doc(JSON.parse(navigation.getParam("key")))
       .get()
       .then(doc => {
         if (doc.exists) {
@@ -58,9 +62,8 @@ export default class LocationDetailsScreen extends Component {
           console.log("No such document!");
         }
       })
+      // .then(() => {console.log("Location details this.state.key", this.state.key)})
       .then(() => this._storeData())
-      .then(() => this._retrieveData())
-
   }
 
   deleteLocation(key) {
@@ -137,7 +140,7 @@ export default class LocationDetailsScreen extends Component {
               title="See Additional Photos" disabled={(this.state.location.photosLocations.length == 0)}
               onPress={() => {
                 this.props.navigation.push("AdditionalPhotos", {
-                  Locationkey: `${JSON.stringify(this.state.key)}`
+                  key: `${JSON.stringify(this.state.key)}`
                 });
               }}
             />
@@ -151,7 +154,7 @@ export default class LocationDetailsScreen extends Component {
               title="Edit"
               onPress={() => {
                 this.props.navigation.navigate("Edit", {
-                  Locationkey: `${JSON.stringify(this.state.key)}`
+                  key: `${JSON.stringify(this.state.key)}`
                 });
               }}
             />

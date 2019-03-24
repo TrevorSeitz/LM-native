@@ -9,7 +9,8 @@ import {
   AsyncStorage,
   // Button
 } from 'react-native';
-import { FileSystem } from 'expo';import { Button } from "react-native-elements";
+import { FileSystem } from 'expo';
+import { Button } from "react-native-elements";
 import ImageTile from './ImageTile';
 import AdditionalPhotosTile from './AdditionalPhotosTile';
 import * as firebase from "firebase";
@@ -42,15 +43,15 @@ export default class AdditionalPhotosScreen extends Component {
 
   componentDidMount() {
     this.getPhotos()
-    this._storeData()
+    // this._storeData(navigation.getParam("key"))
   }
 
-  _storeData = async (user) => {
-    const { navigation } = this.props;
-    try {
-      await AsyncStorage.setItem("key", navigation.getParam("Locationkey"));
-    } catch (error) {}
-  };
+  // _storeData = async (key) => {
+  //   const { navigation } = this.props;
+  //   try {
+  //     await AsyncStorage.setItem("key", key);
+  //   } catch (error) {}
+  // };
 
   selectImage = (index) => {
     let newSelected = {...this.state.selected};
@@ -103,7 +104,7 @@ export default class AdditionalPhotosScreen extends Component {
     firebase
       .firestore()
       .collection("locations")
-      .doc(JSON.parse(navigation.getParam("Locationkey")))
+      .doc(JSON.parse(navigation.getParam("key")))
       .get()
       .then(doc => {
       if (doc.exists) {
@@ -169,7 +170,7 @@ export default class AdditionalPhotosScreen extends Component {
 
   addMorePhotos = () => {
     this.props.navigation.push("AdditionalImageBrowser", {
-      Locationkey: `${JSON.stringify(this.state.key)}`
+      key: `${JSON.stringify(this.state.key)}`
     });
   }
 

@@ -33,7 +33,6 @@ export default class HomeScreen extends React.Component {
     } catch (error) {
       // Error retrieving data
     }
-      console.log("home screen retrieve data uid", this.state.uid);
   };
 
   render() {

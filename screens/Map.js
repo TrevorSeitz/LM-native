@@ -80,18 +80,18 @@ export default class Map extends React.Component {
       });
   }
 
-  _storeData = async user => {
+  _storeData = async () => {
     try {
       await AsyncStorage.setItem("locations", this.state.locations);
     } catch (error) {}
   };
 
-  _storeLocation = async ()=> {
-    try {
-      await AsyncStorage.setItem("Locationkey", this.state.checkLocation);
-      // console.log("store location", this.state.checkLocation)
-    } catch (error) {}
-  };
+  // _storeLocation = async ()=> {
+  //   try {
+  //     await AsyncStorage.setItem("Locationkey", this.state.checkLocation);
+  //     // console.log("store location", this.state.checkLocation)
+  //   } catch (error) {}
+  // };
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -172,7 +172,7 @@ export default class Map extends React.Component {
     // console.log(location.id)
     // this._storeLocation()
     this.props.navigation.push("Details", {
-      Locationkey: `${JSON.stringify(location.id)}`
+      key: `${JSON.stringify(location.id)}`
     })
   }
 

@@ -127,9 +127,10 @@ export default class AdditionalImageBrowser extends React.Component {
   blobToSavedImage = async () => {
     var promises = [];
     let blobs = this.state.blobs
-    // for (let blob of blobs) {
+    // console.log("blobs length = ", blobs.length)
     for(i=0;i<blobs.length;i++) {
-      promises.push(this.uploadExtraImages(blobs[i]))
+      promises.push(await this.uploadExtraImages(blobs[i]))
+      // console.log("blob in loop = ", blobs[i])
     }
 
     Promise.all(promises)
@@ -178,19 +179,21 @@ combineImageArrays = () => {
   };
 
   uploadExtraImages = async (blob) => {
+    console.log("in uploadExtraImages")
     var ref = firebase
       .storage()
       .ref()
       .child("images/" + blob._data.blobId.toString().split(".", 1).toString());
-    const id = (this.state.key).replace(/"/g, '')
-
+    // const id = (this.state.key).replace(/"/g, '')
+console.log("before snapshot")
     const snapshot = await ref.put(blob);
-
-    const imageFileLocation = snapshot.ref
+console.log("before imageFileLocation")
+    const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then((result) => {
-          this.setState(
-            ({ photosToCache }) => ({ photosToCache: [...photosToCache, result] }))
+        this.setState(
+          ({ photosToCache }) => ({ photosToCache: [...photosToCache, result] }))
+          console.log("after result save")
       })
       .catch(error => {
         Alert.alert(error);

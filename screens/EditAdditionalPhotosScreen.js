@@ -111,9 +111,9 @@ export default class EditAdditionalPhotosScreen extends Component {
       .update({
         photosLocations: this.state.photosLocations
         })
-      .then(() => {
-        this._storeData()
-      })
+      // .then(() => {
+      //   this._storeData()
+      // })
       .then(() => {
         console.log("Document successfully deleted!");
         this.props.navigation.back

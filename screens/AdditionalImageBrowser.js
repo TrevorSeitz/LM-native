@@ -105,14 +105,15 @@ export default class AdditionalImageBrowser extends React.Component {
 
   saveImages = async (additionalPhotos) => {
     var promises = [];
-      for(i=0;i<additionalPhotos.length;i++){
-      promises.push(this.saveOneImage(additionalPhotos[i]));
+    for(i=0;i<additionalPhotos.length;i++){
+      promises.push(this.saveOneImage(additionalPhotos[i]))
     }
 
     Promise.all(promises)
+      .then(() => {
+        console.log("step 1 - saveImages promise -  this.state.blobs = ", this.state.blobs)
+      })
       .then(() => {this.blobToSavedImage()})
-
-
   }
 
   saveOneImage = async (additionalPhoto) => {
@@ -124,12 +125,20 @@ export default class AdditionalImageBrowser extends React.Component {
   }
 
   blobToSavedImage = async () => {
+    var promises = [];
     let blobs = this.state.blobs
     for (let blob of blobs) {
-      await this.uploadExtraImage(blob)
+      promises.push(this.uploadExtraImages(blob))
     }
-    // await this.saveToFirestore()
-  }
+
+    Promise.all(promises)
+      .then(() => {
+        console.log("step 2 - blobToSavedImage promise - this.state.photosLocations = ", this.state.photosLocations)
+      })
+      .then(() => {
+        this.saveToFirestore()
+      })
+    }
 
   uriToBlob = (uri)=> {
     if (uri != undefined){
@@ -149,41 +158,52 @@ export default class AdditionalImageBrowser extends React.Component {
   };
 
   uploadExtraImages = async (blob) => {
-    console.log("inside uploadExtraImage: ", blob)
-      var ref = firebase
-        .storage()
-        .ref()
-        .child("images/" + blob._data.blobId.toString().split(".", 1).toString());
-      const snapshot = await ref.put(blob);
+    var ref = firebase
+      .storage()
+      .ref()
+      .child("images/" + blob._data.blobId.toString().split(".", 1).toString());
+    const id = (this.state.key).replace(/"/g, '')
 
-      const id = (this.state.key).replace(/"/g, '')
-      const imageFileLocation = snapshot.ref
-        .getDownloadURL()
-        .then((result) => {
-            this.setState(
-              ({ photosLocations }) => ({ photosLocations: [...photosLocations, result] }))
-        })
-        .then(() => console.log("after result added to photosLocations in uploadExtraImage - 2: ", this.state.photosLocations))
-        .catch(error => {
-          Alert.alert(error);
-        })
-      // }
+    const snapshot = await ref.put(blob);
+
+    const imageFileLocation = snapshot.ref
+      .getDownloadURL()
+      .then((result) => {
+          this.setState(
+            ({ photosLocations }) => ({ photosLocations: [...photosLocations, result] }))
+      })
+      .catch(error => {
+        Alert.alert(error);
+      })
   };
 
   saveToFirestore = async () => {
+    var promises = [];
     const id = (this.state.key).replace(/"/g, '')
     const updateRef = firebase
       .firestore()
       .collection("locations")
       .doc(id)
-    updateRef
-      .update({
-        photosLocations: this.state.photosLocations
+    promises.push(
+      updateRef
+        .update({
+          photosLocations: this.state.photosLocations
+          })
+        .then(() => {
+          this.setState({
+            isLoading: false
+          });
         })
+    )
+
+    Promise.all(promises)
       .then(() => {
-        this.setState({
-          isLoading: false
-        });
+        console.log("step 3 - saveToFirestore  promise - this.state.photosLocations = ", this.state.photosLocations)
+      })
+      .then(() => {
+        this.props.navigation.push("EditAdditionalPhotos", {
+          photosLocations: this.state.photosLocations
+        })
       })
   }
 
@@ -224,28 +244,8 @@ export default class AdditionalImageBrowser extends React.Component {
     });
     promises.push(this.saveImages(selectedPhotos))
 
-    // for(i=0;i<selectedPhotos.length;i++){
-    //   promises.push(this.saveOneImage(selectedPhotos[i]));
-    // }
-    for(i=0;i<blobs.length;i++){
-      promises.push(this.uploadExtraImage(blobs[i]))
-    }
-
     Promise.all(promises)
-    .then(() => {
-      console.log("this.state.blobs = ", this.state.blobs)
-    })
-    .then(() => {
-      console.log("this.state.photosLocations = ", this.state.photosLocations)
-    })
-    .then(() => {
-      this.saveToFirestore()
-    })
-      .then(() => {
-        this.props.navigation.push("EditAdditionalPhotos", {
-          photosLocations: this.state.photosLocations
-        })
-      })
+      .then(() => {console.log("first/Main promise complete??!!")})
   }
 
   renderHeader = () => {

@@ -34,7 +34,7 @@ export default class AdditionalImageBrowser extends React.Component {
       photos: [], // the photos on display for user to choose from
       additionalPhotos: [],  // The selected photos to be saved
       photosLocations:[], // the photos that are saved to the DB
-      photosToCach: [],
+      photosToCache: [],
       cachedPhotos: [],
       blobs: [],
       max: 4,
@@ -128,17 +128,37 @@ export default class AdditionalImageBrowser extends React.Component {
     var promises = [];
     let blobs = this.state.blobs
     for (let blob of blobs) {
-      promises.push(this.uploadExtraImages(blob))
+    for(i=0;i<blobs.length;i++)
+      promises.push(this.uploadExtraImages(blobs[i]))
     }
 
     Promise.all(promises)
       .then(() => {
-        console.log("step 2 - blobToSavedImage promise - this.state.photosLocations = ", this.state.photosLocations)
+        console.log("step 2 - blobToSavedImage promise - this.state.photosToCache = ", this.state.photosToCache)
       })
       .then(() => {
-        this.saveToFirestore()
+        this.combineImageArrays()
+        // this.saveToFirestore()
       })
     }
+
+combineImageArrays = () => {
+  var promises = [];
+  promises.push(
+    this.setState(
+      ({ photosLocations }) => ({ photosLocations: [...photosLocations, ...this.state.photosToCache]})
+    )
+  )
+  Promise.all(promises)
+  .then(() => {
+    console.log("step 3 - combined arrays promise - this.state.photosLocations = ", this.state.photosLocations)
+  })
+  .then(() => {
+    // this.combineImageArrays()
+    this.saveToFirestore()
+  })
+}
+
 
   uriToBlob = (uri)=> {
     if (uri != undefined){
@@ -170,7 +190,7 @@ export default class AdditionalImageBrowser extends React.Component {
       .getDownloadURL()
       .then((result) => {
           this.setState(
-            ({ photosLocations }) => ({ photosLocations: [...photosLocations, result] }))
+            ({ photosToCache }) => ({ photosToCache: [...photosToCache, result] }))
       })
       .catch(error => {
         Alert.alert(error);
@@ -198,7 +218,7 @@ export default class AdditionalImageBrowser extends React.Component {
 
     Promise.all(promises)
       .then(() => {
-        console.log("step 3 - saveToFirestore  promise - this.state.photosLocations = ", this.state.photosLocations)
+        console.log("step 4 - saveToFirestore  promise - this.state.photosLocations = ", this.state.photosLocations)
       })
       .then(() => {
         this.props.navigation.push("EditAdditionalPhotos", {

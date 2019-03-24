@@ -127,8 +127,8 @@ export default class AdditionalImageBrowser extends React.Component {
   blobToSavedImage = async () => {
     var promises = [];
     let blobs = this.state.blobs
-    for (let blob of blobs) {
-    for(i=0;i<blobs.length;i++)
+    // for (let blob of blobs) {
+    for(i=0;i<blobs.length;i++) {
       promises.push(this.uploadExtraImages(blobs[i]))
     }
 

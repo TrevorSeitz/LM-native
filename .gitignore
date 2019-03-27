@@ -19,6 +19,8 @@ ApiKeys.js
 .env.test.local
 .env.production.local
 ellmoe-firebase-adminsdk-zg1yk-6d95165042.json
+*.plist
+
 
 npm-debug.log*
 yarn-debug.log*

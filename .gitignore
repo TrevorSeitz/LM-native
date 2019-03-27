@@ -20,6 +20,7 @@ ApiKeys.js
 .env.production.local
 ellmoe-firebase-adminsdk-zg1yk-6d95165042.json
 *.plist
+LM-Firestore.json
 
 
 npm-debug.log*

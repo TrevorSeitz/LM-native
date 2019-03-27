@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import {
   AppRegistry,
-  TextInput,
+  // TextInput,
   View,
   Text,
   StyleSheet,
   TouchableHighlight
 } from "react-native";
+import { TextInput } from 'react-native-paper';
+
 
 export default class NewPlaceTextInput extends Component {
   constructor(props) {

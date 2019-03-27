@@ -5,10 +5,11 @@ import {
   AsyncStorage,
   ActivityIndicator,
   View,
-  TextInput,
+  // TextInput,
   Image,
   Alert
 } from "react-native";
+import { TextInput } from 'react-native-paper';
 import {  List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
 

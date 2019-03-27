@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
+import { StyleSheet, View, Text, Button, Alert } from "react-native";
+import { TextInput } from 'react-native-paper';
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
@@ -21,7 +22,11 @@ export default class SignupScreen extends React.Component {
         error => {
           Alert.alert("unknown alert from firebase");
         }
-      );
+      ).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message
+      }
   };
 
   render() {
@@ -34,7 +39,7 @@ export default class SignupScreen extends React.Component {
         <TextInput
           placeholder="Email"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.TextInput}
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
@@ -42,7 +47,7 @@ export default class SignupScreen extends React.Component {
           secureTextEntry
           placeholder="Password"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.TextInput}
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
@@ -50,7 +55,7 @@ export default class SignupScreen extends React.Component {
           secureTextEntry
           placeholder="Confirm Password"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.TextInput}
           onChangeText={passwordConfirm => this.setState({ passwordConfirm })}
           value={this.state.passwordConfirm}
         />
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  textInput: {
+  TextInput: {
     height: 40,
     width: "90%",
     borderColor: "gray",

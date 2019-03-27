@@ -8,8 +8,8 @@ import {
 } from "react-navigation";
 
 import { View, Text, StyleSheet, Button, Platform } from "react-native";
-import Icon from "@expo/vector-icons/Ionicons";
-import { Constants, MapView } from "expo";
+// import {Ionicons} from "@expo/vector-icons";
+import { Constants, MapView, Icon } from "expo";
 import TabBarIcon from "../components/TabBarIcon";
 
 import ProfileScreen from "../screens/ProfileScreen";
@@ -29,7 +29,7 @@ const HomeStack = createStackNavigator(
         return {
           headerTitle: "Profile",
           headerLeft: (
-            <Icon
+            <Icon.Ionicons
               style={{ paddingLeft: 10 }}
               onPress={() => navigation.openDrawer()}
               name="md-menu"

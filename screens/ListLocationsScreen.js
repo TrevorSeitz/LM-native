@@ -8,7 +8,7 @@ import {
   Text,
   AsyncStorage
 } from "react-native";
-import { List, ListItem, Button, Icon, Avatar } from "react-native-elements";
+import { List, ListItem, Button, Avatar } from "react-native-elements";
 // import FontAwesome, { Icons } from "react-native-fontawesome";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as firebase from "firebase";

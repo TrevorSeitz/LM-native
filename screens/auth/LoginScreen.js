@@ -7,6 +7,7 @@ import {
   Button,
   AsyncStorage
 } from "react-native";
+// import { TextInput } from 'react-native-paper';
 import * as firebase from "firebase";
 
 export default class LoginScreen extends React.Component {
@@ -31,7 +32,6 @@ export default class LoginScreen extends React.Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      // .then(user => console.log("user:", user))
       .then(user => this._storeData(user))
       .then(() => {
         if (this._ismounted) this.props.navigation.navigate("Map");
@@ -56,7 +56,7 @@ export default class LoginScreen extends React.Component {
           <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
         )}
         <TextInput
-          style={styles.textInput}
+          style={styles.TextInput}
           autoCapitalize="none"
           placeholder="Email"
           onChangeText={email => this.setState({ email })}
@@ -64,7 +64,7 @@ export default class LoginScreen extends React.Component {
         />
         <TextInput
           secureTextEntry
-          style={styles.textInput}
+          style={styles.TextInput}
           autoCapitalize="none"
           placeholder="Password"
           onChangeText={password => this.setState({ password })}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  textInput: {
+  TextInput: {
     height: 40,
     width: "90%",
     borderColor: "gray",

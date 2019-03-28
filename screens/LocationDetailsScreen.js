@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Alert,
   StyleSheet,
   ScrollView,
   AsyncStorage,
@@ -9,7 +10,6 @@ import {
 } from "react-native";
 import { List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
-
 export default class LocationDetailsScreen extends Component {
   static navigationOptions = {
     title: "Location Details"
@@ -66,7 +66,21 @@ export default class LocationDetailsScreen extends Component {
       .then(() => this._storeData())
   }
 
+
+  confirmDelete = () => {
+    Alert.alert(
+     '',
+     'Are you sure you want to delete '+this.state.location.name+'?',
+     [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => this.deleteLocation(this.state.key)},
+     ],
+     { cancelable: false }
+   )
+  };
+
   deleteLocation(key) {
+    // TODO: delete all photos from this location
     const { navigation } = this.props;
     this.setState({
       isLoading: true
@@ -166,7 +180,7 @@ export default class LocationDetailsScreen extends Component {
               color={"#FFFFFF"}
               leftIcon={{ name: "delete" }}
               title="Delete"
-              onPress={() => this.deleteLocation(this.state.key)}
+              onPress={() => this.confirmDelete()}
             />
           </View>
         </Card>
@@ -177,12 +191,13 @@ export default class LocationDetailsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
+    padding: 10
   },
   subContainer: {
     flex: 1,
-    paddingBottom: 20,
-    borderBottomWidth: 2,
+    marginBottom: 5,
+    padding: 2,
+    borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC"
   },
   activity: {
@@ -200,7 +215,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     alignItems: "stretch",
-    marginTop: 7.5,
+    marginTop: 5,
     padding: 5,
     width: 200,
     height: 200

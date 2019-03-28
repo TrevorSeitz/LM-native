@@ -204,13 +204,11 @@ export default class AddLocationScreen extends Component {
 
     // use for loop to send each phot to storage in order
     for (let i = 0; i < allLocalPhotos.length; i++) {
-      // if extra photo (has photo.file) use uploadExtraImage
       if (allLocalPhotos[i].file) {
         console.log("in the loop for extra photos: ", i)
         await this.uploadExtraImage(allLocalPhotos[i])
       } else {
         console.log("in the loop for MAIN photos: ", i)
-      // else use uploadMainImage
         this.uploadMainImage(allLocalPhotos[i])
       }
     }
@@ -227,21 +225,13 @@ export default class AddLocationScreen extends Component {
     const snapshot = await ref.put(blob);
     const imageFileLocation = snapshot.ref
       .getDownloadURL()
-      // .then((result) => {
-      //   extraPhotosArray = [...this.state.photosLocations]
-      // })
-      // .then((result) => {extraPhotosArray.push(result)})
       .then((result) => {
-        // this.setState({
-        //   photosLocations: [...this.state.photosLocations, ...extraPhotosArray]
-        // })
         this.setState( prevState => ({photosLocations: [...prevState.photosLocations, result] })
           )
       })
       .then((result) => {
         console.log("this.state.photosLocations: ", this.state.photosLocations)
       })
-      // .then((result) => {console.log("download url: ", result)})
       .catch(error => {
         Alert.alert(error);
       });
@@ -249,14 +239,12 @@ export default class AddLocationScreen extends Component {
 
   uploadMainImage = async (uri) => {
     const blob = await this.uriToBlob(uri);
-      // console.log("main blob:", blob)
     var ref = firebase
       .storage()
       .ref()
       .child("images/" + this.state.imageFileName);
       console.log(this.state.latitude)
     const snapshot = await ref.put(blob);
-    // console.log("snapshot: ", snapshot)
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => this.setState({ imageFileLocation: result }))
@@ -273,7 +261,6 @@ export default class AddLocationScreen extends Component {
   }
 
   uriToBlob = (uri)=> {
-    // console.log("inside uriToBlob")
     return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
       xhr.onerror = reject;
@@ -315,7 +302,12 @@ export default class AddLocationScreen extends Component {
           <Image style={styles.image} source={{ uri: this.state.image.uri }} />
           {this.state.photos.map((item, i) => this.renderImage(item, i))}
         </View>
-        <Button type="solid" small title="Add More Photos" disabled={!this.state.image.uri} onPress={() => this.setState({imageBrowserOpen: true})}/>
+        <View style={styles.buttonSubContainer}>
+          <Button type="solid" small title="Add More Photos" onPress={() => this.setState({imageBrowserOpen: true})}/>
+        </View>
+        <View style={styles.buttonSubContainer}>
+          <Button large title="Save" onPress={() => this.saveImages() } />
+        </View>
       </View>
     )
   }
@@ -399,7 +391,6 @@ export default class AddLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "description")}
           />
         </View>
-        <Button large title="Save" onPress={() => this.saveImages() } />
         { bottomForm }
       </ScrollView>
     );
@@ -415,7 +406,7 @@ const Button2 = ({ onPress, children }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10
+    // padding: 10
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -430,6 +421,11 @@ const styles = StyleSheet.create({
     padding: 2,
     borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC"
+  },
+  buttonSubContainer: {
+    flex: 1,
+    marginBottom: 2,
+    padding: 2,
   },
   activity: {
     position: "absolute",
@@ -447,12 +443,12 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 25,
-    flexDirection: "row",
+    // flexDirection: "row",
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 5,
-    // marginBottom: 2,
+    marginBottom: 2,
     marginTop: 2,
     alignSelf: "stretch",
     justifyContent: "center"
@@ -460,14 +456,14 @@ const styles = StyleSheet.create({
   image: {
     // flex: 1,
     alignItems: "stretch",
-    width: 75
+    width: 95
   },
   photoList: {
     flexDirection: 'row',
     // marginTop: 2,
-    marginBottom: 2.5,
+    // marginBottom: 2.5,
     padding: 5,
-    height: 75,
+    height: 95,
     // flex: 1,
     alignItems: "stretch",
     justifyContent: "center"

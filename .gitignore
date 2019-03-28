@@ -23,7 +23,9 @@ ellmoe-firebase-adminsdk-zg1yk-2ed93eadfe.json
 *.plist
 LM-Firestore.json
 LM-Firebase.json
-
+/constants/AppKeys.js
+constants/AppKeys.js
+AppKeys.js
 
 npm-debug.log*
 yarn-debug.log*

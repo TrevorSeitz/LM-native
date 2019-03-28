@@ -11,7 +11,7 @@
 
 # misc
 DataConfig.js
-ApiKeys.js
+constants/ApiKeys.js
 .DS_Store
 .env
 .env.local
@@ -19,9 +19,13 @@ ApiKeys.js
 .env.test.local
 .env.production.local
 ellmoe-firebase-adminsdk-zg1yk-6d95165042.json
+ellmoe-firebase-adminsdk-zg1yk-2ed93eadfe.json
 *.plist
 LM-Firestore.json
-
+LM-Firebase.json
+/constants/AppKeys.js
+constants/AppKeys.js
+AppKeys.js
 
 npm-debug.log*
 yarn-debug.log*

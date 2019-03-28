@@ -308,7 +308,33 @@ export default class AddLocationScreen extends Component {
     )
   }
 
+  renderAdditionalImages = () => {
+    return(
+      <View style={styles.container}>
+        <View style={styles.photoList}>
+          <Image style={styles.image} source={{ uri: this.state.image.uri }} />
+          {this.state.photos.map((item, i) => this.renderImage(item, i))}
+        </View>
+        <Button type="solid" small title="Add More Photos" disabled={!this.state.image.uri} onPress={() => this.setState({imageBrowserOpen: true})}/>
+      </View>
+    )
+  }
+
+  renderGetMainImage = () => {
+    return(
+      <View>
+        <Text style={styles.buttonText}>Add Main Photo</Text>
+        <View style={styles.buttonContainer}>
+          <View style={{ flex: 1 }}><Button2 onPress={this.selectPicture}>Gallery</Button2></View>
+          <View style={{ flex: 1 }}><Button2 onPress={this.takePicture}>Take Picture</Button2></View>
+        </View>
+      </View>
+    )
+  }
+
+
   render() {
+    let bottomForm;
     if (this.state.isLoading) {
       return (
         <View style={styles.activity}>
@@ -317,9 +343,16 @@ export default class AddLocationScreen extends Component {
       );
     }
 
-      if (this.state.imageBrowserOpen) {
-        return(<ImageBrowser max={4} callback={this.imageBrowserCallback}/>);
-      }
+    if (this.state.image.uri) {
+      bottomForm = this.renderAdditionalImages()
+    } else {
+      bottomForm = this.renderGetMainImage()
+    }
+
+    if (this.state.imageBrowserOpen) {
+      return(<ImageBrowser max={4} callback={this.imageBrowserCallback}/>);
+    }
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.subContainer}>
@@ -366,18 +399,8 @@ export default class AddLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "description")}
           />
         </View>
-        <View style={styles.container}>
-          <Button2 onPress={this.selectPicture}>Gallery</Button2>
-          <Button2 onPress={this.takePicture}>Take Picture</Button2>
-        </View>
-        <View style={styles.container}>
-          <Button large title="Save" onPress={() => this.saveImages() } />
-          <View style={styles.photoList}>
-            <Image style={styles.image} source={{ uri: this.state.image.uri }} />
-            {this.state.photos.map((item, i) => this.renderImage(item, i))}
-          </View>
-          <Button type="button" small title="Add More Photos" disabled={!this.state.image.uri} onPress={() => this.setState({imageBrowserOpen: true})}/>
-        </View>
+        <Button large title="Save" onPress={() => this.saveImages() } />
+        { bottomForm }
       </ScrollView>
     );
   }
@@ -394,11 +417,18 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    flex: 2,
+    padding: 5,
+    alignItems: "center",
+    justifyContent: "center"
+  },
   subContainer: {
     flex: 1,
-    marginBottom: 15,
-    padding: 5,
-    borderBottomWidth: 2,
+    marginBottom: 5,
+    padding: 2,
+    borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC"
   },
   activity: {
@@ -411,18 +441,18 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 15,
     color: "#111",
     alignSelf: "center"
   },
   button: {
-    height: 35,
+    height: 25,
     flexDirection: "row",
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 5,
-    marginBottom: 2,
+    // marginBottom: 2,
     marginTop: 2,
     alignSelf: "stretch",
     justifyContent: "center"
@@ -434,10 +464,10 @@ const styles = StyleSheet.create({
   },
   photoList: {
     flexDirection: 'row',
-    marginTop: 2.5,
+    // marginTop: 2,
     marginBottom: 2.5,
     padding: 5,
-    height: 85,
+    height: 75,
     // flex: 1,
     alignItems: "stretch",
     justifyContent: "center"

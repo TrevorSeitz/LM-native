@@ -1,167 +1,179 @@
+/* eslint-disable no-console */
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import Button from '../Button';
-import colors from '../../config/colors';
+import { create } from 'react-test-renderer';
+
+import theme from '../../config/theme';
+import { ThemeProvider } from '../../config';
+
+import ThemedButton, { Button } from '../Button';
 
 describe('Button Component', () => {
   it('should render without issues', () => {
-    const component = shallow(<Button />);
+    const component = shallow(<Button theme={theme} />);
 
     expect(component.length).toBe(1);
     expect(toJson(component)).toMatchSnapshot();
   });
 
-  it('should show loading indicator', () => {
-    const component = shallow(<Button loading />);
-
-    expect(component.find('ActivityIndicator').length).toBe(1);
-  });
-
-  it('should have onPress event', () => {
+  it('should be call onPress events', () => {
     const onPress = jest.fn();
-    const component = shallow(<Button onPress={onPress} />);
-    const innerComponent = component.find('TouchableHighlight');
+    console.log = jest.fn();
+    const wrapper = shallow(<Button theme={theme} />);
 
-    innerComponent.simulate('press');
+    // Call default onPress
+    wrapper
+      .find('TouchableOpacity')
+      .props()
+      .onPress();
+
+    expect(console.log.mock.calls[0][0]).toBe(
+      `Please attach a method to this component`
+    );
+
+    wrapper.setProps({ onPress });
+
+    // Call our custom onPress
+    wrapper
+      .find('TouchableOpacity')
+      .props()
+      .onPress();
+
     expect(onPress).toHaveBeenCalled();
   });
 
-  it('should render primary color', () => {
-    const component = shallow(<Button primary />);
+  it('should have ripple on android version 21 and higher', () => {
+    jest.mock('Platform', () => ({
+      OS: 'android',
+      Version: 25,
+      select() {},
+    }));
 
-    expect(component.find('View').at(1).props().style[0].backgroundColor).toBe(
-      colors.primary
-    );
+    const wrapper = shallow(<Button theme={theme} />);
+    expect(wrapper.length).toBe(1);
+    jest.resetModules();
   });
 
-  it('should render primary1 color', () => {
-    const component = shallow(<Button primary1 />);
-    const styles = component.find('View').at(1).props().style;
-    let backgroundColorStyles = [];
-    for (let i = 0; i < styles.length; i++) {
-      if (styles[i] && styles[i].hasOwnProperty('backgroundColor')) {
-        backgroundColorStyles.push(styles[i].backgroundColor);
-      }
-    }
+  it('should have normal ripple on android version 20 and lower', () => {
+    jest.mock('Platform', () => ({
+      OS: 'android',
+      Version: 20,
+      select() {},
+    }));
 
-    expect(backgroundColorStyles[1]).toBe(colors.primary1);
+    const wrapper = shallow(<Button theme={theme} />);
+    expect(wrapper.length).toBe(1);
+    jest.resetModules();
   });
 
-  it('should render primary2 color', () => {
-    const component = shallow(<Button primary2 />);
-    const styles = component.find('View').at(1).props().style;
-    let backgroundColorStyles = [];
-    for (let i = 0; i < styles.length; i++) {
-      if (styles[i] && styles[i].hasOwnProperty('backgroundColor')) {
-        backgroundColorStyles.push(styles[i].backgroundColor);
-      }
-    }
-
-    expect(backgroundColorStyles[1]).toBe(colors.primary2);
-  });
-
-  it('should render secondary color', () => {
-    const component = shallow(<Button secondary />);
-    const styles = component.find('View').at(1).props().style;
-    let backgroundColorStyles = [];
-    for (let i = 0; i < styles.length; i++) {
-      if (styles[i] && styles[i].hasOwnProperty('backgroundColor')) {
-        backgroundColorStyles.push(styles[i].backgroundColor);
-      }
-    }
-
-    expect(backgroundColorStyles[1]).toBe(colors.secondary);
-  });
-
-  it('should render secondary2 color', () => {
-    const component = shallow(<Button secondary2 />);
-    const styles = component.find('View').at(1).props().style;
-    let backgroundColorStyles = [];
-    for (let i = 0; i < styles.length; i++) {
-      if (styles[i] && styles[i].hasOwnProperty('backgroundColor')) {
-        backgroundColorStyles.push(styles[i].backgroundColor);
-      }
-    }
-
-    expect(backgroundColorStyles[1]).toBe(colors.secondary2);
-  });
-
-  it('should render secondary3 color', () => {
-    const component = shallow(<Button secondary3 />);
-    const styles = component.find('View').at(1).props().style;
-    let backgroundColorStyles = [];
-    for (let i = 0; i < styles.length; i++) {
-      if (styles[i] && styles[i].hasOwnProperty('backgroundColor')) {
-        backgroundColorStyles.push(styles[i].backgroundColor);
-      }
-    }
-
-    expect(backgroundColorStyles[1]).toBe(colors.secondary3);
-  });
-
-  it('should render custom background color', () => {
-    const component = shallow(<Button backgroundColor="#777" />);
-    const styles = component.find('View').at(1).props().style;
-    let backgroundColorStyles = [];
-    for (let i = 0; i < styles.length; i++) {
-      if (styles[i] && styles[i].hasOwnProperty('backgroundColor')) {
-        backgroundColorStyles.push(styles[i].backgroundColor);
-      }
-    }
-
-    expect(backgroundColorStyles[1]).toBe('#777');
-  });
-
-  it('should render title as text inside the button', () => {
-    const component = shallow(<Button title="My Button" />);
-
-    expect(
-      component.find('View').at(1).props().children[2].props.children
-    ).toBe('My Button');
-  });
-
-  it('should render with icon type', () => {
-    const component = shallow(
-      <Button icon={{ name: 'acrobat', type: 'zocial' }} />
-    );
-
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
-  });
-
-  it('should render with default icon', () => {
-    const component = shallow(
+  it('should warn the user when using linearGradient without it installed', () => {
+    console.error = jest.fn();
+    shallow(
       <Button
-        icon={{
-          name: 'wifi',
-          size: 22,
-          iconRight: true,
-          style: { fontSize: 20 },
-        }}
+        theme={theme}
+        linearGradientProps={{ colors: ['#4c669f', '#3b5998', '#192f6a'] }}
       />
     );
 
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
+    expect(console.error.mock.calls[0][0]).toBe(
+      `You need to pass a ViewComponent to use linearGradientProps !\nExample: ViewComponent={require('react-native-linear-gradient')}`
+    );
   });
 
-  it('should render with custom icon component', () => {
-    const customIconComponent = () => {};
+  describe('Button Types', () => {
+    describe('Solid', () => {
+      it('should display solid button', () => {
+        const component = shallow(<Button theme={theme} title="Solid" />);
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
 
-    const component = shallow(
-      <Button
-        icon={{
-          name: 'wifi',
-          size: 22,
-          iconRight: true,
-          style: { fontSize: 20 },
-        }}
-        iconComponent={customIconComponent}
-      />
+      it('should display raised solid button', () => {
+        const component = shallow(
+          <Button theme={theme} title="Solid" raised />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+
+      it('should display solid button disabled', () => {
+        const component = shallow(
+          <Button theme={theme} title="Solid" disabled />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+    });
+
+    describe('Outline', () => {
+      it('should display outline button', () => {
+        const component = shallow(
+          <Button theme={theme} title="Outline" type="outline" />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+
+      it('should display raised outline button', () => {
+        const component = shallow(
+          <Button theme={theme} title="Outline" type="outline" raised />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+
+      it('should display outline button disabled', () => {
+        const component = shallow(
+          <Button theme={theme} title="Outline" type="outline" disabled />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+    });
+
+    describe('Clear', () => {
+      it('should display clear button', () => {
+        const component = shallow(
+          <Button theme={theme} title="Clear" type="clear" />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+
+      it('should display raised clear button', () => {
+        const component = shallow(
+          <Button theme={theme} title="Clear" type="clear" raised />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+
+      it('should display clear button disabled', () => {
+        const component = shallow(
+          <Button theme={theme} title="Clear" type="clear" disabled />
+        );
+        expect(component.length).toBe(1);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+    });
+  });
+
+  it('should apply values from theme', () => {
+    const testTheme = {
+      Button: {
+        loading: true,
+      },
+    };
+
+    const component = create(
+      <ThemeProvider theme={testTheme}>
+        <ThemedButton />
+      </ThemeProvider>
     );
 
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
+    expect(component.root.findByType(ActivityIndicator)).toBeTruthy();
+    expect(component.toJSON()).toMatchSnapshot();
   });
 });

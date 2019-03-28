@@ -56,6 +56,8 @@ export default class App extends React.Component {
     } catch (error) {}
   };
 
+
+
   render() {
     const user = this.state.user;
     return (

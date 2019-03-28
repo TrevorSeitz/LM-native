@@ -8,12 +8,13 @@ import {
   Alert,
   AsyncStorage
 } from "react-native";
+// import { TextInput } from 'react-native-paper';
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection("users");
+    // this.ref = firebase.firestore().collection("users");
     this.state = {
       name: "",
       email: "",
@@ -29,12 +30,11 @@ export default class SignupScreen extends React.Component {
       Alert.alert("Passwords do not match");
       return;
     }
+    console.log("inside handleSignup")
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(user => (user = user.user))
-      // .then(user => console.log("user Name: ", this.state.name))
-      // .then(user => this._storeData(user.user))
       .then(user => {
         return firebase
           .firestore()
@@ -73,14 +73,14 @@ export default class SignupScreen extends React.Component {
         <TextInput
           placeholder="Name"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.TextInput}
           onChangeText={name => this.setState({ name })}
           value={this.state.name}
         />
         <TextInput
           placeholder="Email"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.TextInput}
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
@@ -88,7 +88,7 @@ export default class SignupScreen extends React.Component {
           secureTextEntry
           placeholder="Password"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.TextInput}
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
@@ -96,7 +96,7 @@ export default class SignupScreen extends React.Component {
           secureTextEntry
           placeholder="Confirm Password"
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.TextInput}
           onChangeText={passwordConfirm => this.setState({ passwordConfirm })}
           value={this.state.passwordConfirm}
         />
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  textInput: {
+  TextInput: {
     height: 40,
     width: "90%",
     borderColor: "gray",

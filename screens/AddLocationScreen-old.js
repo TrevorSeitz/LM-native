@@ -8,14 +8,15 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  TextInput,
+  // TextInput,
   AsyncStorage,
   FlatList
 } from "react-native";
-import { Button, Icon } from "react-native-elements";
+import { TextInput } from 'react-native-paper';
+import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { MaterialIcons } from "@expo/vector-icons";
+// import { MaterialIcons } from "@expo/vector-icons";
 import {
   Font,
   AppLoading,

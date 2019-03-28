@@ -1,22 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
-import colors from '../config/colors';
-import ViewPropTypes from '../config/ViewPropTypes';
 
-let styles = {};
+import { ViewPropTypes, withTheme } from '../config';
 
-const Divider = ({ style }) =>
-  <View style={[styles.container, style && style]} />;
+const Divider = ({ style, theme, ...rest }) => (
+  <View
+    style={StyleSheet.flatten([styles.container(theme), style])}
+    {...rest}
+  />
+);
 
 Divider.propTypes = {
   style: ViewPropTypes.style,
+  theme: PropTypes.object,
 };
 
-styles = StyleSheet.create({
-  container: {
-    height: 1,
-    backgroundColor: colors.grey5,
-  },
-});
+const styles = {
+  container: theme => ({
+    backgroundColor: theme.colors.divider,
+    height: StyleSheet.hairlineWidth,
+  }),
+};
 
-export default Divider;
+export { Divider };
+export default withTheme(Divider, 'Divider');

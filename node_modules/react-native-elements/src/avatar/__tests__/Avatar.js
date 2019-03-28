@@ -1,97 +1,243 @@
 import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import Avatar from '../Avatar';
+import { create } from 'react-test-renderer';
+
+import { ThemeProvider } from '../../config';
+import ThemedAvatar, { Avatar } from '../Avatar';
 
 describe('Avatar Component', () => {
+  jest.useFakeTimers();
+
   it('should render without issues', () => {
-    const component = shallow(<Avatar />);
+    const component = shallow(
+      <Avatar source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }} />
+    );
 
     expect(component.length).toBe(1);
     expect(toJson(component)).toMatchSnapshot();
   });
 
-  it('should render small avatar', () => {
+  it('renders rounded', () => {
+    const component = shallow(
+      <Avatar source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }} rounded />
+    );
+    expect(component.length).toBe(1);
+    expect(toJson(component)).toMatchSnapshot();
+  });
+
+  it('allows custom imageProps', () => {
     const component = shallow(
       <Avatar
-        small
-        rounded
-        source={{
-          uri:
-            'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        }}
-        activeOpacity={0.7}
-        avatarStyle={{ backgroundColor: 'peru' }}
+        source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+        imageProps={{ resizeMode: 'contain' }}
+      />
+    );
+    expect(component.length).toBe(1);
+    expect(toJson(component)).toMatchSnapshot();
+  });
+
+  it('renders touchable if onPress given', () => {
+    const component = shallow(
+      <Avatar
+        source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+        onPress={() => null}
       />
     );
 
+    expect(component.find(TouchableOpacity)).toBeTruthy();
     expect(component.length).toBe(1);
     expect(toJson(component)).toMatchSnapshot();
   });
 
-  it('should render medium avatar', () => {
-    const component = shallow(
-      <Avatar
-        medium
-        rounded
-        source={{
-          uri:
-            'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        }}
-        activeOpacity={0.7}
-      />
+  it('should apply values from theme', () => {
+    const theme = {
+      Avatar: {
+        source: { uri: 'https://i.imgur.com/0y8Ftya.jpg' },
+      },
+    };
+
+    const component = create(
+      <ThemeProvider theme={theme}>
+        <ThemedAvatar />
+      </ThemeProvider>
     );
 
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
+    expect(component.root.findByType('Image').props.source.uri).toBe(
+      'https://i.imgur.com/0y8Ftya.jpg'
+    );
+    expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it('should render large avatar', () => {
-    const component = shallow(
-      <Avatar
-        large
-        rounded
-        icon={{ color: 'blue', name: 'name', size: 22, type: 'type' }}
-        activeOpacity={0.7}
-      />
-    );
+  describe('Sizes', () => {
+    it('accepts small', () => {
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          size="small"
+        />
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
 
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
+    it('accepts medium', () => {
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          size="medium"
+        />
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
+    it('accepts large', () => {
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          size="large"
+        />
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
+    it('accepts xlarge', () => {
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          size="xlarge"
+        />
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
+    it('defaults to small if invalid string given', () => {
+      const error = jest.fn();
+      global.console.error = error;
+
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          size="asdasdas"
+        />
+      );
+
+      expect(error).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Failed prop type: Invalid prop `size` supplied to `Avatar`'
+        )
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
+    it('accepts a number', () => {
+      const component = shallow(
+        <Avatar source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }} size={30} />
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
   });
 
-  it('should render xlarge avatar', () => {
-    const component = shallow(
-      <Avatar xlarge rounded title="avatar title" activeOpacity={0.7} />
-    );
+  describe('Edit button', () => {
+    it('ios', () => {
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          showEditButton
+        />
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
 
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
+    it('android', () => {
+      jest.mock('Platform', () => ({
+        OS: 'android',
+      }));
+
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          showEditButton
+        />
+      );
+      expect(component.length).toBe(1);
+      expect(toJson(component)).toMatchSnapshot();
+    });
   });
 
-  it('should render avatar without width', () => {
-    const component = shallow(
-      <Avatar
-        height={90}
-        source={{
-          uri:
-            'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        }}
-        activeOpacity={0.7}
-        avatarStyle={{ backgroundColor: 'peru' }}
-      />
-    );
+  describe('Placeholders', () => {
+    it('renders title if given', done => {
+      shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          title="MH"
+        />
+      );
 
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
-  });
+      jest.advanceTimersByTime(200);
+      done();
+    });
 
-  it('should render avatar without height', () => {
-    const component = shallow(
-      <Avatar width={80} title="avatar title" titleStyle={{ color: 'red' }} />
-    );
+    it('renders custom', () => {
+      shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          renderPlaceholderContent={<Text>Hey</Text>}
+        />
+      );
+    });
 
-    expect(component.length).toBe(1);
-    expect(toJson(component)).toMatchSnapshot();
+    it('renders using icon prop', () => {
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          icon={{
+            name: 'home',
+            type: 'material-community',
+          }}
+          iconStyle={{
+            backgroundColor: 'red',
+          }}
+        />
+      );
+
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
+    it('renders using icon with defaults', () => {
+      const component = shallow(
+        <Avatar
+          source={{ uri: 'https://i.imgur.com/0y8Ftya.jpg' }}
+          iconStyle={{
+            backgroundColor: 'red',
+          }}
+          icon={{}}
+        />
+      );
+
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
+    it(`shouldn't show placeholder if not using source`, () => {
+      const component = shallow(
+        <Avatar
+          size="medium"
+          overlayContainerStyle={{ backgroundColor: 'pink' }}
+          title="MD"
+        />
+      );
+
+      expect(component.dive().props().style.backgroundColor).toBe(
+        'transparent'
+      );
+      expect(toJson(component)).toMatchSnapshot();
+    });
   });
 });

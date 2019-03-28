@@ -8,18 +8,11 @@ import {
 } from "react-navigation";
 
 import { View, Text, StyleSheet, Button, Platform } from "react-native";
-import Icon from "@expo/vector-icons/Ionicons";
-import { Constants, MapView } from "expo";
+// import {Ionicons} from "@expo/vector-icons";
+import { Constants, MapView, Icon } from "expo";
 import TabBarIcon from "../components/TabBarIcon";
 
 import HomeScreen from "../screens/HomeScreen";
-// import AddLocationScreen from "../screens/AddLocationScreen";
-// import ListLocationsScreen from "../screens/ListLocationsScreen";
-// import LocationDetailsScreen from "../screens/LocationDetailsScreen";
-// import EditLocationScreen from "../screens/EditLocationScreen";
-// import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
-// import ProfileScreen from "../screens/ProfileScreen";
-// import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
 
 const HomeStack = createStackNavigator(
   {
@@ -29,7 +22,7 @@ const HomeStack = createStackNavigator(
         return {
           headerTitle: "Map",
           headerLeft: (
-            <Icon
+            <Icon.Ionicons
               style={{ paddingLeft: 10 }}
               onPress={() => navigation.openDrawer()}
               name="md-menu"
@@ -39,13 +32,6 @@ const HomeStack = createStackNavigator(
         };
       }
     },
-    // AddLocation: AddLocationScreen,
-    // ListLocations: ListLocationsScreen,
-    // LocationDetails: LocationDetailsScreen,
-    // EditLocation: EditLocationScreen,
-    // AdditionalPhotos: AdditionalPhotosScreen,
-    // Profile: ProfileScreen,
-    // AdditionalImageBrowser: AdditionalImageBrowser
   },
   {
     defaultNavigationOptions: {
@@ -53,19 +39,5 @@ const HomeStack = createStackNavigator(
     }
   }
 );
-
-  // HomeScreen.navigationOptions = {
-  //   tabBarLabel: "Home!",
-  //   tabBarIcon: ({ focused }) => (
-  //     <TabBarIcon
-  //       focused={focused}
-  //       name={
-  //         Platform.OS === "ios"
-  //           ? `ios-home${focused ? "" : ""}`
-  //           : "md-home"
-  //       }
-  //     />
-  //   )
-  // };
 
 export default HomeStack;

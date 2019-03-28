@@ -8,7 +8,8 @@ import {
 } from "react-navigation";
 
 import { View, Text, StyleSheet, Button } from "react-native";
-import Icon from "@expo/vector-icons/Ionicons";
+import { Icon } from 'expo';
+// import {Ionicons} from "@expo/vector-icons";
 import { Constants, MapView } from "expo";
 
 import HomeScreen from "../screens/HomeScreen";
@@ -29,7 +30,7 @@ const AdditionalImageBrowserStack = createStackNavigator(
         return {
           headerTitle: "Edit Location",
           headerLeft: (
-            <Icon
+            <Icon.Ionicons
               style={{ paddingLeft: 10 }}
               onPress={() => navigation.openDrawer()}
               name="md-menu"

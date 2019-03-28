@@ -6,13 +6,13 @@ const settings = {};
 // export default {
 // var firebaseConfig = {
 const firebaseConfig = {
-  apiKey: "AIzaSyBybytYwjFRxcyL410pnwxbkMDMA8Df4KM",
-  src: "https://www.gstatic.com/firebasejs/5.8.0/firebase.js",
-  authDomain: "manager-8ccf4.firebaseapp.com",
-  databaseURL: "https://manager-8ccf4.firebaseio.com",
-  projectId: "manager-8ccf4",
-  storageBucket: "manager-8ccf4.appspot.com",
-  messagingSenderId: "535943620965"
+  apiKey: "AIzaSyAdb-VyzqskSDW_vxh984z7elcmNkPOYts",
+  src: "https://www.gstatic.com/firebasejs/5.9.1/firebase.js",
+  authDomain: "ellmoe.firebaseapp.com",
+  databaseURL: "https://ellmoe.firebaseio.com",
+  projectId: "ellmoe",
+  storageBucket: "ellmoe.appspot.com",
+  messagingSenderId: "774360750184"
 };
 
 // Create a reference with an initial file path and name

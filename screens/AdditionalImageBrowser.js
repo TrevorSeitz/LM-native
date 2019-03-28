@@ -13,7 +13,8 @@ import {
   Dimensions,
   AsyncStorage,
 } from 'react-native';
-import { Button, Icon } from "react-native-elements";
+import { Button } from "react-native-elements";
+
 import {
   Location,
   FileSystem

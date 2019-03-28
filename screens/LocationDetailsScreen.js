@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
+
 export default class LocationDetailsScreen extends Component {
   static navigationOptions = {
     title: "Location Details"
@@ -23,25 +24,24 @@ export default class LocationDetailsScreen extends Component {
       key: "",
       storedkey: ""
     };
+    this.storageRef = firebase.storage()
+    // var storageRef = storage.ref()
   }
 
   _storeData = async ()=> {
     try {
       await AsyncStorage.setItem("key", this.state.key);
-        // console.log("stored data key = ", this.state.key)
     } catch (error) {}
   };
 
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("key")
-      // .then((value) => {console.log("location details retrieved key = ", value)})
       .then((value) => {
       if (value !== null) {
         this.setState({ storedkey: value })
       }})
     } catch (error) {}
-    // console.log("details page page retrieved key = ", this.state.key)
   };
 
   componentDidMount() {
@@ -62,7 +62,6 @@ export default class LocationDetailsScreen extends Component {
           console.log("No such document!");
         }
       })
-      // .then(() => {console.log("Location details this.state.key", this.state.key)})
       .then(() => this._storeData())
   }
 
@@ -116,6 +115,18 @@ export default class LocationDetailsScreen extends Component {
     }
 
     const imageURL = this.state.location.imageFileLocation;
+
+// figure out how to retrieve images from storage by filename
+
+    // const imageURL = firebase.storage().ref().getFile("images/"+this.state.location.imageFileName)
+    // const imageURL = this.storageRef.ref("images/" + this.state.location.imageFileName)
+    // var ref = firebase
+    // var storage = ref.FirebaseStorage.getInstance();
+    // var storageRef = storage.getReferenceFromUrl("images/" );
+    // var  islandRef = storageRef.child(this.state.location.imageFileName);
+    // const imageURL = firebase.storage().FileDownloadTask.getFile("images/" + this.state.location.imageFileName)
+    // const imageURL = islandRef
+    console.log(imageURL)
 
     return (
       <ScrollView>

@@ -53,6 +53,9 @@ export default class AddLocationScreen extends Component {
       isLoading: false
     };
     this.ref = firebase.firestore().collection("locations");
+    var storage = firebase.storage()
+    var storageRef = storage.ref()
+    // let storageRef = FIRStorage.reference().child("images/")
   }
 
   _retrieveData = async () => {
@@ -176,22 +179,14 @@ export default class AddLocationScreen extends Component {
           imageFileLocation: "",
           isLoading: false
         });
-      })      .catch(error => {
-              console.error("Error adding document: ", error);
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+      });
 
-            });
-      // .then(() => {
-        this.setState({
-          isLoading: false
-        });
-      // })
-      // .then(() =>
-      // Alert.alert("Success!")
-    // )
-      // .catch(error => {
-        // console.error("Error adding document: ", error);
-
-      // });
+      this.setState({
+        isLoading: false
+      });
   }
 
   saveImages = async () => {
@@ -218,6 +213,9 @@ export default class AddLocationScreen extends Component {
     let extraPhotosArray = [...this.state.photosLocations]
     const blob = await this.uriToBlob(photo.file);
     console.log("upload extra image blob: ", blob)
+
+// copy this.uploadMainImage() for uploading images
+
     var ref = firebase
       .storage()
       .ref()
@@ -238,23 +236,26 @@ export default class AddLocationScreen extends Component {
   };
 
   uploadMainImage = async (uri) => {
+    console.log(this.state.imageFileName)
+    const mainImage = this.state.imageFileName
     const blob = await this.uriToBlob(uri);
     var ref = firebase
       .storage()
-      .ref()
-      .child("images/" + this.state.imageFileName);
-      console.log(this.state.latitude)
-    const snapshot = await ref.put(blob);
-    const imageFileLocation = await snapshot.ref
-      .getDownloadURL()
-      .then(result => this.setState({ imageFileLocation: result }))
+      .ref("images/")
+      .child(mainImage).put(blob)
+    // .child("images/" + this.state.imageFileName);
+    // console.log(this.state.latitude)
+    // const snapshot = await ref.put(blob);
+    // const imageFileLocation = await snapshot.ref
+      // .getDownloadURL()
+      .then(()=> this.setState({ imageFileLocation: mainImage }))
       .then(() => this.saveLocation())
       .then(() => {
         this.setState({
-          isLoading: true
+          isLoading: false
         });
       })
-      // .then(() => Alert.alert("Success!"))
+      .then(() => Alert.alert("Success!"))
       .catch(error => {
         Alert.alert(error);
       });

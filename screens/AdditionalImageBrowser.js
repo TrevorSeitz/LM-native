@@ -44,7 +44,8 @@ export default class AdditionalImageBrowser extends React.Component {
       has_next_page: true,
       isLoading: false
     }
-    this.ref = firebase.firestore().collection("locations");
+    var dbRef = firebase.firestore().collection("locations");
+
   }
 
   componentDidMount() {
@@ -57,9 +58,10 @@ export default class AdditionalImageBrowser extends React.Component {
     const { navigation } = this.props;
     const id = (this.state.key).replace(/"/g, '')
     console.log("id = ", id)
-    firebase
-      .firestore()
-      .collection("locations")
+    // firebase
+    //   .firestore()
+    //   .collection("locations")
+    dbRef
       .doc(id)
       .get()
       .then(doc => {
@@ -160,7 +162,6 @@ combineImageArrays = () => {
     this.saveToFirestore()
   })
 }
-
 
   uriToBlob = (uri)=> {
     if (uri != undefined){

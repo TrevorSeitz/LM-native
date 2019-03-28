@@ -89,7 +89,6 @@ export default class ListLocationsScreen extends Component {
       })
       .then(() => {
         this.setState({ locations: locations });
-        // this.state.locations.map((item, i) => console.log(item));
       });
   };
 
@@ -105,7 +104,7 @@ export default class ListLocationsScreen extends Component {
         </View>
       );
     }
-    console.log(this.state.locations)
+    
     return (
       <ScrollView style={styles.container}>
           {this.state.locations.map((item, i) => (

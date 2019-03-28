@@ -11,7 +11,7 @@
 
 # misc
 DataConfig.js
-/constants/ApiKeys.js
+constants/ApiKeys.js
 .DS_Store
 .env
 .env.local

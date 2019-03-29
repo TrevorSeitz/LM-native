@@ -48,6 +48,7 @@ export default class AddLocationScreen extends Component {
       imageFileName: "",
       imageFileLocation: "",
       photos: [],
+      photosNames: [],
       photosLocations: [],
       imageBrowserOpen: false,
       isLoading: false
@@ -143,8 +144,6 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
-    // console.log("in save location")
-    // console.log(this.state.photosLocations)
     this.ref
       .add({
         uid: this.state.uid,
@@ -156,6 +155,7 @@ export default class AddLocationScreen extends Component {
         contactPhone: this.state.contactPhone,
         email: this.state.email,
         description: this.state.description,
+        photosNames: this.state.photosNames,
         photosLocations: this.state.photosLocations,
         image: this.state.image,
         imageFileName: this.state.imageFileName,
@@ -173,6 +173,7 @@ export default class AddLocationScreen extends Component {
           email: "",
           description: "",
           photos: [],
+          photosNames: [],
           photosLocations: [],
           image: "nil",
           imageFileName: "",
@@ -197,7 +198,7 @@ export default class AddLocationScreen extends Component {
     // add the main photo to the array of extra photos
     allLocalPhotos.push(this.state.image.uri)
 
-    // use for loop to send each phot to storage in order
+    // use for loop to send each photos to storage in order
     for (let i = 0; i < allLocalPhotos.length; i++) {
       if (allLocalPhotos[i].file) {
         console.log("in the loop for extra photos: ", i)
@@ -211,44 +212,47 @@ export default class AddLocationScreen extends Component {
 
   uploadExtraImage = async (photo) => {
     let extraPhotosArray = [...this.state.photosLocations]
+    let extraPhotosNames = [...this.state.photosNames]
+    let photoName = "IMG_" + photo.modificationTime.toString().split(".", 1).toString() +".JPG"
     const blob = await this.uriToBlob(photo.file);
-    console.log("upload extra image blob: ", blob)
-
-// copy this.uploadMainImage() for uploading images
 
     var ref = firebase
       .storage()
-      .ref()
-      .child("images/" + photo.modificationTime.toString().split(".", 1).toString());
-    const snapshot = await ref.put(blob);
-    const imageFileLocation = snapshot.ref
+      .ref("images/")
+      .child(photoName)
+      const snapshot = await ref.put(blob);
+      const imageFileLocation = snapshot.ref
       .getDownloadURL()
       .then((result) => {
-        this.setState( prevState => ({photosLocations: [...prevState.photosLocations, result] })
+        this.setState( ({ photosLocations }) => ({ photosLocations: [...photosLocations, result] })
+          )
+      }).then((result) => {
+        this.setState( ({ photosNames }) => ({ photosNames: [...photosNames, photoName] })
           )
       })
-      .then((result) => {
-        console.log("this.state.photosLocations: ", this.state.photosLocations)
-      })
+
       .catch(error => {
         Alert.alert(error);
       });
   };
 
   uploadMainImage = async (uri) => {
-    console.log(this.state.imageFileName)
     const mainImage = this.state.imageFileName
     const blob = await this.uriToBlob(uri);
     var ref = firebase
       .storage()
-      .ref("images/")
-      .child(mainImage).put(blob)
+      .ref()
+      .child("images/" + mainImage)
     // .child("images/" + this.state.imageFileName);
     // console.log(this.state.latitude)
-    // const snapshot = await ref.put(blob);
-    // const imageFileLocation = await snapshot.ref
-      // .getDownloadURL()
-      .then(()=> this.setState({ imageFileLocation: mainImage }))
+      const snapshot = await ref.put(blob);
+      const imageFileLocation = await snapshot.ref
+      .getDownloadURL()
+      .then((result) => this.setState({ imageFileLocation: result }))
+      .then(() => {
+        this.setState( ({ photosNames }) => ({ photosNames: [...photosNames, mainImage] })
+          )
+      })
       .then(() => this.saveLocation())
       .then(() => {
         this.setState({

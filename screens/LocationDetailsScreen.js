@@ -79,7 +79,7 @@ export default class LocationDetailsScreen extends Component {
   };
 
   deleteLocation(key) {
-    // TODO: delete all photos from this location
+    // TODO: delete all photos from this location using file names
     const { navigation } = this.props;
     this.setState({
       isLoading: true
@@ -115,19 +115,7 @@ export default class LocationDetailsScreen extends Component {
     }
 
     const imageURL = this.state.location.imageFileLocation;
-
-// figure out how to retrieve images from storage by filename
-
-    // const imageURL = firebase.storage().ref().getFile("images/"+this.state.location.imageFileName)
-    // const imageURL = this.storageRef.ref("images/" + this.state.location.imageFileName)
-    // var ref = firebase
-    // var storage = ref.FirebaseStorage.getInstance();
-    // var storageRef = storage.getReferenceFromUrl("images/" );
-    // var  islandRef = storageRef.child(this.state.location.imageFileName);
-    // const imageURL = firebase.storage().FileDownloadTask.getFile("images/" + this.state.location.imageFileName)
-    // const imageURL = islandRef
-    console.log(imageURL)
-
+    // figure out how to delete images from storage by filename
     return (
       <ScrollView>
         <Card style={styles.container}>

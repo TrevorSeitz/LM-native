@@ -84,12 +84,13 @@ export default class LocationDetailsScreen extends Component {
     });
     // TODO: delete all photos from this location using file names
     const { navigation } = this.props;
+    const uid = this.state.location.uid
     let photosNames = this.state.location.photosNames
 
     for (photo in photosNames) {  //delete photos
       firebase
         .storage()
-        .ref("images/")
+        .ref("images/" + uid + "/")
         .child(photosNames[photo])
         .delete()
         .then(() => {

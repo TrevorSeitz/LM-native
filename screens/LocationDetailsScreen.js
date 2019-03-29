@@ -78,13 +78,32 @@ export default class LocationDetailsScreen extends Component {
    )
   };
 
-  deleteLocation(key) {
-    // TODO: delete all photos from this location using file names
-    const { navigation } = this.props;
+  deleteLocation = (key) => {
     this.setState({
       isLoading: true
     });
-    firebase
+    // TODO: delete all photos from this location using file names
+    const { navigation } = this.props;
+    let photosNames = this.state.location.photosNames
+
+    for (photo in photosNames) {  //delete photos
+      firebase
+        .storage()
+        .ref("images/")
+        .child(photosNames[photo])
+        .delete()
+        .then(() => {
+          console.log("Photo successfully deleted!");
+        })
+        .catch(error => {
+          console.error("Error removing document: ", error);
+          this.setState({
+            isLoading: false
+          });
+        });
+    }
+
+    firebase  // delete location
       .firestore()
       .collection("locations")
       .doc(key)

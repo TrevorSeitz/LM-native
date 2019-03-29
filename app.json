@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ELLMOE",
-    "description": "No description",
+    "description": "New DB",
     "slug": "snack-HJAp3SLG4",
     "privacy": "unlisted",
     "sdkVersion": "32.0.0",
@@ -23,6 +23,10 @@
     },
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ]
   }
 }

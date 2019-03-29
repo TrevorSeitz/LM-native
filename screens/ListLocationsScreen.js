@@ -8,7 +8,7 @@ import {
   Text,
   AsyncStorage
 } from "react-native";
-import { List, ListItem, Button, Avatar } from "react-native-elements";
+import { ListItem, Button, Avatar } from "react-native-elements";
 // import FontAwesome, { Icons } from "react-native-fontawesome";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as firebase from "firebase";
@@ -25,12 +25,6 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 export default class ListLocationsScreen extends Component {
-  // static navigationOptions = ({ navigation }) => {
-  //   return {
-  //     title: "Location List"
-  //   };
-  // };
-
   constructor() {
     super();
     this.ref = firebase.firestore().collection("locations");
@@ -94,8 +88,7 @@ export default class ListLocationsScreen extends Component {
         });
       })
       .then(() => {
-        this.setState({ locations: locations });
-        // this.state.locations.map((item, i) => console.log(item));
+        this.setState({ locations });
       });
   };
 
@@ -111,14 +104,15 @@ export default class ListLocationsScreen extends Component {
         </View>
       );
     }
+
     return (
       <ScrollView style={styles.container}>
-        <List>
           {this.state.locations.map((item, i) => (
             <ListItem
               key={i}
+              leftAvatar={{ source: { uri: item.imageFileLocation } }}
               title={item.name}
-              subtitle={item.Description}
+              subtitle={item.description}
               onPress={() => {
               this.props.navigation.push("Details", {
                 key: `${JSON.stringify(item.id)}`
@@ -126,7 +120,6 @@ export default class ListLocationsScreen extends Component {
               }}
             />
           ))}
-        </List>
       </ScrollView>
     );
   }

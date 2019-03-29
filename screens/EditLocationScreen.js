@@ -5,7 +5,6 @@ import {
   AsyncStorage,
   ActivityIndicator,
   View,
-  // TextInput,
   Image,
   Alert
 } from "react-native";
@@ -22,14 +21,14 @@ export default class EditLocationScreen extends Component {
     super();
     this.state = {
       location: {},
-      isLoading: false
+      isLoading: false,
+      key: ""
     };
 
   }
 
   componentDidMount() {
     const { navigation } = this.props;
-        // console.log("nav key", JSON.parse(navigation.getParam("key")))
     firebase
       .firestore()
       .collection("locations")
@@ -52,21 +51,13 @@ export default class EditLocationScreen extends Component {
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("key")
-      // .then((value) => {console.log("edit page retrieved key = ", value)})
       .then((value) => {
       if (value !== null) {
-        this.setState({ storedkey: value })
+        this.setState({ key: value })
       }})
     } catch (error) {}
-    // console.log("edit page page retrieved key = ", this.state.key)
   };
 
-  // _storeData = async user => {
-  //   try {
-  //     // await AsyncStorage.setItem("photosLocations", this.state.location.photosLocations)
-  //     await AsyncStorage.setItem("key", this.state.key)
-  //   } catch (error) {}
-  // };
 
   updateTextInput = (text, field) => {
     const state = this.state.location;
@@ -196,16 +187,6 @@ export default class EditLocationScreen extends Component {
             onPress={() => this.updateLocation()}
           />
         </View>
-        <View style={styles.detailButton}>
-          <Button
-            medium
-            backgroundColor={"#999999"}
-            color={"#FFFFFF"}
-            leftIcon={{ name: "delete" }}
-            title="Delete"
-            onPress={() => this.deleteLocation(this.state.key)}
-          />
-        </View>
       </ScrollView>
     );
   }
@@ -214,13 +195,12 @@ export default class EditLocationScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
+    padding: 5
   },
   subContainer: {
     flex: 1,
-    marginBottom: 20,
-    padding: 5,
-    borderBottomWidth: 2,
+    padding: 2,
+    borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC"
   },
   detailButton: {
@@ -230,9 +210,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     marginTop: 5,
-    padding: 5,
-    width: 100,
-    height: 100
+    padding: 2,
+    width: 95,
+    height: 95
   },
   imageBox: {
     flex: 1,

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Alert,
   StyleSheet,
   ScrollView,
   AsyncStorage,
@@ -23,25 +24,24 @@ export default class LocationDetailsScreen extends Component {
       key: "",
       storedkey: ""
     };
+    this.storageRef = firebase.storage()
+    // var storageRef = storage.ref()
   }
 
   _storeData = async ()=> {
     try {
       await AsyncStorage.setItem("key", this.state.key);
-        // console.log("stored data key = ", this.state.key)
     } catch (error) {}
   };
 
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("key")
-      // .then((value) => {console.log("location details retrieved key = ", value)})
       .then((value) => {
       if (value !== null) {
         this.setState({ storedkey: value })
       }})
     } catch (error) {}
-    // console.log("details page page retrieved key = ", this.state.key)
   };
 
   componentDidMount() {
@@ -62,11 +62,24 @@ export default class LocationDetailsScreen extends Component {
           console.log("No such document!");
         }
       })
-      // .then(() => {console.log("Location details this.state.key", this.state.key)})
       .then(() => this._storeData())
   }
 
+
+  confirmDelete = () => {
+    Alert.alert(
+     '',
+     'Are you sure you want to delete '+this.state.location.name+'?',
+     [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => this.deleteLocation(this.state.key)},
+     ],
+     { cancelable: false }
+   )
+  };
+
   deleteLocation(key) {
+    // TODO: delete all photos from this location using file names
     const { navigation } = this.props;
     this.setState({
       isLoading: true
@@ -102,7 +115,7 @@ export default class LocationDetailsScreen extends Component {
     }
 
     const imageURL = this.state.location.imageFileLocation;
-
+    // figure out how to delete images from storage by filename
     return (
       <ScrollView>
         <Card style={styles.container}>
@@ -166,7 +179,7 @@ export default class LocationDetailsScreen extends Component {
               color={"#FFFFFF"}
               leftIcon={{ name: "delete" }}
               title="Delete"
-              onPress={() => this.deleteLocation(this.state.key)}
+              onPress={() => this.confirmDelete()}
             />
           </View>
         </Card>
@@ -177,12 +190,13 @@ export default class LocationDetailsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
+    padding: 10
   },
   subContainer: {
     flex: 1,
-    paddingBottom: 20,
-    borderBottomWidth: 2,
+    marginBottom: 5,
+    padding: 2,
+    borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC"
   },
   activity: {
@@ -200,7 +214,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     alignItems: "stretch",
-    marginTop: 7.5,
+    marginTop: 5,
     padding: 5,
     width: 200,
     height: 200

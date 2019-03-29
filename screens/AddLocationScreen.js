@@ -48,11 +48,15 @@ export default class AddLocationScreen extends Component {
       imageFileName: "",
       imageFileLocation: "",
       photos: [],
+      photosNames: [],
       photosLocations: [],
       imageBrowserOpen: false,
       isLoading: false
     };
     this.ref = firebase.firestore().collection("locations");
+    var storage = firebase.storage()
+    var storageRef = storage.ref()
+    // let storageRef = FIRStorage.reference().child("images/")
   }
 
   _retrieveData = async () => {
@@ -140,8 +144,6 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
-    // console.log("in save location")
-    // console.log(this.state.photosLocations)
     this.ref
       .add({
         uid: this.state.uid,
@@ -153,6 +155,7 @@ export default class AddLocationScreen extends Component {
         contactPhone: this.state.contactPhone,
         email: this.state.email,
         description: this.state.description,
+        photosNames: this.state.photosNames,
         photosLocations: this.state.photosLocations,
         image: this.state.image,
         imageFileName: this.state.imageFileName,
@@ -170,28 +173,21 @@ export default class AddLocationScreen extends Component {
           email: "",
           description: "",
           photos: [],
+          photosNames: [],
           photosLocations: [],
           image: "nil",
           imageFileName: "",
           imageFileLocation: "",
           isLoading: false
         });
-      })      .catch(error => {
-              console.error("Error adding document: ", error);
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+      });
 
-            });
-      // .then(() => {
-        this.setState({
-          isLoading: false
-        });
-      // })
-      // .then(() =>
-      // Alert.alert("Success!")
-    // )
-      // .catch(error => {
-        // console.error("Error adding document: ", error);
-
-      // });
+      this.setState({
+        isLoading: false
+      });
   }
 
   saveImages = async () => {
@@ -202,15 +198,13 @@ export default class AddLocationScreen extends Component {
     // add the main photo to the array of extra photos
     allLocalPhotos.push(this.state.image.uri)
 
-    // use for loop to send each phot to storage in order
+    // use for loop to send each photos to storage in order
     for (let i = 0; i < allLocalPhotos.length; i++) {
-      // if extra photo (has photo.file) use uploadExtraImage
       if (allLocalPhotos[i].file) {
         console.log("in the loop for extra photos: ", i)
         await this.uploadExtraImage(allLocalPhotos[i])
       } else {
         console.log("in the loop for MAIN photos: ", i)
-      // else use uploadMainImage
         this.uploadMainImage(allLocalPhotos[i])
       }
     }
@@ -218,62 +212,60 @@ export default class AddLocationScreen extends Component {
 
   uploadExtraImage = async (photo) => {
     let extraPhotosArray = [...this.state.photosLocations]
+    let extraPhotosNames = [...this.state.photosNames]
+    let photoName = "IMG_" + photo.modificationTime.toString().split(".", 1).toString() +".JPG"
     const blob = await this.uriToBlob(photo.file);
-    console.log("upload extra image blob: ", blob)
+
     var ref = firebase
       .storage()
-      .ref()
-      .child("images/" + photo.modificationTime.toString().split(".", 1).toString());
-    const snapshot = await ref.put(blob);
-    const imageFileLocation = snapshot.ref
+      .ref("images/")
+      .child(photoName)
+      const snapshot = await ref.put(blob);
+      const imageFileLocation = snapshot.ref
       .getDownloadURL()
-      // .then((result) => {
-      //   extraPhotosArray = [...this.state.photosLocations]
-      // })
-      // .then((result) => {extraPhotosArray.push(result)})
       .then((result) => {
-        // this.setState({
-        //   photosLocations: [...this.state.photosLocations, ...extraPhotosArray]
-        // })
-        this.setState( prevState => ({photosLocations: [...prevState.photosLocations, result] })
+        this.setState( ({ photosLocations }) => ({ photosLocations: [...photosLocations, result] })
+          )
+      }).then((result) => {
+        this.setState( ({ photosNames }) => ({ photosNames: [...photosNames, photoName] })
           )
       })
-      .then((result) => {
-        console.log("this.state.photosLocations: ", this.state.photosLocations)
-      })
-      // .then((result) => {console.log("download url: ", result)})
+
       .catch(error => {
         Alert.alert(error);
       });
   };
 
   uploadMainImage = async (uri) => {
+    const mainImage = this.state.imageFileName
     const blob = await this.uriToBlob(uri);
-      // console.log("main blob:", blob)
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + this.state.imageFileName);
-      console.log(this.state.latitude)
-    const snapshot = await ref.put(blob);
-    // console.log("snapshot: ", snapshot)
-    const imageFileLocation = await snapshot.ref
+      .child("images/" + mainImage)
+    // .child("images/" + this.state.imageFileName);
+    // console.log(this.state.latitude)
+      const snapshot = await ref.put(blob);
+      const imageFileLocation = await snapshot.ref
       .getDownloadURL()
-      .then(result => this.setState({ imageFileLocation: result }))
+      .then((result) => this.setState({ imageFileLocation: result }))
+      .then(() => {
+        this.setState( ({ photosNames }) => ({ photosNames: [...photosNames, mainImage] })
+          )
+      })
       .then(() => this.saveLocation())
       .then(() => {
         this.setState({
-          isLoading: true
+          isLoading: false
         });
       })
-      // .then(() => Alert.alert("Success!"))
+      .then(() => Alert.alert("Success!"))
       .catch(error => {
         Alert.alert(error);
       });
   }
 
   uriToBlob = (uri)=> {
-    // console.log("inside uriToBlob")
     return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
       xhr.onerror = reject;
@@ -315,7 +307,12 @@ export default class AddLocationScreen extends Component {
           <Image style={styles.image} source={{ uri: this.state.image.uri }} />
           {this.state.photos.map((item, i) => this.renderImage(item, i))}
         </View>
-        <Button type="solid" small title="Add More Photos" disabled={!this.state.image.uri} onPress={() => this.setState({imageBrowserOpen: true})}/>
+        <View style={styles.buttonSubContainer}>
+          <Button type="solid" small title="Add More Photos" onPress={() => this.setState({imageBrowserOpen: true})}/>
+        </View>
+        <View style={styles.buttonSubContainer}>
+          <Button large title="Save" onPress={() => this.saveImages() } />
+        </View>
       </View>
     )
   }
@@ -399,7 +396,6 @@ export default class AddLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "description")}
           />
         </View>
-        <Button large title="Save" onPress={() => this.saveImages() } />
         { bottomForm }
       </ScrollView>
     );
@@ -415,7 +411,7 @@ const Button2 = ({ onPress, children }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10
+    // padding: 10
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -430,6 +426,11 @@ const styles = StyleSheet.create({
     padding: 2,
     borderBottomWidth: 1,
     borderBottomColor: "#CCCCCC"
+  },
+  buttonSubContainer: {
+    flex: 1,
+    marginBottom: 2,
+    padding: 2,
   },
   activity: {
     position: "absolute",
@@ -447,12 +448,12 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 25,
-    flexDirection: "row",
+    // flexDirection: "row",
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 5,
-    // marginBottom: 2,
+    marginBottom: 2,
     marginTop: 2,
     alignSelf: "stretch",
     justifyContent: "center"
@@ -460,14 +461,14 @@ const styles = StyleSheet.create({
   image: {
     // flex: 1,
     alignItems: "stretch",
-    width: 75
+    width: 95
   },
   photoList: {
     flexDirection: 'row',
     // marginTop: 2,
-    marginBottom: 2.5,
+    // marginBottom: 2.5,
     padding: 5,
-    height: 75,
+    height: 95,
     // flex: 1,
     alignItems: "stretch",
     justifyContent: "center"

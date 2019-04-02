@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { Platform, Text, View, StyleSheet, Thumbnail, AsyncStorage, Image } from "react-native";
-import { Constants, Location, Permissions, MapView, Marker } from "expo";
+import { Platform, Text, View, StyleSheet, Thumbnail, AsyncStorage, Image, TouchableOpacity } from "react-native";
+import { Constants, Location, Permissions, MapView, Marker, Icon } from "expo";
 import { Card } from "react-native-paper";
-// import { MapView } from "react-native-maps";
+import TabBarIcon from "../components/TabBarIcon";
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -155,6 +155,10 @@ export default class Map extends React.Component {
     );
   }
 
+  recenter = () => {
+    this._getLocationAsync()
+  }
+
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
@@ -164,6 +168,7 @@ export default class Map extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
+    console.log(location)
     this.setState({ location });
   };
 
@@ -178,6 +183,8 @@ export default class Map extends React.Component {
 
 
   render() {
+    // LOCATE ICON <ion-icon name="locate"></ion-icon>
+
     let lat = 0;
     let long = 0;
     if (this.state.errorMessage) {
@@ -192,16 +199,20 @@ export default class Map extends React.Component {
       <View style={styles.container}>
         <MapView
           style={styles.map}
-
           region={{
+          // latitude: 43.16053,
+          // longitude: -77.54364,
             latitude: lat,
-            // latitude: 43.16053,
             longitude: long,
-            // longitude: -77.54364,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
         >
+          <View>
+            <TouchableOpacity style={styles.overlay}>
+              <Icon.MaterialIcons name="my-location" size={64} color="black" />
+            </TouchableOpacity>
+          </View>
           <MapView.Marker
             coordinate={{ latitude: lat, longitude: long }}
             title={"Current Location"}
@@ -281,10 +292,23 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center"
   },
+  overlay: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "right",
+    alignContent: "flex-end",
+    justifyContent: 'flex-end',
+    marginBottom: 25
+  },
   map: {
     flex: 1,
     alignItems: "stretch",
     justifyContent: "center",
     flexDirection: "row"
-  }
+  },
+  text: {
+    fontSize: 15,
+    color: "black",
+    alignSelf: "center"
+  },
 });

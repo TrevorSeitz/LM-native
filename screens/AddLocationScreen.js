@@ -53,7 +53,9 @@ export default class AddLocationScreen extends Component {
       imageBrowserOpen: false,
       isLoading: false
     };
-    this.ref = firebase.firestore().collection("locations");
+    const userLocation = "users/" + this.state.uid
+    this.ref = firebase.firestore().collection("users")
+    // this.ref = firebase.firestore().collection(userLocation);
     var storage = firebase.storage()
     var storageRef = storage.ref()
     // let storageRef = FIRStorage.reference().child("images/")
@@ -144,7 +146,7 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
-    this.ref
+    this.ref.doc(this.state.uid).collection("locations")
       .add({
         uid: this.state.uid,
         name: this.state.name,
@@ -218,7 +220,7 @@ export default class AddLocationScreen extends Component {
 
     var ref = firebase
       .storage()
-      .ref("images/")
+      .ref("images/" + this.state.uid + "/")
       .child(photoName)
       const snapshot = await ref.put(blob);
       const imageFileLocation = snapshot.ref
@@ -242,7 +244,7 @@ export default class AddLocationScreen extends Component {
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + mainImage)
+      .child("images/" + this.state.uid + "/" + mainImage)
     // .child("images/" + this.state.imageFileName);
     // console.log(this.state.latitude)
       const snapshot = await ref.put(blob);

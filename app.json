@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ELLMOE",
-    "description": "New DB",
+    "description": "Map should center on location now",
     "slug": "snack-HJAp3SLG4",
     "privacy": "unlisted",
     "sdkVersion": "32.0.0",

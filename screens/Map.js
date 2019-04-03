@@ -156,7 +156,12 @@ export default class Map extends React.Component {
   }
 
   recenter = () => {
-    this._getLocationAsync()
+    console.log(this.state.location)
+    // this.props.navigation.push("Map")
+
+      // this.map.flyTo(feature.geometry.coordinates, 1000);
+    // }
+
   }
 
   _getLocationAsync = async () => {
@@ -168,8 +173,8 @@ export default class Map extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    console.log(location)
-    this.setState({ location });
+    // console.log(location)
+    this.setState({ location: location.coords });
   };
 
   goToLoc = (location) => {
@@ -190,14 +195,17 @@ export default class Map extends React.Component {
     if (this.state.errorMessage) {
       text = this.state.errorMessage;
     } else if (this.state.location) {
-      lat = parseFloat(this.state.location.coords.latitude, 5);
-      long = parseFloat(this.state.location.coords.longitude, 5);
+      lat = parseFloat(this.state.location.latitude, 5);
+      long = parseFloat(this.state.location.longitude, 5);
     }
     const locations = this.state.locations;
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
         <MapView
+          showsMyLocationButton={true}
+          showsCompass={true}
+          showsUserLocation={true}
           style={styles.map}
           region={{
           // latitude: 43.16053,
@@ -209,7 +217,7 @@ export default class Map extends React.Component {
           }}
         >
           <View>
-            <TouchableOpacity style={styles.overlay}>
+            <TouchableOpacity style={styles.overlay} onPress={this.recenter}>
               <Icon.MaterialIcons name="my-location" size={64} color="black" />
             </TouchableOpacity>
           </View>

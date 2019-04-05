@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ELLMOE",
-    "description": "Map should center on location now",
+    "description": "center on my location button works now",
     "slug": "snack-HJAp3SLG4",
     "privacy": "unlisted",
     "sdkVersion": "32.0.0",
@@ -13,7 +13,12 @@
       "hideExponentText": false
     },
     "packagerOpts": {
-      "assetExts": ["ttf", "mp4", "otf", "xml"]
+      "assetExts": [
+        "ttf",
+        "mp4",
+        "otf",
+        "xml"
+      ]
     },
     "ios": {
       "infoPlist": {
@@ -21,6 +26,9 @@
       },
       "supportsTablet": true
     },
-    "platforms": ["android", "ios"]
+    "platforms": [
+      "android",
+      "ios"
+    ]
   }
 }

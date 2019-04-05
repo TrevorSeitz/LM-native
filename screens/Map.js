@@ -59,52 +59,6 @@ export default class Map extends React.Component {
     } catch (error) {}
   };
 
-  _getUserAsync = async () => {
-    const { navigation } = this.props;
-    const uid = await AsyncStorage.getItem("uid");
-    let { status } = await Permissions.askAsync(Permissions.USER);
-    if (status !== "granted") {
-      this.setState({
-        errorMessage: "Permission to access user was denied"
-      });
-    }
-
-    let user = await firebase
-      .firestore()
-      .collection("users")
-      .doc(JSON.parse(navigation.getParam(uid)))
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          this.setState({
-            user: doc.data(),
-            isLoading: false
-          });
-        } else {
-          console.log("No such document!");
-        }
-      });
-    this.setState({ user });
-  };
-
-  _getUserName = async () => {
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(JSON.parse(navigation.getParam(uid)))
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          this.setState({
-            user: doc.data(),
-            isLoading: false
-          });
-        } else {
-          console.log("No such document!");
-        }
-      });
-  };
-
   _storeData = async () => {
     try {
       await AsyncStorage.setItem("locations", this.state.locations);
@@ -297,14 +251,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     opacity: 0.8,
     fontSize: 40,
-    width: 55,
-    height: 55,
+    width: 100,
+    height: 100,
     position: "absolute",
-    left: 0,
-    bottom: 0
-    // flexDirection: "row",
-    // justifyContent: "flex-end"
-    // backgroundColor: "#FF0000"
+    bottom: -50,
+    left: 0
+    // left: 145,
+    // bottom: -50
   },
   map: {
     flex: 1,

@@ -1,7 +1,18 @@
 import * as React from "react";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { Platform, Text, View, StyleSheet, Thumbnail, AsyncStorage, Image, TouchableOpacity } from "react-native";
+import {
+  Platform,
+  Alert,
+  Text,
+  View,
+  StyleSheet,
+  Thumbnail,
+  AsyncStorage,
+  Image,
+  TouchableOpacity
+} from "react-native";
+
 import { Constants, Location, Permissions, MapView, Marker, Icon } from "expo";
 import { Card } from "react-native-paper";
 import TabBarIcon from "../components/TabBarIcon";
@@ -15,83 +26,14 @@ export default class Map extends React.Component {
       location: null,
       locations: [],
       checkLocation: {},
+      latitude: 43.16053,
+      longitude: -77.54364,
       errorMessage: null
     };
     this.unsubscribe = null;
   }
 
   ref = firebase.firestore().collection("locations");
-
-  _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("uid");
-      // console.log(value)
-      if (value !== null) {
-        this.setState({ uid: value });
-      }
-    } catch (error) {}
-  };
-
-  _getUserAsync = async () => {
-    const { navigation } = this.props;
-    const uid = await AsyncStorage.getItem("uid");
-    let { status } = await Permissions.askAsync(Permissions.USER);
-    if (status !== "granted") {
-      this.setState({
-        errorMessage: "Permission to access user was denied"
-      });
-    }
-
-    let user = await firebase
-      .firestore()
-      .collection("users")
-      .doc(JSON.parse(navigation.getParam(uid)))
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          this.setState({
-            user: doc.data(),
-            // key: doc.id,
-            isLoading: false
-          });
-        } else {
-          console.log("No such document!");
-        }
-      });;
-    this.setState({ user });
-  };
-
-  _getUserName = async () => {
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(JSON.parse(navigation.getParam(uid)))
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          this.setState({
-            user: doc.data(),
-            // key: doc.id,
-            isLoading: false
-          });
-        } else {
-          console.log("No such document!");
-        }
-      });
-  }
-
-  _storeData = async () => {
-    try {
-      await AsyncStorage.setItem("locations", this.state.locations);
-    } catch (error) {}
-  };
-
-  // _storeLocation = async ()=> {
-  //   try {
-  //     await AsyncStorage.setItem("Locationkey", this.state.checkLocation);
-  //     // console.log("store location", this.state.checkLocation)
-  //   } catch (error) {}
-  // };
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -101,6 +43,27 @@ export default class Map extends React.Component {
       });
     }
   }
+
+  componentDidMount() {
+    this._getLocationAsync().then(
+      () => (this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate))
+    );
+  }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("uid");
+      if (value !== null) {
+        this.setState({ uid: value });
+      }
+    } catch (error) {}
+  };
+
+  _storeData = async () => {
+    try {
+      await AsyncStorage.setItem("locations", this.state.locations);
+    } catch (error) {}
+  };
 
   onCollectionUpdate = querySnapshot => {
     const uid = this.state.uid;
@@ -120,7 +83,7 @@ export default class Map extends React.Component {
           const contactPhone = doc.data().contactPhone;
           const email = doc.data().email;
           const description = doc.data().description;
-          const photosLocations= doc.data().photosLocations;
+          const photosLocations = doc.data().photosLocations;
           const image = doc.data().image;
           const imageFileName = doc.data().imageFileName;
           const imageFileLocation = doc.data().imageFileLocation;
@@ -143,26 +106,24 @@ export default class Map extends React.Component {
         });
       })
       .then(() => {
-        this.setState({ locations: locations });
-        // this.state.locations.map((item, i) => console.log(item));
+        this.setState({ locations });
       });
-    // .then(() => this._storeData());
   };
 
-  componentDidMount() {
-    this._getLocationAsync().then(
-      () => (this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate))
-    );
-  }
+  getCurrentPosition = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access location was denied"
+      });
+    }
 
-  recenter = () => {
-    console.log(this.state.location)
-    // this.props.navigation.push("Map")
-
-      // this.map.flyTo(feature.geometry.coordinates, 1000);
-    // }
-
-  }
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude
+    });
+  };
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -173,25 +134,18 @@ export default class Map extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    // console.log(location)
     this.setState({ location: location.coords });
   };
 
-  goToLoc = (location) => {
-    // this.setState({checkLocation: location.id})
-    // console.log(location.id)
-    // this._storeLocation()
+  goToLoc = location => {
     this.props.navigation.push("Details", {
       key: `${JSON.stringify(location.id)}`
-    })
-  }
-
+    });
+  };
 
   render() {
-    // LOCATE ICON <ion-icon name="locate"></ion-icon>
-
-    let lat = 0;
-    let long = 0;
+    let lat = this.state.latitude;
+    let long = this.state.longitude;
     if (this.state.errorMessage) {
       text = this.state.errorMessage;
     } else if (this.state.location) {
@@ -201,26 +155,22 @@ export default class Map extends React.Component {
     const locations = this.state.locations;
 
     return (
-      <View style={styles.container} >
+      <View style={styles.container}>
         <MapView
-          showsMyLocationButton={true}
-          showsCompass={true}
           showsUserLocation={true}
+          showsMyLocationButton={false}
+          showsCompass={true}
+          showsScale={true}
           style={styles.map}
           region={{
-          // latitude: 43.16053,
-          // longitude: -77.54364,
+            // latitude: 43.16053,
+            // longitude: -77.54364,
             latitude: lat,
             longitude: long,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
         >
-          <View>
-            <TouchableOpacity style={styles.overlay} onPress={this.recenter}>
-              <Icon.MaterialIcons name="my-location" size={64} color="black" />
-            </TouchableOpacity>
-          </View>
           <MapView.Marker
             coordinate={{ latitude: lat, longitude: long }}
             title={"Current Location"}
@@ -241,21 +191,17 @@ export default class Map extends React.Component {
                 coordinate={{ latitude, longitude }}
                 onCalloutPress={() => this.goToLoc(location)}
               >
-
                 <View>
-                <MapView.Callout>
-                  <Image
-                    source={{ uri: location.imageFileLocation }}
-                    style={{ width: 40, height: 40 }}
-                  />
-                </MapView.Callout>
-                <View style={styles.radius}>
-                  <View style={styles.marker} />
-                </View>
+                  <View style={styles.radius}>
+                    <View style={styles.marker} />
+                  </View>
                 </View>
               </MapView.Marker>
             );
           })}
+          <TouchableOpacity onPress={this.getCurrentPosition}>
+            <Icon.Ionicons name="md-locate" style={styles.button} />
+          </TouchableOpacity>
         </MapView>
       </View>
     );
@@ -300,13 +246,18 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center"
   },
-  overlay: {
+  button: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "right",
-    alignContent: "flex-end",
-    justifyContent: 'flex-end',
-    marginBottom: 25
+    marginBottom: 5,
+    opacity: 0.8,
+    fontSize: 40,
+    width: 100,
+    height: 100,
+    position: "absolute",
+    bottom: -50,
+    left: 0
+    // left: 145,
+    // bottom: -50
   },
   map: {
     flex: 1,
@@ -318,5 +269,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "black",
     alignSelf: "center"
-  },
+  }
 });

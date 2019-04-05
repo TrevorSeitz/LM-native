@@ -37,9 +37,9 @@ export default class ListLocationsScreen extends Component {
   }
 
   async componentWillMount() {
-    await Font.loadAsync({
-      "Material Icons": require("@expo/vector-icons/fonts/MaterialIcons.ttf")
-    });
+    // await Font.loadAsync({
+    //   "Material Icons": require("@expo/vector-icons/fonts/MaterialIcons.ttf")
+    // });
 
     this.setState({ isLoading: false });
   }
@@ -107,19 +107,19 @@ export default class ListLocationsScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-          {this.state.locations.map((item, i) => (
-            <ListItem
-              key={i}
-              leftAvatar={{ source: { uri: item.imageFileLocation } }}
-              title={item.name}
-              subtitle={item.description}
-              onPress={() => {
+        {this.state.locations.map((item, i) => (
+          <ListItem
+            key={i}
+            leftAvatar={{ source: { uri: item.imageFileLocation } }}
+            title={item.name}
+            subtitle={item.description}
+            onPress={() => {
               this.props.navigation.push("Details", {
                 key: `${JSON.stringify(item.id)}`
-                });
-              }}
-            />
-          ))}
+              });
+            }}
+          />
+        ))}
       </ScrollView>
     );
   }

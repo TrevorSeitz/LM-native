@@ -7,13 +7,14 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 import { View, Text, StyleSheet, Button } from "react-native";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 class WelcomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome Screen</Text>
+        <Text>Welcome to ELLMOE!!</Text>
+        <Text>Your Electronic Location Manager</Text>
         <Button
           title="Login"
           onPress={() => this.props.navigation.navigate("Login")}

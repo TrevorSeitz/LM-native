@@ -21,7 +21,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       uid: ""
     };
-    this._retrieveData()
+    this._retrieveData();
   }
 
   _retrieveData = async () => {
@@ -36,11 +36,9 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
-    let state = this.state.uid
     return (
       <View style={styles.container}>
-        <Text>{state}</Text>
-        <Map {...this.props}/>
+        <Map {...this.props} />
       </View>
     );
   }

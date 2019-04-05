@@ -13,8 +13,10 @@ class WelcomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome to ELLMOE!!</Text>
-        <Text>Your Electronic Location Manager</Text>
+        <View style={styles.title}>
+          <Text>Welcome to ELLMOE!!</Text>
+          <Text>Your Electronic Location Manager</Text>
+        </View>
         <Button
           title="Login"
           onPress={() => this.props.navigation.navigate("Login")}
@@ -37,6 +39,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
+  },
+  title: {
+    fontSize: 25
   }
 });
 

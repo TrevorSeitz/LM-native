@@ -8,13 +8,11 @@ import {
   Alert,
   AsyncStorage
 } from "react-native";
-// import { TextInput } from 'react-native-paper';
 import * as firebase from "firebase";
 
 export default class SignupScreen extends React.Component {
   constructor(props) {
     super(props);
-    // this.ref = firebase.firestore().collection("users");
     this.state = {
       name: "",
       email: "",
@@ -30,7 +28,7 @@ export default class SignupScreen extends React.Component {
       Alert.alert("Passwords do not match");
       return;
     }
-    console.log("inside handleSignup")
+    console.log("inside handleSignup");
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)

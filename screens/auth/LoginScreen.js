@@ -7,7 +7,6 @@ import {
   Button,
   AsyncStorage
 } from "react-native";
-// import { TextInput } from 'react-native-paper';
 import * as firebase from "firebase";
 
 export default class LoginScreen extends React.Component {

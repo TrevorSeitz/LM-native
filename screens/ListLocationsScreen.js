@@ -9,7 +9,6 @@ import {
   AsyncStorage
 } from "react-native";
 import { ListItem, Button, Avatar } from "react-native-elements";
-// import FontAwesome, { Icons } from "react-native-fontawesome";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
@@ -37,10 +36,6 @@ export default class ListLocationsScreen extends Component {
   }
 
   async componentWillMount() {
-    // await Font.loadAsync({
-    //   "Material Icons": require("@expo/vector-icons/fonts/MaterialIcons.ttf")
-    // });
-
     this.setState({ isLoading: false });
   }
 

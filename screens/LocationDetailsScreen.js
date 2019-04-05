@@ -24,11 +24,10 @@ export default class LocationDetailsScreen extends Component {
       key: "",
       storedkey: ""
     };
-    this.storageRef = firebase.storage()
-    // var storageRef = storage.ref()
+    this.storageRef = firebase.storage();
   }
 
-  _storeData = async ()=> {
+  _storeData = async () => {
     try {
       await AsyncStorage.setItem("key", this.state.key);
     } catch (error) {}
@@ -36,11 +35,11 @@ export default class LocationDetailsScreen extends Component {
 
   _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem("key")
-      .then((value) => {
-      if (value !== null) {
-        this.setState({ storedkey: value })
-      }})
+      const value = await AsyncStorage.getItem("key").then(value => {
+        if (value !== null) {
+          this.setState({ storedkey: value });
+        }
+      });
     } catch (error) {}
   };
 
@@ -57,37 +56,40 @@ export default class LocationDetailsScreen extends Component {
             location: doc.data(),
             key: doc.id,
             isLoading: false
-          })
+          });
         } else {
           console.log("No such document!");
         }
       })
-      .then(() => this._storeData())
+      .then(() => this._storeData());
   }
-
 
   confirmDelete = () => {
     Alert.alert(
-     '',
-     'Are you sure you want to delete '+this.state.location.name+'?',
-     [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: () => this.deleteLocation(this.state.key)},
-     ],
-     { cancelable: false }
-   )
+      "",
+      "Are you sure you want to delete " + this.state.location.name + "?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => this.deleteLocation(this.state.key) }
+      ],
+      { cancelable: false }
+    );
   };
 
-  deleteLocation = (key) => {
+  deleteLocation = key => {
     this.setState({
       isLoading: true
     });
-    // TODO: delete all photos from this location using file names
     const { navigation } = this.props;
-    const uid = this.state.location.uid
-    let photosNames = this.state.location.photosNames
+    const uid = this.state.location.uid;
+    let photosNames = this.state.location.photosNames;
 
-    for (photo in photosNames) {  //delete photos
+    for (photo in photosNames) {
+      //delete photos
       firebase
         .storage()
         .ref("images/" + uid + "/")
@@ -104,7 +106,7 @@ export default class LocationDetailsScreen extends Component {
         });
     }
 
-    firebase  // delete location
+    firebase // delete location
       .firestore()
       .collection("locations")
       .doc(key)
@@ -123,7 +125,7 @@ export default class LocationDetailsScreen extends Component {
         });
       });
     this.props.navigation.navigate("ListLocations");
-  }
+  };
 
   render() {
     if (this.state.isLoading) {
@@ -135,7 +137,7 @@ export default class LocationDetailsScreen extends Component {
     }
 
     const imageURL = this.state.location.imageFileLocation;
-    // figure out how to delete images from storage by filename
+
     return (
       <ScrollView>
         <Card style={styles.container}>
@@ -170,7 +172,8 @@ export default class LocationDetailsScreen extends Component {
               medium
               backgroundColor={"#999999"}
               color={"#FFFFFF"}
-              title="See Additional Photos" disabled={(this.state.location.photosLocations.length == 0)}
+              title="See Additional Photos"
+              disabled={this.state.location.photosLocations.length == 0}
               onPress={() => {
                 this.props.navigation.push("AdditionalPhotos", {
                   key: `${JSON.stringify(this.state.key)}`
@@ -250,7 +253,6 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 36,
-    // fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: "center"
   }
 });

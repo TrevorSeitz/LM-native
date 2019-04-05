@@ -40,7 +40,6 @@ export default class App extends React.Component {
 
   authListener() {
     firebase.auth().onAuthStateChanged(user => {
-      // console.log("app.js user: ", user);
       if (user) {
         this._storeData(user);
         this.setState({ user, uid: user.uid });
@@ -55,8 +54,6 @@ export default class App extends React.Component {
       await AsyncStorage.setItem("uid", user.uid);
     } catch (error) {}
   };
-
-
 
   render() {
     const user = this.state.user;

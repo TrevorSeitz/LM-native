@@ -48,7 +48,6 @@ export default class CurrentLocation extends Component {
     } else if (this.state.location) {
       lat = JSON.stringify(this.state.location.coords.latitude);
       long = JSON.stringify(this.state.location.coords.longitude);
-      // text = { lat, long };
     }
 
     return (

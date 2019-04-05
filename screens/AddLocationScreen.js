@@ -8,15 +8,13 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  // TextInput,
   AsyncStorage,
   FlatList
 } from "react-native";
-import { TextInput } from 'react-native-paper';
+import { TextInput } from "react-native-paper";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-// import { MaterialIcons } from "@expo/vector-icons";
 import {
   Font,
   AppLoading,
@@ -26,10 +24,8 @@ import {
   Location,
   MediaLibrary
 } from "expo";
-import ImageBrowser from './ImageBrowser';
-// import SaveExtraPhoto from '../components/SaveExtraPhoto'
-import SaveMainPhoto from '../components/SaveMainPhoto'
-
+import ImageBrowser from "./ImageBrowser";
+import SaveMainPhoto from "../components/SaveMainPhoto";
 
 export default class AddLocationScreen extends Component {
   constructor(props) {
@@ -53,12 +49,10 @@ export default class AddLocationScreen extends Component {
       imageBrowserOpen: false,
       isLoading: false
     };
-    const userLocation = "users/" + this.state.uid
-    this.ref = firebase.firestore().collection("users")
-    // this.ref = firebase.firestore().collection(userLocation);
-    var storage = firebase.storage()
-    var storageRef = storage.ref()
-    // let storageRef = FIRStorage.reference().child("images/")
+    const userLocation = "users/" + this.state.uid;
+    this.ref = firebase.firestore().collection("users");
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
   }
 
   _retrieveData = async () => {
@@ -72,9 +66,9 @@ export default class AddLocationScreen extends Component {
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
+    if (status !== "granted") {
       this.setState({
-        errorMessage: 'Permission to access location was denied',
+        errorMessage: "Permission to access location was denied"
       });
     }
 
@@ -84,7 +78,7 @@ export default class AddLocationScreen extends Component {
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    console.log("permission: ", result)
+    console.log("permission: ", result);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: false,
@@ -103,8 +97,7 @@ export default class AddLocationScreen extends Component {
       // aspect: 1,
       quality: 0.5,
       exif: true
-    })
-    .then(await this._getLocationAsync());
+    }).then(await this._getLocationAsync());
     const metadata = result.metadata;
     console.log("result", result.metadata);
 
@@ -146,7 +139,9 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
-    this.ref.doc(this.state.uid).collection("locations")
+    this.ref
+      .doc(this.state.uid)
+      .collection("locations")
       .add({
         uid: this.state.uid,
         name: this.state.name,
@@ -187,50 +182,59 @@ export default class AddLocationScreen extends Component {
         console.error("Error adding document: ", error);
       });
 
-      this.setState({
-        isLoading: false
-      });
+    this.setState({
+      isLoading: false
+    });
   }
 
   saveImages = async () => {
     this.setState({
       isLoading: true
     });
-    let allLocalPhotos = [...this.state.photos]
+    let allLocalPhotos = [...this.state.photos];
     // add the main photo to the array of extra photos
-    allLocalPhotos.push(this.state.image.uri)
+    allLocalPhotos.push(this.state.image.uri);
 
     // use for loop to send each photos to storage in order
     for (let i = 0; i < allLocalPhotos.length; i++) {
       if (allLocalPhotos[i].file) {
-        console.log("in the loop for extra photos: ", i)
-        await this.uploadExtraImage(allLocalPhotos[i])
+        console.log("in the loop for extra photos: ", i);
+        await this.uploadExtraImage(allLocalPhotos[i]);
       } else {
-        console.log("in the loop for MAIN photos: ", i)
-        this.uploadMainImage(allLocalPhotos[i])
+        console.log("in the loop for MAIN photos: ", i);
+        this.uploadMainImage(allLocalPhotos[i]);
       }
     }
-  }
+  };
 
-  uploadExtraImage = async (photo) => {
-    let extraPhotosArray = [...this.state.photosLocations]
-    let extraPhotosNames = [...this.state.photosNames]
-    let photoName = "IMG_" + photo.modificationTime.toString().split(".", 1).toString() +".JPG"
+  uploadExtraImage = async photo => {
+    let extraPhotosArray = [...this.state.photosLocations];
+    let extraPhotosNames = [...this.state.photosNames];
+    let photoName =
+      "IMG_" +
+      photo.modificationTime
+        .toString()
+        .split(".", 1)
+        .toString() +
+      ".JPG";
     const blob = await this.uriToBlob(photo.file);
 
     var ref = firebase
       .storage()
       .ref("images/" + this.state.uid + "/")
-      .child(photoName)
-      const snapshot = await ref.put(blob);
-      const imageFileLocation = snapshot.ref
+      .child(photoName);
+    const snapshot = await ref.put(blob);
+    const imageFileLocation = snapshot.ref
       .getDownloadURL()
-      .then((result) => {
-        this.setState( ({ photosLocations }) => ({ photosLocations: [...photosLocations, result] })
-          )
-      }).then((result) => {
-        this.setState( ({ photosNames }) => ({ photosNames: [...photosNames, photoName] })
-          )
+      .then(result => {
+        this.setState(({ photosLocations }) => ({
+          photosLocations: [...photosLocations, result]
+        }));
+      })
+      .then(result => {
+        this.setState(({ photosNames }) => ({
+          photosNames: [...photosNames, photoName]
+        }));
       })
 
       .catch(error => {
@@ -238,22 +242,21 @@ export default class AddLocationScreen extends Component {
       });
   };
 
-  uploadMainImage = async (uri) => {
-    const mainImage = this.state.imageFileName
+  uploadMainImage = async uri => {
+    const mainImage = this.state.imageFileName;
     const blob = await this.uriToBlob(uri);
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + this.state.uid + "/" + mainImage)
-    // .child("images/" + this.state.imageFileName);
-    // console.log(this.state.latitude)
-      const snapshot = await ref.put(blob);
-      const imageFileLocation = await snapshot.ref
+      .child("images/" + this.state.uid + "/" + mainImage);
+    const snapshot = await ref.put(blob);
+    const imageFileLocation = await snapshot.ref
       .getDownloadURL()
-      .then((result) => this.setState({ imageFileLocation: result }))
+      .then(result => this.setState({ imageFileLocation: result }))
       .then(() => {
-        this.setState( ({ photosNames }) => ({ photosNames: [...photosNames, mainImage] })
-          )
+        this.setState(({ photosNames }) => ({
+          photosNames: [...photosNames, mainImage]
+        }));
       })
       .then(() => this.saveLocation())
       .then(() => {
@@ -265,9 +268,9 @@ export default class AddLocationScreen extends Component {
       .catch(error => {
         Alert.alert(error);
       });
-  }
+  };
 
-  uriToBlob = (uri)=> {
+  uriToBlob = uri => {
     return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
       xhr.onerror = reject;
@@ -282,55 +285,64 @@ export default class AddLocationScreen extends Component {
     });
   };
 
-  imageBrowserCallback = (callback) => {
-    callback.then((photos) => {
-      this.setState({
-        imageBrowserOpen: false,
-        photos: photos
+  imageBrowserCallback = callback => {
+    callback
+      .then(photos => {
+        this.setState({
+          imageBrowserOpen: false,
+          photos: photos
+        });
       })
-    })
-    .catch((e) => console.log(e))
-  }
+      .catch(e => console.log(e));
+  };
 
   renderImage = (item, i) => {
-    return(
+    return (
       <Image
-        style={{height: 75, width: 75}}
-        source={{uri: item.file}}
+        style={{ height: 75, width: 75 }}
+        source={{ uri: item.file }}
         key={i}
       />
-    )
-  }
+    );
+  };
 
   renderAdditionalImages = () => {
-    return(
+    return (
       <View style={styles.container}>
         <View style={styles.photoList}>
           <Image style={styles.image} source={{ uri: this.state.image.uri }} />
           {this.state.photos.map((item, i) => this.renderImage(item, i))}
         </View>
         <View style={styles.buttonSubContainer}>
-          <Button type="solid" small title="Add More Photos" onPress={() => this.setState({imageBrowserOpen: true})}/>
+          <Button
+            type="solid"
+            small
+            title="Add More Photos"
+            onPress={() => this.setState({ imageBrowserOpen: true })}
+          />
         </View>
         <View style={styles.buttonSubContainer}>
-          <Button large title="Save" onPress={() => this.saveImages() } />
+          <Button large title="Save" onPress={() => this.saveImages()} />
         </View>
       </View>
-    )
-  }
+    );
+  };
 
   renderGetMainImage = () => {
-    return(
+    return (
       <View>
         <Text style={styles.buttonText}>Add Main Photo</Text>
         <View style={styles.buttonContainer}>
-          <View style={{ flex: 1 }}><Button2 onPress={this.selectPicture}>Gallery</Button2></View>
-          <View style={{ flex: 1 }}><Button2 onPress={this.takePicture}>Take Picture</Button2></View>
+          <View style={{ flex: 1 }}>
+            <Button2 onPress={this.selectPicture}>Gallery</Button2>
+          </View>
+          <View style={{ flex: 1 }}>
+            <Button2 onPress={this.takePicture}>Take Picture</Button2>
+          </View>
         </View>
       </View>
-    )
-  }
-
+    );
+  };
 
   render() {
     let bottomForm;
@@ -343,13 +355,13 @@ export default class AddLocationScreen extends Component {
     }
 
     if (this.state.image.uri) {
-      bottomForm = this.renderAdditionalImages()
+      bottomForm = this.renderAdditionalImages();
     } else {
-      bottomForm = this.renderGetMainImage()
+      bottomForm = this.renderGetMainImage();
     }
 
     if (this.state.imageBrowserOpen) {
-      return(<ImageBrowser max={4} callback={this.imageBrowserCallback}/>);
+      return <ImageBrowser max={4} callback={this.imageBrowserCallback} />;
     }
 
     return (
@@ -398,7 +410,7 @@ export default class AddLocationScreen extends Component {
             onChangeText={text => this.updateTextInput(text, "description")}
           />
         </View>
-        { bottomForm }
+        {bottomForm}
       </ScrollView>
     );
   }
@@ -412,11 +424,10 @@ const Button2 = ({ onPress, children }) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // padding: 10
+    flex: 1
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 2,
     padding: 5,
     alignItems: "center",
@@ -432,7 +443,7 @@ const styles = StyleSheet.create({
   buttonSubContainer: {
     flex: 1,
     marginBottom: 2,
-    padding: 2,
+    padding: 2
   },
   activity: {
     position: "absolute",
@@ -450,7 +461,6 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 25,
-    // flexDirection: "row",
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
@@ -461,20 +471,14 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   image: {
-    // flex: 1,
     alignItems: "stretch",
     width: 95
   },
   photoList: {
-    flexDirection: 'row',
-    // marginTop: 2,
-    // marginBottom: 2.5,
+    flexDirection: "row",
     padding: 5,
     height: 95,
-    // flex: 1,
     alignItems: "stretch",
     justifyContent: "center"
   }
 });
-
-// export default AddLocationScreen;

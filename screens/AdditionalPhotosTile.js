@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
   Dimensions,
   Image,
-  TouchableHighlight,
-} from 'react-native';
-const { width } = Dimensions.get('window')
+  TouchableHighlight
+} from "react-native";
+const { width } = Dimensions.get("window");
 
 export default class AdditionalPhotosTile extends React.PureComponent {
   render() {
@@ -16,16 +16,15 @@ export default class AdditionalPhotosTile extends React.PureComponent {
     if (!item) return null;
     return (
       <TouchableHighlight
-        style={{opacity: selected ? 0.5 : 1}}
-        underlayColor='transparent'
+        style={{ opacity: selected ? 0.5 : 1 }}
+        underlayColor="transparent"
         onPress={() => selectImage(index)}
       >
         <Image
-          style={{width: width/2, height: width/2}}
-          source={{uri: item}}
+          style={{ width: width / 2, height: width / 2 }}
+          source={{ uri: item }}
         />
       </TouchableHighlight>
-    )
+    );
   }
 }
-// export default AdditionalPhotosTile;

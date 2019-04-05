@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {
-  createBottomTabNavigator
-} from "react-navigation";import { Platform } from "react-native";
+import { createBottomTabNavigator } from "react-navigation";
+import { Platform } from "react-native";
 import TabBarIcon from "../components/TabBarIcon";
 
 import HomeStack from "../stacks/HomeStack";
@@ -9,78 +8,69 @@ import AddLocationStack from "../stacks/AddLocationStack";
 import ListLocationsStack from "../stacks/ListLocationsStack";
 import ProfileStack from "../stacks/ProfileStack";
 
-// import HomeScreen from "../screens/HomeScreen";
-// import ListLocationsScreen from "../screens/ListLocationsScreen";
-// import AddLocationScreen from "../screens/AddLocationScreen";
-// import ProfileScreen from "../screens/ProfileScreen";
-
 const DashboardTabNavigator = createBottomTabNavigator(
   // this is where the tab navigator is built
   {
-      Map: {
-        screen: HomeStack,
-        navigationOptions: {
-          tabBarLabel: "Map",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon
-              focused={focused}
-              name={
-                Platform.OS === "ios"
-                  ? `ios-navigate${focused ? "" : ""}`
-                  : "md-navigate"
-              }
-            />
-          )
-        }
-      },
-      "Add Location": {
-        screen: AddLocationStack,
-        navigationOptions: {
-          tabBarLabel: "Add Location",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon
-              focused={focused}
-              name={
-                Platform.OS === "ios"
-                  ? `ios-add${focused ? "" : ""}`
-                  : "md-add"
-              }
-            />
-          )
-        }
-      },
-      "List Locations":  {
-        screen: ListLocationsStack,
-        navigationOptions: {
-          tabBarLabel: "List Locations",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon
-              focused={focused}
-              name={
-                Platform.OS === "ios"
-                  ? `ios-list${focused ? "" : ""}`
-                  : "md-list"
-              }
-            />
-          )
-        }
-      },
-      "Profile":  {
-        screen: ProfileStack,
-        navigationOptions: {
-          tabBarLabel: "Profile",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon
-              focused={focused}
-              name={
-                Platform.OS === "ios"
-                  ? `ios-person${focused ? "" : ""}`
-                  : "md-person"
-              }
-            />
-          )
-        }
-      },
+    Map: {
+      screen: HomeStack,
+      navigationOptions: {
+        tabBarLabel: "Map",
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+            focused={focused}
+            name={
+              Platform.OS === "ios"
+                ? `ios-navigate${focused ? "" : ""}`
+                : "md-navigate"
+            }
+          />
+        )
+      }
+    },
+    "Add Location": {
+      screen: AddLocationStack,
+      navigationOptions: {
+        tabBarLabel: "Add Location",
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+            focused={focused}
+            name={
+              Platform.OS === "ios" ? `ios-add${focused ? "" : ""}` : "md-add"
+            }
+          />
+        )
+      }
+    },
+    "List Locations": {
+      screen: ListLocationsStack,
+      navigationOptions: {
+        tabBarLabel: "List Locations",
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+            focused={focused}
+            name={
+              Platform.OS === "ios" ? `ios-list${focused ? "" : ""}` : "md-list"
+            }
+          />
+        )
+      }
+    },
+    Profile: {
+      screen: ProfileStack,
+      navigationOptions: {
+        tabBarLabel: "Profile",
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+            focused={focused}
+            name={
+              Platform.OS === "ios"
+                ? `ios-person${focused ? "" : ""}`
+                : "md-person"
+            }
+          />
+        )
+      }
+    }
   },
   {
     navigationOptions: ({ navigation }) => {
@@ -93,4 +83,4 @@ const DashboardTabNavigator = createBottomTabNavigator(
   }
 );
 
-export default DashboardTabNavigator
+export default DashboardTabNavigator;

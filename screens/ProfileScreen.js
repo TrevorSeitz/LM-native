@@ -11,7 +11,7 @@ import {
   // TextInput,
   AsyncStorage
 } from "react-native";
-import { TextInput } from 'react-native-paper';
+import { TextInput } from "react-native-paper";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
@@ -52,8 +52,7 @@ export default class ProfileScreen extends Component {
     const value = await AsyncStorage.getItem("uid")
       .then(value => {
         if (value !== null) {
-          this.setState({ uid: value })
-          console.log("Profile retrieveData value: ", value)
+          this.setState({ uid: value });
           this.onCollectionUpdate(value);
         }
         return value;
@@ -70,7 +69,6 @@ export default class ProfileScreen extends Component {
       .then(doc => {
         if (doc.exists) {
           this.setState({
-            // uid: uid,
             name: doc.data().name || "",
             phone: doc.data().phone || "",
             email: doc.data().email || "",
@@ -80,7 +78,6 @@ export default class ProfileScreen extends Component {
           });
         }
       });
-      console.log("Profile state: ", this.state)
   };
 
   updateTextInput = (text, field) => {
@@ -174,23 +171,13 @@ export default class ProfileScreen extends Component {
         })
       )
       .then(docRef => {
-        // this.setState({
-        //   uid: "",
-        //   name: "",
-        //   phone: "",
-        //   email: "",
-        //   avatar: {},
-        //   avatarFileName: "",
-        //   avatarFileLocation: "",
-        //   isLoading: false
-        // });
         this.setState({
           isLoading: false
-        })
+        });
         this.props.navigation.navigate("Map");
       })
       .catch(error => {
-        // console.error("Error adding document: ", error);
+        console.error("Error adding document: ", error);
         this.setState({
           isLoading: false
         });

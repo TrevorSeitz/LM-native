@@ -6,7 +6,6 @@ import {
 } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
@@ -24,11 +23,7 @@ ListLocationsScreen.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-list${focused ? "" : ""}`
-          : "md-list"
-      }
+      name={Platform.OS === "ios" ? `ios-list${focused ? "" : ""}` : "md-list"}
     />
   )
 };

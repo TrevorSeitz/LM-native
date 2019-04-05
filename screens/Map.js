@@ -171,15 +171,6 @@ export default class Map extends React.Component {
             longitudeDelta: 0.0421
           }}
         >
-          <MapView.Marker
-            coordinate={{ latitude: lat, longitude: long }}
-            title={"Current Location"}
-          >
-            <View style={styles.radius}>
-              <View style={styles.currentMarker} />
-            </View>
-          </MapView.Marker>
-
           {this.state.locations.map((location, i) => {
             const latitude = Number(location.latitude);
             const longitude = Number(location.longitude);

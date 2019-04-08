@@ -190,7 +190,10 @@ export default class Map extends React.Component {
               </MapView.Marker>
             );
           })}
-          <TouchableOpacity onPress={this.getCurrentPosition}>
+          <TouchableOpacity
+            style={styles.touchableArea}
+            onPress={this.getCurrentPosition}
+          >
             <Icon.Ionicons name="md-locate" style={styles.button} />
           </TouchableOpacity>
         </MapView>
@@ -237,16 +240,34 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center"
   },
-  button: {
-    flex: 1,
-    marginBottom: 5,
+  touchableArea: {
+    // flex: 1,
+    // flexDirection: "row",
+    // marginBottom: 5,
     opacity: 0.8,
     fontSize: 40,
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     position: "absolute",
-    bottom: -50,
-    left: 0
+    // backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    right: 0,
+    bottom: 0
+  },
+  button: {
+    // flex: 1,
+    // marginBottom: 5,
+    opacity: 0.8,
+    fontSize: 40,
+    width: 40,
+    height: 40,
+    // position: "absolute",
+    // bottom: 0,
+    // left: 0,
+    // backgroundColor: "#FF0000",
+    alignItems: "center",
+    justifyContent: "center"
     // left: 145,
     // bottom: -50
   },

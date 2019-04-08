@@ -40,6 +40,7 @@ export default class AdditionalPhotosScreen extends Component {
   }
 
   selectImage = index => {
+    console.log("AdditionalPhotosScreen");
     let newSelected = { ...this.state.selected };
     if (newSelected[index]) {
       delete newSelected[index];
@@ -51,7 +52,6 @@ export default class AdditionalPhotosScreen extends Component {
     this.setState({ selected: newSelected });
     // create array of indexes to be deleted
     let toDelete = Object.keys(newSelected);
-
     this.setState({ toDelete });
   };
 

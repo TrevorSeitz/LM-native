@@ -80,7 +80,6 @@ export default class AddLocationScreen extends Component {
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    console.log("permission: ", result);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: false,
@@ -101,15 +100,12 @@ export default class AddLocationScreen extends Component {
       exif: true
     }).then(await this._getLocationAsync());
     const metadata = result.metadata;
-    console.log("result", result.metadata);
-
     result.exif.GPSLatitude = JSON.stringify(
       this.state.location.coords.latitude
     );
     result.exif.GPSLongitude = JSON.stringify(
       this.state.location.coords.longitude
     );
-    console.log("result", result);
     this.processImage(result, metadata);
   };
 
@@ -141,8 +137,6 @@ export default class AddLocationScreen extends Component {
   };
 
   saveLocation() {
-    // console.log("in save location")
-    // console.log(this.state.photosLocations)
     this.ref
       .add({
         uid: this.state.uid,
@@ -198,10 +192,10 @@ export default class AddLocationScreen extends Component {
     // use for loop to send each phot to storage in order
     for (let i = 0; i < allLocalPhotos.length; i++) {
       if (allLocalPhotos[i].file) {
-        console.log("in the loop for extra photos: ", i);
+        // console.log("in the loop for extra photos: ", i);
         await this.uploadExtraImage(allLocalPhotos[i]);
       } else {
-        console.log("in the loop for MAIN photos: ", i);
+        // console.log("in the loop for MAIN photos: ", i);
         this.uploadMainImage(allLocalPhotos[i]);
       }
     }
@@ -210,10 +204,6 @@ export default class AddLocationScreen extends Component {
   uploadExtraImage = async photo => {
     let extraPhotosArray = [...this.state.photosLocations];
     const blob = await this.uriToBlob(photo.file);
-    console.log("upload extra image blob: ", blob);
-
-    // copy this.uploadMainImage() for uploading images
-
     var ref = firebase
       .storage()
       .ref()
@@ -232,33 +222,25 @@ export default class AddLocationScreen extends Component {
           photosLocations: [...prevState.photosLocations, result]
         }));
       })
-      .then(result => {
-        console.log("this.state.photosLocations: ", this.state.photosLocations);
-      })
       .catch(error => {
         Alert.alert(error);
       });
   };
 
   uploadMainImage = async uri => {
-    console.log(this.state.imageFileName);
-    const mainImage = this.state.imageFileName;
     const blob = await this.uriToBlob(uri);
     var ref = firebase
       .storage()
-      .ref("images/")
-      .child(mainImage)
-      .put(blob)
-      // .child("images/" + this.state.imageFileName);
-      // console.log(this.state.latitude)
-      // const snapshot = await ref.put(blob);
-      // const imageFileLocation = await snapshot.ref
-      // .getDownloadURL()
-      .then(() => this.setState({ imageFileLocation: mainImage }))
+      .ref()
+      .child("images/" + this.state.imageFileName);
+    const snapshot = await ref.put(blob);
+    const imageFileLocation = await snapshot.ref
+      .getDownloadURL()
+      .then(result => this.setState({ imageFileLocation: result }))
       .then(() => this.saveLocation())
       .then(() => {
         this.setState({
-          isLoading: false
+          isLoading: true
         });
       })
       .then(() => Alert.alert("Success!"))

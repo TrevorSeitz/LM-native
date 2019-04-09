@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Text,
+  // TextInput,
   AsyncStorage,
   FlatList
 } from "react-native";
@@ -15,6 +16,7 @@ import { TextInput } from "react-native-paper";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
+// import { MaterialIcons } from "@expo/vector-icons";
 import {
   Font,
   AppLoading,
@@ -25,6 +27,7 @@ import {
   MediaLibrary
 } from "expo";
 import ImageBrowser from "./ImageBrowser";
+// import SaveExtraPhoto from '../components/SaveExtraPhoto'
 import SaveMainPhoto from "../components/SaveMainPhoto";
 
 export default class AddLocationScreen extends Component {
@@ -44,15 +47,14 @@ export default class AddLocationScreen extends Component {
       imageFileName: "",
       imageFileLocation: "",
       photos: [],
-      photosNames: [],
       photosLocations: [],
       imageBrowserOpen: false,
       isLoading: false
     };
-    const userLocation = "users/" + this.state.uid;
-    this.ref = firebase.firestore().collection("users");
+    this.ref = firebase.firestore().collection("locations");
     var storage = firebase.storage();
     var storageRef = storage.ref();
+    // let storageRef = FIRStorage.reference().child("images/")
   }
 
   _retrieveData = async () => {
@@ -78,7 +80,6 @@ export default class AddLocationScreen extends Component {
 
   selectPicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    console.log("permission: ", result);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: false,
@@ -99,15 +100,12 @@ export default class AddLocationScreen extends Component {
       exif: true
     }).then(await this._getLocationAsync());
     const metadata = result.metadata;
-    console.log("result", result.metadata);
-
     result.exif.GPSLatitude = JSON.stringify(
       this.state.location.coords.latitude
     );
     result.exif.GPSLongitude = JSON.stringify(
       this.state.location.coords.longitude
     );
-    console.log("result", result);
     this.processImage(result, metadata);
   };
 
@@ -140,8 +138,6 @@ export default class AddLocationScreen extends Component {
 
   saveLocation() {
     this.ref
-      .doc(this.state.uid)
-      .collection("locations")
       .add({
         uid: this.state.uid,
         name: this.state.name,
@@ -152,7 +148,6 @@ export default class AddLocationScreen extends Component {
         contactPhone: this.state.contactPhone,
         email: this.state.email,
         description: this.state.description,
-        photosNames: this.state.photosNames,
         photosLocations: this.state.photosLocations,
         image: this.state.image,
         imageFileName: this.state.imageFileName,
@@ -170,7 +165,6 @@ export default class AddLocationScreen extends Component {
           email: "",
           description: "",
           photos: [],
-          photosNames: [],
           photosLocations: [],
           image: "nil",
           imageFileName: "",
@@ -195,13 +189,13 @@ export default class AddLocationScreen extends Component {
     // add the main photo to the array of extra photos
     allLocalPhotos.push(this.state.image.uri);
 
-    // use for loop to send each photos to storage in order
+    // use for loop to send each phot to storage in order
     for (let i = 0; i < allLocalPhotos.length; i++) {
       if (allLocalPhotos[i].file) {
-        console.log("in the loop for extra photos: ", i);
+        // console.log("in the loop for extra photos: ", i);
         await this.uploadExtraImage(allLocalPhotos[i]);
       } else {
-        console.log("in the loop for MAIN photos: ", i);
+        // console.log("in the loop for MAIN photos: ", i);
         this.uploadMainImage(allLocalPhotos[i]);
       }
     }
@@ -209,59 +203,44 @@ export default class AddLocationScreen extends Component {
 
   uploadExtraImage = async photo => {
     let extraPhotosArray = [...this.state.photosLocations];
-    let extraPhotosNames = [...this.state.photosNames];
-    let photoName =
-      "IMG_" +
-      photo.modificationTime
-        .toString()
-        .split(".", 1)
-        .toString() +
-      ".JPG";
     const blob = await this.uriToBlob(photo.file);
-
     var ref = firebase
       .storage()
-      .ref("images/" + this.state.uid + "/")
-      .child(photoName);
+      .ref()
+      .child(
+        "images/" +
+          photo.modificationTime
+            .toString()
+            .split(".", 1)
+            .toString()
+      );
     const snapshot = await ref.put(blob);
     const imageFileLocation = snapshot.ref
       .getDownloadURL()
       .then(result => {
-        this.setState(({ photosLocations }) => ({
-          photosLocations: [...photosLocations, result]
+        this.setState(prevState => ({
+          photosLocations: [...prevState.photosLocations, result]
         }));
       })
-      .then(result => {
-        this.setState(({ photosNames }) => ({
-          photosNames: [...photosNames, photoName]
-        }));
-      })
-
       .catch(error => {
         Alert.alert(error);
       });
   };
 
   uploadMainImage = async uri => {
-    const mainImage = this.state.imageFileName;
     const blob = await this.uriToBlob(uri);
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + this.state.uid + "/" + mainImage);
+      .child("images/" + this.state.imageFileName);
     const snapshot = await ref.put(blob);
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => this.setState({ imageFileLocation: result }))
-      .then(() => {
-        this.setState(({ photosNames }) => ({
-          photosNames: [...photosNames, mainImage]
-        }));
-      })
       .then(() => this.saveLocation())
       .then(() => {
         this.setState({
-          isLoading: false
+          isLoading: true
         });
       })
       .then(() => Alert.alert("Success!"))
@@ -425,6 +404,7 @@ const Button2 = ({ onPress, children }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1
+    // padding: 10
   },
   buttonContainer: {
     flexDirection: "row",
@@ -461,6 +441,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 25,
+    // flexDirection: "row",
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
@@ -471,13 +452,17 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   image: {
+    // flex: 1,
     alignItems: "stretch",
     width: 95
   },
   photoList: {
     flexDirection: "row",
+    // marginTop: 2,
+    // marginBottom: 2.5,
     padding: 5,
     height: 95,
+    // flex: 1,
     alignItems: "stretch",
     justifyContent: "center"
   }

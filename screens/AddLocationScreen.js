@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  // TextInput,
   AsyncStorage,
   FlatList
 } from "react-native";
@@ -16,7 +15,7 @@ import { TextInput } from "react-native-paper";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-// import { MaterialIcons } from "@expo/vector-icons";
+import { FileSystem } from "expo";
 import {
   Font,
   AppLoading,
@@ -27,7 +26,6 @@ import {
   MediaLibrary
 } from "expo";
 import ImageBrowser from "./ImageBrowser";
-// import SaveExtraPhoto from '../components/SaveExtraPhoto'
 import SaveMainPhoto from "../components/SaveMainPhoto";
 
 export default class AddLocationScreen extends Component {
@@ -54,7 +52,6 @@ export default class AddLocationScreen extends Component {
     this.ref = firebase.firestore().collection("locations");
     var storage = firebase.storage();
     var storageRef = storage.ref();
-    // let storageRef = FIRStorage.reference().child("images/")
   }
 
   _retrieveData = async () => {
@@ -112,6 +109,7 @@ export default class AddLocationScreen extends Component {
   processImage = async (result, metadata) => {
     if (!result.cancelled) {
       this.setState({ image: result });
+      console.log(result);
       const asset = await MediaLibrary.createAssetAsync(result.uri);
       let lat = parseFloat(result.exif.GPSLatitude, 5);
       let long = parseFloat(result.exif.GPSLongitude, 5);
@@ -229,14 +227,24 @@ export default class AddLocationScreen extends Component {
 
   uploadMainImage = async uri => {
     const blob = await this.uriToBlob(uri);
+    const fileName = this.state.imageFileName;
+    const location = this.state.imageFileLocation;
+    const cache = FileSystem.cacheDirectory + fileName;
     var ref = firebase
       .storage()
       .ref()
-      .child("images/" + this.state.imageFileName);
+      .child("images/" + fileName);
     const snapshot = await ref.put(blob);
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => this.setState({ imageFileLocation: result }))
+      .then(result => {
+        FileSystem.downloadAsync(
+          this.state.imageFileLocation,
+          // result,
+          cache
+        );
+      })
       .then(() => this.saveLocation())
       .then(() => {
         this.setState({
@@ -276,6 +284,7 @@ export default class AddLocationScreen extends Component {
   };
 
   renderImage = (item, i) => {
+    console.log(item);
     return (
       <Image
         style={{ height: 75, width: 75 }}

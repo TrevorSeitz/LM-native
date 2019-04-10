@@ -67,6 +67,7 @@ export default class ListLocationsScreen extends Component {
           const email = doc.data().email;
           const description = doc.data().description;
           const imageFileLocation = doc.data().imageFileLocation;
+          const image = doc.data().image;
           locations.push({
             id: id,
             uid: uid,
@@ -78,11 +79,13 @@ export default class ListLocationsScreen extends Component {
             contactPhone: contactPhone,
             email: email,
             description: description,
+            image: image,
             imageFileLocation: imageFileLocation
           });
         });
       })
       .then(() => {
+        console.log(locations[0]);
         this.setState({ locations });
       });
   };
@@ -105,7 +108,7 @@ export default class ListLocationsScreen extends Component {
         {this.state.locations.map((item, i) => (
           <ListItem
             key={i}
-            leftAvatar={{ source: { uri: item.imageFileLocation } }}
+            leftAvatar={{ source: { uri: item.image.uri } }}
             title={item.name}
             subtitle={item.description}
             onPress={() => {

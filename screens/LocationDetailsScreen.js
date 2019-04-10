@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { List, ListItem, Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
+import { FileSystem } from "expo";
 
 export default class LocationDetailsScreen extends Component {
   static navigationOptions = {
@@ -127,6 +128,14 @@ export default class LocationDetailsScreen extends Component {
     this.props.navigation.navigate("ListLocations");
   };
 
+  getImage = () => {
+    if (this.state.location.image.uri) {
+      return this.state.location.image.uri;
+    } else {
+      return this.state.location.imageFileLocation;
+    }
+  };
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -136,7 +145,7 @@ export default class LocationDetailsScreen extends Component {
       );
     }
 
-    const imageURL = this.state.location.imageFileLocation;
+    const imageURL = this.getImage();
 
     return (
       <ScrollView>

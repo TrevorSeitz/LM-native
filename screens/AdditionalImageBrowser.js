@@ -52,7 +52,7 @@ export default class AdditionalImageBrowser extends React.Component {
     // retreive the Location information from the DB
     const { navigation } = this.props;
     const id = this.state.key.replace(/"/g, "");
-    console.log("id = ", id);
+    // console.log("id = ", id);
     firebase
       .firestore()
       .collection("locations")
@@ -109,12 +109,12 @@ export default class AdditionalImageBrowser extends React.Component {
     }
 
     Promise.all(promises)
-      .then(() => {
-        console.log(
-          "step 1 - saveImages promise -  this.state.blobs = ",
-          this.state.blobs
-        );
-      })
+      // .then(() => {
+      //   console.log(
+      //     "step 1 - saveImages promise -  this.state.blobs = ",
+      //     this.state.blobs
+      //   );
+      // })
       .then(() => {
         this.blobToSavedImage();
       });
@@ -135,12 +135,12 @@ export default class AdditionalImageBrowser extends React.Component {
     }
 
     Promise.all(promises)
-      .then(() => {
-        console.log(
-          "step 2 - blobToSavedImage promise - this.state.photosToCache = ",
-          this.state.photosToCache
-        );
-      })
+      // .then(() => {
+      //   console.log(
+      //     "step 2 - blobToSavedImage promise - this.state.photosToCache = ",
+      //     this.state.photosToCache
+      //   );
+      // })
       .then(() => {
         this.combineImageArrays();
       });
@@ -154,12 +154,12 @@ export default class AdditionalImageBrowser extends React.Component {
       }))
     );
     Promise.all(promises)
-      .then(() => {
-        console.log(
-          "step 3 - combined arrays promise - this.state.photosLocations = ",
-          this.state.photosLocations
-        );
-      })
+      // .then(() => {
+      //   console.log(
+      //     "step 3 - combined arrays promise - this.state.photosLocations = ",
+      //     this.state.photosLocations
+      //   );
+      // })
       .then(() => {
         this.saveToFirestore();
       });
@@ -183,7 +183,7 @@ export default class AdditionalImageBrowser extends React.Component {
   };
 
   uploadExtraImages = async blob => {
-    console.log("in uploadExtraImages");
+    // console.log("in uploadExtraImages");
     var ref = firebase
       .storage()
       .ref()
@@ -194,16 +194,16 @@ export default class AdditionalImageBrowser extends React.Component {
             .split(".", 1)
             .toString()
       );
-    console.log("before snapshot");
+    // console.log("before snapshot");
     const snapshot = await ref.put(blob);
-    console.log("before imageFileLocation");
+    // console.log("before imageFileLocation");
     const imageFileLocation = await snapshot.ref
       .getDownloadURL()
       .then(result => {
         this.setState(({ photosToCache }) => ({
           photosToCache: [...photosToCache, result]
         }));
-        console.log("after result save");
+        // console.log("after result save");
       })
       .catch(error => {
         Alert.alert(error);
@@ -230,12 +230,12 @@ export default class AdditionalImageBrowser extends React.Component {
     );
 
     Promise.all(promises)
-      .then(() => {
-        console.log(
-          "step 4 - saveToFirestore  promise - this.state.photosLocations = ",
-          this.state.photosLocations
-        );
-      })
+      // .then(() => {
+      //   console.log(
+      //     "step 4 - saveToFirestore  promise - this.state.photosLocations = ",
+      //     this.state.photosLocations
+      //   );
+      // })
       .then(() => {
         this.props.navigation.push("EditAdditionalPhotos", {
           photosLocations: this.state.photosLocations
@@ -281,9 +281,10 @@ export default class AdditionalImageBrowser extends React.Component {
     });
     promises.push(this.saveImages(selectedPhotos));
 
-    Promise.all(promises).then(() => {
-      console.log("first/Main promise complete??!!");
-    });
+    Promise.all(promises);
+    // .then(() => {
+    //   console.log("first/Main promise complete??!!");
+    // });
   };
 
   renderHeader = () => {

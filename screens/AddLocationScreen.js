@@ -342,7 +342,7 @@ export default class AddLocationScreen extends Component {
       );
     }
 
-    if (this.state.image.uri) {
+    if (this.state.image.uri && this.state.name) {
       bottomForm = this.renderAdditionalImages();
     } else {
       bottomForm = this.renderGetMainImage();

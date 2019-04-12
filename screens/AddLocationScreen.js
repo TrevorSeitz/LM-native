@@ -27,6 +27,9 @@ import {
 } from "expo";
 import ImageBrowser from "./ImageBrowser";
 import SaveMainPhoto from "../components/SaveMainPhoto";
+// import { ImagePicker } from "react-native-image-crop-picker";
+// import ImagePicker from "react-native-image-crop-picker";
+// import ImagePicker from 'react-native-image-picker'
 
 export default class AddLocationScreen extends Component {
   constructor(props) {
@@ -84,6 +87,13 @@ export default class AddLocationScreen extends Component {
       quality: 0.25,
       exif: true
     });
+    // let result = ImagePicker.openPicker({
+    //   width: 300,
+    //   height: 400,
+    //   cropping: true
+    // }).then(image => {
+    //   console.log(image);
+    // });
     this.processImage(result);
   };
 

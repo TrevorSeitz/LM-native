@@ -245,7 +245,7 @@ export default class AdditionalImageBrowser extends React.Component {
 
   // Get photos from device camera roll
   getPhotos = () => {
-    let params = { first: 50, mimeTypes: ["image/jpeg"] };
+    let params = { first: 50, mimeTypes: ["image/jpeg"], groupTypes: "All" };
     if (this.state.after) params.after = this.state.after;
     if (!this.state.has_next_page) return;
     CameraRoll.getPhotos(params).then(r => this.processPhotos(r));

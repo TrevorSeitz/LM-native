@@ -5,15 +5,17 @@ import {
   View,
   FlatList,
   Dimensions,
+  Image,
   AsyncStorage
 } from "react-native";
 import { FileSystem } from "expo";
 import { Button } from "react-native-elements";
 import ImageTile from "./ImageTile";
-import AdditionalPhotosTile from "./AdditionalPhotosTile";
+import ShowAdditionalPhotosTile from "./ShowAdditionalPhotosTile";
 import * as firebase from "firebase";
 import AdditionalImageBrowser from "./AdditionalImageBrowser";
 import SaveMainPhoto from "../components/SaveMainPhoto";
+import GallerySwiper from "react-native-gallery-swiper";
 
 const { width } = Dimensions.get("window");
 
@@ -30,9 +32,11 @@ export default class AdditionalPhotosScreen extends Component {
       name: "",
       venue: "",
       photosLocations: [],
+      cachedPhotosLocations: [],
       after: null,
       has_next_page: true
     };
+    // console.log("this.props: ", this.props);
   }
 
   componentDidMount() {
@@ -40,7 +44,7 @@ export default class AdditionalPhotosScreen extends Component {
   }
 
   selectImage = index => {
-    console.log("AdditionalPhotosScreen");
+    // console.log("AdditionalPhotosScreen");
     let newSelected = { ...this.state.selected };
     if (newSelected[index]) {
       delete newSelected[index];
@@ -53,36 +57,6 @@ export default class AdditionalPhotosScreen extends Component {
     // create array of indexes to be deleted
     let toDelete = Object.keys(newSelected);
     this.setState({ toDelete });
-  };
-
-  deleteSelected = async () => {
-    let currentPhotos = [...this.state.photosLocations];
-    let toDelete = this.state.toDelete;
-    // delete selected photos
-    for (let i = toDelete.length - 1; i >= 0; i--) {
-      let del = toDelete[i];
-      currentPhotos.splice(del, 1);
-    }
-    await this.setState({ photosLocations: currentPhotos });
-
-    this.deleteFromDB();
-
-    this.setState({ selected: {} });
-  };
-
-  deleteFromDB = () => {
-    const id = this.state.key.replace(/"/g, "");
-    firebase
-      .firestore()
-      .collection("locations")
-      .doc(id)
-      .update({
-        photosLocations: this.state.photosLocations
-      })
-      .then(() => console.log("update should be done"))
-      .then(() => {
-        this.props.navigation.back;
-      });
   };
 
   getPhotos = () => {
@@ -113,31 +87,18 @@ export default class AdditionalPhotosScreen extends Component {
     return { length, offset: length * index, index };
   };
 
-  prepareCallback() {
-    let { selected, photos } = this.state;
-    let selectedPhotos = photos.filter((item, index) => {
-      return selected[index];
-    });
-
-    let files = selectedPhotos.map(i =>
-      FileSystem.getInfoAsync(i, { md5: true })
-    );
-    let callbackResult = Promise.all(files).then(imageData => {
-      return imageData.map((data, i) => {
-        return { file: selectedPhotos[i], ...data };
-      });
-    });
-    this.props.callback(callbackResult);
-  }
-
   renderImageTile = ({ item, index }) => {
-    let selected = this.state.selected[index] ? true : false;
+    let selectedPhoto = this.state.photosLocations[index];
+    let photos = this.state.photosLocations;
+    const { navigate } = this.props.navigation;
+    // console.log("APS navigate:", navigate);
     return (
-      <AdditionalPhotosTile
+      <ShowAdditionalPhotosTile
         item={item}
         index={index}
-        selected={selected}
-        selectImage={this.selectImage}
+        selectedPhoto={selectedPhoto}
+        photos={photos}
+        navigate={navigate}
       />
     );
   };
@@ -151,12 +112,6 @@ export default class AdditionalPhotosScreen extends Component {
         });
       })
       .catch(e => console.log(e));
-  };
-
-  addMorePhotos = () => {
-    this.props.navigation.push("AdditionalImageBrowser", {
-      key: `${JSON.stringify(this.state.key)}`
-    });
   };
 
   renderImages() {
@@ -193,9 +148,7 @@ export default class AdditionalPhotosScreen extends Component {
         />
       );
     }
-
-    const selectedPhotos = Object.keys(this.state.selected);
-
+    // const selectedPhotos = Object.keys(this.state.selected);
     return (
       <View style={styles.container}>
         {this.renderImages()}

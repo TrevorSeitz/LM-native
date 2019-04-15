@@ -11,6 +11,7 @@ import { FileSystem } from "expo";
 import { Button } from "react-native-elements";
 import ImageTile from "./ImageTile";
 import AdditionalPhotosTile from "./AdditionalPhotosTile";
+import ShowAdditionalPhotosTile from "./ShowAdditionalPhotosTile";
 import * as firebase from "firebase";
 import AdditionalImageBrowser from "./AdditionalImageBrowser";
 import SaveMainPhoto from "../components/SaveMainPhoto";

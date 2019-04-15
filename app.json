@@ -13,22 +13,23 @@
       "hideExponentText": false
     },
     "packagerOpts": {
-      "assetExts": [
-        "ttf",
-        "mp4",
-        "otf",
-        "xml"
-      ]
+      "assetExts": ["ttf", "mp4", "otf", "xml"]
     },
     "ios": {
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "used to center and recenter the map"
       },
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.trevorseitz.ellmoe",
+      "publishBundlePath": "ios/ellmoe/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/ellmoe/Supporting/shell-app-manifest.json"
     },
-    "platforms": [
-      "android",
-      "ios"
-    ]
+    "platforms": ["android", "ios"],
+    "scheme": "expde9527dcec66434db4ae436652093ec8",
+    "android": {
+      "package": "com.trevorseitz.ellmoe",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    }
   }
 }

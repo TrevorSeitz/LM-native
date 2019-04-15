@@ -10,12 +10,15 @@ import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import AdditionalPhotosScreen from "../screens/AdditionalPhotosScreen";
+import ShowAdditionalPhotosScreen from "../screens/ShowAdditionalPhotosScreen";
+import AdditionalPhotosGallery from "../screens/AdditionalPhotosGallery";
 
 const ListLocationsStack = createStackNavigator({
   List: ListLocationsScreen,
   Details: LocationDetailsScreen,
   Edit: EditLocationScreen,
-  AdditionalPhotos: AdditionalPhotosScreen
+  AdditionalPhotos: AdditionalPhotosScreen,
+  AdditionalPhotosGallery: AdditionalPhotosGallery
 });
 
 ListLocationsScreen.navigationOptions = {

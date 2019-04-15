@@ -9,19 +9,12 @@ import {
 
 import { View, Text, StyleSheet, Button } from "react-native";
 // import {Ionicons} from "@expo/vector-icons";
-import { Icon } from 'expo';
+import { Icon } from "expo";
 import { Constants, MapView } from "expo";
 
-// import HomeScreen from "../screens/HomeScreen";
-// import ListLocationsScreen from "../screens/ListLocationsScreen";
-// import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";
 import EditAdditionalPhotosScreen from "../screens/EditAdditionalPhotosScreen";
 import AdditionalImageBrowser from "../screens/AdditionalImageBrowser";
-
-// import EditAdditionalPhotosStack from "../stacks/EditAdditionalPhotosStack";
-
-// import EditAdditionalPhotosSwitchNavigator from "../navigation/switches/EditAdditionalPhotosSwitchNavigator";
 
 const EditLocationStack = createStackNavigator(
   {
@@ -41,11 +34,8 @@ const EditLocationStack = createStackNavigator(
         };
       }
     },
-    // ListLocations: ListLocationsScreen,
-    // Edit: EditLocationStack,
     EditAdditionalPhotos: EditAdditionalPhotosScreen,
-    // EditAdditionalPhotos: EditAdditionalPhotosStack,
-    AdditionalImageBrowser: AdditionalImageBrowser,
+    AdditionalImageBrowser: AdditionalImageBrowser
   },
   {
     defaultNavigationOptions: {
@@ -54,5 +44,4 @@ const EditLocationStack = createStackNavigator(
     }
   }
 );
-export default EditLocationStack
-;
+export default EditLocationStack;

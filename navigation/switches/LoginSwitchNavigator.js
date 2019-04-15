@@ -9,14 +9,12 @@ import ForgotPasswordScreen from "../../screens/auth/ForgotPasswordScreen";
 import LoadingScreen from "../../screens/auth/LoadingScreen";
 
 const LoginSwitchNavigator = createSwitchNavigator({
-  Welcome: { screen: WelcomeScreen },
-
-  Map: { screen: HomeScreen },
-
-  Login: { screen: LoginScreen },
-  Signup: { screen: SignupScreen },
-  ForgotPassword: { screen: ForgotPasswordScreen },
-  Loading: { screen: LoadingScreen }
+  Welcome: WelcomeScreen,
+  Map: HomeScreen,
+  Login: LoginScreen,
+  Signup: SignupScreen,
+  ForgotPassword: ForgotPasswordScreen,
+  Loading: LoadingScreen
 });
 
 export default LoginSwitchNavigator;

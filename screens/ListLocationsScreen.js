@@ -85,7 +85,7 @@ export default class ListLocationsScreen extends Component {
         });
       })
       .then(() => {
-        console.log(locations[0]);
+        // console.log(locations[0]);
         this.setState({ locations });
       });
   };

@@ -9,7 +9,7 @@ import {
   AsyncStorage,
   TouchableOpacity
 } from "react-native";
-import { FileSystem, Icon } from "expo";
+import { FileSystem, Icon, ScreenOrientation } from "expo";
 import GallerySwiper from "react-native-gallery-swiper";
 import * as firebase from "firebase";
 
@@ -25,6 +25,14 @@ export default class AdditionalPhotoGallery extends React.Component {
 
     this.index = this.state.index;
   }
+
+  componentWillMount() {
+    this.changeScreenOrientation();
+  }
+
+  changeScreenOrientation = () => {
+    ScreenOrientation.allowAsync(ScreenOrientation.Orientation.ALL);
+  };
 
   leftArrow = () => {
     // this.setState({
@@ -59,7 +67,8 @@ export default class AdditionalPhotoGallery extends React.Component {
     let uri = photos[this.index];
     let index = this.index;
     let dimensions = Dimensions.get("window");
-    let imageHeight = Math.round((dimensions.width * 9) / 16);
+    // let imageHeight = Math.round((dimensions.width * 9) / 16);
+    let imageHeight = dimensions.height * 0.85;
     let imageWidth = dimensions.width;
     // console.log("photos[index]: ", photos[index]);
 
@@ -67,10 +76,7 @@ export default class AdditionalPhotoGallery extends React.Component {
     return (
       <View style={styles.imageBox}>
         <View>
-          <Image
-            style={{ height: imageHeight, width: imageWidth }}
-            source={{ uri: this.imageURL }}
-          />
+          <Image style={styles.image} source={{ uri: this.imageURL }} />
         </View>
         <TouchableOpacity
           style={styles.touchableAreaLeft}
@@ -94,81 +100,60 @@ export default class AdditionalPhotoGallery extends React.Component {
 
 const styles = StyleSheet.create({
   touchableAreaLeft: {
-    // flex: 1,
-    // flexDirection: "row",
-    // marginBottom: 5,
     opacity: 1,
     fontSize: 40,
     width: 80,
     height: 80,
     position: "absolute",
-    // backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
-    left: 10
-    // right: 0,
-    // bottom: 0
+    left: 10,
+    top: 0
   },
   leftButton: {
-    // color: "#254117",
-    // flex: 1,
-    // marginBottom: 5,
     opacity: 1,
     fontSize: 40,
     width: 40,
     height: 40,
     position: "absolute",
-    // bottom: 0,
-    // left: 0,
-    color: "#FFFFFF",
-    alignItems: "center"
-    // justifyContent: "center"
-    // left: 0
-    // bottom: -50
+    color: "#000000",
+    top: -25
+    // alignItems: "center"
+  },
+  rightButton: {
+    opacity: 1,
+    fontSize: 40,
+    width: 40,
+    height: 40,
+    position: "absolute",
+    color: "#000000",
+    top: -25
+    // alignItems: "center"
   },
   touchableAreaRight: {
-    // flex: 1,
-    // flexDirection: "row",
-    // marginBottom: 5,
     opacity: 1,
     fontSize: 40,
     width: 80,
     height: 80,
     position: "absolute",
-    // backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
-    // left: 10
-    right: 10
-    // bottom: 0
-  },
-  rightButton: {
-    // color: "#254117",
-    // flex: 1,
-    // marginBottom: 5,
-    opacity: 1,
-    fontSize: 40,
-    width: 40,
-    height: 40,
-    position: "absolute",
-    // bottom: 0,
-    // left: 0,
-    color: "#FFFFFF",
-    alignItems: "center"
-    // justifyContent: "center"
-    // left: 0
-    // bottom: -50
+    right: 10,
+    top: 0
   },
   image: {
     flex: 1,
+    resizeMode: "contain",
     alignItems: "stretch",
     marginTop: 5,
-    padding: 5
-    // width: auto,
-    // height: auto
+    padding: 5,
+    width: 375,
+    height: "100%"
   },
   imageBox: {
     flex: 1,
+    resizeMode: "contain",
+    marginTop: 40,
     left: 0,
     right: 0,
     top: 0,

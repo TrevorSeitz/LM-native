@@ -65,7 +65,6 @@ export default class EditAdditionalPhotosScreen extends Component {
     this.setState({ selected: newSelected });
     // create array of indexes to be deleted
     let toDelete = Object.keys(newSelected);
-    console.log("EditAdditionalPhotosScreen");
 
     this.setState({ toDelete });
   };
@@ -176,7 +175,8 @@ export default class EditAdditionalPhotosScreen extends Component {
   }
 
   renderImageTile = ({ item, index }) => {
-    let selected = this.state.selected[index] ? true : false;
+    let selected = this.state.newSelected[index] ? true : false;
+
     return (
       <AdditionalPhotosTile
         item={item}
@@ -244,6 +244,7 @@ export default class EditAdditionalPhotosScreen extends Component {
       );
     }
     const selectedPhotos = Object.keys(this.state.selected);
+    console.log("selectedPhotos", selectedPhotos);
     return (
       <View style={styles.container}>
         {this.renderImages()}

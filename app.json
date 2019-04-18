@@ -24,11 +24,25 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "used to center and recenter the map"
       },
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "ellmoTry1",
+      "publishBundlePath": "ios/ellmoe/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/ellmoe/Supporting/shell-app-manifest.json"
     },
     "platforms": [
       "android",
       "ios"
-    ]
+    ],
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.10.6-sdk32.0.0-e50ee83a-41bd-4965-b067-4c815a3b3fcc.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.10.8-sdk32.0.0-bca0f957-de78-44c8-91ed-f3151372d79d.tar.gz"
+    },
+    "scheme": "expbd74044801814a738c79d4a76ef10fdc",
+    "android": {
+      "package": "com.treforseitz.ellmoeTry1",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    }
   }
 }

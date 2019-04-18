@@ -7,6 +7,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "@expo/vector-icons": "^10.0.1",
+    "@unimodules/core": "^1.0.0",
+    "@unimodules/react-native-platform": "^0.1.17",
     "expo": "^32.0.6",
     "expo-camera": "^4.0.0",
     "expokit": "^32.1.1",
@@ -26,7 +28,14 @@
     "react-native-paper": "^2.15.0",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.5.1",
-    "shorthash": "0.0.2"
+    "shorthash": "0.0.2",
+    "unimodules": "^1.0.0",
+    "unimodules-barcode-scanner-interface": "^1.0.0",
+    "unimodules-camera-interface": "^1.0.0",
+    "unimodules-face-detector-interface": "^1.0.0",
+    "unimodules-file-system-interface": "^1.0.0",
+    "unimodules-image-loader-interface": "^1.0.0",
+    "unimodules-permissions-interface": "^1.0.0"
   },
   "devDependencies": {
     "schedule": "^0.4.0"

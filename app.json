@@ -13,22 +13,28 @@
       "hideExponentText": false
     },
     "packagerOpts": {
-      "assetExts": [
-        "ttf",
-        "mp4",
-        "otf",
-        "xml"
-      ]
+      "assetExts": ["ttf", "mp4", "otf", "xml"]
     },
     "ios": {
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "used to center and recenter the map"
       },
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.trevorseitz.ellmoeapp",
+      "publishBundlePath": "ios/ellmoe/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/ellmoe/Supporting/shell-app-manifest.json"
     },
-    "platforms": [
-      "android",
-      "ios"
-    ]
+    "platforms": ["android", "ios"],
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.10.6-sdk32.0.0-e50ee83a-41bd-4965-b067-4c815a3b3fcc.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.10.8-sdk32.0.0-bca0f957-de78-44c8-91ed-f3151372d79d.tar.gz"
+    },
+    "scheme": "exp7c28dfcf621740c5a858d44421108e88",
+    "android": {
+      "package": "com.trevorseitz.ellmoe",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    }
   }
 }

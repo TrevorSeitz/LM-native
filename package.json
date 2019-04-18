@@ -7,8 +7,12 @@
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "@expo/vector-icons": "^10.0.1",
+    "@unimodules/core": "^1.0.0",
     "expo": "^32.0.6",
     "expo-camera": "^4.0.0",
+    "expo-file-system": "^4.0.0",
+    "expo-file-system-interface": "^3.0.0",
+    "expo-image-loader-interface": "^3.0.0",
     "expokit": "^32.1.1",
     "firebase": "^5.9.1",
     "firebaseui": "^3.5.2",

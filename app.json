@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ELLMOE",
-    "description": "location additional photos carousel works",
+    "description": "location additional photos carousel works - and changes orientation",
     "slug": "snack-HJAp3SLG4",
     "privacy": "unlisted",
     "sdkVersion": "32.0.0",

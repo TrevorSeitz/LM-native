@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0C66A3C800D342629645A707 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 521EC6A1C80F4943A7CD0CFE /* EvilIcons.ttf */; };
 		11C641198C0D4952AE314871 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04CCDA18C64BEBA59F9DC0 /* libRNFirebase.a */; };

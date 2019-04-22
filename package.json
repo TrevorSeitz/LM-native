@@ -12,22 +12,22 @@
     "expo": "^32.0.6",
     "expo-camera": "^4.0.0",
     "expokit": "^32.1.1",
-    "firebase": "^5.9.1",
+    "firebase": "^5.10.0",
     "firebaseui": "^3.5.2",
-    "react": "^16.8.5",
+    "react": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-customized-image-picker": "^0.1.4",
+    "react-native-customized-image-picker": "^0.1.5",
     "react-native-elements": "^1.1.0",
     "react-native-exif": "^0.4.0",
-    "react-native-firebase": "^5.2.3",
+    "react-native-firebase": "^5.3.1",
     "react-native-fontawesome": "^6.0.1",
-    "react-native-gallery-swiper": "^1.20.3",
+    "react-native-gallery-swiper": "^1.21.0",
     "react-native-image-crop-picker": "^0.23.1",
     "react-native-image-picker": "^0.28.1",
-    "react-native-maps": "^0.23.0",
-    "react-native-paper": "^2.15.0",
+    "react-native-maps": "^0.24.2",
+    "react-native-paper": "^2.15.2",
     "react-native-vector-icons": "^6.4.2",
-    "react-navigation": "^3.5.1",
+    "react-navigation": "^3.8.1",
     "shorthash": "0.0.2",
     "unimodules": "^1.0.0",
     "unimodules-barcode-scanner-interface": "^1.0.0",
@@ -38,6 +38,6 @@
     "unimodules-permissions-interface": "^1.0.0"
   },
   "devDependencies": {
-    "schedule": "^0.4.0"
+    "schedule": "^0.5.0"
   }
 }

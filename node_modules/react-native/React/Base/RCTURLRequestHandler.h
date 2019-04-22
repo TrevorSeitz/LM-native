@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <React/RCTBridgeModule.h>
-#import <React/RCTURLRequestDelegate.h>
+#import "RCTBridgeModule.h"
+#import "RCTURLRequestDelegate.h"
 
 /**
  * Provides the interface needed to register a request handler. Request handlers

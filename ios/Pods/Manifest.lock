@@ -253,7 +253,7 @@ PODS:
     - React
   - react-native-image-picker (0.28.1):
     - React
-  - react-native-maps (0.23.0):
+  - react-native-maps (0.22.1):
     - React
   - React/ART (0.57.1):
     - React/Core
@@ -301,7 +301,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNFirebase (5.2.3):
+  - RNFirebase (5.3.1):
     - Firebase/Core
     - React
   - RNVectorIcons (6.4.2):
@@ -614,6 +614,6 @@ SPEC CHECKSUMS:
   UMPermissionsInterface: 2a4e59492eb0a32410af28dff8d498ea4030deaf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: f12ae63cd1cb02a02b7d8a9064f2bbc5634ae32a
+PODFILE CHECKSUM: 027ec68dbf059d2a3df0473c1b168ef80387455a
 
 COCOAPODS: 1.5.3

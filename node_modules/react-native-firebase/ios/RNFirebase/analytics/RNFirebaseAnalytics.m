@@ -1,5 +1,5 @@
 #import "RNFirebaseAnalytics.h"
-#import <React/RCTUtils.h>
+#import "RCTUtils.h"
 
 #if __has_include(<FirebaseAnalytics/FIRAnalytics.h>)
 #import <FirebaseAnalytics/FIRAnalytics.h>

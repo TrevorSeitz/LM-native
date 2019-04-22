@@ -116,6 +116,7 @@
 		BE9CEE726E0C4EA1B62D35E7 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		C00F16BF92354C9FAD2E053F /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C28E8585331041ACBB74412F /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../node_modules/RNVectorIcons/Fonts/Foundation.ttf; sourceTree = "<group>"; };
+		C3F92215226E06FA00414139 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ellmoe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD96D0F088C54FFD926E6D91 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../node_modules/RNVectorIcons/Fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		F4764F1EC0574C879757E132 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -195,6 +196,7 @@
 		A77D882B62FE4897BADD842E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C3F92215226E06FA00414139 /* JavaScriptCore.framework */,
 				7D699ADBACB7434ABD46F970 /* imageCropPicker.xcodeproj */,
 				A0A008A6800E45618F40688A /* RNFirebase.xcodeproj */,
 			);
@@ -213,6 +215,7 @@
 				C3D9797D2269380B00B6F10A /* Recovered References */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		B56386421DB9693800A0598C /* Products */ = {
 			isa = PBXGroup;

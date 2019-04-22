@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <React/RCTConvert.h>
+#import "RCTConvert.h"
 
 typedef NS_ENUM(NSInteger, RCTResizeMode) {
   RCTResizeModeCover = UIViewContentModeScaleAspectFill,

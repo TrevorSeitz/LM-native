@@ -31,16 +31,13 @@
 		A8D7B3B54AD74243BF9146F7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0321176DA78B4EF4A4D201ED /* Foundation.ttf */; };
 		ACD558682E664540BD13F55C /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6CEBD038C6C84187AB938E5D /* Feather.ttf */; };
 		B133B658C28148F79EB1CD16 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4BB2305994A4B48B9A8678E /* MaterialIcons.ttf */; };
-		B501732B1DC01252003445D9 /* EXShell.plist in Resources */ = {isa = PBXBuildFile; fileRef = B501732A1DC01252003445D9 /* EXShell.plist */; };
 		B56386491DB9693800A0598C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B56386481DB9693800A0598C /* AppDelegate.m */; };
 		B56386511DB9693800A0598C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56386501DB9693800A0598C /* Assets.xcassets */; };
 		B56386611DB96A5E00A0598C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B563865E1DB96A5E00A0598C /* main.m */; };
-		B56386671DB9994300A0598C /* EXSDKVersions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B56386661DB9994300A0598C /* EXSDKVersions.plist */; };
 		B5693E8E1FABD16A00307FA4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5693E8D1FABD16A00307FA4 /* LaunchScreen.xib */; };
 		B5693E911FABD46800307FA4 /* launch_background_image.png in Resources */ = {isa = PBXBuildFile; fileRef = B5693E8F1FABD46800307FA4 /* launch_background_image.png */; };
 		B5693E921FABD46800307FA4 /* launch_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5693E901FABD46800307FA4 /* launch_icon.png */; };
 		B5C89C36FE6343F2B80EB8C3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F828F9875DF4C19846EF8CF /* Ionicons.ttf */; };
-		B5CFBF4F1EDE419400B4BE24 /* EXBuildConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */; };
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
 		B841422FF74C457B944C5EEF /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E09B2241CFE42DA8A3F1260 /* libimageCropPicker.a */; };
@@ -401,9 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5693E911FABD46800307FA4 /* launch_background_image.png in Resources */,
-				B501732B1DC01252003445D9 /* EXShell.plist in Resources */,
-				B5CFBF4F1EDE419400B4BE24 /* EXBuildConstants.plist in Resources */,
-				B56386671DB9994300A0598C /* EXSDKVersions.plist in Resources */,
 				B5693E921FABD46800307FA4 /* launch_icon.png in Resources */,
 				B5693E8E1FABD16A00307FA4 /* LaunchScreen.xib in Resources */,
 				B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */,
@@ -569,6 +563,7 @@
 		B56386561DB9693800A0598C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -617,6 +612,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -626,6 +622,7 @@
 		B56386571DB9693800A0598C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -668,6 +665,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				"OTHER_LDFLAGS[arch=*]" = "";
 				"OTHER_LIBTOOLFLAGS[arch=*]" = "";
@@ -680,6 +678,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-ellmoe.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78H427V6FY;
 				INFOPLIST_FILE = "$(SRCROOT)/ellmoe/Supporting/Info.plist";
@@ -689,6 +688,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = ellmoTry1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -699,6 +699,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-ellmoe.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78H427V6FY;
 				INFOPLIST_FILE = "$(SRCROOT)/ellmoe/Supporting/Info.plist";
@@ -708,6 +709,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = ellmoTry1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

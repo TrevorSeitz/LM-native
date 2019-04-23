@@ -253,7 +253,7 @@ PODS:
     - React
   - react-native-image-picker (0.28.1):
     - React
-  - react-native-maps (0.22.1):
+  - react-native-maps (0.24.2):
     - React
   - React/ART (0.57.1):
     - React/Core
@@ -602,7 +602,7 @@ SPEC CHECKSUMS:
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-exif: 7c746794957e7ca384675e74d9eb7ef1c5962517
   react-native-image-picker: f42de90075c5b1af53417af927631d909a1a746e
-  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  react-native-maps: bb480348a3fe1e5a811fed1ba3387b329161c5cc
   RNFirebase: 57f6c2adb24355b4e6211e028a8e97e473432245
   RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
   UMBarCodeScannerInterface: f623227f2f6e8fa5c45fef1cc2b5ae200dd14918

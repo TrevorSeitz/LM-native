@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0C66A3C800D342629645A707 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 521EC6A1C80F4943A7CD0CFE /* EvilIcons.ttf */; };
-		11C641198C0D4952AE314871 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A04CCDA18C64BEBA59F9DC0 /* libRNFirebase.a */; };
 		2DFE1EE5C29B4D5B81DD6D3E /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF06CFFF65D046999C6DBDEE /* FontAwesome5_Regular.ttf */; };
 		310DC63BE3F14653B30878A3 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDF590C0B0024D89B4DD3BE4 /* FontAwesome.ttf */; };
 		33CD283654934DE1922C594D /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28E8585331041ACBB74412F /* Foundation.ttf */; };
@@ -40,19 +39,9 @@
 		B5C89C36FE6343F2B80EB8C3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F828F9875DF4C19846EF8CF /* Ionicons.ttf */; };
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
-		B841422FF74C457B944C5EEF /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E09B2241CFE42DA8A3F1260 /* libimageCropPicker.a */; };
 		B8BF71A3A4B34982A59AD22F /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4504E6C03FF34788B16E3AAB /* Entypo.ttf */; };
 		C274EC31E9EE49EF9E50384E /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE9CEE726E0C4EA1B62D35E7 /* FontAwesome5_Brands.ttf */; };
-		C3F9221E226E24F300414139 /* libEXCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F9221D226E24F300414139 /* libEXCamera.a */; };
-		C3F92222226E256200414139 /* libUMCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92221226E256200414139 /* libUMCore.a */; settings = {ATTRIBUTES = (Required, ); }; };
-		C3F92224226E276400414139 /* libExpoKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92223226E276400414139 /* libExpoKit.a */; };
-		C3F92226226E298700414139 /* libreact-native-image-picker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92225226E298700414139 /* libreact-native-image-picker.a */; };
-		C3F92228226E299A00414139 /* libreact-native-maps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92227226E299A00414139 /* libreact-native-maps.a */; };
-		C3F9222A226E29B500414139 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92229226E29B500414139 /* libReact.a */; };
-		C3F9222C226E29BF00414139 /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F9222B226E29BF00414139 /* QBImagePicker.framework */; };
-		C3F9222E226E29C800414139 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F9222D226E29C800414139 /* RSKImageCropper.framework */; };
 		D6E0E7F84ACD4A709ADBC6DE /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF68DBDC34284EC785734822 /* MaterialCommunityIcons.ttf */; };
-		EBB8117C1BFA0514F79CAF74 /* libPods-ellmoe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */; };
 		F1841E9A26DD4B719E95A26F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD96D0F088C54FFD926E6D91 /* SimpleLineIcons.ttf */; };
 		F4F94BA1F20044E494DDD332 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01A58CE6CE434B5597FA1873 /* AntDesign.ttf */; };
 		FF28AFABF92C42C599C01D5F /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23A7F83FFF74948BA7358CA /* MaterialIcons.ttf */; };
@@ -143,17 +132,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3F9222E226E29C800414139 /* RSKImageCropper.framework in Frameworks */,
-				C3F9222C226E29BF00414139 /* QBImagePicker.framework in Frameworks */,
-				C3F9222A226E29B500414139 /* libReact.a in Frameworks */,
-				C3F92228226E299A00414139 /* libreact-native-maps.a in Frameworks */,
-				C3F92226226E298700414139 /* libreact-native-image-picker.a in Frameworks */,
-				C3F92224226E276400414139 /* libExpoKit.a in Frameworks */,
-				C3F92222226E256200414139 /* libUMCore.a in Frameworks */,
-				C3F9221E226E24F300414139 /* libEXCamera.a in Frameworks */,
-				EBB8117C1BFA0514F79CAF74 /* libPods-ellmoe.a in Frameworks */,
-				B841422FF74C457B944C5EEF /* libimageCropPicker.a in Frameworks */,
-				11C641198C0D4952AE314871 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

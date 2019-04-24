@@ -21,8 +21,8 @@ target 'ellmoe' do
     :path => "../node_modules/expo-background-fetch/ios"
   pod 'EXBarCodeScanner',
     :path => "../node_modules/expo-barcode-scanner/ios"
-  pod 'EXBarCodeScannerInterface',
-    :path => "../node_modules/expo-barcode-scanner-interface/ios"
+  # pod 'EXBarCodeScannerInterface',
+  #   :path => "../node_modules/expo-barcode-scanner-interface/ios"
   pod 'EXCamera',
     :path => "../node_modules/expo-camera/ios"
   pod 'EXCameraInterface',
@@ -162,14 +162,14 @@ target 'ellmoe' do
 
     if ['Amplitude-iOS','Analytics','AppAuth','Branch','CocoaLumberjack','FBSDKCoreKit','FBSDKLoginKit','FBSDKShareKit','GPUImage','JKBigInteger2'].include? target.pod_name
       target.native_target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.2'
       end
     end
     # Can't specify this in the React podspec because we need
     # to use those podspecs for detached projects which don't reference ExponentCPP.
     if target.pod_name.start_with?('React')
       target.native_target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.2'
         config.build_settings['HEADER_SEARCH_PATHS'] ||= ['$(inherited)']
       end
     end
@@ -186,25 +186,25 @@ target 'ellmoe' do
     end
   end
 
-  post_install do |installer|
-      installer.pods_project.targets.each do |target|
-          if target.name == 'TesseractOCRiOS'
-              target.build_configurations.each do |config|
-                  config.build_settings['ENABLE_BITCODE'] = 'NO'
-              end
-              header_phase = target.build_phases().select do |phase|
-                  phase.is_a? Xcodeproj::Project::PBXHeadersBuildPhase
-              end.first
-
-              duplicated_header_files = header_phase.files.select do |file|
-                  file.display_name == 'config_auto.h'
-              end
-
-              duplicated_header_files.each do |file|
-                  header_phase.remove_build_file file
-              end
-          end
-      end
-  end
+  # post_install do |installer|
+  #     installer.pods_project.targets.each do |target|
+  #         if target.name == 'TesseractOCRiOS'
+  #             target.build_configurations.each do |config|
+  #                 config.build_settings['ENABLE_BITCODE'] = 'NO'
+  #             end
+  #             header_phase = target.build_phases().select do |phase|
+  #                 phase.is_a? Xcodeproj::Project::PBXHeadersBuildPhase
+  #             end.first
+  #
+  #             duplicated_header_files = header_phase.files.select do |file|
+  #                 file.display_name == 'config_auto.h'
+  #             end
+  #
+  #             duplicated_header_files.each do |file|
+  #                 header_phase.remove_build_file file
+  #             end
+  #         end
+  #     end
+  # end
 
 end

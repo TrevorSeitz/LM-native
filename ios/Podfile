@@ -21,8 +21,8 @@ target 'ellmoe' do
     :path => "../node_modules/expo-background-fetch/ios"
   pod 'EXBarCodeScanner',
     :path => "../node_modules/expo-barcode-scanner/ios"
-  # pod 'EXBarCodeScannerInterface',
-  #   :path => "../node_modules/expo-barcode-scanner-interface/ios"
+  pod 'EXBarCodeScannerInterface',
+    :path => "../node_modules/expo-barcode-scanner-interface/ios"
   pod 'EXCamera',
     :path => "../node_modules/expo-camera/ios"
   pod 'EXCameraInterface',

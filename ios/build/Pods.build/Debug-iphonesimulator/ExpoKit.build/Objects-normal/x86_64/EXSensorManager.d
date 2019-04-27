@@ -1,0 +1,40 @@
+dependencies: \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Services/EXSensorManager.m \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Target\ Support\ Files/ExpoKit/ExpoKit-prefix.pch \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Core/EXKernel.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Core/EXAppBrowserController.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Core/EXKernelAppRegistry.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Core/EXKernelAppRecord.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Core/EXKernelServiceRegistry.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Core/EXKernelUtil.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/CocoaLumberjack.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDLog.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDLegacyMacros.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDLogMacros.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDAssertMacros.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDASLLogCapture.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDASLLogger.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDTTYLogger.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDFileLogger.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/CocoaLumberjack/DDOSLogger.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/ExpoKit/EXViewController.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Core/EXPendingNotification.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Versioned/Core/Api/EXNotifications.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Versioned/Core/ScopedModule/EXScopedBridgeModule.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTBridge.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTBridgeDelegate.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTJavaScriptLoader.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTDefines.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTBridgeModule.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTFrameUpdate.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTInvalidating.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Versioned/Core/Internal/EXScopedModuleRegistry.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Kernel/Services/EXSensorManager.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/ExpoKit/ios/Exponent/Versioned/Core/UniversalModules/EXSensorsManagerBinding.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/EXCore/EXInternalModule.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/EXCore/EXDefines.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/EXSensorsInterface/EXAccelerometerInterface.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/EXSensorsInterface/EXDeviceMotionInterface.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/EXSensorsInterface/EXGyroscopeInterface.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/EXSensorsInterface/EXMagnetometerInterface.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/EXSensorsInterface/EXMagnetometerUncalibratedInterface.h

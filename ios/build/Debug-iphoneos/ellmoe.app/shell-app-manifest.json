@@ -1,0 +1,77 @@
+{
+  "android": {
+    "package": "com.treforseitz.ellmoeTry1",
+    "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+    "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+  },
+  "dependencies": [
+    "@expo/vector-icons",
+    "@unimodules/core",
+    "@unimodules/react-native-platform",
+    "expo",
+    "expo-camera",
+    "expokit",
+    "firebase",
+    "firebaseui",
+    "react",
+    "react-native",
+    "react-native-customized-image-picker",
+    "react-native-elements",
+    "react-native-exif",
+    "react-native-firebase",
+    "react-native-fontawesome",
+    "react-native-gallery-swiper",
+    "react-native-image-crop-picker",
+    "react-native-image-picker",
+    "react-native-maps",
+    "react-native-paper",
+    "react-native-vector-icons",
+    "react-navigation",
+    "shorthash",
+    "unimodules",
+    "unimodules-barcode-scanner-interface",
+    "unimodules-camera-interface",
+    "unimodules-face-detector-interface",
+    "unimodules-file-system-interface",
+    "unimodules-image-loader-interface",
+    "unimodules-permissions-interface"
+  ],
+  "description": "location additional photos carousel works - and changes orientation",
+  "detach": {
+    "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.10.8-sdk32.0.0-bca0f957-de78-44c8-91ed-f3151372d79d.tar.gz",
+    "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.10.6-sdk32.0.0-e50ee83a-41bd-4965-b067-4c815a3b3fcc.tar.gz"
+  },
+  "ios": {
+    "bundleIdentifier": "ellmoTry1",
+    "infoPlist": {
+      "NSLocationWhenInUseUsageDescription": "used to center and recenter the map"
+    },
+    "publishBundlePath": "ios/ellmoe/Supporting/shell-app.bundle",
+    "publishManifestPath": "ios/ellmoe/Supporting/shell-app-manifest.json",
+    "supportsTablet": true
+  },
+  "isDetached": true,
+  "loading": {
+    "hideExponentText": false,
+    "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
+    "iconUrl": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc"
+  },
+  "locales": {},
+  "name": "ELLMOE",
+  "orientation": "portrait",
+  "packagerOpts": { "assetExts": ["ttf", "mp4", "otf", "xml"] },
+  "platforms": ["android", "ios"],
+  "primaryColor": "#cccccc",
+  "privacy": "unlisted",
+  "scheme": "expbd74044801814a738c79d4a76ef10fdc",
+  "sdkVersion": "32.0.0",
+  "slug": "snack-HJAp3SLG4",
+  "version": "1.0.0",
+  "id": "@trevorseitz/snack-HJAp3SLG4",
+  "revisionId": "1.0.0-r.Xj3GO05jM6",
+  "publishedTime": "2019-04-26T18:45:24.326Z",
+  "commitTime": "2019-04-26T18:45:24.367Z",
+  "bundleUrl": "https://d1wp6m56sqw74a.cloudfront.net/%40trevorseitz%2Fsnack-HJAp3SLG4%2F1.0.0%2F958850a98790470787e39c37f0d8f82c-32.0.0-ios.js",
+  "releaseChannel": "default",
+  "hostUri": "exp.host/@trevorseitz/snack-HJAp3SLG4"
+}

@@ -3,11 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>BuildLocationStyle</key>
-	<string>UseTargetSettings</string>
+	<string>CustomLocation</string>
 	<key>BuildSystemType</key>
 	<string>Original</string>
+	<key>CustomBuildIntermediatesPath</key>
+	<string>build/Build/Intermediates.noindex</string>
 	<key>CustomBuildLocationType</key>
-	<string>RelativeToDerivedData</string>
+	<string>RelativeToWorkspace</string>
+	<key>CustomBuildProductsPath</key>
+	<string>build/Build/Products</string>
+	<key>CustomIndexStorePath</key>
+	<string>Index/DataStore</string>
 	<key>DerivedDataLocationStyle</key>
 	<string>Default</string>
 	<key>EnabledFullIndexStoreVisibility</key>

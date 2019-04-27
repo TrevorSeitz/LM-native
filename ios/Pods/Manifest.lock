@@ -33,6 +33,8 @@ PODS:
     - EXTaskManagerInterface
   - EXBarCodeScanner (2.0.0):
     - EXCore
+  - EXBarCodeScannerInterface (2.0.0):
+    - EXCore
   - EXCamera (4.0.0):
     - UMBarCodeScannerInterface
     - UMCore
@@ -320,6 +322,7 @@ DEPENDENCIES:
   - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
   - EXBackgroundFetch (from `../node_modules/expo-background-fetch/ios`)
   - EXBarCodeScanner (from `../node_modules/expo-barcode-scanner/ios`)
+  - EXBarCodeScannerInterface (from `../node_modules/expo-barcode-scanner-interface/ios`)
   - EXCamera (from `../node_modules/expo-camera/ios`)
   - EXCameraInterface (from `../node_modules/expo-camera-interface/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -424,6 +427,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-background-fetch/ios"
   EXBarCodeScanner:
     :path: "../node_modules/expo-barcode-scanner/ios"
+  EXBarCodeScannerInterface:
+    :path: "../node_modules/expo-barcode-scanner-interface/ios"
   EXCamera:
     :path: "../node_modules/expo-camera/ios"
   EXCameraInterface:
@@ -540,6 +545,7 @@ SPEC CHECKSUMS:
   EXAppLoaderProvider: 2638ca3d779c8baae37e63352c785e5e2dad70d5
   EXBackgroundFetch: 1b5444a094fc71e0361c80720482946c4388c9b7
   EXBarCodeScanner: 0ed39b41ccec72935521823eceed3d60c73fc43d
+  EXBarCodeScannerInterface: 4453aa03ca1e0a1c9b320aaf4ce5b7d88064d192
   EXCamera: 88f1b7d4ddb779cb0f481ae67aca3e347bfb1cd6
   EXCameraInterface: 6d990173e3f6355e575f44b38dcf61d0c90bc47e
   EXConstants: 4ab8da18840ebae518e15541164fbaf7907e58c2
@@ -608,6 +614,6 @@ SPEC CHECKSUMS:
   UMPermissionsInterface: 2a4e59492eb0a32410af28dff8d498ea4030deaf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 7721660c0e90f87411ce9dd1efe764563598a809
+PODFILE CHECKSUM: 50fd422d2735c805ae5b6359d3f06d8e665836d8
 
 COCOAPODS: 1.5.3

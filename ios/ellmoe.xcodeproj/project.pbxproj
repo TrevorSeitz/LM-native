@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		20F377C2022933A601FD6834 /* libPods-ellmoe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */; };
-		88DFC446D76444659FB2F87E /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E09247EE7DD498A8DBB283A /* Octicons.ttf */; };
-		9890ADEF3DFB45A0880252D2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B6A0C5A590E4510B7697D72 /* Zocial.ttf */; };
 		B56386491DB9693800A0598C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B56386481DB9693800A0598C /* AppDelegate.m */; };
 		B56386511DB9693800A0598C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56386501DB9693800A0598C /* Assets.xcassets */; };
 		B56386611DB96A5E00A0598C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B563865E1DB96A5E00A0598C /* main.m */; };
@@ -18,8 +16,36 @@
 		B5693E921FABD46800307FA4 /* launch_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5693E901FABD46800307FA4 /* launch_icon.png */; };
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
-		F1841E9A26DD4B719E95A26F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD96D0F088C54FFD926E6D91 /* SimpleLineIcons.ttf */; };
+		C314456A2275017B00000D1A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445612275017A00000D1A /* JavaScriptCore.framework */; };
+		C314456B2275017B00000D1A /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445642275017A00000D1A /* SafariServices.framework */; };
+		C314456C2275017B00000D1A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445652275017A00000D1A /* AdSupport.framework */; };
+		C314456D2275017B00000D1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445662275017A00000D1A /* Foundation.framework */; };
+		C314456E2275017B00000D1A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445672275017A00000D1A /* Security.framework */; };
+		C314456F2275017B00000D1A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445682275017B00000D1A /* SystemConfiguration.framework */; };
+		C31445702275017B00000D1A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445692275017B00000D1A /* MobileCoreServices.framework */; };
+		C31445722275018C00000D1A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C31445712275018C00000D1A /* UIKit.framework */; };
+		C35781362274E4030024B07A /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F9222D226E29C800414139 /* RSKImageCropper.framework */; };
+		C35781392274E4070024B07A /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F9222B226E29BF00414139 /* QBImagePicker.framework */; };
+		C357813A2274E40C0024B07A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92229226E29B500414139 /* libReact.a */; };
+		C357813B2274E40F0024B07A /* libreact-native-maps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92227226E299A00414139 /* libreact-native-maps.a */; };
+		C357813C2274E4120024B07A /* libreact-native-image-picker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92225226E298700414139 /* libreact-native-image-picker.a */; };
+		C357813D2274E4140024B07A /* libExpoKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92223226E276400414139 /* libExpoKit.a */; };
+		C357813E2274E4170024B07A /* libUMCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F92221226E256200414139 /* libUMCore.a */; };
+		C357813F2274E41A0024B07A /* libEXCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F9221D226E24F300414139 /* libEXCamera.a */; };
+		C39C45B52273779000DF3F79 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C39C45B22273779000DF3F79 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		C35781402274F91A0024B07A /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = asset.file.usd;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# asset_validation\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		C3D979852269380B00B6F10A /* PBXContainerItemProxy */ = {
@@ -84,6 +110,15 @@
 		BE9CEE726E0C4EA1B62D35E7 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		C00F16BF92354C9FAD2E053F /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C28E8585331041ACBB74412F /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../node_modules/RNVectorIcons/Fonts/Foundation.ttf; sourceTree = "<group>"; };
+		C31445612275017A00000D1A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		C31445642275017A00000D1A /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		C31445652275017A00000D1A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		C31445662275017A00000D1A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C31445672275017A00000D1A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C31445682275017B00000D1A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C31445692275017B00000D1A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C31445712275018C00000D1A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C39C45B22273779000DF3F79 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C3F92215226E06FA00414139 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		C3F9221D226E24F300414139 /* libEXCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXCamera.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F92221226E256200414139 /* libUMCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,7 +141,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C31445722275018C00000D1A /* UIKit.framework in Frameworks */,
+				C314456A2275017B00000D1A /* JavaScriptCore.framework in Frameworks */,
+				C314456B2275017B00000D1A /* SafariServices.framework in Frameworks */,
+				C314456C2275017B00000D1A /* AdSupport.framework in Frameworks */,
+				C314456D2275017B00000D1A /* Foundation.framework in Frameworks */,
+				C314456E2275017B00000D1A /* Security.framework in Frameworks */,
+				C314456F2275017B00000D1A /* SystemConfiguration.framework in Frameworks */,
+				C31445702275017B00000D1A /* MobileCoreServices.framework in Frameworks */,
+				C357813C2274E4120024B07A /* libreact-native-image-picker.a in Frameworks */,
+				C357813B2274E40F0024B07A /* libreact-native-maps.a in Frameworks */,
 				20F377C2022933A601FD6834 /* libPods-ellmoe.a in Frameworks */,
+				C35781362274E4030024B07A /* RSKImageCropper.framework in Frameworks */,
+				C357813E2274E4170024B07A /* libUMCore.a in Frameworks */,
+				C35781392274E4070024B07A /* QBImagePicker.framework in Frameworks */,
+				C357813D2274E4140024B07A /* libExpoKit.a in Frameworks */,
+				C357813F2274E41A0024B07A /* libEXCamera.a in Frameworks */,
+				C357813A2274E40C0024B07A /* libReact.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +167,14 @@
 		1A42804E64B7E9E0AB8B6799 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C31445712275018C00000D1A /* UIKit.framework */,
+				C31445652275017A00000D1A /* AdSupport.framework */,
+				C31445662275017A00000D1A /* Foundation.framework */,
+				C31445612275017A00000D1A /* JavaScriptCore.framework */,
+				C31445692275017B00000D1A /* MobileCoreServices.framework */,
+				C31445642275017A00000D1A /* SafariServices.framework */,
+				C31445672275017A00000D1A /* Security.framework */,
+				C31445682275017B00000D1A /* SystemConfiguration.framework */,
 				C3F9222D226E29C800414139 /* RSKImageCropper.framework */,
 				C3F9222B226E29BF00414139 /* QBImagePicker.framework */,
 				C3F92229226E29B500414139 /* libReact.a */,
@@ -188,6 +247,7 @@
 		B56386381DB9693800A0598C = {
 			isa = PBXGroup;
 			children = (
+				C39C45B22273779000DF3F79 /* Default-568h@2x.png */,
 				B56386431DB9693800A0598C /* ellmoe */,
 				B56386421DB9693800A0598C /* Products */,
 				5B29BC350A332C58878A9F13 /* Pods */,
@@ -276,6 +336,7 @@
 				19D233B7204FDD7D0087ED51 /* Bundle Expo Assets */,
 			);
 			buildRules = (
+				C35781402274F91A0024B07A /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -295,7 +356,7 @@
 				TargetAttributes = {
 					B56386401DB9693800A0598C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = B8Q3STL2KM;
+						DevelopmentTeam = 78H427V6FY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -353,12 +414,10 @@
 				B5693E911FABD46800307FA4 /* launch_background_image.png in Resources */,
 				B5693E921FABD46800307FA4 /* launch_icon.png in Resources */,
 				B5693E8E1FABD16A00307FA4 /* LaunchScreen.xib in Resources */,
+				C39C45B52273779000DF3F79 /* Default-568h@2x.png in Resources */,
 				B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */,
 				B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */,
 				B56386511DB9693800A0598C /* Assets.xcassets in Resources */,
-				88DFC446D76444659FB2F87E /* Octicons.ttf in Resources */,
-				F1841E9A26DD4B719E95A26F /* SimpleLineIcons.ttf in Resources */,
-				9890ADEF3DFB45A0880252D2 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +596,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -591,7 +650,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -608,16 +667,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B8Q3STL2KM;
+				DEVELOPMENT_TEAM = 78H427V6FY;
 				INFOPLIST_FILE = "$(SRCROOT)/ellmoe/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				LINK_WITH_STANDARD_LIBRARIES = NO;
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = ellmoTry1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -632,7 +690,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B8Q3STL2KM;
+				DEVELOPMENT_TEAM = 78H427V6FY;
 				INFOPLIST_FILE = "$(SRCROOT)/ellmoe/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -641,7 +699,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				LINK_WITH_STANDARD_LIBRARIES = NO;
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = ellmoTry1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

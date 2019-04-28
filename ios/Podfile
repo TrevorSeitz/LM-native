@@ -81,6 +81,8 @@ target 'ellmoe' do
     :path => "../node_modules/expo-task-manager/ios"
   pod 'EXTaskManagerInterface',
     :path => "../node_modules/expo-task-manager-interface/ios"
+  pod 'RNFirebase',
+    :path => "../node_modules/react-native-firebase/ios"
 
 
   pod 'React',
@@ -125,6 +127,8 @@ target 'ellmoe' do
   pod 'react-native-exif', :path => '../node_modules/react-native-exif'
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
   pod 'react-native-maps', :path => '../node_modules/react-native-maps'
 

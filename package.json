@@ -16,7 +16,7 @@
     "expo-file-system-interface": "^3.0.0",
     "expo-image-loader-interface": "^3.0.0",
     "expokit": "^32.1.1",
-    "firebase": "^5.9.1",
+    "firebase": "^5.10.1",
     "firebaseui": "^3.5.2",
     "react": "^16.8.5",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
@@ -32,7 +32,13 @@
     "react-native-paper": "^2.15.0",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.5.1",
-    "shorthash": "0.0.2"
+    "shorthash": "0.0.2",
+    "unimodules-barcode-scanner-interface": "^1.0.0",
+    "unimodules-camera-interface": "^1.0.0",
+    "unimodules-face-detector-interface": "^1.0.0",
+    "unimodules-file-system-interface": "^1.0.0",
+    "unimodules-image-loader-interface": "^1.0.0",
+    "unimodules-permissions-interface": "^1.0.0"
   },
   "devDependencies": {
     "schedule": "^0.4.0"

@@ -3,6 +3,6 @@
 #import <UIKit/UIKit.h>
 #import <ExpoKit/EXStandaloneAppDelegate.h>
 
-@interface AppDelegate : EXStandaloneAppDelegate <UIApplicationDelegate>
+@interface AppDelegate : EXStandaloneAppDelegate <UIApplicationDelegate, RCTBridgeDelegate>
 
 @end

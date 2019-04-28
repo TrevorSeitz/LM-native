@@ -1,8 +1,6 @@
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMap.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapCallout.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapCalloutManager.o
-/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapCalloutSubview.o
-/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapCalloutSubviewManager.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapCircle.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapCircleManager.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapCoordinate.o
@@ -22,8 +20,6 @@
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapPolylineRenderer.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapUrlTile.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRMapUrlTileManager.o
-/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRWeakMapReference.o
-/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/AIRWeakTimerReference.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/RCTConvert+AirMap.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/react-native-maps-dummy.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/react-native-maps.build/Objects-normal/x86_64/SMCalloutView.o

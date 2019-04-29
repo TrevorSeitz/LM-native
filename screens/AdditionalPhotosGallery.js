@@ -10,7 +10,6 @@ import {
   TouchableOpacity
 } from "react-native";
 import { FileSystem, Icon, ScreenOrientation } from "expo";
-import GallerySwiper from "react-native-gallery-swiper";
 import * as firebase from "firebase";
 
 export default class AdditionalPhotoGallery extends React.Component {

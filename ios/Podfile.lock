@@ -245,12 +245,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - QBImagePickerController (3.4.0)
   - React (0.57.1):
     - React/Core (= 0.57.1)
   - react-native-exif (0.4.0):
-    - React
-  - react-native-image-picker (0.28.1):
     - React
   - react-native-maps (0.23.0):
     - React
@@ -303,13 +300,8 @@ PODS:
   - RNFirebase (5.2.3):
     - Firebase/Core
     - React
-  - RNImageCropPicker (0.23.1):
-    - QBImagePickerController
-    - React/Core
-    - RSKImageCropper
   - RNVectorIcons (6.4.2):
     - React
-  - RSKImageCropper (2.2.1)
   - UMBarCodeScannerInterface (1.0.0)
   - UMCameraInterface (1.0.0)
   - UMCore (1.0.0)
@@ -361,7 +353,6 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - react-native-exif (from `../node_modules/react-native-exif`)
-  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React/ART (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
@@ -377,7 +368,6 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
-  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
@@ -418,8 +408,6 @@ SPEC REPOS:
     - JKBigInteger2
     - lottie-ios
     - nanopb
-    - QBImagePickerController
-    - RSKImageCropper
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -507,14 +495,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   react-native-exif:
     :path: "../node_modules/react-native-exif"
-  react-native-image-picker:
-    :path: "../node_modules/react-native-image-picker"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   RNFirebase:
     :path: "../node_modules/react-native-firebase/ios"
-  RNImageCropPicker:
-    :path: "../node_modules/react-native-image-crop-picker"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   UMBarCodeScannerInterface:
@@ -608,15 +592,11 @@ SPEC CHECKSUMS:
   JKBigInteger2: e91672035c42328c48b7dd015b66812ddf40ca9b
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-exif: 7c746794957e7ca384675e74d9eb7ef1c5962517
-  react-native-image-picker: f42de90075c5b1af53417af927631d909a1a746e
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNFirebase: 57f6c2adb24355b4e6211e028a8e97e473432245
-  RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
   RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
-  RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   UMBarCodeScannerInterface: f623227f2f6e8fa5c45fef1cc2b5ae200dd14918
   UMCameraInterface: 2a22ae5a2d4f710d617e3fd2c5c0511019aea1c7
   UMCore: c057256783718d88e019597f70b14c7312b14d91
@@ -626,6 +606,6 @@ SPEC CHECKSUMS:
   UMPermissionsInterface: 2a4e59492eb0a32410af28dff8d498ea4030deaf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: dac03c61c26c4cf594366e4a395fc7d7213289a3
+PODFILE CHECKSUM: 1cd53cbc59c15ed2103117f52a12de443383e556
 
 COCOAPODS: 1.5.3

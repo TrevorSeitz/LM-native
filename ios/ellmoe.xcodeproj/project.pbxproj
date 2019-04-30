@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		19E690601087408E9FD9BED4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A844590A3DA34934BEF0F529 /* Zocial.ttf */; };
 		297B3F0D397F46EA80606ED2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2505165F7F74E68B180933A /* Foundation.ttf */; };
@@ -32,7 +31,6 @@
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
 		B814F0A6752A4A18B0264B7E /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B130A547654B4961B5A57CB5 /* FontAwesome5_Solid.ttf */; };
-		C37FC19822787FB70003F0E0 /* libEXCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C37FC19722787FB70003F0E0 /* libEXCamera.a */; };
 		C37FC19B227888050003F0E0 /* libUMCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C37FC19A227888050003F0E0 /* libUMCore.a */; };
 		CB5B305294EE4DF790F1F2B9 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF08D926805043B5A176BF9A /* FontAwesome.ttf */; };
 		E5998B4F03FF4E7D8F70581F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D23173F377A047E793E94AFF /* FontAwesome5_Regular.ttf */; };
@@ -104,7 +102,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C37FC19B227888050003F0E0 /* libUMCore.a in Frameworks */,
-				C37FC19822787FB70003F0E0 /* libEXCamera.a in Frameworks */,
 				EBB8117C1BFA0514F79CAF74 /* libPods-ellmoe.a in Frameworks */,
 				35FCDCE348E64053992EE788 /* libRNFirebase.a in Frameworks */,
 			);

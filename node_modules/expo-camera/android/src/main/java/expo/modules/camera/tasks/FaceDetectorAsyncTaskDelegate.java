@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import java.util.List;
 
-import org.unimodules.interfaces.facedetector.FaceDetector;
+import expo.interfaces.facedetector.FaceDetector;
 
 public interface FaceDetectorAsyncTaskDelegate {
   void onFacesDetected(List<Bundle> faces);

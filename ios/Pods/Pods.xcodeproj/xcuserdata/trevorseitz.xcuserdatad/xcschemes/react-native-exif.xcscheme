@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2E0A56F056C5532C85F9CAC44ADFA5EE"
+               BlueprintIdentifier = "85672F72FF1F1C49BD7E04142C5A0B93"
                BuildableName = "libreact-native-exif.a"
                BlueprintName = "react-native-exif"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2E0A56F056C5532C85F9CAC44ADFA5EE"
+            BlueprintIdentifier = "85672F72FF1F1C49BD7E04142C5A0B93"
             BuildableName = "libreact-native-exif.a"
             BlueprintName = "react-native-exif"
             ReferencedContainer = "container:Pods.xcodeproj">

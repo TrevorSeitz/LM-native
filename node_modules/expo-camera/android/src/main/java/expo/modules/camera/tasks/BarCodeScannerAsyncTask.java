@@ -1,7 +1,7 @@
 package expo.modules.camera.tasks;
 
-import org.unimodules.interfaces.barcodescanner.BarCodeScanner;
-import org.unimodules.interfaces.barcodescanner.BarCodeScannerResult;
+import expo.interfaces.barcodescanner.BarCodeScanner;
+import expo.interfaces.barcodescanner.BarCodeScannerResult;
 
 public class BarCodeScannerAsyncTask extends android.os.AsyncTask<Void, Void, BarCodeScannerResult> {
   private final BarCodeScanner mBarCodeScanner;

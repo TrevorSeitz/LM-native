@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "60AEBF535D707AA8909FF61D31DD883C"
+               BlueprintIdentifier = "B80EE98C1E1AA4C85BDEC1E70D6EF999"
                BuildableName = "libreact-native-maps.a"
                BlueprintName = "react-native-maps"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "60AEBF535D707AA8909FF61D31DD883C"
+            BlueprintIdentifier = "B80EE98C1E1AA4C85BDEC1E70D6EF999"
             BuildableName = "libreact-native-maps.a"
             BlueprintName = "react-native-maps"
             ReferencedContainer = "container:Pods.xcodeproj">

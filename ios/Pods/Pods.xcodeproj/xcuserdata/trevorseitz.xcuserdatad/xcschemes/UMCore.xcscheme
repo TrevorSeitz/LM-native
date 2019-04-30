@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F37077D2F1673BE36BCEF5D7F05E0260"
+               BlueprintIdentifier = "A141158058F8EA48BD6A04D446341005"
                BuildableName = "libUMCore.a"
                BlueprintName = "UMCore"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F37077D2F1673BE36BCEF5D7F05E0260"
+            BlueprintIdentifier = "A141158058F8EA48BD6A04D446341005"
             BuildableName = "libUMCore.a"
             BlueprintName = "UMCore"
             ReferencedContainer = "container:Pods.xcodeproj">

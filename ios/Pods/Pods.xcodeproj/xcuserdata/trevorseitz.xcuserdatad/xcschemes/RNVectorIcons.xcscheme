@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "328E0C9D5A145D8F38D0D30537D1DF3A"
+               BlueprintIdentifier = "6722CEDD409FD56B9F5FE4B6CBEF5004"
                BuildableName = "libRNVectorIcons.a"
                BlueprintName = "RNVectorIcons"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "328E0C9D5A145D8F38D0D30537D1DF3A"
+            BlueprintIdentifier = "6722CEDD409FD56B9F5FE4B6CBEF5004"
             BuildableName = "libRNVectorIcons.a"
             BlueprintName = "RNVectorIcons"
             ReferencedContainer = "container:Pods.xcodeproj">

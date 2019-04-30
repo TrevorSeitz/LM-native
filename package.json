@@ -12,6 +12,7 @@
     "@unimodules/react-native-platform": "^0.1.17",
     "expo": "^32.0.6",
     "expo-camera": "^4.0.0",
+    "expo-camera-interface": "^3.0.0",
     "expo-file-system": "^4.0.0",
     "expo-file-system-interface": "^3.0.0",
     "expo-image-loader-interface": "^3.0.0",

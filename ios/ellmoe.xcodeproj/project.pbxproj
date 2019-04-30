@@ -32,8 +32,9 @@
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
 		B814F0A6752A4A18B0264B7E /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B130A547654B4961B5A57CB5 /* FontAwesome5_Solid.ttf */; };
+		C37FC19822787FB70003F0E0 /* libEXCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C37FC19722787FB70003F0E0 /* libEXCamera.a */; };
+		C37FC19B227888050003F0E0 /* libUMCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C37FC19A227888050003F0E0 /* libUMCore.a */; };
 		CB5B305294EE4DF790F1F2B9 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF08D926805043B5A176BF9A /* FontAwesome.ttf */; };
-		D5ACA14B9B6D4D78A5EE1551 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6BC30F3B5840B2876C0BE3 /* libimageCropPicker.a */; };
 		E5998B4F03FF4E7D8F70581F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D23173F377A047E793E94AFF /* FontAwesome5_Regular.ttf */; };
 		EBB8117C1BFA0514F79CAF74 /* libPods-ellmoe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,8 @@
 		C2505165F7F74E68B180933A /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		C2A7E2EE82CB4698B13C0148 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		C3072C3922763288002FFF68 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		C37FC19722787FB70003F0E0 /* libEXCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXCamera.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C37FC19A227888050003F0E0 /* libUMCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ellmoe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA757EFF218141FDAD96E3BE /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		CE8E411889E04F3E90CDBA07 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
@@ -100,8 +103,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C37FC19B227888050003F0E0 /* libUMCore.a in Frameworks */,
+				C37FC19822787FB70003F0E0 /* libEXCamera.a in Frameworks */,
 				EBB8117C1BFA0514F79CAF74 /* libPods-ellmoe.a in Frameworks */,
-				D5ACA14B9B6D4D78A5EE1551 /* libimageCropPicker.a in Frameworks */,
 				35FCDCE348E64053992EE788 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +116,8 @@
 		1A42804E64B7E9E0AB8B6799 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C37FC19A227888050003F0E0 /* libUMCore.a */,
+				C37FC19722787FB70003F0E0 /* libEXCamera.a */,
 				C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */,
 				C3072C3922763288002FFF68 /* JavaScriptCore.framework */,
 			);

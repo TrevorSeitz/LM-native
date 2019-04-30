@@ -42,8 +42,7 @@ PODS:
     - UMFileSystemInterface
     - UMImageLoaderInterface
     - UMPermissionsInterface
-  - EXCameraInterface (2.0.0):
-    - EXCore
+  - EXCameraInterface (3.0.0)
   - EXConstants (2.0.1):
     - EXConstantsInterface
     - EXCore
@@ -540,7 +539,7 @@ SPEC CHECKSUMS:
   EXBarCodeScanner: 0ed39b41ccec72935521823eceed3d60c73fc43d
   EXBarCodeScannerInterface: 4453aa03ca1e0a1c9b320aaf4ce5b7d88064d192
   EXCamera: 88f1b7d4ddb779cb0f481ae67aca3e347bfb1cd6
-  EXCameraInterface: 6d990173e3f6355e575f44b38dcf61d0c90bc47e
+  EXCameraInterface: 869fde055d1d4b01757e60168087444a0c22f4e8
   EXConstants: 4ab8da18840ebae518e15541164fbaf7907e58c2
   EXConstantsInterface: c60c068f94b78c8805bfeb35bd2bbaf859293de5
   EXContacts: 50843152d15328802c57b0382759595848959371
@@ -606,6 +605,6 @@ SPEC CHECKSUMS:
   UMPermissionsInterface: 2a4e59492eb0a32410af28dff8d498ea4030deaf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 1cd53cbc59c15ed2103117f52a12de443383e556
+PODFILE CHECKSUM: 76790e26f3344e5e0279e318afad0d8d9a9b4310
 
 COCOAPODS: 1.5.3

@@ -1,6 +1,8 @@
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMap.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapCallout.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapCalloutManager.o
+/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapCalloutSubview.o
+/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapCalloutSubviewManager.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapCircle.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapCircleManager.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapCoordinate.o
@@ -20,6 +22,8 @@
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapPolylineRenderer.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapUrlTile.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRMapUrlTileManager.o
+/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRWeakMapReference.o
+/Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/AIRWeakTimerReference.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/RCTConvert+AirMap.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/react-native-maps-dummy.o
 /Users/trevorseitz/repos/GitHub/LM_native/ios/build/Pods.build/Debug-iphoneos/react-native-maps.build/Objects-normal/arm64/SMCalloutView.o

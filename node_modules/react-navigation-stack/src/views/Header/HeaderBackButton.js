@@ -11,14 +11,19 @@ import {
 import TouchableItem from '../TouchableItem';
 
 import defaultBackImage from '../assets/back-icon.png';
+import BackButtonWeb from './BackButton.web';
 
 class HeaderBackButton extends React.PureComponent {
   static defaultProps = {
     pressColorAndroid: 'rgba(0, 0, 0, .32)',
     tintColor: Platform.select({
       ios: '#037aff',
+      web: '#5f6368',
     }),
     truncatedTitle: 'Back',
+    backImage: Platform.select({
+      web: BackButtonWeb,
+    }),
   };
 
   state = {};
@@ -105,10 +110,11 @@ class HeaderBackButton extends React.PureComponent {
   }
 
   render() {
-    const { onPress, pressColorAndroid, title } = this.props;
+    const { onPress, pressColorAndroid, title, disabled } = this.props;
 
     let button = (
       <TouchableItem
+        disabled={disabled}
         accessible
         accessibilityRole="button"
         accessibilityComponentType="button"
@@ -116,9 +122,9 @@ class HeaderBackButton extends React.PureComponent {
         accessibilityTraits="button"
         testID="header-back"
         delayPressIn={0}
-        onPress={onPress}
+        onPress={disabled ? undefined : onPress}
         pressColor={pressColorAndroid}
-        style={styles.container}
+        style={[styles.container, disabled && styles.disabled]}
         borderless
       >
         <View style={styles.container}>
@@ -137,9 +143,18 @@ class HeaderBackButton extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
+  disabled: {
+    opacity: 0.5,
+  },
   androidButtonWrapper: {
     margin: 13,
     backgroundColor: 'transparent',
+    ...Platform.select({
+      web: {
+        marginLeft: 21,
+      },
+      default: {},
+    }),
   },
   container: {
     alignItems: 'center',
@@ -150,26 +165,26 @@ const styles = StyleSheet.create({
     fontSize: 17,
     paddingRight: 10,
   },
-  icon:
-    Platform.OS === 'ios'
-      ? {
-          backgroundColor: 'transparent',
-          height: 21,
-          width: 13,
-          marginLeft: 9,
-          marginRight: 22,
-          marginVertical: 12,
-          resizeMode: 'contain',
-          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
-        }
-      : {
-          height: 24,
-          width: 24,
-          margin: 3,
-          resizeMode: 'contain',
-          backgroundColor: 'transparent',
-          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
-        },
+  icon: Platform.select({
+    ios: {
+      backgroundColor: 'transparent',
+      height: 21,
+      width: 13,
+      marginLeft: 9,
+      marginRight: 22,
+      marginVertical: 12,
+      resizeMode: 'contain',
+      transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+    },
+    default: {
+      height: 24,
+      width: 24,
+      margin: 3,
+      resizeMode: 'contain',
+      backgroundColor: 'transparent',
+      transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+    },
+  }),
   iconWithTitle:
     Platform.OS === 'ios'
       ? {

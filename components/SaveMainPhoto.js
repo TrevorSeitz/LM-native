@@ -1,17 +1,16 @@
-import React, { Component } from "react";
-import { Image, Alert, AsyncStorage } from "react-native";
+import React from "react";
+import { Image, Alert } from "react-native";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
 
-export default class SaveMainPhoto extends Component {
-constructor(props) {
-  super(props)
-console.log(this.props)
-}
+export default class SaveMainPhoto extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  uploadMainPhoto = async (uri) => {
+  uploadMainPhoto = async uri => {
     uriToBlob = uri => {
-      console.log("uritoblob uri:", uri)
+      console.log("uritoblob uri:", uri);
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.onerror = reject;
@@ -43,8 +42,6 @@ console.log(this.props)
       });
   };
   return() {
-    console.log("inside SaveMainPhoto")
-    // this.uploadMainPhoto(this.state.image.uri)
+    console.log("inside SaveMainPhoto");
   }
-
 }

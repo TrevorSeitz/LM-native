@@ -1,28 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
-  CameraRoll,
   FlatList,
   Dimensions,
   AsyncStorage,
   ActivityIndicator,
   Image
 } from "react-native";
-import { FileSystem } from "expo";
-import shorthash from "shorthash";
 import { Button } from "react-native-elements";
 import ImageTile from "./ImageTile";
 import AdditionalPhotosTile from "./AdditionalPhotosTile";
 import * as firebase from "firebase";
 import AdditionalImageBrowser from "./AdditionalImageBrowser";
-import SaveMainPhoto from "../components/SaveMainPhoto";
-import CacheImage from "../components/CacheImage";
 
 const { width } = Dimensions.get("window");
 
-export default class EditAdditionalPhotosScreen extends Component {
+export default class EditAdditionalPhotosScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

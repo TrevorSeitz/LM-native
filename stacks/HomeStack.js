@@ -1,17 +1,7 @@
-import * as React from "react";
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createDrawerNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
-
-import { View, Text, StyleSheet, Button, Platform } from "react-native";
-// import {Ionicons} from "@expo/vector-icons";
-import { Constants, MapView, Icon } from "expo";
-import TabBarIcon from "../components/TabBarIcon";
-
+import React from "react";
+import { createStackNavigator } from "react-navigation";
+import { View } from "react-native";
+import { Icon } from "expo";
 import HomeScreen from "../screens/HomeScreen";
 
 const HomeStack = createStackNavigator(
@@ -31,7 +21,7 @@ const HomeStack = createStackNavigator(
           )
         };
       }
-    },
+    }
   },
   {
     defaultNavigationOptions: {

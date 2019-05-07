@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  TouchableHighlight
-} from "react-native";
+import { Dimensions, Image, TouchableHighlight } from "react-native";
 const { width } = Dimensions.get("window");
 
 export default class AdditionalPhotosTile extends React.PureComponent {

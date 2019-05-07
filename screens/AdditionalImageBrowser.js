@@ -1,11 +1,9 @@
 import React from "react";
 import {
   StyleSheet,
-  ScrollView,
   ActivityIndicator,
   Image,
   View,
-  // TouchableOpacity,
   Alert,
   Text,
   CameraRoll,
@@ -15,8 +13,7 @@ import {
 } from "react-native";
 import { Button } from "react-native-elements";
 
-import { Location, FileSystem } from "expo";
-import shorthash from "shorthash";
+import { Location } from "expo";
 import ImageTile from "./ImageTile";
 import * as firebase from "firebase";
 

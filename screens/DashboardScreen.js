@@ -1,15 +1,7 @@
-import React, { Component } from "react";
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createDrawerNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
-import { View, Text, StyleSheet, Button } from "react-native";
-import {Ionicons} from "@expo/vector-icons";
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
-export default class DashboardScreen extends Component {
+export default class DashboardScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>

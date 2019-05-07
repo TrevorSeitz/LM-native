@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Alert,
   StyleSheet,
@@ -8,11 +8,10 @@ import {
   View,
   Image
 } from "react-native";
-import { List, ListItem, Text, Card, Button } from "react-native-elements";
+import { Text, Card, Button } from "react-native-elements";
 import * as firebase from "firebase";
-import { FileSystem } from "expo";
 
-export default class LocationDetailsScreen extends Component {
+export default class LocationDetailsScreen extends React.Component {
   static navigationOptions = {
     title: "Location Details"
   };

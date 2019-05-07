@@ -1,11 +1,7 @@
-import React, { Component } from "react";
-import {
-  createStackNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React from "react";
+import { createStackNavigator } from "react-navigation";
 import { Icon } from "expo";
-
+// Navigators
 import DashboardTabNavigator from "./DashboardTabNavigator";
 
 const DashboardStackNavigator = createStackNavigator(

@@ -1,14 +1,7 @@
-import React, { Component } from "react";
-import {
-  Platform,
-  StatusBar,
-  StyleSheet,
-  View,
-  AsyncStorage
-} from "react-native";
-import { AppLoading, Asset, Font } from "expo";
+import React from "react";
+import { StatusBar, StyleSheet, View, AsyncStorage } from "react-native";
 import { createAppContainer } from "react-navigation";
-import ApiKeys from "./constants/ApiKeys";
+import ApiKeys from "./constants/ApiKeys"; //is this needed jere?
 import * as firebase from "firebase";
 import { Constants } from "expo";
 

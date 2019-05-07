@@ -1,16 +1,8 @@
-import React, { Component } from "react";
-import {
-  AppRegistry,
-  // TextInput,
-  View,
-  Text,
-  StyleSheet,
-  TouchableHighlight
-} from "react-native";
-import { TextInput } from 'react-native-paper';
+import React from "react";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import { TextInput } from "react-native-paper";
 
-
-export default class NewPlaceTextInput extends Component {
+export default class NewPlaceTextInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { name: "add name", address: "add address", email: "email" };

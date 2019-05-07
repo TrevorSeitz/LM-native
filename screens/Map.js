@@ -3,18 +3,14 @@ import * as firebase from "firebase";
 import firestore from "firebase/firestore";
 import {
   Platform,
-  Alert,
   Text,
   View,
   StyleSheet,
-  Thumbnail,
   AsyncStorage,
   Image,
   TouchableOpacity
 } from "react-native";
-
 import { Constants, Location, Permissions, MapView, Marker, Icon } from "expo";
-import { Card } from "react-native-paper";
 import TabBarIcon from "../components/TabBarIcon";
 
 export default class Map extends React.Component {
@@ -241,35 +237,23 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   touchableArea: {
-    // flex: 1,
-    // flexDirection: "row",
-    // marginBottom: 5,
     opacity: 0.8,
     fontSize: 40,
     width: 80,
     height: 80,
     position: "absolute",
-    // backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     right: 0,
     bottom: 0
   },
   button: {
-    // flex: 1,
-    // marginBottom: 5,
     opacity: 0.8,
     fontSize: 40,
     width: 40,
     height: 40,
-    // position: "absolute",
-    // bottom: 0,
-    // left: 0,
-    // backgroundColor: "#FF0000",
     alignItems: "center",
     justifyContent: "center"
-    // left: 145,
-    // bottom: -50
   },
   map: {
     flex: 1,

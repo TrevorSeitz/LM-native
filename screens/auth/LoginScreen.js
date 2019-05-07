@@ -43,7 +43,7 @@ export default class LoginScreen extends React.Component {
     try {
       await AsyncStorage.setItem("uid", user.user.uid);
     } catch (error) {
-      // Error saving data
+      Alert.alert("Error saving data"); //Add better description
     }
   };
 

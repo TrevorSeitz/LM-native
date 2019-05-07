@@ -1,15 +1,7 @@
-import React, { Component } from "react";
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createDrawerNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
+import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
-class WelcomeScreen extends Component {
+export default class WelcomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -44,5 +36,3 @@ const styles = StyleSheet.create({
     fontSize: 25
   }
 });
-
-export default WelcomeScreen;

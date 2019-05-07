@@ -1,19 +1,8 @@
-import * as React from "react";
-import {
-  Text,
-  Platform,
-  Image,
-  View,
-  StyleSheet,
-  AsyncStorage
-} from "react-native";
+import React from "react";
+import { Text, View, StyleSheet, AsyncStorage } from "react-native";
 import TabBarIcon from "../components/TabBarIcon";
-import { Constants, MapView } from "expo";
-import { createStackNavigator, createAppContainer } from "react-navigation";
 import * as firebase from "firebase";
 import Map from "./Map";
-
-import { Card } from "react-native-paper";
 
 export default class HomeScreen extends React.Component {
   constructor(props) {

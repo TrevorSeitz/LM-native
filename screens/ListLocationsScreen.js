@@ -1,29 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
   View,
-  TouchableOpacity,
-  Text,
   AsyncStorage
 } from "react-native";
-import { ListItem, Button, Avatar } from "react-native-elements";
-import { MaterialIcons } from "@expo/vector-icons";
+import { ListItem, Avatar } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import {
-  Font,
-  AppLoading,
-  Constants,
-  ImagePicker,
-  Permissions,
-  MediaLibrary,
-  FlatList
-} from "expo";
-import { createStackNavigator, createAppContainer } from "react-navigation";
 
-export default class ListLocationsScreen extends Component {
+export default class ListLocationsScreen extends React.Component {
   constructor() {
     super();
     this.ref = firebase.firestore().collection("locations");
@@ -85,7 +72,6 @@ export default class ListLocationsScreen extends Component {
         });
       })
       .then(() => {
-        // console.log(locations[0]);
         this.setState({ locations });
       });
   };

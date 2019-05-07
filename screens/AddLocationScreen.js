@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -8,30 +8,16 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  AsyncStorage,
-  FlatList
+  AsyncStorage
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { FileSystem } from "expo";
-import {
-  Font,
-  AppLoading,
-  Constants,
-  ImagePicker,
-  Permissions,
-  Location,
-  MediaLibrary
-} from "expo";
+import { Font, ImagePicker, Permissions, Location, MediaLibrary } from "expo";
 import ImageBrowser from "./ImageBrowser";
-import SaveMainPhoto from "../components/SaveMainPhoto";
-// import { ImagePicker } from "react-native-image-crop-picker";
-// import ImagePicker from "react-native-image-crop-picker";
-// import ImagePicker from 'react-native-image-picker'
 
-export default class AddLocationScreen extends Component {
+export default class AddLocationScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -87,13 +73,6 @@ export default class AddLocationScreen extends Component {
       quality: 0.25,
       exif: true
     });
-    // let result = ImagePicker.openPicker({
-    //   width: 300,
-    //   height: 400,
-    //   cropping: true
-    // }).then(image => {
-    //   console.log(image);
-    // });
     this.processImage(result);
   };
 
@@ -200,10 +179,8 @@ export default class AddLocationScreen extends Component {
     // use for loop to send each phot to storage in order
     for (let i = 0; i < allLocalPhotos.length; i++) {
       if (allLocalPhotos[i].file) {
-        // console.log("in the loop for extra photos: ", i);
         await this.uploadExtraImage(allLocalPhotos[i]);
       } else {
-        // console.log("in the loop for MAIN photos: ", i);
         this.uploadMainImage(allLocalPhotos[i]);
       }
     }
@@ -423,7 +400,6 @@ const Button2 = ({ onPress, children }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1
-    // padding: 10
   },
   buttonContainer: {
     flexDirection: "row",
@@ -460,7 +436,6 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 25,
-    // flexDirection: "row",
     backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
@@ -471,17 +446,13 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   image: {
-    // flex: 1,
     alignItems: "stretch",
     width: 95
   },
   photoList: {
     flexDirection: "row",
-    // marginTop: 2,
-    // marginBottom: 2.5,
     padding: 5,
     height: 95,
-    // flex: 1,
     alignItems: "stretch",
     justifyContent: "center"
   }

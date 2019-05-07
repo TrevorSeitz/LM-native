@@ -1,13 +1,7 @@
-import * as React from "react";
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createDrawerNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { Constants, MapView, Icon } from "expo";
+import React from "react";
+import { createStackNavigator } from "react-navigation";
+import { View } from "react-native";
+import { Icon } from "expo";
 
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";

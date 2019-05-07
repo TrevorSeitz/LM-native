@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { createSwitchNavigator } from "react-navigation";
-
+// Screens
 import WelcomeScreen from "../../screens/WelcomeScreen";
 import HomeScreen from "../../screens/HomeScreen";
 import LoginScreen from "../../screens/auth/LoginScreen";

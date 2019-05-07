@@ -1,15 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  FlatList,
   Dimensions,
   Image,
-  AsyncStorage,
   TouchableOpacity
 } from "react-native";
-import { FileSystem, Icon, ScreenOrientation } from "expo";
+import { Icon, ScreenOrientation } from "expo";
 import * as firebase from "firebase";
 
 export default class AdditionalPhotoGallery extends React.Component {
@@ -19,8 +16,6 @@ export default class AdditionalPhotoGallery extends React.Component {
       index: this.props.navigation.state.params.index,
       photos: this.props.navigation.state.params.photos
     };
-    // console.log("This.props.navigation: ", this.props.navigation);
-    // console.log(this.state);
 
     this.index = this.state.index;
   }
@@ -34,13 +29,8 @@ export default class AdditionalPhotoGallery extends React.Component {
   };
 
   leftArrow = () => {
-    // this.setState({
-    // index: this.state.index - 1
-    // });
-    console.log("left");
     if (this.index > 0) {
       this.index--;
-      console.log(this.index);
       this.setState({
         index: this.index
       });
@@ -48,13 +38,8 @@ export default class AdditionalPhotoGallery extends React.Component {
   };
 
   rightArrow = () => {
-    // this.setState({
-    // index: this.state.index - 1
-    // });
-    // console.log("right");
     if (this.index < this.state.photos.length - 1) {
       this.index++;
-      // console.log(this.index);
       this.setState({
         index: this.index
       });
@@ -66,10 +51,8 @@ export default class AdditionalPhotoGallery extends React.Component {
     let uri = photos[this.index];
     let index = this.index;
     let dimensions = Dimensions.get("window");
-    // let imageHeight = Math.round((dimensions.width * 9) / 16);
     let imageHeight = dimensions.height * 0.85;
     let imageWidth = dimensions.width;
-    // console.log("photos[index]: ", photos[index]);
 
     this.imageURL = this.state.photos[index];
     return (
@@ -117,7 +100,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     color: "#000000",
     top: -25
-    // alignItems: "center"
   },
   rightButton: {
     opacity: 1,
@@ -127,7 +109,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     color: "#000000",
     top: -25
-    // alignItems: "center"
   },
   touchableAreaRight: {
     opacity: 1,

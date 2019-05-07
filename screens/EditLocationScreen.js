@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -8,11 +8,11 @@ import {
   Image,
   Alert
 } from "react-native";
-import { TextInput } from 'react-native-paper';
-import {  List, ListItem, Text, Card, Button } from "react-native-elements";
+import { TextInput } from "react-native-paper";
+import { Text, Button } from "react-native-elements";
 import * as firebase from "firebase";
 
-export default class EditLocationScreen extends Component {
+export default class EditLocationScreen extends React.Component {
   static navigationOptions = {
     title: "Edit Location"
   };
@@ -24,7 +24,6 @@ export default class EditLocationScreen extends Component {
       isLoading: false,
       key: ""
     };
-
   }
 
   componentDidMount() {
@@ -33,31 +32,31 @@ export default class EditLocationScreen extends Component {
       .firestore()
       .collection("locations")
       .doc(JSON.parse(navigation.getParam("key")))
-      .get().then(doc => {
-      if (doc.exists) {
-        this.setState({
-          location: doc.data(),
-          isLoading: false
-        });
-      } else {
-        console.log("No such document!");
-      }
-    })
-    .then(() => {
-      this._retrieveData()
-    })
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          this.setState({
+            location: doc.data(),
+            isLoading: false
+          });
+        } else {
+          console.log("No such document!");
+        }
+      })
+      .then(() => {
+        this._retrieveData();
+      });
   }
 
   _retrieveData = async () => {
     try {
-      const value = await AsyncStorage.getItem("key")
-      .then((value) => {
-      if (value !== null) {
-        this.setState({ key: value })
-      }})
+      const value = await AsyncStorage.getItem("key").then(value => {
+        if (value !== null) {
+          this.setState({ key: value });
+        }
+      });
     } catch (error) {}
   };
-
 
   updateTextInput = (text, field) => {
     const state = this.state.location;
@@ -69,7 +68,7 @@ export default class EditLocationScreen extends Component {
     this.setState({
       isLoading: true
     });
-    const id = (this.state.key).replace(/"/g, '');
+    const id = this.state.key.replace(/"/g, "");
     const { navigation } = this.props;
     firebase
       .firestore()
@@ -97,12 +96,12 @@ export default class EditLocationScreen extends Component {
           isLoading: false
         });
       })
-      .then(() =>{
+      .then(() => {
         this.setState({
           isLoading: false
-        })
-        Alert.alert("Success!")
-      })
+        });
+        Alert.alert("Success!");
+      });
   }
 
   render() {
@@ -163,7 +162,10 @@ export default class EditLocationScreen extends Component {
         </View>
         <View style={styles.imageBox}>
           <View>
-            <Image style={styles.image} source={{ uri: this.state.location.imageFileLocation }} />
+            <Image
+              style={styles.image}
+              source={{ uri: this.state.location.imageFileLocation }}
+            />
           </View>
         </View>
         <View style={styles.detailButton}>
@@ -233,5 +235,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-// export default EditLocationScreen;

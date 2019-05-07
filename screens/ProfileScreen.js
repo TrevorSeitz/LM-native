@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -8,25 +8,15 @@ import {
   TouchableOpacity,
   Alert,
   Text,
-  // TextInput,
   AsyncStorage
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import firestore from "firebase/firestore";
-import { MaterialIcons } from "@expo/vector-icons";
-import {
-  Font,
-  AppLoading,
-  Constants,
-  ImagePicker,
-  Permissions,
-  Location,
-  MediaLibrary
-} from "expo";
+import { Font, ImagePicker, Permissions, Location, MediaLibrary } from "expo";
 
-export default class ProfileScreen extends Component {
+export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: "Profile"
   };
@@ -40,7 +30,6 @@ export default class ProfileScreen extends Component {
       email: "",
       avatar: {},
       avatarFileName: "",
-      // avatarLocalUri: "",
       avatarFileLocation: "",
       isLoading: false
     };
@@ -289,14 +278,11 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 2,
-    // marginBottom: 2,
-    // marginTop: 2,
     alignSelf: "stretch",
     justifyContent: "center"
   },
   avatar: {
     flex: 1,
-    // alignItems: center,
     alignSelf: "center",
     marginTop: 7.5,
     padding: 5,
@@ -304,5 +290,3 @@ const styles = StyleSheet.create({
     height: 225
   }
 });
-
-// export default AddLocationScreen;

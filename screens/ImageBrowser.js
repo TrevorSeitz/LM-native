@@ -8,7 +8,6 @@ import {
   Dimensions,
   Button
 } from "react-native";
-import { FileSystem } from "expo";
 import ImageTile from "./ImageTile";
 const { width } = Dimensions.get("window");
 

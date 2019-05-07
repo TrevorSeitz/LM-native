@@ -4,10 +4,8 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-
 import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import DashboardScreen from "../screens/DashboardScreen";
+// Screens
 import AddLocationScreen from "../screens/AddLocationScreen";
 
 const AddLocationStack = createStackNavigator({
@@ -19,11 +17,7 @@ AddLocationScreen.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-add${focused ? "" : ""}`
-          : "md-add"
-      }
+      name={Platform.OS === "ios" ? `ios-add${focused ? "" : ""}` : "md-add"}
     />
   )
 };

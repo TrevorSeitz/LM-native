@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
   FlatList,
   Dimensions,
-  Image,
-  AsyncStorage
+  Image
 } from "react-native";
-import { FileSystem } from "expo";
 import { Button } from "react-native-elements";
 import ImageTile from "./ImageTile";
 import ShowAdditionalPhotosTile from "./ShowAdditionalPhotosTile";
@@ -18,7 +16,7 @@ import SaveMainPhoto from "../components/SaveMainPhoto";
 
 const { width } = Dimensions.get("window");
 
-export default class AdditionalPhotosScreen extends Component {
+export default class AdditionalPhotosScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +33,6 @@ export default class AdditionalPhotosScreen extends Component {
       after: null,
       has_next_page: true
     };
-    // console.log("this.props: ", this.props);
   }
 
   componentDidMount() {
@@ -43,7 +40,6 @@ export default class AdditionalPhotosScreen extends Component {
   }
 
   selectImage = index => {
-    // console.log("AdditionalPhotosScreen");
     let newSelected = { ...this.state.selected };
     if (newSelected[index]) {
       delete newSelected[index];
@@ -53,7 +49,6 @@ export default class AdditionalPhotosScreen extends Component {
     if (Object.keys(newSelected).length > this.props.max) return;
     if (!newSelected) newSelected = {};
     this.setState({ selected: newSelected });
-    // create array of indexes to be deleted
     let toDelete = Object.keys(newSelected);
     this.setState({ toDelete });
   };
@@ -90,7 +85,6 @@ export default class AdditionalPhotosScreen extends Component {
     let selectedPhoto = this.state.photosLocations[index];
     let photos = this.state.photosLocations;
     const { navigate } = this.props.navigation;
-    // console.log("APS navigate:", navigate);
     return (
       <ShowAdditionalPhotosTile
         item={item}
@@ -147,7 +141,6 @@ export default class AdditionalPhotosScreen extends Component {
         />
       );
     }
-    // const selectedPhotos = Object.keys(this.state.selected);
     return (
       <View style={styles.container}>
         {this.renderImages()}

@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Platform, Text, View, StyleSheet, AsyncStorage } from "react-native";
-import { Constants, Location, Permissions } from 'expo';
+import { AsyncStorage } from "react-native";
+import { Location, Permissions } from "expo";
 
 export default class GetCurrentLocation extends React.Component {
-
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
@@ -13,21 +12,18 @@ export default class GetCurrentLocation extends React.Component {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    console.log("location: ", location)
-    this._storeData(location)
+    console.log("location: ", location);
+    this._storeData(location);
   };
 
-  _storeData = async (location) => {
+  _storeData = async location => {
     try {
       await AsyncStorage.setItem("location", location);
-      console.log("in GetCurrentLocation")
+      console.log("in GetCurrentLocation");
     } catch (error) {}
   };
 
   render() {
-    return(
-      this._getLocationAsync()
-    )
+    return this._getLocationAsync();
   }
-
 }

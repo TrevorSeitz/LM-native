@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import { Platform } from "react-native";
 import TabBarIcon from "../components/TabBarIcon";
-
+// Stacks
 import HomeStack from "../stacks/HomeStack";
 import AddLocationStack from "../stacks/AddLocationStack";
 import ListLocationsStack from "../stacks/ListLocationsStack";

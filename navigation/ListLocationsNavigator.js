@@ -4,8 +4,8 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-
 import TabBarIcon from "../components/TabBarIcon";
+// Screens
 import ListLocationsScreen from "../screens/ListLocationsScreen";
 import LocationDetailsScreen from "../screens/LocationDetailsScreen";
 import EditLocationScreen from "../screens/EditLocationScreen";

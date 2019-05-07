@@ -32,7 +32,10 @@
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
 		B814F0A6752A4A18B0264B7E /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B130A547654B4961B5A57CB5 /* FontAwesome5_Solid.ttf */; };
+<<<<<<< HEAD
 		C38038112281FF2500B6329A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C380380F2281FF2500B6329A /* GoogleService-Info.plist */; };
+=======
+>>>>>>> 320660768a74107eaba6d2e80638bd1c30d039a8
 		CB5B305294EE4DF790F1F2B9 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF08D926805043B5A176BF9A /* FontAwesome.ttf */; };
 		E5998B4F03FF4E7D8F70581F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D23173F377A047E793E94AFF /* FontAwesome5_Regular.ttf */; };
 		EBB8117C1BFA0514F79CAF74 /* libPods-ellmoe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */; };
@@ -79,7 +82,10 @@
 		C2A7E2EE82CB4698B13C0148 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		C37FC19722787FB70003F0E0 /* libEXCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; name = libEXCamera.a; path = EXCamera/libEXCamera.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C37FC1DB2279155D0003F0E0 /* libUMCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMCore.a; path = "build/Debug-iphoneos/UMCore/libUMCore.a"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		C380380F2281FF2500B6329A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+=======
+>>>>>>> 320660768a74107eaba6d2e80638bd1c30d039a8
 		C4A88D15726AD99E8A257BC7 /* libPods-ellmoe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ellmoe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA757EFF218141FDAD96E3BE /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		CE8E411889E04F3E90CDBA07 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
@@ -229,7 +235,11 @@
 				B563863E1DB9693800A0598C /* Frameworks */,
 				B563863F1DB9693800A0598C /* Resources */,
 				19D233B7204FDD7D0087ED51 /* Bundle Expo Assets */,
+<<<<<<< HEAD
 				7FF25A08D61D69F825328C77 /* [CP] Copy Pods Resources */,
+=======
+				F01B8F9DC67463FACC19C4DA /* [CP] Copy Pods Resources */,
+>>>>>>> 320660768a74107eaba6d2e80638bd1c30d039a8
 			);
 			buildRules = (
 			);
@@ -358,7 +368,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+<<<<<<< HEAD
 		7FF25A08D61D69F825328C77 /* [CP] Copy Pods Resources */ = {
+=======
+		B5722AD01DFB7E3F0084848F /* Prepare Expo */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare Expo";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -eo pipefail\n\npushd \"${SRCROOT}/..\"\nexport PATH=\"$(if [ -f ~/.expo/PATH ]; then echo $PATH:$(cat ~/.expo/PATH); else echo $PATH; fi)\"\nexpo prepare-detached-build --platform ios\npopd\n";
+		};
+		F01B8F9DC67463FACC19C4DA /* [CP] Copy Pods Resources */ = {
+>>>>>>> 320660768a74107eaba6d2e80638bd1c30d039a8
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -391,20 +419,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ellmoe/Pods-ellmoe-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		B5722AD01DFB7E3F0084848F /* Prepare Expo */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Prepare Expo";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "set -eo pipefail\n\npushd \"${SRCROOT}/..\"\nexport PATH=\"$(if [ -f ~/.expo/PATH ]; then echo $PATH:$(cat ~/.expo/PATH); else echo $PATH; fi)\"\nexpo prepare-detached-build --platform ios\npopd\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

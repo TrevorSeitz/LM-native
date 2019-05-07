@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Uncomment the next line to define a global platform for your project
+=======
+source 'https://github.com/CocoaPods/Specs.git'
+>>>>>>> 320660768a74107eaba6d2e80638bd1c30d039a8
 platform :ios, '11.2'
 
 target 'ellmoe' do
@@ -120,6 +124,8 @@ target 'ellmoe' do
     :podspec => "../node_modules/react-native/third-party-podspecs/glog.podspec",
     :inhibit_warnings => true
 
+
+  pod 'UMCameraInterface', path: '../node_modules/unimodules-camera-interface/ios'
 
   post_install do |installer|
     installer.pods_project.main_group.tab_width = '2';

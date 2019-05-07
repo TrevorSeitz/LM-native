@@ -4,9 +4,13 @@
   "summary": "Provides GLView that acts as OpenGL ES render target and gives GL context object implementing WebGL 2.0 specification.",
   "description": "Provides GLView that acts as OpenGL ES render target and gives GL context object implementing WebGL 2.0 specification.",
   "license": "MIT",
+<<<<<<< HEAD
   "authors": {
     "name": "650 Industries, Inc."
   },
+=======
+  "authors": "650 Industries, Inc.",
+>>>>>>> 320660768a74107eaba6d2e80638bd1c30d039a8
   "homepage": "https://docs.expo.io/versions/latest/sdk/gl-view/",
   "platforms": {
     "ios": "10.0"

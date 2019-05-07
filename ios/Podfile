@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.2'
 
 target 'ellmoe' do
   pod 'ExpoKit',
@@ -23,10 +23,6 @@ target 'ellmoe' do
     :path => "../node_modules/expo-barcode-scanner/ios"
   pod 'EXBarCodeScannerInterface',
     :path => "../node_modules/expo-barcode-scanner-interface/ios"
-  pod 'EXCamera',
-    :path => "../node_modules/expo-camera/ios"
-  pod 'EXCameraInterface',
-    :path => "../node_modules/expo-camera-interface/ios"
   pod 'EXConstants',
     :path => "../node_modules/expo-constants/ios"
   pod 'EXConstantsInterface',
@@ -81,10 +77,10 @@ target 'ellmoe' do
     :path => "../node_modules/expo-task-manager/ios"
   pod 'EXTaskManagerInterface',
     :path => "../node_modules/expo-task-manager-interface/ios"
-  pod 'UMCore',
-    :path => '../node_modules/@unimodules/core/ios'
-  # pod 'UMFileSystemInterface',
-  #   :path => '../node_modules/expo-file-system-interface/ios'
+  pod 'RNFirebase',
+    :path => "../node_modules/react-native-firebase/ios"
+
+
   pod 'React',
     :path => "../node_modules/react-native",
     :inhibit_warnings => true,
@@ -116,6 +112,22 @@ target 'ellmoe' do
     :podspec => "../node_modules/react-native/third-party-podspecs/glog.podspec",
     :inhibit_warnings => true
 
+  pod 'UMCore', path: '../node_modules/@unimodules/core/ios'
+  pod 'UMFileSystemInterface', path: '../node_modules/unimodules-file-system-interface/ios'
+  pod 'UMImageLoaderInterface', path: '../node_modules/unimodules-image-loader-interface/ios'
+  pod 'UMPermissionsInterface', path: '../node_modules/unimodules-permissions-interface/ios'
+  pod 'UMFaceDetectorInterface', path: '../node_modules/unimodules-face-detector-interface/ios'
+  pod 'UMBarCodeScannerInterface', path: '../node_modules/unimodules-barcode-scanner-interface/ios'
+
+  pod 'react-native-exif', :path => '../node_modules/react-native-exif'
+
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'EXCameraInterface', path: '../node_modules/expo-camera-interface/ios'
+
+  pod 'UMCameraInterface', path: '../node_modules/unimodules-camera-interface/ios'
 
   post_install do |installer|
     installer.pods_project.main_group.tab_width = '2';

@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>BuildLocationStyle</key>
-	<string>UseAppPreferences</string>
+	<string>UseTargetSettings</string>
+	<key>BuildSystemType</key>
+	<string>Original</string>
 	<key>CustomBuildLocationType</key>
 	<string>RelativeToDerivedData</string>
 	<key>DerivedDataLocationStyle</key>

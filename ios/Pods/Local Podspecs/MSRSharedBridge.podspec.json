@@ -1,0 +1,25 @@
+{
+  "name": "MSRSharedBridge",
+  "version": "0.5.0",
+  "summary": "A manager to share an RCTBridge across the application.",
+  "homepage": "https://github.com/maicki/react-native-shared-bridge",
+  "license": "Apache-2.0",
+  "authors": {
+    "Michael Schneider": "mischneider1@gmail.com"
+  },
+  "social_media_url": "https://twitter.com/maicki",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/maicki/react-native-shared-bridge.git",
+    "tag": "0.5.0"
+  },
+  "source_files": "ios/**/*.{h,m}",
+  "requires_arc": true,
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}

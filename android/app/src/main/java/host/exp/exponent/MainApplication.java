@@ -34,6 +34,14 @@ import expolib_v1.okhttp3.OkHttpClient;
 
 // Needed for `react-native link`
 // import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.devialab.exif.RCTExifPackage;
+import com.mg.app.PickerPackage;
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
 
 public class MainApplication extends ExpoApplication implements AppLoaderPackagesProviderInterface<ReactPackage> {
 
@@ -49,7 +57,15 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
         // TODO: add native modules!
 
         // Needed for `react-native link`
-        // new MainReactPackage()
+        // new MainReactPackage(),
+            new VectorIconsPackage(),
+            new MapsPackage(),
+            new ImagePickerPackage(),
+            new PickerPackage(),
+            new RNFirebasePackage(),
+            new RCTExifPackage(),
+            new PickerPackage(),
+            new ModuleRegistryAdapter()
     );
   }
 

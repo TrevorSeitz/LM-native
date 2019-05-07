@@ -15,7 +15,6 @@ import ShowAdditionalPhotosTile from "./ShowAdditionalPhotosTile";
 import * as firebase from "firebase";
 import AdditionalImageBrowser from "./AdditionalImageBrowser";
 import SaveMainPhoto from "../components/SaveMainPhoto";
-import GallerySwiper from "react-native-gallery-swiper";
 
 const { width } = Dimensions.get("window");
 

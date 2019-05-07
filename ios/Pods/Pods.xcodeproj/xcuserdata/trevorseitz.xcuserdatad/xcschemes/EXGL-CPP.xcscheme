@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9C6DE9AA9660FE1F97DB3238469D088B"
+               BlueprintIdentifier = "8F7B724E8B9CACA9F203ACACF709B4A7"
                BuildableName = "libEXGL-CPP.a"
                BlueprintName = "EXGL-CPP"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9C6DE9AA9660FE1F97DB3238469D088B"
+            BlueprintIdentifier = "8F7B724E8B9CACA9F203ACACF709B4A7"
             BuildableName = "libEXGL-CPP.a"
             BlueprintName = "EXGL-CPP"
             ReferencedContainer = "container:Pods.xcodeproj">

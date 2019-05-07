@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceID.m \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/Public/FIRInstanceID.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRAppInternal.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRApp.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRErrors.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRErrorCode.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRComponent.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRComponentContainer.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRComponentType.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIRLibrary.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/FirebaseCore/FIROptions.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/GoogleUtilities/GULAppEnvironmentUtil.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceID+Private.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDCheckinService.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDUtilities.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDAuthService.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDCombinedHandler.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDConstants.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDDefines.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDKeyPairStore.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDLogger.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRIMessageCode.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDStore.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDTokenInfo.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDAPNSInfo.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDTokenManager.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/FIRInstanceIDVersionUtilities.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/FirebaseInstanceID/Firebase/InstanceID/NSError+FIRInstanceID.h

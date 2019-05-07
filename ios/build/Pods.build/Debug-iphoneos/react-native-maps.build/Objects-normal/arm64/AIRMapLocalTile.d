@@ -20,5 +20,6 @@ dependencies: \
   /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/yoga/Yoga.h \
   /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/yoga/YGEnums.h \
   /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Private/yoga/YGMacros.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapCalloutSubview.h \
   /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/UIView+React.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapLocalTileOverlay.h

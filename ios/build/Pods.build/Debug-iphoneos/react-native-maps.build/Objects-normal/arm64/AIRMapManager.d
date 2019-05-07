@@ -27,12 +27,13 @@ dependencies: \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMap.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/Callout/SMCalloutView.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/RCTConvert+AirMap.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapCalloutSubview.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTView.h \
   /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTUIManager.h \
   /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTRootView.h \
   /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTConvert+CoreLocation.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapMarker.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapCallout.h \
-  /Users/trevorseitz/repos/GitHub/LM_native/ios/Pods/Headers/Public/React/React/RCTView.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapPolyline.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapCoordinate.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapPolygon.h \
@@ -41,4 +42,6 @@ dependencies: \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapLocalTile.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapSnapshot.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapOverlay.h \
-  /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapOverlayRenderer.h
+  /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapOverlayRenderer.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRWeakTimerReference.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRWeakMapReference.h

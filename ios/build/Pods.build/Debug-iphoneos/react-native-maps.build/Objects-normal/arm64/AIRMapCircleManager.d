@@ -31,5 +31,6 @@ dependencies: \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMap.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/Callout/SMCalloutView.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/RCTConvert+AirMap.h \
+  /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapCalloutSubview.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapCircle.h \
   /Users/trevorseitz/repos/GitHub/LM_native/node_modules/react-native-maps/lib/ios/AirMaps/AIRMapCoordinate.h

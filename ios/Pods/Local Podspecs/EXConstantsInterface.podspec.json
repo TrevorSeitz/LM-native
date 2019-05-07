@@ -1,13 +1,13 @@
 {
   "name": "EXConstantsInterface",
-  "version": "2.0.0",
+  "version": "2.1.0-alpha.0",
   "summary": "Expo Constants interface package",
   "description": "Expo Constants interface package",
   "license": "MIT",
   "authors": {
     "name": "650 Industries, Inc."
   },
-  "homepage": "https://docs.expo.io/",
+  "homepage": "https://github.com/expo/expo/tree/master/packages/expo-constants-interface",
   "platforms": {
     "ios": "10.0"
   },
@@ -16,10 +16,5 @@
   },
   "source_files": "**/*.{h,m}",
   "preserve_paths": "**/*.{h,m}",
-  "requires_arc": true,
-  "dependencies": {
-    "EXCore": [
-
-    ]
-  }
+  "requires_arc": true
 }
